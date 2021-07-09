@@ -1,0 +1,500 @@
+\documentclass[dvipsnames]{article}
+\usepackage{geometry}
+\geometry{a3paper, landscape, margin=2in}
+\usepackage{url}
+\usepackage{multicol}
+\usepackage{amsmath}
+\usepackage{esint}
+\usepackage{amsfonts}
+\usepackage{tikz}
+\usetikzlibrary{decorations.pathmorphing}
+\usepackage{amsmath,amssymb}
+\usepackage{enumitem}
+\usepackage{colortbl}
+\usepackage{mathtools}
+\usepackage{amsmath,amssymb}
+\usepackage{enumitem}
+\usepackage{ dsfont }
+\makeatletter
+
+\newcommand*\bigcdot{\mathpalette\bigcdot@{.5}}
+\newcommand*\bigcdot@[2]{\mathbin{\vcenter{\hbox{\scalebox{#2}{$\m@th#1\bullet$}}}}}
+\makeatother
+%Sheet made by Boris, Template is by Drew Ulick https://de.overleaf.com/articles/130-cheat-sheet/ntwtkmpxmgrp
+\title{Intro Ring and Field Theory Cheat Sheet}
+\usepackage[english]{babel}
+\usepackage{palatino}
+\usepackage{bm}
+
+\advance\topmargin-1.2in
+\advance\textheight3in
+\advance\textwidth3in
+\advance\oddsidemargin-1.5in
+\advance\evensidemargin-1.5in
+\parindent0pt
+\parskip2pt
+\newcommand{\hr}{\centerline{\rule{3.5in}{1pt}}}
+%\colorbox[HTML]{e4e4e4}{\makebox[\textwidth-2\fboxsep][l]{texto}
+\begin{document}
+
+\begin{center}{\fontsize{35}{60}{\textcolor{teal}{\textbf{Intro Ring and Field Theory Cheat Sheet}}}}\\
+\end{center}
+\begin{multicols*}{3}
+
+\tikzstyle{mybox} = [draw=teal, fill=white, very thick,
+    rectangle, rounded corners, inner sep=10pt, inner ysep=10pt]
+\tikzstyle{fancytitle} =[fill=teal, text=white, font=\bfseries]
+
+%------------ Ring and Field Axioms Definitions ---------------
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{0.3\textwidth}
+    A ring $R$ is a set with two binary operations $+$ and $\times$ satisfying the following axioms:\\
+    \textbf{i. $\bm{(R, +)}$ is an abelian group.}\\
+    \textbf{ii. Multiplicative associativity:} $(a\times b)\times c = a \times (b \times c)\ \forall a, b, c \in R.$\\
+    \textbf{iii. Left and right distributivity:}\\
+    $(a+b)\times c=(a \times c)+(b \times c)$ and $a \times (b+c) = (a \times b)+(a \times c).$\\
+    In addition to these rings may also have the following optional properties.\\
+    \textbf{a. Multiplicative commutativity:} $a \times b = b \times a,\ \forall\ a, b \in R.$\\
+    \textbf{b. Multiplicative Identity:} $\exists\ 1 \in R$ s.t. $\forall a \neq 0 \in R, 1 \times a = a \times 1 = a.$\\
+    \textbf{c. Multiplicative Inverse:} $\forall\ a\neq 0 \in R\ \exists\ a^{-1} \in R$ s.t. $a \times a^{-1}=a^{-1} \times a = 1.$\\
+    \textbf{\textit{FOR THE PURPOSE OF THIS SHEET WE LOOK AT RINGS WITH MULTIPLICATIVE COMMUTATIVITY AND 1$\neq$0.}}\\
+    A field $F$ is a set with two binary operations $+$ and $\times$ satisfying the following axioms:\\
+    \textbf{i. $\bm{(F, +)}$ is an abelian group with identity 0.}\\
+    \textbf{ii. The non-zero elements of $\bm{F}$ form a abelian group under multiplication with identity 1.}\\
+    \textbf{iii. Left and right distributivity.}
+    \end{minipage}
+};
+%------------ Ring and Field Axioms Header ---------------------
+\node[fancytitle, right=10pt] at (box.north west) {Ring and Field Axioms};
+\end{tikzpicture}
+
+%------------ Polynomial Rings  Definitions ---------------
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{0.3\textwidth}
+    For a ring $R$, $R[x]$ denotes the polynomial ring of a single variable $x$ s.t.the elements of $R[x]$ are of the form\\
+    $a_n x^n + a_{n-1} x^{n-1}+ \dots + a_1 x + a_0$ with $n\geq 0$ and $a_i \in R$\\ 
+    Polynomial rings can be generalized for multiple variables.
+    \end{minipage}
+};
+%------------ Polynomial Rings Header ---------------------
+\node[fancytitle, right=10pt] at (box.north west) {Polynomial Rings};
+\end{tikzpicture}
+
+%------------ Zero Divisors, Units and Integral Domains Definitions ---------------
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{0.3\textwidth}
+    \textbf{i. Zero Divisor:} $a \neq 0 \in R$ is called a zero divisor of $R$ if  $\exists\ b\neq0 \in\ R$ s.t. either $ab=0$ or $ba=0.$\\
+    \textbf{ii. Unit:} For a ring $R$ with identity $1\neq 0$, $u \in R$ is called a unit in $R$ if $\exists v \in R$ s.t. $uv=vu=1$.\\
+    \textbf{iii. Integral Domain:} A commutative ring with identity $1\neq 0$ is called an integral domain if it has no zero divisors.
+    \begin{itemize}[noitemsep,topsep=0pt]
+        \item Any finite integral domain is a field.
+        \item If $R$ is an integral domain than the polynomial ring of one variable over R, i.e. $R[x],$ is also a integral domain.
+    \end{itemize}
+    
+    \end{minipage}
+};
+%------------ Zero Divisors, Units and Integral Domains Header ---------------------
+\node[fancytitle, right=10pt] at (box.north west) {Zero Divisors, Units and Integral Domains};
+\end{tikzpicture}
+
+%------------ Subrings Definitions ---------------
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{0.3\textwidth}
+    A subring of the ring $R$ is defined as a subgroup of $R$ that is closed under multiplication.
+    \end{minipage}
+};
+%------------ Surbings Header ---------------------
+\node[fancytitle, right=10pt] at (box.north west) {Subrings};
+\end{tikzpicture}
+
+%------------ Ring Homomorphisms, Isomorphisms and Kernels Definitions ---------------
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{0.3\textwidth}
+    For rings $R$ and $S$.\\
+    \textbf{i. Ring Homomorphism} is a map $\varphi:R\rightarrow S$ satisfying:
+    \begin{itemize}[noitemsep,topsep=0pt]
+        \item $\varphi(a+b)=\varphi(a)+\varphi(b)\ \forall\ a,b \in R$
+        \item $\varphi(ab)=\varphi(a)\varphi(b)\ \forall\ a,b \in R$
+    \end{itemize}
+    \textbf{ii. Isomorphism} is a bijective ring homomorphism. \\
+    \textbf{iii. Kernel} of the ring homomorphism $\varphi$ is the set of elements of $R$ that map to $0$ in $S$.
+    \begin{itemize}[noitemsep,topsep=0pt]
+        \item The image of $\varphi$ is a subring of S.
+        \item The kernel of $\varphi$ is a subring of S. \emph{(For Rings without 1)}
+    \end{itemize}
+    \end{minipage}
+};
+%------------ Ring Homomorphisms, Isomorphisms and Kernels Header ---------------------
+\node[fancytitle, right=10pt] at (box.north west) {Ring Homomorphisms, Isomorphisms and Kernels};
+\end{tikzpicture}
+
+%------------ Ideals Definitions ---------------
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{0.3\textwidth}
+    \textbf{Ideal:} A subset $I$ of ring $R$ is called an ideal of $R$ if \begin{itemize}[noitemsep,topsep=0pt]
+        \item It is a subring of $R$.
+        \item It is closed under both left and right multiplication with elements from $R$.
+    \end{itemize}
+    \textit{Ideals are to rings what normal subgroups are to groups.}
+    \end{minipage}
+};
+%------------ Ideals Header ---------------------
+\node[fancytitle, right=10pt] at (box.north west) {Ideals};
+\end{tikzpicture}
+
+%------------ Quotient Rings Definitions ---------------
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{0.3\textwidth}
+    Let $R$ be a ring with ideal $I$. $R/I$ is called a quotient ring if\\
+    \textbf{i.} $(r+I)+(s+I)=(r+s)+I$\\
+    \textbf{ii.} $(r+I) \times (s+I)=(rs)+I$
+    \end{minipage}
+};
+%------------ Quotient Rings Header ---------------------
+\node[fancytitle, right=10pt] at (box.north west) {Quotient Rings};
+\end{tikzpicture}
+
+%------------ First Isomorphism and Correspondence Theorem  Definitions ---------------
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{0.3\textwidth}
+    \textbf{i. First Isomorphism Theorem:} Let $\varphi: R \rightarrow S$ be a ring homomorphism from ring $R$ to $S$ then:
+    \begin{itemize}[noitemsep,topsep=0pt]
+        \item Kernel of $\varphi$ is an ideal of $R$,
+        \item Image of $\varphi$ is a subring of $S$ and,
+        \item $R/$ ker $\varphi \cong \varphi(R)$.
+    \end{itemize}
+    \textbf{ii. Correspondence Theorem:} Let $R$ be a ring, and $I$ be an ideal of $R$. \\
+    The correspondence $A\leftrightarrow A/I$ is an inclusion preserving bijection between the set of subrings $A$ of $R$ that contain $I$ and the set of subrings of $R/I$.\\
+    \textit{or}\\
+    There exists an inclusion preserving biijection between ideals in $R$ containing ker$(\varphi)$ and ideals in $\varphi(R).$
+    \end{minipage}
+};
+%------------ First Isomorphism and Correspondence Theorem Header ---------------------
+\node[fancytitle, right=10pt] at (box.north west) {First Isomorphism and Correspondence Theorem};
+\end{tikzpicture}
+
+%------------ Principal, Prime and Maximal Ideals  Definitions ---------------
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{0.3\textwidth}
+    \textbf{i. Principal Ideals:} An ideal generated by a single element is called a principal ideal.\\
+    \textbf{ii. Prime Ideals:} If $P\neq R$, then an ideal $P$ is called a prime ideal if  $ab \in P, \text{when } a,b \in R$ then at least one of $a$ and $b$ in an element of $P$. \textit{This is analogous to the definition of prime numbers in number theory}\\
+    \textbf{iii. Maximal Ideals:} If $M \neq R$, then an ideal $M$ is called a maximal ideal if the only ideals containing $M$ are $M$ and $R$ itself.\\
+    \textit{$\bullet$ Every maximal ideal of $R$ is a prime ideal.}\\
+    \textit{$\bullet$ The ideal $P$ is a prime ideal in $R$ iff $R/P$ is an integral domain.}
+    \end{minipage}
+};
+%------------ Principal, Prime and Maximal Ideals Header ---------------------
+\node[fancytitle, right=10pt] at (box.north west) {Principal, Prime and Maximal Ideals};
+\end{tikzpicture}
+
+%------------ Zorn's Lemma Definitions ---------------
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{0.3\textwidth}
+ If $S$ is any nonempty partially ordered set in which every chain has an upper bound, then $S$ has a maximal element. 
+    \end{minipage}
+};
+%------------ Zorn's Lemma Header ---------------------
+\node[fancytitle, right=10pt] at (box.north west) {Zorn's Lemma};
+\end{tikzpicture}
+
+%------------ Ring of Fractions of an Integral Domain Definitions ---------------
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{0.3\textwidth}
+    Let $R$ be an integral domain. Let $K$ be the ring of fractions of $R$ s.t. \\
+    $K=\{\frac{a}{b}| a, b\ \in\ R, b\neq0\}$. $K$ is also called a field of fractions since it always forms a field for any ring $R$.
+    \begin{itemize}[noitemsep,topsep=0pt]
+        \item $\frac{a}{b}+\frac{c}{d}=\frac{ad+bc}{bd}$, $b,d\ \neq 0$
+        \item $\frac{a}{b}\frac{c}{d}=\frac{ac}{bd}$, $b,d\ \neq 0$
+    \end{itemize}
+    \end{minipage}
+};
+%------------ Ring of Fractions of an Integral Domain Header ---------------------
+\node[fancytitle, right=10pt] at (box.north west) {Ring of Fractions of an Integral Domain};
+\end{tikzpicture}
+
+%------------ Chinese Remainder Theorem  Definitions ---------------
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{0.3\textwidth}
+    The ideals $I$ and $J$ of a ring $R$ are said to be \textbf{comaximal} if $I+J=R.$\\
+    \textbf{Chinese Remainder Theorem:} $\forall\ a, b\ \in R,\ \exists\ x\ \in\ R$ s.t. \\$x\equiv a (\text{mod } I)$ and $x\equiv b(\text{mod } J)$
+    \end{minipage}
+};
+%------------ Chinese Remainder Theorem Header ---------------------
+\node[fancytitle, right=10pt] at (box.north west) {Chinese Remainder Theorem};
+\end{tikzpicture}
+
+%------------ Noetherian Rings  Definitions ---------------
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{0.3\textwidth}
+   A commutative ring $R$ is called \textbf{Noetherian} if there is no infinite increasing chain of ideals in $R$, i.e. when $I_1 \subseteq I_2 \subseteq I_3 \dots$ is an ascending chain of ideals $\exists\ k\in \mathds{Z}^+$ s.t. $I_k=I_m\ \forall k\geq m.$\\
+   It is equivalent to say that $R$ is Noetherian if every ideal of $R$ is finitely generated.
+    \end{minipage}
+};
+%------------ Noetherian Rings Header ---------------------
+\node[fancytitle, right=10pt] at (box.north west) {Noetherian Rings};
+\end{tikzpicture}
+
+%------------ Hilbert Basis Theorem  Definitions ---------------
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{0.3\textwidth}
+    If $R$ is a noetherian ring then so is the polynomial ring $R[x]$.\\
+    \textit{$R[x_1, x_2, x_3, \dots, x_n]$ for finite $n$ is also noetherian.}
+    \end{minipage}
+};
+%------------ Hilbert Basis Theorem Header ---------------------
+\node[fancytitle, right=10pt] at (box.north west) {Hilbert Basis Theorem};
+\end{tikzpicture}
+
+%------------ Irreducible and Prime Elements  Definitions ---------------
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{0.3\textwidth}
+    \textbf{i. Irreducible Element} An element $a$ of ring $R$ is called \textbf{irreducible} if it is  non-zero, not a unit and, \emph{only has trivial divisors (i.e. units and products of units).}\\
+    \textbf{ii. Prime Element} An element $a$ of ring $R$ is called \textbf{prime} if it is non-zero, not a unit and, if $a \mid bc$ then either $a \mid b$ or $a \mid c$ for some $b, c\ \in\ R.$\\
+   \emph{The concept of primes and irreducible is the same in integers, but they are distinct in general.\\
+    In an integral domain, every prime element is irreducible, but the converse holds only in UFDs.}
+    \end{minipage}
+};
+%------------ Irreducible and Prime Elements Header ---------------------
+\node[fancytitle, right=10pt] at (box.north west) {Irreducible and Prime Elements};
+\end{tikzpicture}
+
+%------------ Norm and Euclidean Domains Definitions ---------------
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{0.3\textwidth}
+    \textbf{i. Norm:} For a integral domain $R$, any function $N:R\rightarrow \mathds{Z}^+ \cup {0}$ with $N(0)=0$ is called a $norm$ on $R$.\\
+    \textbf{ii. Euclidean Domain:} An integral domain $R$ is called an \textbf{Euclidean Domain} if there is a norm $N$ on $R$ s.t. for any two elements $a, b\ \in\ R$, where $b\neq 0\ \exists\ q, r\ \in\ R$ s.t. $\mathbf{a=qb+r\ where\ r=0\ or\ N(r)<N(b).}$\\
+    $\bullet$ Any field $F$ is a trivial example of a Euclidean Domain.
+    \end{minipage}
+};
+%------------ Norm and Euclidean Domain Header ---------------------
+\node[fancytitle, right=10pt] at (box.north west) {Norm and Euclidean Domain};
+\end{tikzpicture}
+
+%------------ Principal Ideal Domains (PIDs)  Definitions ---------------
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{0.3\textwidth}
+    A \textbf{Principal Ideal Domain (PID)} is an integral domain in which every ideal is principal.\\
+    \emph{Every Euclidean Domain is a PID.}\\
+    \textbf{Examples:}\\
+    $\bullet \mathds{Z}$ is a PID, but $\mathds{Z}[x]$ is not.\\
+    $\bullet F[x]$ if $F$ is a field, $\bullet Z[i]$
+    \end{minipage}
+};
+%------------ Principal Ideal Domains (PIDs) Header ---------------------
+\node[fancytitle, right=10pt] at (box.north west) {Principal Ideal Domains (PIDs)};
+\end{tikzpicture}
+
+
+%------------ Unique Factorisation Domains (UFDs)  Definitions ---------------
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{0.3\textwidth}
+    Two elements $a, b\ \in\ R$ are said to be \textbf{associates} in $R$ if they differ by a unit, i.e. $a=ub$ for some unit $u\ \in\ R$.
+    A \textbf{Unique Factorisation Domain (UFD)} is an integral domain $R$ in which every nonzero element $r\ \in\ R$ which is not a unit follows the properties:\\
+    \textbf{i.} $r$ can we written as a finite product of irreducibles $p_i$ of $R$.\\
+    \textbf{ii.} This decomposition is unique up to associates, i.e. if $r=p_1 p_2 \dots p_n$ and $r=q_1 q_2 \dots q_n$ then $m=n$ and for some renumbering of factors there is $p_i$ associate to $q_i$\\
+    The above definition can be equivalently stated as:\\
+    \emph{A UID is any integral domain in which every non-zero, non-invertible element has a unique factorisation.}\\
+    $\bullet$\textbf{Every PID is a UID.}\\
+    $\bullet$ $Z[x]$ is a UID, but not a PID.\\
+    $\bullet$In a UID every non-zero element is a prime iff it is irreducible.\\
+    $\bullet$ Fields $\subset$ Euclidean Domains $\subset$ PIDs $\subset$ UFDs $\subset$ Integral Domains.
+    \end{minipage}
+};
+%------------ Unique Factorisation Domains (UFDs) Header ---------------------
+\node[fancytitle, right=10pt] at (box.north west) {Unique Factorisation Domains (UFDs)};
+\end{tikzpicture}
+
+%------------ Primitive Polynomials and Gauss' Lemma  Definitions ---------------
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{0.3\textwidth}
+    A polynomial $f(x) \in \mathds{Z}[x]$ is called \textbf{primitive} if $n=deg(f)>0$, $a_n>0$ and, $gcd(a_0,a_1,\dots,a_n)=1$ for $a_i \in \mathds{Z}$\\
+    \textbf{Gauss' Lemma:} If $f(x), g(x) \in \mathds{Z}$ are primitive $\implies$ $fg$ is also primitive.
+    \end{minipage}
+};
+
+%------------ Primitive Polynomials and Gauss' Lemma Header ---------------------
+\node[fancytitle, right=10pt] at (box.north west) {Primitive Polynomials and Gauss' Lemma};
+\end{tikzpicture}
+
+
+%------------ Eisenstein's Criterion  Definitions ---------------
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{0.3\textwidth}
+    The Eisenstein's Criterion is a test for irreducibility of polynomials.\\
+    Let $P$ be a prime ideal of the integral domain $R$ amd, $f(x)=x^n+a_{n-1}x^{n-1}+\dots+a_1x+a_0$ be a polynomial in $R[x]$.\\
+    \textbf{Eisenstein's Criterion} states that $f(x)$ is irreducible in R[x] if\\
+    $\bullet\ a_{n-1},\dots a_1, a_0$ are elements of $P$ and,\\
+    $\bullet\ a_0$ is \textbf{not} an element of $P^2.$\\
+    \emph{If Eisenstein's Criterion doesn't directly apply to f(x) try on f(x+1), if f(x+1) is irreducible it implies f(x) is also irreducible.}
+    \end{minipage}
+};
+
+%------------ Eisenstein's Criterion Header ---------------------
+\node[fancytitle, right=10pt] at (box.north west) {Eisenstein's Criterion};
+\end{tikzpicture}
+
+
+%----------------------------Next Page-----------------------------
+
+%------------ Characteristics of Fields  Definitions ---------------
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{0.3\textwidth}
+    Let $1_F$ denote the identity of $F$.\\
+    The \textbf{characteristic} of a field $F$, denoted as $ch(F)$ is defined as the smallest integer $p$ such that $p \cdot 1_f=0$ if such a $p$ exists and is defined as $0$ otherwise.\\
+    $\bullet$ $ch(F)$ is either $0$ or a prime $p$, $\bullet$ $\mathds{Q}$ and $\mathds{R}$ have characteristic 0\\
+    $\bullet\ F_p=\mathds{Z}/p\mathds{Z}$ has characteristic $p$,  
+    \end{minipage}
+};
+%------------ Characteristics of Fields Header ---------------------
+\node[fancytitle, right=10pt] at (box.north west) {Characteristics of Fields};
+\end{tikzpicture}
+
+%------------ Field Extensions and Degree  Definitions ---------------
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{0.3\textwidth}
+    If $K$ is a field containing the subfield $F$, then $K$ is said to be an \textbf{extension field} of $F$. It is denoted as $K/F$.\\
+    The \textbf{degree} of a field extension $K/F$ denoted by $[K:F]$ is the dimension of $K$ as a vector space over $F$.
+    
+    \end{minipage}
+};
+%------------ Field Extensions and Degree Header ---------------------
+\node[fancytitle, right=10pt] at (box.north west) {Field Extensions and Degree};
+\end{tikzpicture}
+
+%------------ Irreducible Polynomials in Fields  Definitions ---------------
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{0.3\textwidth}
+    $\bullet$ For a irreducible polynomial $p(x)\in F$, there exists a field $K$ containing a isomorphic copy of $F$ in which $p(x)$ has a root, i.e. there exists a field extension $K$ of $F$ in which $p(x)$ has a root. A simple way to find this extension is to consider the quotient $K=F[x]/(p(x))$.\\
+    $\bullet$ For the above case, let $\theta=x\mod(p(x)) \in K$. Then the elements $1, \theta, \theta^2\dots \theta^{n-1}$ are a basis for $K$ as a vector space over $F$, with $[K:F]=n$.\\
+    $\bullet$ For the above case, let $\alpha$ be the root of $p(x)$ s.t. $p(\alpha)=0$. Then, $F(\alpha)\cong F[x]/(p(x))$.
+    \end{minipage}
+};
+%------------ Irreducible Polynomials in Fields Header ---------------------
+\node[fancytitle, right=10pt] at (box.north west) {Irreducible Polynomials in Fields};
+\end{tikzpicture}
+
+%------------ Algebraic and Transcendental Elements Definitions ---------------
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{0.3\textwidth}
+    \textbf{i. Algebraic Element:} If $K$ is a field extension over $F$, then $\alpha \in K$ is called \textbf{algebraic} over $F$, if there exists some non-zero polynomial $f(x)$ with coefficients, in $F$, s.t. $f(\alpha)=0.$\\
+    \textbf{ii. Transcendental Element:} Elements $\alpha \in K$ which are not algebraic over $F$ are called \textbf{transcendental}.\\
+    $\bullet$ If $\alpha$ is algebraic over $F$, then $F[\alpha]=F(\alpha)$, if $\alpha$ is transcendental over $F$, then $F[\alpha]\neq F(\alpha).$
+    \end{minipage}
+};
+%------------ Algebraic and Transcendental Elements Header ---------------------
+\node[fancytitle, right=10pt] at (box.north west) {Algebraic and Transcendental Elements};
+\end{tikzpicture}
+
+%------------ Algebraic Extensions Definitions ---------------
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{0.3\textwidth}
+    $\bullet$ Let $\alpha$ be algebraic over $F$. There there exists a unique monic irreducible polynomial $m_{\alpha, F}(x) \in F[x]$ which has $\alpha$ as a root.\\
+    $\bullet$ If $L/F$ is an extension of fields and $\alpha$ is algebraic over both $F$ and $L$ then $m_{\alpha, L}(x)$ divides $m_{\alpha, F}(x)$ in $L[x]$.\\
+    $\bullet$ If $F(\alpha)$ is the field generated by $\alpha$ over $F$ then, $F(\alpha)\cong F[x]/(m_\alpha (x))$.\\
+    $\bullet$ Let $F \subseteq K \subseteq L$ be fields. Then $[L:F]=[L:K][K:F]$
+    $\bullet$ Similarly, $[K:F]$ divides $[L:F]$.\\
+    $\bullet$ Let $K_1, K_2$ be two finite extensions of field $F$ contained in $K$. Then, $[K_1 K_2:F] \leq [K_1:F][K_2:F]$, but if $[K_1:F]=n, [K_2:F]=m$ and if gcd $(m,n)=1$. Then, $[K_1 K_2: F] = [K_1:F][K_2:F]=nm.$
+    \end{minipage}
+};
+%------------ Algebraic Extensions Header ---------------------
+\node[fancytitle, right=10pt] at (box.north west) {Algebraic Extensions};
+\end{tikzpicture}
+
+%------------ Splitting Fields Definitions ---------------
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{0.3\textwidth}
+    \textbf{Splitting Fields:} The extension field $K$ of $F$ is called a splitting field for the polynomial $f(x) \in F[x]$ if $f(x)$ factors completely into linear factors in $K[x]$ but not over any proper subfield of $K$ containing $F$.\\
+    $\bullet$ For any field $F$, if $f(x) \in F[x]$. Then, there exists an extension $K$ of $F$ which is a splitting field for $f(x)$.\\
+    $\bullet$ A splitting field of a polynomial of degree $n$ over $F$ is of degree at most $n!$ over $F$.\\
+    $\bullet$ Any two splitting fields for a polynomial $f(x) \in F[x]$ over a field $F$ are isomorphic.
+    $\bullet$ The polynomial $x^n-1$ over $\mathds{Q}$ has in general a splitting field contained in $\mathds{C}$.\\
+    $\bullet$ Let $\mathds{Q}(\zeta_n)$ be the cyclotomic field of $n^{th}$ roots of unity. $[\mathds{Q}\zeta_n:\mathds{Q}]=\varphi(n)$ where $\varphi(n)$ is Euler's totient function.
+    \end{minipage} 
+};
+%------------ Splitting Fields Header ---------------------
+\node[fancytitle, right=10pt] at (box.north west) {Splitting Fields};
+\end{tikzpicture}
+
+%------------ Algebraic Closure of Fields Definitions ---------------
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{0.3\textwidth}
+    $\bullet$ The field $\Bar{F}$ is called an \textbf{algebraic closure} of $F$ if $\Bar{F}$ is algebraic over $F$ and, if every polynomial $f(x) \in F[x]$ splits completely over $\Bar{F}$.\\
+    $\bullet$ A field $K$ is said to be \textbf{algebraically closed} if every polynomial with coefficients in $K$ has a root n $K$. $\Bar{F}$ as defined above is algebraically closed.\\
+    $\bullet$ For every field $F$ there exists an algebraically closed field $K$ containing $F$.
+    \end{minipage} 
+};
+%------------ Algebraic Closure of Fields Header ---------------------
+\node[fancytitle, right=10pt] at (box.north west) {Algebraic Closure of Fields};
+\end{tikzpicture}
+
+%------------ Fundamental Theorem of Algebra Definitions ---------------
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{0.3\textwidth}
+    The field $\mathds{C}$ is algebraically closed.
+    \end{minipage} 
+};
+%------------ Fundamental Theorem of Algebra Header ---------------------
+\node[fancytitle, right=10pt] at (box.north west) {Fundamental Theorem of Algebra};
+\end{tikzpicture}
+
+%------------ Finite Fields Definitions ---------------
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{0.3\textwidth}
+    $\bullet$ For every prime $p \in \mathds{N}$ there exists a field $\mathds{F}_p$ of order $p$, e.g.$\mathds{Z}/p \mathds{Z}$.\\
+    $\bullet$ For any finite field $F$, the order of $F$ is $q=p^r$ for some prime $p$ and positive integer $r$.
+    \end{minipage} 
+};
+%------------ Finite Fields Header ---------------------
+\node[fancytitle, right=10pt] at (box.north west) {Finite Fields};
+\end{tikzpicture}
+
+%------------ Structure Theorem for Finite Fields Definitions ---------------
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{0.3\textwidth}
+    Let $p$ be a prime integer and let $q=p^r$ for some positive integer $r$. Then the following statements hold.
+    \begin{itemize}[noitemsep,topsep=0pt]
+        \item There exists a field of order $q.$
+        \item Any two fields of order $q$ are isomorphic.
+        \item Let $K$ be a field of order $q$. The multiplicative group $K^x$ of non-zero elements of $K$ is a cyclic group of order $q-1$.
+        \item Let $K$ be a field of order $q$. The elements of $K$ are the roots of $x^q-x \in \mathds{F}_p[x]$.
+        \item A field of order $p^r$ contains a field of order $p^k \iff k|r$
+        \item The irreducible factors of $x^q-x$ over $\mathds{F_p}$ are the irreducible polynomials in $\mathds{F_p}[x]$ whose degree divides $r$.
+    \end{itemize}
+    \end{minipage} 
+};
+%------------ Structure Theorem for Finite Fields Header ---------------------
+\node[fancytitle, right=10pt] at (box.north west) {Structure Theorem for Finite Fields};
+\end{tikzpicture}
+
+\end{multicols*}
+\end{document}

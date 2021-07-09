@@ -1,0 +1,349 @@
+
+\documentclass{article}
+\usepackage{geometry}
+\geometry{a3paper, landscape, margin=2in}
+\usepackage{url}
+\usepackage{multicol}
+\usepackage{amsmath}
+\usepackage{esint}
+\usepackage{amsfonts}
+\usepackage{tikz}
+\usetikzlibrary{decorations.pathmorphing}
+\usepackage{amsmath,amssymb}
+
+\usepackage{colortbl}
+\usepackage{xcolor}
+\usepackage{mathtools}
+\usepackage{amsmath,amssymb}
+\usepackage{enumitem}
+\makeatletter
+
+\newcommand*\bigcdot{\mathpalette\bigcdot@{.5}}
+\newcommand*\bigcdot@[2]{\mathbin{\vcenter{\hbox{\scalebox{#2}{$\m@th#1\bullet$}}}}}
+\makeatother
+%Template by Drew Ulick https://de.overleaf.com/articles/130-cheat-sheet/ntwtkmpxmgrp
+\title{Intro Group Theory Cheat Sheet}
+\usepackage[english]{babel}
+\usepackage{palatino}
+
+\advance\topmargin-1.2in
+\advance\textheight3in
+\advance\textwidth3in
+\advance\oddsidemargin-1.5in
+\advance\evensidemargin-1.5in
+\parindent0pt
+\parskip2pt
+\newcommand{\hr}{\centerline{\rule{3.5in}{1pt}}}
+%\colorbox[HTML]{e4e4e4}{\makebox[\textwidth-2\fboxsep][l]{texto}
+\begin{document}
+
+\begin{center}{\fontsize{35}{60}{\textcolor{purple}{\textbf{Intro Group Theory Cheat Sheet}}}}\\
+\end{center}
+\begin{multicols*}{3}
+
+\tikzstyle{mybox} = [draw=purple, fill=white, very thick,
+    rectangle, rounded corners, inner sep=10pt, inner ysep=10pt]
+\tikzstyle{fancytitle} =[fill=purple, text=white, font=\bfseries]
+
+%------------ Group Definitions ---------------
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{0.3\textwidth}
+    A group is an ordered pair (G, *) where G is a set and * is a binary operation on G satisfying the following axioms:\\
+    \textbf{i. Closure:} $\forall$ a, b $\in$ G, a * b, is also in G\\
+    \textbf{ii. Associativity:} (a * b) * c = a * (b * c), $\forall$ a, b, c $\in$ G\\
+    \textbf{iii. Identity:} $\exists$ e $\in$ G, called an identity of G,\\ s.t. $\forall$ a $\in$ G we have a * e = e * a = a\\
+    \textbf{iv. Inverse} $\forall$ a $\in$ G $\exists \ a^{-1} \in$ G, called an inverse of a, s.t. a * $a^{-1}$ = $a^{-1}$ * a = e.
+    \end{minipage}
+};
+%------------ Group Definitons Header ---------------------
+\node[fancytitle, right=10pt] at (box.north west) {Group Axioms};
+\end{tikzpicture}
+
+%------------ Some Properties of Groups ---------------
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{0.3\textwidth}
+    \textbf{i. Abelian group} A group G is abelian if a * b = b * a $\forall$ a, b $\in$ G\\
+    \textbf{ii. Finite group} A group G is finite if the number of elements in G are finite\\
+    \textbf{iii. Cancellation property} suppose that a * b = a * c,  $\forall$ a, b, c $\in$ G, $\Rightarrow$ b = c\\
+    \textbf{iv. Uniqueness of Inverse and Identity}\\ • The identity of G is unique\\
+    • $\forall$ a $\in$ G, $a^{-1}$ is uniquely determined\\
+    • $(a^{-1})^{-1}$ = a $\forall$ a $\in$ G\\
+    • $(a * b)^{-1}$ = $(b^{-1})\ *\ (a^{-1})$\\
+    • for any $a_1 , a_2, ... , a_n$ $\in$ G the value of $a_1 * a_2 * · · · *a_n$ is independent of how the expression is bracketed
+    \end{minipage}
+};
+%------------ Mixing Header ---------------------
+\node[fancytitle, right=10pt] at (box.north west) {Some Properties of Groups};
+\end{tikzpicture}
+
+%------------ Some special groups ---------------
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{0.3\textwidth}
+    \textbf{i. Dihedral Group ($D_n\ \text{or}\ D_{2n}$)} is a group of symmetries of a n-sided regular polygon. Order = 2n\\
+    \textbf{ii. Symmetric Group ($S_n$)} is the group whose elements are all the bijections from the set to itself.\\Order = n!\\
+    \textbf{iii. Klein-4 Group ($K_4$ or $V$)} is a group with 4 elements in which each element is a self inverse.
+    \textbf{}
+    \end{minipage}
+};
+%------------ Some Special Groups Space Header ---------------------
+\node[fancytitle, right=10pt] at (box.north west) {Some Special Groups};
+\end{tikzpicture}
+
+%------------ Homomorphisms and Isomorphisms ---------------
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{0.3\textwidth}
+    \textbf{i. Homomorphisms}\\Let (G , *) and (H, $\circ$) be groups. \\A map $\varphi$ : $G \rightarrow H,\ s.t.\ \varphi(x * y) = \varphi(x) \circ \varphi(y)\ \forall\ x, y \in G$ is called a \textbf{homomorphism.}\\
+    \textbf{ii. Isomorphism}\\ For $\varphi$ : G $\rightarrow$ H is called an \textbf{isomorphism} if:\\
+    i. $\varphi$ is a homomorphism\\
+    ii. $\varphi$ is a bijection
+
+    \end{minipage}
+};
+%------------ Homomorphisms and Isomoprhisms Header ---------------------
+\node[fancytitle, right=10pt] at (box.north west) {Homomorphisms and Isomorphisms};
+\end{tikzpicture}
+%------------ Group Actions ---------------
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{0.3\textwidth}
+    A \textbf{group action} of a group G on a set A is a map from G $\times$ A to A satisfying the following properties\\
+    \textbf{i. Identity:} $e \cdot x = x$ and,\\
+    \textbf{ii. Compatibility:} $g \cdot (h \cdot x)=(gh) \cdot x$
+
+    \end{minipage}
+};
+%------------ Group Actions Header ---------------------
+\node[fancytitle, right=10pt] at (box.north west) {Group Actions};
+\end{tikzpicture}
+%------------ Subgroups ---------------------
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{0.3\textwidth}
+    For a Group G. The subset H of G, is a \textbf{Subgroup} of G, i.e. H $\leq$ G if\\
+    \textbf{i.} H is non-empty\\
+    \textbf{ii.} H is closed under products and inverses\\
+    • \textbf{A Normal subgroup} N of G, (i.e. $N \trianglelefteq G$) iff $gng^{-1} \in N\ \forall\ g \in G\ \text{and}\ n \in N.$\\
+    \textbf{The Subgroup Criterion}\\
+    A subset H of group G is a subgroup of G iff\\
+    \textbf{i.} H $\neq \emptyset$\\
+    \textbf{ii.} $\forall\  x,\ y \in H\ xy^{-1} \in H$
+    \end{minipage}
+};
+%------------ Variation of Parameters Header ---------------------
+\node[fancytitle, right=10pt] at (box.north west) {Subgroups};
+\end{tikzpicture}
+
+%------------ CNSK Content ---------------
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{0.3\textwidth}
+    \textbf{• Centralizer} of A in G is a subset of G defined as $C_G(A) = \{ g \in G\ |\ gag^{-1} = a\ \forall\ a \in A \}$,\\ \emph{it is the set of all elements of G which commute with every element of A.} \\
+    \textbf{• Center} of G is the subset of G defined as\\ $Z(G) = \{ g \in G\ |\ gx = xg\ \forall\ x \in G \}$,\\
+    \emph{it is the set of elements commutating with all the elements of G.} Note, this is case $Z(G)=C_G(G)\ \text{so}\ Z(G) \leq G$.\\
+    \textbf{• Normalizer} of A in G is defined as the set\\
+    $N_G(A)=\{ g \in G\ |\ gAg^{-1} = A\}\ \text{where, }\\ gAg^{-1}=\{gag^{-1}\ |\ a \in A\}$. Note that $C_G(A) \leq N_G(A).$\\
+    \textbf{• Stabilizer} on a set S with element s in G is defined as the set\\ 
+    $G_s=\{g \in G\ |\ g \cdot s = s\}.$ Note that $G_S \leq G.$\\
+    \textbf{• Kernel} of G on S is defined as the set\\
+    $Ker(f)=\{ g \in G\ |\ g \cdot s = s\ \forall\ s \in S\}$
+    \end{minipage}
+};
+%------------ CNSK Header ---------------------
+\node[fancytitle, right=10pt] at (box.north west) {Centralizers, Normalizers, Stabilizers and Kernels};
+\end{tikzpicture}
+
+
+%------------ Cyclic Groups and Cycle Notation Content ---------------
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{0.3\textwidth}
+    A Group H is \textbf{Cyclic} if $\exists\ x \in H\ \text{s.t. } H = \{ x^n\ |\ n \in \boldsymbol{Z} \}$\\
+    For the above case we say $H \left < x \right >$ and that $H$ is generated by $x$. \\
+   • A cyclic group can have more than one generator.\\• All cyclic groups are abelian.\\
+   • If $H=\left<x\right>$ then $|H| = |x|,$ if $|H|=n<\infty$ then $x^n=1$\\
+   • Any two cyclic groups of the same order are isomorphic.\\
+   \hrule
+   \vspace{0.2cm}
+   Two-Line to Cycle notation for permutations\\
+   $\left(\begin{matrix}
+1 & 2 & 3 & 4 & 5\\ 
+2 & 5 & 4 & 3 & 1
+\end{matrix}\right)=(125)(34)=(34)(125)=(34)(512)=(15)(25)(34)$\\
+Here, the last form is a case of 2-cycle (transposition).
+    \end{minipage}
+};
+%------------ Cyclic Groups Header ---------------------
+\node[fancytitle, right=10pt] at (box.north west) {Cyclic Groups and Cycle Notation};
+\end{tikzpicture}
+
+%------------ Cosets and Quotient Groups Content ---------------
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{0.3\textwidth}
+    For any $N\leq G$ and any $g \in G$\\
+    • $gN=\{gn\ |\ n\in N\}=\{g, gh_1, gh_2 \dots \}$ and,\\
+    • $Ng=\{ng\ |\ n\in N\}=\{g, h_1g, h_2g \dots \}$
+    are called a left coset and a right coset respectively.\\
+    \hrule
+    \vspace{0.2cm}
+    For a Group $G\ \text{and}\ N \trianglelefteq G$, the \textbf{quotient group} of N in G (i.e. G/N), is the set of cosets of N in G.
+    
+    \end{minipage}
+};
+%------------ Cosets and Quotient Groups Header ---------------------
+\node[fancytitle, right=10pt] at (box.north west) {Cosets and Quotient Groups};
+\end{tikzpicture}
+
+%------------ Lagrange's Theorem and some results ---------------
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{0.3\textwidth}
+    \textbf{Lagrange's Theorem}: For a finite group $G$ and $H \leq G$,\\
+    • The order of $H$ divides the order of $G$, and,\\
+    • The number of left cosets of $H$ in $G$ equals $\frac{|G|}{|H|}$\\
+    \hrule
+    \vspace{0.2cm}
+    \textbf{Some important results}\\
+    • If $G$ is a finite group and $x \in G$, then the order of $x$ divides the order of $G$, and $x^{|G|}=e\ \forall\ x \in G$\\
+    • If $G$ is a group of prime order, then $G$ is cyclic
+    \end{minipage}
+};
+%------------ Lagrange's Theorem and some results ---------------------
+\node[fancytitle, right=10pt] at (box.north west) {Lagrange's Theorem and some results};
+\end{tikzpicture}
+\
+%------------ Cauchy's Theorem Content ---------------
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{0.3\textwidth}
+    \textbf{Cauchy's Theorem}: If $G$ is a finite group and $p$ is a prime dividing $|G|$ then $G$ has an element of order $p$.
+    \end{minipage}
+};
+%------------ Cauchy's Theorems Header ---------------------
+\node[fancytitle, right=10pt] at (box.north west) {Cauchy's Theorem};
+\end{tikzpicture}
+%------------ The Isomorphism Theorems Content ---------------------
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{0.3\textwidth}
+	\textbf{i. The First Isomorphism Theorem:}\\
+	If $\varphi:G \rightarrow\  \text{H is a homomorphism of groups. Then }ker\ \varphi \trianglelefteq G\text{ and, }\\
+	G/ker \varphi \cong \varphi(G)$.\\
+	\textbf{ii. The Second Isomoprhism Theorem:}\\
+	For a group $G$ with, $A, B \leq G$ and, $A \trianglelefteq N_G(B)$.
+Then $AB \leq G, \\ B\trianglelefteq AB, A \cap B \trianglelefteq A$ and, $AB/B \cong A/ A \cap B$\\
+	\textbf{iii. The Third Isomoprhism Theorem:}\\
+	For a group $G$ with, $H, K \trianglelefteq G$ and, $H\leq K$. Then $K/H \trianglelefteq G/H$ and, $\frac{G/H}{K/H}\cong G/K$
+	\end{minipage}
+};
+%------------ The Isomorphism Theorems Header ---------------------
+\node[fancytitle, right=10pt] at (box.north west) {The Isomorphism Theorems};
+\end{tikzpicture}
+
+%------------ Parity of Permutations and Alternating Groups Content ---------------------
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{0.3\textwidth}
+    The parity of any permutation $\sigma$ is given by the parity of the number of its 2-cycles (transpositions).
+    \hrule
+    \vspace{0.2cm}
+    \textbf{Alternating Groups}:\\
+    An alternating group is the group of even permutations of a finite set of length $n$. It is denoted by $A_n$ it's order is $\frac{n!}{2}$
+
+	\end{minipage}
+};
+%------------ Parity of Permutations and Alternating Groups Header ---------------------
+\node[fancytitle, right=10pt] at (box.north west) {Parity of Permutations and Alternating Groups};
+\end{tikzpicture}
+
+%------------ Equivalence Classes and Orbits Content ---------------
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{0.3\textwidth}
+    • If $G$ is a group acting on the non-empty set $A$. Then $a \sim b \iff a=g\cdot b$ for some $g \in G$. Where $\sim$ is an equivalence relation.\\
+    • The \textbf{orbit} of $G$ containing $a$ is given as $\mathcal{O}_a=\{g \cdot a\ |\ g\in G\}$\\
+    • The action of $G$ on $A$ is called transitive if there is only one orbit.\\
+    • \textbf{Conjugacy classes} of G is the equivalence classes of G when it acts on itself with conjugation. i.e. ${gag^{-1}\ |\ g \in G }$
+    \end{minipage}
+};
+%------------ Equivalence Classes and Orbits Header ---------------------
+'\node[fancytitle, right=10pt] at (box.north west) {Equivalence Classes and Orbits};
+\end{tikzpicture}
+
+%------------ Class equations and Orbit-stabilizer Theorem Content ---------------
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{0.3\textwidth}
+    \textbf{Class equation} of a finite group $G$ is written as:\\
+    $|G|=|Z(G)|+|\sum(\text{Conjugancy classes of G})|$\\
+    \textbf{Oribit-stabilizer Theorem:}\\
+    For a group $G$ acting on a set $S$, for any $s\ \in\ S$ we have,  $|\mathcal{O}_s||G_s|=|G|$
+    
+    \end{minipage}
+};
+%------------ Class equations and Orbit-stabilizer Theorem Header ---------------------
+'\node[fancytitle, right=10pt] at (box.north west) {Class equations and Orbit-stabilizer Theorem};
+\end{tikzpicture}
+
+%------------ Cayley's Theorem Content ---------------
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{0.3\textwidth}
+    \textbf{Cayley's Theorem:}\\
+    Every group is isomorphic to a subgroup of some symmetric group. If $G$ is a group of order $n$, then G is isomoprhic to a subgroup of $S_n$
+    \end{minipage}
+};
+%------------ Cayley's Theorem Header ---------------------
+'\node[fancytitle, right=10pt] at (box.north west) {Cayley's Theorem};
+\end{tikzpicture}
+
+%------------ Automorphisms Content ---------------
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{0.3\textwidth}
+    \textbf{Automorphism} of $G$ is defined as an isomorphism from $G$ onto itself.\\
+    The set of all automorphisms of $G$ is denoted by Aut($G$)
+    \end{minipage}
+};
+%------------ Automorphisms Header ---------------------
+'\node[fancytitle, right=10pt] at (box.north west) {Automorphisms};
+\end{tikzpicture}
+
+%------------ p-groups and Sylow p-groups Content ---------------
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{0.3\textwidth}
+    \textbf{• p-group} is defined as a group of order $p^a$ for some $a \geq 1$. Sub-groups of $G$ which are p-groups are called p-subgroups.\\
+    \textbf{• Sylow p-group} is defined as a group of order $p^am$, where $p \nmid m$, a subgroup of order $p^a$ is called a Sylow p-subgroup of $G$. $Syl_p(G)$ is the set of Sylow p-subgroups of $G$.
+    \end{minipage}
+};
+%------------ p-groups and Sylow p-groups Header ---------------------
+'\node[fancytitle, right=10pt] at (box.north west) {p-groups and Sylow p-groups};
+\end{tikzpicture}
+
+
+%------------ The Sylow Theorems Content ---------------
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{0.3\textwidth}
+    \textbf{i. The First Sylow Theorem:}\\
+    If $p$ divides $|G|$, then $G$ has a Sylow p-subgroup.\\
+    \textbf{ii. The Second Sylow Theorem:}\\
+    All Sylow p-subgroups of $G$ are conjugate to each other for a fixed $p$.\\
+    \textbf{iii. The Third Sylow Theorem:}\\
+    $n_p \equiv 1 (\text{mod}\ p)$, where $n_p$ is the number of Sylow p-subgroups of G.
+    \end{minipage}
+};
+%------------ The Sylow Theorems Header ---------------------
+'\node[fancytitle, right=10pt] at (box.north west) {The Sylow Theorems};
+\end{tikzpicture}
+\end{multicols*}
+\end{document}
+
+
+Contact GitHub API Training Shop Blog About
+© 2016 GitHub, Inc. Terms Privacy Security Status Help
