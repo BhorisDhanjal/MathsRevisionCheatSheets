@@ -1,5 +1,5 @@
 # Maths Revision Cheat Sheets
-I have stored here a few Mathematics Cheat Sheets I've made on LaTeX. 
+I have stored here a few Mathematics Revision Cheat Sheets I've made on LaTeX. 
 
 The topics included are:
 1. Introductory Group Theory
