@@ -1,0 +1,901 @@
+\documentclass[dvipsnames]{article}
+\usepackage{geometry}
+\geometry{a3paper, landscape, margin=2in}
+\usepackage{url}
+\usepackage{multicol}
+\usepackage{esint}
+\usepackage{amsfonts}
+\usepackage{tikz}
+\usetikzlibrary{decorations.pathmorphing}
+\usepackage{amsmath,amssymb}
+\usepackage{enumitem}
+\usepackage{colortbl}
+\usepackage{mathtools}
+\usepackage{ mathrsfs }
+\usepackage{ dsfont }
+\usepackage{ gensymb }
+\usepackage[activate={true,nocompatibility},final,tracking=true,kerning=true,spacing=true,factor=1100,stretch=10,shrink=10]{microtype}
+\makeatletter
+\setlist[itemize]{noitemsep, topsep=0pt}
+\newcommand*\bigcdot{\mathpalette\bigcdot@{.5}}
+\newcommand*\bigcdot@[2]{\mathbin{\vcenter{\hbox{\scalebox{#2}{$\m@th#1\bullet$}}}}}
+\makeatother
+%Sheet made by Boris, Template is by Drew Ulick https://de.overleaf.com/articles/130-cheat-sheet/ntwtkmpxmgrp
+\title{Introductory Complex Analysis Cheat Sheet}
+\usepackage[english]{babel}
+\usepackage{palatino}
+\usepackage{bm}
+	\definecolor{cobalt}{rgb}{0.0, 0.28, 0.67}
+\advance\topmargin-1.2in
+\advance\textheight3in
+\advance\textwidth3in
+\advance\oddsidemargin-1.5in
+\advance\evensidemargin-1.5in
+\parindent0pt
+\parskip2pt
+\newcommand{\hr}{\centerline{\rule{3.5in}{1pt}}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\D}{\mathbb{D}}
+% \colorbox[HTML]{e4e4e4}{\makebox[\textwidth-2\fboxsep][l]{texto}}
+\begin{document}
+
+\begin{center}{\fontsize{35}{60}{\textcolor{cobalt}{\textbf{Introductory Complex Analysis Cheat Sheet}}}}\\
+\end{center}
+\begin{multicols*}{3}
+
+\tikzstyle{mybox} = [draw=cobalt, fill=white, very thick,
+    rectangle, rounded corners, inner sep=10pt, inner ysep=10pt]
+\tikzstyle{fancytitle} =[fill=cobalt, text=white, font=\bfseries]
+
+% ------------------------------------------------------
+% Start of Sheet
+% ------------------------------------------------------
+
+%------------ Field of Complex Numbers Definitions ---------------
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{0.3\textwidth}
+    We construct the field of complex numbers as the following quotient ring, $\C=\R[x]/\langle x^2+1 \rangle$\\
+    \textbf{Algebra of Complex Numbers}
+    \begin{itemize}
+        \item Addition: $(a +i b)+(c + i d)=(a+c)+i(b+d)$
+        \item Multiplication: $(a+ i b)(c + i d)=(a c - b d)+i(a d +b c)$
+        \item Division: $\dfrac{a+i b}{c + i d} = \dfrac{(a c + b d)+i(b c - a d)}{c^2+d^2}$
+        \item Square root: $\sqrt{a + i b}=\pm \left( \sqrt{\dfrac{a+\sqrt{a^2+b^2}}{2}} + i \dfrac{b}{|b|} \sqrt{\dfrac{-a+\sqrt{a^2+b^2}}{2}}\right)$
+        \item $\Re (a+ib)=a, \Im (a+ib)=b$
+    \end{itemize}
+    \end{minipage}
+};
+%------------ Field of Complex Numbers Header ---------------------
+\node[fancytitle, right=10pt] at (box.north west) {Field of Complex Numbers};
+\end{tikzpicture}
+
+% ==============================================================
+
+%------------ Conjugation, Absolute Value Definitions ---------------
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{0.3\textwidth}
+    \begin{itemize}
+        \item \textbf{Complex conjugation: } $\overline{a+ i b}=a-i b$
+        \begin{itemize}
+            \item $\overline{a+b}=\overline{a}+\overline{b}$
+            \item $\overline{ab}=\overline{a} \cdot \overline{b}$
+        \end{itemize}
+        Geometrically, conjugation is reflection over the real axis.
+        \item \textbf{Absolute value: } $|a|=+\sqrt{a\overline{a}}$
+        \begin{itemize}
+            \item $|ab|=|a| \cdot |b|$
+            \item $|a+b|^2=|a|^2+|b|^2+ 2 \Re (a \overline{b})$
+            \item $|a-b|^2=|a|^2+|b|^2- 2 \Re(a \overline{b})$
+            \item $|a+b|^2+|a-b|^2=2(|a|^2+|b|^2)$
+        \end{itemize}
+        The absolute value function forms the metric on $\C$. $\C$ is complete under this metric.
+    \end{itemize}
+
+    
+    
+    
+    \end{minipage}
+};
+%------------ Conjugation, Absolute Value Header ---------------------
+\node[fancytitle, right=10pt] at (box.north west) {Conjugation, Absolute Value};
+\end{tikzpicture}
+
+%------------ Basic Topological definitions in C Definitions ---------------
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{0.3\textwidth}
+    \textbf{Some basic results:}
+       \begin{itemize}
+           \item For $z_0 \in \C, r>0$ we denote the ball (i.e. disk) of radius $r$ around $z_0$ to be $D(z_0,r)=\{ z \in \C \mid |z-z_0| < r\}$
+           \item A point $z \in \C$ is a \textbf{limit point} of $E \subseteq \C$ if $\forall \varepsilon>0$, $D(z,\varepsilon)\cap E$ contains a point other than $z$.
+           \item A subset $E \subseteq \C$ is said to be \textbf{open} if $\forall z \in E, \exists\ r>0$, s.t. $D(z,r)\subset E.$
+           \item A subset $E \subseteq \C$ is said to be \textbf{closed}, if $\C \setminus E$ is open in $C$. Or equivalently a set which contains all its limit points.
+           
+      \end{itemize} 
+    \textbf{Some properties of open sets:}
+    \begin{itemize}
+        \item $\C$ and \O\ are open subsets of $\C$.
+        \item All finite intersections of open sets are open sets.
+        \item The collection of all open sets on $\C$ form a topology on $\C$.
+    \end{itemize}
+    \textbf{Interior, closure, density}
+    \begin{itemize}
+        \item \textbf{Interior: } Let $E \subseteq \C$. The interior of $E$ is defined as, $E\degree$=set of all interior points of $E$, or equivalently, $\cup \{\Omega \mid \Omega \subseteq E \wedge \Omega \text{ is open in }\C \}$
+        \item \textbf{Closure: } Let $E \subseteq \C$. The closure of $E$ is defined as $\hat \{F \mid E \subseteq F \wedge F \text{ is closed in }\C \}$
+        \item \textbf{Density: }Let $E \subseteq D$, the closure of $E$ in $D$ is $D$. Then $E$ is called dense in $D$.
+      
+    \end{itemize}
+    \textbf{Path :} A path in a metric space from a point $x \in X$ to $y \in Y$ is a continuous mapping $\gamma: [0,1] \rightarrow x$ s.t. $\gamma(0)=x$ and $\gamma(1)=y$.\\
+    \textbf{Separated and Connected}\\
+    For a metric space $(X,d)$.
+    \begin{itemize}
+        \item \textbf{Separated: } $X$ is separated if $\exists$ disjoint non-empty open subsets $A, B$ of $X$ s.t. $X=A \cup B$.
+        \item \textbf{Connected: } 
+        \begin{itemize}
+            \item $X$ is connected if it has no separation.
+            \item $X$ is connected $\iff$ $X$ does not contain a proper subset of $X$ which is both open and closed in $X$.
+            \item Continuous functions preserve connectedness.
+            \item An open subset $\Omega \in \C$ is connected $\iff$ for $z, w \in \Omega$, there exists a path from $z$ to $w$.
+        \end{itemize}
+    \end{itemize}
+    
+    \end{minipage}
+};
+%------------ Basic Topological definitions in C Header ---------------------
+\node[fancytitle, right=10pt] at (box.north west) {Basic Topological definitions in $\C$};
+\end{tikzpicture}
+
+%------------ Basic Topological definitions in C contd. Definitions ---------------
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{0.3\textwidth}
+    \textbf{Open cover: }Let $(X,d)$ be a metric space and $E$ be a collection of open sets in $X$. We say that $\mathscr{U}$ is an open cover of a subset $K \subseteq X$, if $K \subset \bigcup \{ \mathscr{U} \mid  \mathscr{U} \in E\}$\\
+    \textbf{Compactness: } For some $K \subseteq X$ is compact if for every open cover $E$ of $K$, there exists $E_1, \cdots. E_n \in E$ s.t. $K \subset U_{i=1}^n E_n$, i.e. it is compact if it has a finite open cover.
+\begin{itemize}
+    \item In a metric space, a compact set is closed.
+    \item A closed subset of a compact set is closed.
+\end{itemize}
+\textbf{Limit point compact: } We say a metric space $X$ is limit point compact if every infinite subset of $X$ has a limit point.
+\begin{itemize}
+    \item If $X$ is a compact metric space, then it is also limit point compact.
+\end{itemize} 
+\textbf{Sequentially compact: } We say a metric space $X$ is sequentially compact if every sequence has a convergent sub-sequence.
+\begin{itemize}
+    \item If $X$ is limit point compact then $X$ is sequentially compact.
+    \item Let $X$ be sequentially compact, then $X$ is a compact metric space.
+\end{itemize}
+ \textbf{Lebesgue number lemma: } Let $X$ be sequentially compact, and let $\mathscr{U}$ be an open cover of $X$. Then $\exists\ \delta>0$ s.t. for $x \in X$, $\exists\ u\in \mathscr{U} $ s.t. $B(x,\delta) \subseteq u. $
+    
+    \end{minipage}
+};
+%------------ Basic Topological definitions in C contd. Header ---------------------
+\node[fancytitle, right=10pt] at (box.north west) {Basic Topological definitions in C contd.};
+    
+\end{tikzpicture}
+
+%------------ Isometries on the Complex Plane Definitions ---------------
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{0.3\textwidth}
+    A function $f: \C \rightarrow \C $ is called an \textbf{isometry} if $|f(z)-f(w)|=|z-w|\ , \forall z,w \in \C$.
+    \begin{itemize}
+        \item Let $f$ be an isometry s.t. $f(0)=0$, then the inner product $\langle f(z), f(w)\rangle = \langle z, w \rangle\ , \forall z,w \in \C$.
+        \item If $f$ is an isometry s.t. $f(0)=0$ then $f$ is a linear map.
+        \item The standard argument for $a+ib \in \C$, Arg$(a+ib)=tan^{-1}\frac{b}{a}$
+    \end{itemize}
+    \end{minipage}
+};  
+%------------ Isometries on the Complex Plane Header ---------------------
+\node[fancytitle, right=10pt] at (box.north west) {Isometries on the Complex Plane};
+\end{tikzpicture}
+
+%------------ Functions on the Complex Plane Definitions ---------------
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{0.3\textwidth}
+    \textbf{Uniform convergence: } Let $\Omega \subseteq \C$ and $f_1, \cdots, f_n: \Omega \rightarrow \C$ be a set of functions on $\Omega.$ We say, $\{f\}_{n \in \N}$ converges uniformly to $f$ if given $\varepsilon>0, \exists n \in \N$ s.t. $|f_n(x)-f(x)|<\varepsilon, \forall x\in \Omega$ and $n \geq N$.\\
+    \textbf{Complex exponential: } For $z \in C$, exp$(z)=\sum_{n=0}^\infty \frac{z^n}{n!}$\\
+    \textbf{Trigonometric functions: } For $z\in \C$, $\cos (x)=\frac{e^{iz}+e^{-iz}}{2}$ and $\sin (x)=\frac{e^{iz}-e^{iz}}{2}$\\
+    \textbf{Hyperbolic trigonometric functions: } For $z \in \C$, $\cosh(x)=\frac{e^{z}+e^{-z}}{2}$ and $sinh(z)=\frac{e^{z}-e^{-z}}{2}$
+    \end{minipage}
+};  
+%------------ Functions on the Complex Plane Header ---------------------
+\node[fancytitle, right=10pt] at (box.north west) {Functions on the Complex Plane};
+\end{tikzpicture}
+
+%------------ Complex differentiability Definitions ---------------
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{0.3\textwidth}
+    \textbf{Complex derivative: }Let $\Omega \subseteq \C$ and $f: \Omega \rightarrow \C$, we say that $f$ is complex differentiable at a point $z_0 \in \Omega$ if $z_0$ is an interior point and the following limit exists $\lim_{z \rightarrow z_0}\frac{f(z)-f(z_0)}{z-z_0}$. The limit is denoted as $f'(z_0)$ or $\frac{\mathrm{d} f(z)}{\mathrm{d}z}$.\\
+    \textbf{Holomorphic functions: }If $f: \Omega \rightarrow \C$ is complex differentiable at every point $z \in \Omega$, then $f$ is said to be a holomorphic on $\Omega$.
+    \textbf{Entire function: } Functions which are complex differentiable on $\C$ are called entire functions.
+    \begin{itemize}
+        \item Complex differentiability implies continuity.
+        \item Complex derivatives of a function are linear transformations.
+        \item \textbf{Product rule: }If $f,g: \Omega \rightarrow \C$ are complex differentiable at $z_0 \in \Omega$. Then $fg$ is complex differentiable at $z_0$ with derivative $f'(z_0)g(z_0)+g'(z_0)f(z_0).$'
+        \item \textbf{Quotient rule: }If $f,g: \Omega \rightarrow \C$ are complex differentiable at $z_0 \in \Omega$, and $g$ doesn't vanish at $z_0$. Then $\left(\frac{f}{g}\right)'(z_0)=\frac{f'(z_0)g(z_0)-g'(z_0)f(z_0)}{g(z_0)^2}$
+        \item \textbf{Chain rule: }If $f: \Omega \rightarrow \C$ and $g: D \rightarrow \C$ are complex differentiable at $z_0 \in \Omega$, and $f(\Omega)\subseteq D$. Then $g(f(x))'(z_0)=g'(f(z_0))f'(z_0)$
+    \end{itemize}
+    
+    \end{minipage}
+};  
+%------------ Complex differentiability Header ---------------------
+\node[fancytitle, right=10pt] at (box.north west) {Complex differentiability};
+\end{tikzpicture}
+
+%------------ Power Series Definitions ---------------
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{0.3\textwidth}
+    \textbf{Formal Power Series:} A formal power series around $z_0 \in \C$ is a formal expansion $\sum_{n=0}^\infty a_n(z-z_0)^n$, where $a_n \in \C$ and $z$ is indeterminate.\\
+    \textbf{Radius of convergence:} For a formal power series $\sum a_n(z-z_0)^n$ the radius of convergence $R \in [0,\infty]$ given by $R= \liminf_{n \rightarrow \infty} |a_n|^{-1/n}$. Using the ratio test is identical i.e. $R= \liminf_{n \rightarrow \infty} \frac{|a_n|}{|a_{n+1}|}$.
+    \begin{itemize}
+        \item The series converges absolutely when $z \in B(z_0, R)$, and for $r< R$, the series converges uniformly, else if $|z-z_0|>R$ the series diverges.
+        \item Let $z \in \C$ s.t. $|z-z_0|>R$, then $\exists$ infinitely many $n \in N$ s.t. $|a_n|^{-1/n}<|z-z_0|$.
+    \end{itemize}
+    \textbf{Abels Theorem: }Let $F(z)=\sum_{n=0}^{\infty} a_n(z-z_0)^n$ be a power series with a positive radius of convergence $R$, suppose $z_1=z_0 + Re^{i \theta}$ be a point s.t. $F(z_1)$ converges. Then $\lim_{r \rightarrow R^-}F(z_0+re^{i \theta})=F(z_1)$
+    \end{minipage}
+};  
+%------------ Power Series Header ---------------------
+\node[fancytitle, right=10pt] at (box.north west) {Power Series};
+\end{tikzpicture}
+
+%------------ Differentiation of Power Series Definitions ---------------
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{0.3\textwidth}
+    Let $F(z)=\sum_{n=1}^\infty a_n(z-z_0)^n$ be a power series around $z_0$ with a radius of convergence $R$. Then F is \textbf{holomorphic} in $B(z_0, R)$.
+    \begin{itemize}
+        \item $F(x)'=\sum_{n=1}^{\infty}n a_n (z-z_0)^{n-1}$ with same radius of convergence $R.$
+        \item $a_n=\frac{F^n(z_0)}{n!}$
+    \end{itemize}
+    \textbf{Cauchy product of two power series: } For power series $F(z)=\sum a_n(z-z_0)^n$ and $G(z)=\sum a_n(z-z_0)^n$ with degree of convergence at least $R.$ Then the Cauchy product $F(z)G(z)=\sum c_n(z-z_0)^n$ where $c_n=\sum_{k=0}^n a_k b_{n-k}$ also has degree of convergence at least $R$.
+    \end{minipage}
+};  
+%------------ Differentiation of Power Series Header ---------------------
+\node[fancytitle, right=10pt] at (box.north west) {Differentiation of Power Series};
+\end{tikzpicture}
+
+%------------ Cauchy-Riemann Differential Equations Definitions ---------------
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{0.3\textwidth}
+    For a complex function $f(z)=u(z)+iv(z)$,\\ $f'(x)=\frac{\partial u}{\partial x}+i \frac{\partial v}{\partial x}$ or $f'(x)=-i\frac{\partial u}{\partial y}+\frac{\partial v}{\partial y}$\\
+    Therefore, we get the two \textbf{Cauchy-Riemann Differential equations},\\
+    $\bullet\ \dfrac{\partial u}{\partial x}=\dfrac{\partial v}{\partial y} \hspace{2cm} \bullet\ \dfrac{\partial u}{\partial y}=-\dfrac{\partial v}{\partial x}$\\
+    A function is holomorphic \textbf{iff} it satisfies
+    the Cauchy-Riemann equations.
+    \textbf{Wirtinger derivatives: }\\
+    $\bullet\ \dfrac{\partial}{\partial z}=\dfrac{1}{2}\left(\dfrac{\partial }{\partial x}+\dfrac{1}{i}\dfrac{\partial}{\partial y}\right)\hspace{2cm} \bullet\ \dfrac{\partial}{\partial \overline{z}}=\dfrac{1}{2}\left(\dfrac{\partial }{\partial x}-\dfrac{1}{i}\dfrac{\partial}{\partial y}\right)$\\
+If $f$ is holomorphic at $z_0$ then, $\frac{\partial f}{\partial \overline{z}}=0$ and $f'(z_0)=\frac{\partial f}{\partial z}(z_0)=2\frac{\partial u}{\partial z}(z_0)$
+
+    \end{minipage}
+};  
+%------------ Cauchy-Riemann Differential Equations Header ---------------------
+\node[fancytitle, right=10pt] at (box.north west) {Cauchy-Riemann Differential Equations};
+\end{tikzpicture}
+
+%------------ Harmonic Functions Definitions ---------------
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{0.3\textwidth}
+    \textbf{Laplacian: }Define $\Delta=\frac{\partial^2}{\partial x^2}+\frac{\partial^2}{\partial y^2}$.\\
+    \textbf{Harmonic function: }Let $u: \Omega \rightarrow \R$ be a twice differentiable function. We say that $u$ is a harmonic function if $\Delta u=0$\\
+    For any holomorphic function $f$, $\Re(f), \Im(f)$ are examples of harmonic functions, but there are harmonic functions which are not holomorphic.\\
+    \textbf{Boundary of a set: }For a metric space $X$, $\Omega \in X$, \\
+    the boundary of $\Omega=\partial \Omega= \overline{\Omega}\cap \overline{\Omega^C}$\\
+    \textbf{Maximum principle for harmonic functions: }Let $u: \Omega \rightarrow \R$ be a twice differentiable harmonic function. Let $k \subset \Omega$ be a compact sub   set of $\Omega$. Then,
+    $\sup_{z\in k} u(z)=\sup_{z \in \partial k} u(z)$ and $\inf_{z\in k} u(z)=\inf_{z \in \partial k} u(z)$\\
+    \textbf{Maximum principle for holomorphic functions: }Let $\Omega \subseteq \C$ be open and connected and let $f: \Omega \rightarrow \C$ be a holomorphic function. Then, for compact $k \subseteq \Omega$, we have, 
+    $\sup_{z \in k}|f(z)|=\sup_{\partial k} |f(z)|$\\
+    \textbf{Harmonic conjugate: }Let $u: \Omega \rightarrow \R$ be a twice differentiable harmonic function. We say that $v: \Omega \rightarrow \R$ is a harmonic conjugate of $u$ if $f=u+iv$ is holomorphic.\\
+    $\bullet$ For a harmonic function from $\C$ to $\R$ there exists a uniquely determined harmonic conjugate from $\C$ to $\R$ (up to constants).\\
+    \end{minipage}
+};  
+%------------ Harmonic Functions Header ---------------------
+\node[fancytitle, right=10pt] at (box.north west) {Harmonic Functions};
+\end{tikzpicture}
+
+%------------ Riemann Sphere Definitions ---------------
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{0.3\textwidth}
+    \textbf{Extended complex plane:} $\widehat{\C}=\C \bigcup \{\infty\}$\\
+    Consider $S^2$, associate every point $z=x+iy$ with a line $L$ that connects to the point $P=(0,0,1)$. $L=(1-t)z+tP$, where $t \in \R$.\\
+    The point at which $L$ for some $z$ touches $S^2$ is given as $\left ( \dfrac{2x}{|z|^2+1},\dfrac{2y}{|z|^2+1},\dfrac{|z|^2-1}{|z|^2+1} \right )$, associate $P$ with $\infty$. This gives a stereographic projection of the complex plane unto $S^2$. This sphere is known as the Riemann sphere.
+    \end{minipage}
+};  
+%------------ Riemann Sphere Header ---------------------
+\node[fancytitle, right=10pt] at (box.north west) {Riemann Sphere};
+\end{tikzpicture}
+
+%------------ Möbius transformations Definitions ---------------
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{0.3\textwidth}
+    A map $S(z)=\dfrac{az+b}{cz+d}$ for $a,b,c,d \in \C$ is called a Möbius transformation if $ad-bc \neq 0$.\\
+    Every mobius transformation is holomorphic at $\C \setminus \{-d/c\}$, i.e. every point other than is zero. 
+    \begin{itemize}
+        \item The set of all mobius transformations is a group under transposition.
+        \item $S$ forms a bijection with $\widehat{\C}$
+    \end{itemize}
+    Every mobius transformation can be written as composition of, 
+    \begin{enumerate}
+        \item Translation: $S(z)=z+b, b \in \C$
+        \item Dilation: $S(z)=az, a\neq 0,a=e^{i \theta}$
+        \item Inversion: $S(z)=1/z$
+    \end{enumerate}
+    
+    
+    
+    \end{minipage}
+};  
+%------------ Möbius transformations Header ---------------------
+\node[fancytitle, right=10pt] at (box.north west) {Möbius transformations};
+\end{tikzpicture}
+
+%------------ Curves in C Definitions ---------------
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{0.3\textwidth}
+    A continuous parametrized curve is a continuous map $\gamma:[a,b] \rightarrow \C$ for $a,b\in \R$.
+    \begin{itemize}
+        \item If $a=b$ the curve is trivial.
+        \item $\gamma(a)$ is initial point and $\gamma(b)$ is terminal point.
+        \item $\gamma$ is said to be closed if $\gamma(a)=\gamma(b)$.
+        \item $\gamma$ is said to be simple if  it is injective, i.e. doesn't "cross" itself.
+        \item A curve $-\gamma$ is a reversal of $\gamma$ if $\gamma:[-a,-b]\rightarrow \C$ and if $-\gamma(t)=\gamma(-t)$
+        \item $\gamma$ is said to be continuously differentiable if $\gamma'(t_0)$ (defined usually) exists and is continuous.
+    \end{itemize}
+    \textbf{Reparametrization:} We say a curve $\gamma_2:[a_2,b_2]\rightarrow \C$ is a continuous reparametrization of $\gamma_1:[a_1,b_1] \rightarrow \C$, if there exists a homeomoprhism $\varphi: [a_1,b_1] \rightarrow [a_2,b_2]$ s.t.$\varphi(a_1)=a_2, \varphi(b_1)=b_2$ and $\gamma_2(\varphi(t))=\gamma_1(t) \forall t \in [a_1,b_1]$.
+    \begin{itemize}
+        \item Reparametrization is an equivalence relation.
+    \end{itemize}
+    
+    \textbf{Arc length:} Arc length of curve $\gamma=|\gamma|=\sup \sum_{i=0}^n|\gamma(x_{i+1}-\gamma(x_i))|$ for all partitions of $[a,b]$.
+    \begin{itemize}
+        \item A curve that has a finite arc length is called \textbf{rectifiable}.
+        \item $\displaystyle |\gamma|=\int_{a}^b|\gamma'(t)|\,dt$
+    \end{itemize}
+    
+    \end{minipage}
+};  
+%------------ Curves in C Header ---------------------
+\node[fancytitle, right=10pt] at (box.north west) {Curves in $\C$};
+\end{tikzpicture}
+
+
+%------------ First Fundamental Theorem of Calculus Definitions ---------------
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{0.3\textwidth}
+Let $f:\Omega \rightarrow \C$ be a continuous function. Let $F:\Omega \rightarrow \C$ be called the anti-derivative of $f$, i.e. $F$ is holomorphic in $\Omega$ and $F'(z)=f(z), \forall z\in\Omega$.
+ For a rectifiable curve $\gamma$, $\int_\gamma f(z) dz=F(z_1)-F(z_0)$, where $z_0$ is the initial point and $z_1$ is the terminal point.
+
+    \end{minipage}
+};  
+%------------ First Fundamental Theorem of Calculus Header ---------------------
+\node[fancytitle, right=10pt] at (box.north west) {First Fundamental Theorem of Calculus};
+\end{tikzpicture}
+
+%------------ Second Fundamental Theorem of Calculus Definitions ---------------
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{0.3\textwidth}
+Let $f:\Omega \rightarrow \C$ be a continuous function such that $\int_\gamma f=0.$ Whenever $\gamma$ is a closed polygonal path contained in $\Omega$. For fixed $z_0 \in \Omega$, define a path $\gamma_1$ from $z_0$ to $z_1$ such that $F(z_1)=\int_{\gamma_1} f(z)\, dz$. Then $F$ is a well defined holomorphic function s.t. $F'(z_1)=f(z_1)\ \forall z_1 \in \Omega$
+    \end{minipage}
+};  
+%------------ Second Fundamental Theorem of Calculus Header ---------------------
+\node[fancytitle, right=10pt] at (box.north west) {Second Fundamental Theorem of Calculus};
+\end{tikzpicture}
+
+
+%------------ Properties of complex integration Definitions ---------------
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{0.3\textwidth}
+    For continuously differentiable curves $\gamma:[a,b] \rightarrow \C$, and $\sigma:[b,c] \rightarrow \C$
+    \begin{itemize}
+        \item For a reparametrization $\widehat{\gamma}$ of $\gamma$ we can say that $\int_\gamma f(z)\, dz=\int_{\widehat{\gamma}} f(z)\, dz$
+        \item $\int_{-\gamma} f(z)\, dz=-\int_{\gamma} f(z)\, dz$
+        \item $\int_{\gamma+\sigma}f(z)\, dz=\int_{\gamma}f(z)\, dz+\int_{\sigma}f(z)\,dz$
+        \item $\int_\gamma f(z)\, dz=\int_a^b f(\gamma(t))\gamma'(t)\, dt$
+        \item If $f$ is bounded by $M$ then $\int_\gamma f(z)\, dz \leq M|\gamma|$
+        \item For $c\in \C$, we have, $\int_\gamma (cf+g)(z)\, dz=c\int_\gamma f(z)\, dz+\int_\gamma g(z)\, dz$
+    \end{itemize}
+    \end{minipage}
+};  
+%------------ Properties of complex integration Header ---------------------
+\node[fancytitle, right=10pt] at (box.north west) {Properties of complex integration};
+\end{tikzpicture}
+
+%------------ Homotopy of curves Definitions ---------------
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{0.3\textwidth}
+    Consider two curves $\gamma_0, \gamma_1 \rightarrow \Omega$ with the same initial and end point $[a,b]$.\\
+    We say that $\gamma_0$ is homotopic to $\gamma_1$ ($\gamma_0 \sim \gamma_1$) if there exists a continuous map \\$H: [0,1]\times[a,b] \rightarrow \Omega$ s.t. $H(0,t)=\gamma_0 (t)$ and $H(1,t)=\gamma_1 (t),\ \forall t \in [a,b].$\\
+    $H(s,a)=z_0, H(s,b)=z_1\ \forall s \in [0,1]$\\
+    For \textbf{closed curves} $\gamma_0$ at $z_0$ and $\gamma_1$ at $z_1$, we say that $\gamma_0$ is homotopic to $\gamma_1$ as closed curves if there exists a continuous map $H:[0,1]\times[a,b]\rightarrow \Omega$, s.t. $H(0,t)=\gamma_0(t), H(1,t)=\gamma_1(t),\ \forall t \in [a,b]$. And $H(s,a)=H(s,b),\ \forall s\in[0,1].$
+    \begin{itemize}
+        \item Homotopy is an equivalence relation.
+    \end{itemize}
+    \end{minipage}
+};  
+%------------ Homotopy of curves Header ---------------------
+\node[fancytitle, right=10pt] at (box.north west) {Homotopy of curves};
+\end{tikzpicture}
+
+%------------ Cauchy-Goursat Theorem Definitions ---------------
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{0.3\textwidth}
+    \textbf{Cauchy-Goursat theorem: } If a curve $\gamma_0$ is homotopic to a reparametrization of $\gamma_1$ then, the integral of some function $f:\Omega \rightarrow \C$ is homotopy invariant, i.e., $\displaystyle \int_{\gamma_0}f=\int_{\gamma_1}f$\\
+    \textbf{Alternative statement: }Let $f: \Omega \rightarrow \C$ be holomorphic on $\Omega$, and $\gamma_0:[a,b]\rightarrow \Omega$ is a rectifiable curve which is null-homotopic (i.e. homotopic to a constant map). Then, $ \displaystyle \int_{\gamma_0}f(z)\, dz=0$
+    \end{minipage}
+};  
+%------------ Cauchy-Goursat Theorem Header ---------------------
+\node[fancytitle, right=10pt] at (box.north west) {Cauchy-Goursat Theorem};
+\end{tikzpicture}
+
+
+%------------ Cauchy's theorem for convex domains Definitions ---------------
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{0.3\textwidth}
+    Let $\Omega \subseteq \C$ be a convex and open set and $f:\Omega \rightarrow \C$ be holomorphic on $\Omega$. Then $f$ has an anti derivative $F$ on $\Omega$, and if $\gamma$ is a closed rectifiable curve on $\Omega$ then $\int_\gamma f=0$. 
+    \end{minipage}
+};  
+%------------ Cauchy's theorem for convex domains Header ---------------------
+\node[fancytitle, right=10pt] at (box.north west) {Cauchy's theorem for convex domains};
+\end{tikzpicture}
+
+%------------ Cauchy's integral formula ---------------
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{0.3\textwidth}
+    Let $f:\Omega \rightarrow \C$ be holomorphic. Fix $z_0 \in \Omega$ and let $r>0$ be s.t. $\overline{B(z_0,r)}\subseteq \Omega$. Suppose $\gamma$ is a closed curve in $\Omega \setminus\{z_0\}$ s.t. $\gamma$ is homotopic to a reparametrization to $\gamma_1$ where $\gamma_1(t)=z_0+re^{it}$ for $t \in [0, 2\pi].$ Then,
+    $$f(z_0)=\frac{1}{2\pi i}\int_\gamma \frac{f(z)}{z-z_0}\, dz$$
+    \end{minipage}
+};  
+%------------ Cauchy's integral formula Header ---------------------
+\node[fancytitle, right=10pt] at (box.north west) {Cauchy's integral formula};
+\end{tikzpicture}
+
+%------------ Complex analytic function ---------------
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{0.3\textwidth}
+    An alternative statement, we say $f:\Omega \rightarrow \C$ is complex analytical if given $z_0 \in \Omega, \exists\ B(z_0,r)\subseteq\Omega$ s.t. the formal power series $\sum_{n=0}^\infty a_n (z-z_0)^n$ converges in $B(z_0,r)$ to $f$.\\
+    Let $f:\Omega \rightarrow \C$ be holomorphic on $\Omega$. Suppose for $z_0 \in \Omega, \overline{B(z_0,r)}\subset \Omega$, then for every $n\in \N$, let $a_n=\frac{1}{2\pi i}\int_\gamma \frac{f(z)}{(z-z_0)^{n+1}}\, dz$ where $\gamma(t)=z_0+re^{it}$ for $t\in[0,2\pi]$.
+    Then the power series $\sum_{n=0}^\infty a_n(z-z_0)^n$ converges in $B(z_0,r)$ to $f(z)$.\\
+    \textbf{Corollary:} If $f:\Omega\rightarrow\C$ is holomorphic then $f'$ is also holomorphic. Therefore $f$ is infinitely differentiable.
+    \end{minipage}
+};  
+%------------ Complex analytic function Header ---------------------
+\node[fancytitle, right=10pt] at (box.north west) {Complex analytic function};
+\end{tikzpicture}
+
+%------------ Factor theorem for analytic function ---------------
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{0.3\textwidth}
+    For a analytic function $f:\Omega \rightarrow \C$ s.t. $f(z_0)=0$ at $z_0 \in \Omega, \exists$ a unique analytic function  $g: \Omega \rightarrow \C$ s.t. $f(z)=(z-z_0)g(z)$
+    \end{minipage}
+};  
+%------------ Factor theorem for analytic function Header ---------------------
+\node[fancytitle, right=10pt] at (box.north west) {Factor theorem for analytic function};
+\end{tikzpicture}
+
+
+
+%------------ Principle of analytical continuation ---------------
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{0.3\textwidth}
+    \begin{itemize}
+        \item Let $\Omega$ be open and connected subset of $\C$. and $f,g:\Omega \rightarrow \C$ be analytic functions on $\Omega$. Suppose $f,g$ agree on a non-empty subset of $\Omega$. Then $f\equiv g$ on $\Omega$.
+        \item A consequence to this is that, non-trivial holomorphic functions have isolated zeros.
+    \end{itemize}
+    \end{minipage}
+};  
+%------------ Principle of analytical continuation Header ---------------------
+\node[fancytitle, right=10pt] at (box.north west) {Principle of analytical continuation};
+\end{tikzpicture}
+
+
+%------------ Higher-order Cauchy integral formula ---------------
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{0.3\textwidth}
+    Let $f:\Omega \rightarrow \C$ be analytic on $\Omega$ and $z_0 \in \Omega$ with $\overline{B(z_0,r)}\subseteq \Omega$. Let $\gamma$ be a closed curve in $\Omega\setminus \{z_0\}$ that is homotopic to a reparametrization of $\gamma_1$ where $\gamma_1(t)=z_0+re^{it}$ for $t\in[0,2\pi]$. Then,
+    $$f^{(n)}(z_0)=\frac{n!}{2 \pi i}\int_\gamma \frac{f(z)}{(z-z_0)^{n+1}}\, dz $$
+    \textbf{Cauchy estimates: }If $|f(z)|\leq M\ \forall z\in \gamma([0,2\pi])$ then, $\forall n \in \N$, then we have $|f^{(n)}(z_0)|\leq\frac{Mn!}{r^n}$
+    \end{minipage}
+};  
+%------------ Higher-order Cauchy integral formula Header ---------------------
+\node[fancytitle, right=10pt] at (box.north west) {Higher-order Cauchy integral formula};
+\end{tikzpicture}
+
+%------------ Liouville's Theorem ---------------
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{0.3\textwidth}
+    Let $f$ be a entire function which is bounded. Then $f$ is a constant function.
+    \end{minipage}
+};  
+%------------ Liouville's Theorem Header ---------------------
+\node[fancytitle, right=10pt] at (box.north west) {Liouville's Theorem};
+\end{tikzpicture}
+
+
+%------------ Fundamental Theorem of Algebra ---------------
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{0.3\textwidth}
+    Let $p(z)=a_0+a_1z+\cdots+a_nz^n$ be a non constant polynomial s.t. $a_i\in \C,a_n\neq0$. Then $\exists z_1,z_2,\dots,z_n$ s.t. $p(z)=a_n(z-z_1)\dots(z-z_n).$
+    \end{minipage}
+};  
+%------------ Fundamental Theorem of Algebra Header ---------------------
+\node[fancytitle, right=10pt] at (box.north west) {Fundamental Theorem of Algebra};
+\end{tikzpicture}
+
+%------------ Morera's Theorem ---------------
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{0.3\textwidth}
+    Let $f:\Omega \rightarrow \C$ be a continuous function such that, $\int_\gamma f(z)\, dz=0, \forall$ closed polygonal paths $\gamma \in \Omega$. Then $f$ is holomorphic on $\Omega$.
+    \end{minipage}
+};  
+%------------ Morera's Theorem Header ---------------------
+\node[fancytitle, right=10pt] at (box.north west) {Morera's Theorem};
+\end{tikzpicture}
+
+
+%------------ Uniform limit of holomorphic functions ---------------
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{0.3\textwidth}
+    Let $f_n:\Omega \rightarrow \C$ be a holomorphic on $\Omega, \forall n \in \N$ s.t. $f_n$ converges uniformly on compact sets to $f$. Then $f$ is holomorphic.
+    \end{minipage}
+};  
+%------------ Uniform limit of holomorphic functions Header ---------------------
+\node[fancytitle, right=10pt] at (box.north west) {Uniform limit of holomorphic functions};
+\end{tikzpicture}
+
+%------------ Winding number ---------------
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{0.3\textwidth}
+    Let $\gamma:[a,b]\rightarrow \C$ be a closed curve and let $z_0$ be a point not in the image of $\gamma$. Then the winding number of $\gamma$ around $z_0$ is
+    $$W_\gamma(z_0)=\frac{1}{2 \pi i}\int_\gamma \frac{dz}{z-z_0} $$
+    \begin{itemize}
+        \item Winding number is invariant over homotopy.
+        \item Let $z_0$ be a point not in the image of $\gamma$ then $\exists r>0$ s.t. for $z\in B(z_0,r),W_\gamma(z_0)=W_\gamma(z)$
+        \item The winding number is always an integer.
+        \item The winding number is locally constant.
+    \end{itemize}
+    \textbf{Generalized Cauchy Integral formula}: Let $f:\Omega \rightarrow \C$ be holomorphic on $\Omega$ and $\gamma:[a,b]\rightarrow \Omega$ be a closed curve which is null homotopic. Then for $z_0$ not in the image of $\gamma$,
+    $$f(z_0)W_\gamma(z_0)=\frac{1}{2\pi i}\int_\gamma \frac{f(z)}{(z-z_0)}\, dz$$
+    \end{minipage}
+};  
+%------------ Winding number Header ---------------------
+\node[fancytitle, right=10pt] at (box.north west) {Winding number};
+\end{tikzpicture}
+
+
+%------------Open Mapping Theorem ---------------
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{0.3\textwidth}
+    \begin{itemize}
+        \item $f:\Omega \rightarrow \C$ be holomorphic on $\Omega$. Then $G: \Omega \times \Omega \rightarrow \C$ given by 
+    $$G(z,w)=\left\{\begin{matrix}
+\frac{f(z)-f(w)}{z-w} & \text{when }z \neq w \\
+ f'(z) & \text{when }z=w 
+\end{matrix}\right.$$ then $G$ is continuous.
+\item Let $f:\Omega \rightarrow \C$ be holomorphic on some open set. Suppose $z_0 \in \Omega$ s.t. $f'(z_0)\neq 0$. Then $\exists$ a neighbourhood $U$ of $z_0 \in \Omega$ s.t. $f$ restricted to $U$ is injective. And $V=f(U)$ is an open set and the inverse $g:V\rightarrow U$ of $ f$ is holomorphic.
+\item Let $f:\Omega \rightarrow \C$ be a non-constant holomorphic function on open, connected set $\Omega$. Let $z_0 \in \Omega$ and $w_0=f(z_0).$ Then $\exists$ a neighbourhood $U$ of $z_0$ and bijective holomorphic function $\varphi$ on $U$ s.t. $f(z)=w_0+(\varphi(z))^m$ for $z\in U$ and some integer $m>0$. And $\varphi$ maps $U$ unto $D(0,r)$ for some $r>0.$
+    \end{itemize}
+
+\textbf{Open Mapping Theorem: }Let $f:\Omega \rightarrow \C$ be a non-constant holomorphic function on open connected set $\Omega$, then 
+$f(\Omega)$ is an open set.
+\end{minipage}
+};  
+%------------ Open Mapping Theorem Header ---------------------
+\node[fancytitle, right=10pt] at (box.north west) {Open Mapping Theorem};
+\end{tikzpicture}
+
+%------------ Schwarz reflection principle ---------------
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{0.3\textwidth}
+    Let $\Omega$ be a open connected set which is symmetric w.r.t $\R$. Then define the following,
+    \begin{itemize}
+        \item $\Omega_+=\{z\in \Omega \mid \Im(z)>0 \}$
+        \item $\Omega_-=\{z \in \Omega \mid \Im(z)<0\}$
+        \item $I=\{ z \in \Omega \mid \Im(z)=0\}$
+    \end{itemize}
+    \textbf{Schawrz reflection principle: } Let $\Omega$ be defined as above. Then if $f:\Omega_+ \bigcup I \rightarrow \C$ which is continuous on $\Omega_+ \bigcup I$ and holomorphic on $\Omega_+$. Suppose for $f(x)\in \R,\ \forall x \in I$ then there exists $g:\Omega \rightarrow \C$ holomorphic on $\Omega$ s.t. $g(z)=f(z)$ for $z \in \Omega_+\bigcup I$
+    \end{minipage}
+};  
+%------------ Schwarz reflection principle Header ---------------------
+\node[fancytitle, right=10pt] at (box.north west) {Schwarz reflection principle};
+\end{tikzpicture}
+
+
+%------------ Singularity of a holomorphic function ---------------
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{0.3\textwidth}
+    \begin{itemize}
+        \item \textbf{Isolated singularity: }If $f$ is holomorphic on $B(z_0,R)\setminus \{z_0\}$ for some $R>0$ then $z_0$ is called an isolated singularity.
+        \item \textbf{Removable singularity: }Let $z_0$ be an isolated singularity of a holomorphic function $f$ as defined above. It is called removable if there exists holomorphic function $g$ on $B(z_0,R)$ s.t. $g(z)=f(z)$ on $B(z_0,R)\setminus \{z_0\}.$
+        \item \textbf{Riemann removable singularity theorem: }Let $z_0$ be an isolated singularity of a function $f$, then $z_0$ is a removable singularity if and only if $f$ is locally bounded around $z_0$.
+        \item \textbf{Pole: }If $z_0$ is an isolated singularity as defined above and if $\displaystyle \lim_{z \rightarrow z_0} |f(z)|=\infty$ then $z_0$ is called a pole of $f$.
+        \item \textbf{Essential singularity: }A singularity that is neither removable nor a pole.
+    \end{itemize}
+    \end{minipage}
+};  
+%------------ Singularity of a holomorphic function Header ---------------------
+\node[fancytitle, right=10pt] at (box.north west) {Singularity of a holomorphic function};
+\end{tikzpicture}
+
+%------------ Doubly infinite series ---------------
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{0.3\textwidth}
+    Let $z_n$ be a function defined for $n=,0, \pm1, \pm2,\cdots$, then it is doubly infinite.
+    \begin{itemize}
+        \item A doubly infinite series converges if $\sum_{n=0}^\infty a_n$ and $\sum_{n=1}^\infty a_{=n}$ both converge.
+    \item Splitting up the series in similar manners you can define absolute and uniform convergence. 
+    \end{itemize}
+    
+    \end{minipage}
+};  
+%------------ Doubly infinite series Header ---------------------
+\node[fancytitle, right=10pt] at (box.north west) {Doubly infinite series};
+\end{tikzpicture}
+
+%------------ Annulus series ---------------
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{0.3\textwidth}
+    An annulus $A(z_0,R_1,R_2)$ around a point $z_0$ for $0\leq R_1 \leq R_2$ is the set of all $z \in \C$ s.t. $R_1 \leq |z-z_0| \leq R_2.$
+    \end{minipage}
+};  
+%------------ Annulus Header ---------------------
+\node[fancytitle, right=10pt] at (box.north west) {Annulus};
+\end{tikzpicture}
+
+%------------ Laurent series expansion ---------------
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{0.3\textwidth}
+    Let $f$ be a function holomorphic on $A(z_0, R_1, R_2)$, then there exists $a_n \in \C$ for $n \in \Z$ s.t.
+    $$ f(z)=\sum_{n=-\infty}^\infty a_n(z-z_0)^n$$ where the doubly infinite series converges absolutely and uniformly in some $A(z_0,r_1,r_2)$ when $R_1<r_1<r_2<R_2$.\\
+    $$a_n=\frac{1}{2\pi i}\int_\gamma \frac{f(z)}{(z-z_0)^{n+1}}\,dz$$
+    where $\gamma(z)=z_0+re^{it}$ for $t\in[0,2\pi]$ and $R_1<r<R_2$.\\
+    \textbf{Important results}
+    \begin{itemize}
+        \item $f$ has a removable singularity at $z_0 \iff a_n=0$ for $n<0$ in the Laurent series expansion of $f$
+        \item $f$ has a pole at $z_0$ of order $m \iff a_n=0$ for $n<-m$ in the Laurent series expansion of $f$.  
+        \item $f$ has a essential singularity at $z_0 \iff a_n\neq 0$ for infinitely many negative integers $n$.
+    \end{itemize}
+    \end{minipage}
+};  
+%------------ Laurent series expansion Header ---------------------
+\node[fancytitle, right=10pt] at (box.north west) {Laurent series expansion};
+\end{tikzpicture}
+
+%------------ Casorati–Weierstrass theorem ---------------
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{0.3\textwidth}
+    Let $z_0$ be an essential singularity of $f$ then given $\alpha \in \C$, there exists a sequence $z_n \in B(z_0, R)\setminus \{z_0\}$ s.t. $z_n \rightarrow z_0$ and $f(z_n)\rightarrow \alpha.$\\
+    \begin{itemize}
+        \item Alternatively, $f$ approaches any given value arbitrarily closely in any neighborhood of an essential singularity.
+    \end{itemize}
+    \end{minipage}
+};  
+%------------ Casorati–Weierstrass theorem Header ---------------------
+\node[fancytitle, right=10pt] at (box.north west) {Casorati–Weierstrass theorem};
+\end{tikzpicture}
+
+%------------ Meromorphic functions ---------------
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{0.3\textwidth}
+    Let $\Omega$ be a open connected subset of $\C$ and let $S \subset \Omega$. Let $f: \Omega \setminus S \rightarrow \C$ be holomorphic on $\Omega.$ We say that $f$ is a meromorphic function on $\Omega$ if, 
+    \begin{itemize}
+        \item $S$ is a discrete set.
+        \item $f$ either has removable singularities or poles at point of $S$.
+    \end{itemize}
+    \end{minipage}
+};  
+%------------ Meromorphic functions Header ---------------------
+\node[fancytitle, right=10pt] at (box.north west) {Meromorphic functions};
+\end{tikzpicture}
+
+%------------ Operations on meromorphic functions ---------------
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{0.3\textwidth}
+    Let $\mathcal{M}(\Omega)$ denote the equivalence classes of meromorphic functions over $\Omega$.
+    \begin{itemize}
+        \item  We say that two meromorphic functions $f:\Omega\setminus S_1$ and $g: \Omega \setminus S_2$ are equivalent if $f(z)=g(z)$ on $\Omega \setminus (S_1 \bigcup S_2)$.
+        \item For $f, g \in \mathcal{M}(\Omega)$, define $f+g$ to be the equivalence class of $(f+g):\Omega \setminus (S_1 \bigcup S_2) $
+        \item Similarly, $fg$ is the equivalence class of $fg: \Omega \setminus (S_1 \bigcup S_2).$
+    \end{itemize}
+    \textbf{The space of all meromorphic functions is a field.}
+    \end{minipage}
+};  
+%------------ Operations on meromorphic functions Header ---------------------
+\node[fancytitle, right=10pt] at (box.north west) {Operations on meromorphic functions};
+\end{tikzpicture}
+
+
+
+%------------ Order of meromorphic functions ---------------
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{0.3\textwidth}
+    The order of a meromorphic function is defined as follows,
+    \begin{itemize}
+        \item If $z_0 \in S$ is a removable singularity then the order of $f$ at $z_0$ is the order of the zero at $z_0$ of $f$, i.e., $f(z)=(z-z_0)^m g(z)$ then $m$ is the order.
+        \item If $z_0 \in S$ is a pole and the pole is of order $m$ then order of $f$ at $z_0$ is $-m$.
+        \item If $f \equiv 0$ then $\text{Ord}_{z_0}=\infty.$
+        \item $\text{Ord}_{z_0}(f+g)\geq \min (\text{Ord}_{z_0}(f), \text{Ord}_{z_0}(g))$
+        \item $\text{Ord}_{z_0}(fg)=\text{Ord}_{z_0}(f)+\text{Ord}_{z_0}(g)$
+    \end{itemize}
+
+    \end{minipage}
+};  
+%------------ Order of meromorphic functions Header ---------------------
+\node[fancytitle, right=10pt] at (box.north west) {Order of meromorphic functions};
+\end{tikzpicture}
+
+%------------ Residue of a function ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			\textbf{Residue of a function:} Let $f:\Omega\setminus S \rightarrow\C$ be a holomorphic function, where $ \Omega $ is an open set and $ S $ is a discrete subset of $ \Omega $. Then for $ z_0 \in S $, let $r>0$ be s.t. $ \overline{B(z_0,r)}\subseteq \Omega$ and $ B(z_0,r)=\{ z_0 \}.$ Then in $ B(z_0,r) \setminus \{ z_0 \} $, consider the Laurent series expansion of $ f $ given by $ f(z)=\sum_{n=-\infty}^{\infty} a_n(z-z_0)^n$. We define the residue of $ f $ at $ z_0 $ to be $ \text{Res}(f,z_0)= a_{-1}$.
+			\begin{enumerate}
+				\item If $ z_0 $ is a removable singularity then Res$ (z_0)=0 $.
+				\item If $ z_0$ is a pole of order $m$ then $ (z-z_0)^m f(z)=g(z) $, where $ g(z)\neq0  $ on $ B(z_0,r)\setminus\{z_0\} $then, Res$ (z_0)= a_{m-1}=\frac{g^{(m-1)}(z_0)}{(m-1)!}.$
+			\end{enumerate}
+		\end{minipage}
+	};  
+	%------------ Residue of a function Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Residue of a function	};
+\end{tikzpicture}
+
+
+%------------ Residue theorem ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			Let $ \Omega $ be an open connected subset of $ \C  $ and $ S $ be a finite subset of $ \Omega $ and let $ f:\Omega\setminus S \rightarrow \C  $ be a holomorphic function. Let $ \gamma  $ be a null homotopic closed curve on $ \Omega  $. Then,
+				\[ \dfrac{1}{2 \pi i} \int_\gamma f(z)\, dz= \sum_{j=1}^{k} W_\gamma(z_j) \text{Res}(f,z_j)\] where $ S=\{z_1,\cdots, z_k\} $ and $ W_\gamma $ is the winding number.
+		\end{minipage}
+	};  
+	%------------ Residue theorem Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Residue theorem};
+\end{tikzpicture}
+
+%------------ Log derivative ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			For a holomorphic function $ f:\Omega \rightarrow \C  $. Define the log derivative of $ f $ to be the meromorphic function $ \frac{f'(z)}{f(z)}. $
+			\begin{enumerate}
+				\item $\frac{(fg)'}{fg}=\frac{f'}{f}+\frac{g'}{g}$
+				\item $ \frac{(f/g)'}{(f/g)}=\frac{f'}{f} - \frac{g'}{g}$
+				\item When $ f $ has a pole of order $ m $ at $ z_0 $ then for $f(z)=\frac{g(z)}{(z-z_0)^m} $ the log derivative of $ f $ is $ \frac{g'(z)}{g(z)} -\frac{m}{(z-z_0)}$
+			\end{enumerate}
+		\end{minipage}
+	};  
+	%------------ Log derivative Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Log derivative};
+\end{tikzpicture}
+
+
+%------------ Argument principle ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			Let $ f: \Omega\setminus S \rightarrow \C$ be a meromorphic function s.t. $ f $ has zeros of order $ d_1,\dots,d_n $ at $ z_1, \dots z_n $ after removing the removable singularities. And $ f $ has poles of order $ e_1, \dots, e_m $ at points $ w_1,\dots, w_m $. Let $ \gamma$ be a closed curve which is null homotopic in $ \Omega $ s.t. the zeros and poles don't lie in the image of $ \gamma $. Then,
+			\[ \dfrac{1}{2 \pi i} \int_\gamma \frac{f'(z)}{f(z)}\, dz = \sum_{i=0}^{n} d_i W_\gamma(z_i)- \sum_{j=1}^{m}e_j W_\gamma (w_j)\]
+		\end{minipage}
+	};  
+	%------------ Argument principle Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Argument principle};
+\end{tikzpicture}
+
+
+%------------ Rouche's theorem ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			Let $ \gamma  $ be a closed curve which is null homotopic in $ \Omega  $. Let $ f,g $ be functions holomorphic in $ \Omega $ and $ |g(z)|<|f(z)| $ on $ \gamma  $ then $ f $ and $ f+g $ have the same number of zeros counting multiplicities on the interior of $ H([0,1]\times[a,b]) $ where $ H $ is the null homotopy from $ \gamma $ to a constant path.
+		\end{minipage}
+	};  
+	%------------ Rouche's theorem Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Rouche's theorem};
+\end{tikzpicture}
+
+
+%------------ Branch of the complex logarithm ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			Let $ \Omega $ be an open connected subset of $ \C\setminus\{0\} $. Define a branch of the logarithm on $\Omega$ as a function $ f:\Omega \rightarrow \C $ s.t. $ \exp (f(z))=z, \forall z\in \Omega.	 $\\
+			For $\Omega=\C \setminus \{\Re(x) \leq 0\}$ define the standard branch to be 
+			\[ \text{Log}(z)=\ln|z|+i \text{Arg}(z)	 \]
+			As defined above Log$ (z) $ is holomorphic on $\Omega$.
+		\end{minipage}
+	};  
+	%------------ Branch of the complex logarithm Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Branch of the complex logarithm};
+\end{tikzpicture}
+
+%------------ Schawrz lemma ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			Let $ \D $ denote the open unit disc. Let $ f: \D \rightarrow \D  $ be a holomoprhic function s.t. $ f(0)=0 $. Then, \[ |f(z)| \leq |z|, \forall z \in \D, \text{ and } |f'(z)\leq 1|  \]
+			Also, if $ |f(z)|=|z| $ for some $ z \in \D $ or if $ |f'(0)|=1 $ then $ \exists \lambda in \C, |\lambda|=1 $ s.t. $ f(z)=\lambda z $.
+		\end{minipage}
+	};  
+	%------------ Schawrz lemma Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Schawrz lemma};
+\end{tikzpicture}
+
+
+%------------ Automorphism ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			A function $ f:\Omega \rightarrow \Omega $ is an automorphism if $ f $ is holomorphic and has a holomorphic inverse.	
+		\end{minipage}
+	};  
+	%------------ Automorphism Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Automorphism};
+\end{tikzpicture}
+
+
+%------------ Automorphisms of the unit disc ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			Define a function $ \varphi_\alpha: \D \rightarrow \C $ defined as $ \varphi_\alpha(z)=\frac{z-\alpha}{1-\overline{\alpha}z}$.\\
+			Let $ f:\D \rightarrow \D $ be an automorphism. Then there exists $ \alpha \in \D $ and $ \lambda \in \partial \D $ s.t. \[  f(z)=\lambda \varphi_\alpha (z)\]
+		\end{minipage}
+	};  
+	%------------ Automorphisms of the unit disc Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Automorphisms of the unit disc};
+\end{tikzpicture}
+
+%------------ Phragmén–Lindelöf method ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			Let $ \Omega =\{z\in\Omega: a < \Re(z) < b\} $. Let $ f:\overline{\Omega} \rightarrow \C $, s.t. $ f $ is continous on $ \overline{\Omega} $ and holomorphic on $ \Omega $. Suppose for some $ z=x+iy $, we have $|f(z)|<B $ and let\\
+			 $ M(x)=\sup\{|f(x+iy)|:-\infty < y< \infty \} $. Then,
+			 \[ M(x)^{b-a}\leq M(a)^{b-x}M(b)^{x-a	} \]
+			 And further \[ |f(z)\leq M(x)\leq \max \{M(a),M(b)\}=\sup_{z\in \partial \Omega} |f(z)|\]
+		\end{minipage}
+	};  
+	%------------ Phragmén–Lindelöf method Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Phragmén–Lindelöf method};
+\end{tikzpicture}
+
+% ==============================================================
+\end{multicols*}
+\end{document}
