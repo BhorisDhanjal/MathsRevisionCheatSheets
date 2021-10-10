@@ -111,9 +111,9 @@
     \begin{minipage}{0.3\textwidth}
     \textbf{Some basic results:}
        \begin{itemize}
-           \item For $z_0 \in \C, r>0$ we denote the ball (i.e. disk) of radius $r$ around $z_0$ to be $D(z_0,r)=\{ z \in \C \mid |z-z_0| < r\}$
-           \item A point $z \in \C$ is a \textbf{limit point} of $E \subseteq \C$ if $\forall \varepsilon>0$, $D(z,\varepsilon)\cap E$ contains a point other than $z$.
-           \item A subset $E \subseteq \C$ is said to be \textbf{open} if $\forall z \in E, \exists\ r>0$, s.t. $D(z,r)\subset E.$
+           \item For $z_0 \in \C, r>0$ we denote the ball (i.e. disk) of radius $r$ around $z_0$ to be $B(z_0,r)=\{ z \in \C \mid |z-z_0| < r\}$
+           \item A point $z \in \C$ is a \textbf{limit point} of $E \subseteq \C$ if $\forall \varepsilon>0$, $B(z,\varepsilon)\cap E$ contains a point other than $z$.
+           \item A subset $E \subseteq \C$ is said to be \textbf{open} if $\forall z \in E, \exists\ r>0$, s.t. $B(z,r)\subset E.$
            \item A subset $E \subseteq \C$ is said to be \textbf{closed}, if $\C \setminus E$ is open in $C$. Or equivalently a set which contains all its limit points.
            
       \end{itemize} 
@@ -353,7 +353,7 @@ If $f$ is holomorphic at $z_0$ then, $\frac{\partial f}{\partial \overline{z}}=0
         \item A curve $-\gamma$ is a reversal of $\gamma$ if $\gamma:[-a,-b]\rightarrow \C$ and if $-\gamma(t)=\gamma(-t)$
         \item $\gamma$ is said to be continuously differentiable if $\gamma'(t_0)$ (defined usually) exists and is continuous.
     \end{itemize}
-    \textbf{Reparametrization:} We say a curve $\gamma_2:[a_2,b_2]\rightarrow \C$ is a continuous reparametrization of $\gamma_1:[a_1,b_1] \rightarrow \C$, if there exists a homeomoprhism $\varphi: [a_1,b_1] \rightarrow [a_2,b_2]$ s.t.$\varphi(a_1)=a_2, \varphi(b_1)=b_2$ and $\gamma_2(\varphi(t))=\gamma_1(t) \forall t \in [a_1,b_1]$.
+    \textbf{Reparametrization:} We say a curve $\gamma_2:[a_2,b_2]\rightarrow \C$ is a continuous reparametrization of $\gamma_1:[a_1,b_1] \rightarrow \C$, if there exists a homeomorphism $\varphi: [a_1,b_1] \rightarrow [a_2,b_2]$ s.t.$\varphi(a_1)=a_2, \varphi(b_1)=b_2$ and $\gamma_2(\varphi(t))=\gamma_1(t) \forall t \in [a_1,b_1]$.
     \begin{itemize}
         \item Reparametrization is an equivalence relation.
     \end{itemize}
@@ -377,7 +377,6 @@ If $f$ is holomorphic at $z_0$ then, $\frac{\partial f}{\partial \overline{z}}=0
     \begin{minipage}{0.3\textwidth}
 Let $f:\Omega \rightarrow \C$ be a continuous function. Let $F:\Omega \rightarrow \C$ be called the anti-derivative of $f$, i.e. $F$ is holomorphic in $\Omega$ and $F'(z)=f(z), \forall z\in\Omega$.
  For a rectifiable curve $\gamma$, $\int_\gamma f(z) dz=F(z_1)-F(z_0)$, where $z_0$ is the initial point and $z_1$ is the terminal point.
-
     \end{minipage}
 };  
 %------------ First Fundamental Theorem of Calculus Header ---------------------
@@ -601,7 +600,7 @@ Let $f:\Omega \rightarrow \C$ be a continuous function such that $\int_\gamma f=
  f'(z) & \text{when }z=w 
 \end{matrix}\right.$$ then $G$ is continuous.
 \item Let $f:\Omega \rightarrow \C$ be holomorphic on some open set. Suppose $z_0 \in \Omega$ s.t. $f'(z_0)\neq 0$. Then $\exists$ a neighbourhood $U$ of $z_0 \in \Omega$ s.t. $f$ restricted to $U$ is injective. And $V=f(U)$ is an open set and the inverse $g:V\rightarrow U$ of $ f$ is holomorphic.
-\item Let $f:\Omega \rightarrow \C$ be a non-constant holomorphic function on open, connected set $\Omega$. Let $z_0 \in \Omega$ and $w_0=f(z_0).$ Then $\exists$ a neighbourhood $U$ of $z_0$ and bijective holomorphic function $\varphi$ on $U$ s.t. $f(z)=w_0+(\varphi(z))^m$ for $z\in U$ and some integer $m>0$. And $\varphi$ maps $U$ unto $D(0,r)$ for some $r>0.$
+\item Let $f:\Omega \rightarrow \C$ be a non-constant holomorphic function on open, connected set $\Omega$. Let $z_0 \in \Omega$ and $w_0=f(z_0).$ Then $\exists$ a neighbourhood $U$ of $z_0$ and bijective holomorphic function $\varphi$ on $U$ s.t. $f(z)=w_0+(\varphi(z))^m$ for $z\in U$ and some integer $m>0$. And $\varphi$ maps $U$ unto $B(0,r)$ for some $r>0.$
     \end{itemize}
 
 \textbf{Open Mapping Theorem: }Let $f:\Omega \rightarrow \C$ be a non-constant holomorphic function on open connected set $\Omega$, then 
@@ -849,8 +848,8 @@ $f(\Omega)$ is an open set.
 \begin{tikzpicture}
 	\node [mybox] (box){%
 		\begin{minipage}{0.3\textwidth}
-			Let $ \D $ denote the open unit disc. Let $ f: \D \rightarrow \D  $ be a holomoprhic function s.t. $ f(0)=0 $. Then, \[ |f(z)| \leq |z|, \forall z \in \D, \text{ and } |f'(z)\leq 1|  \]
-			Also, if $ |f(z)|=|z| $ for some $ z \in \D $ or if $ |f'(0)|=1 $ then $ \exists \lambda in \C, |\lambda|=1 $ s.t. $ f(z)=\lambda z $.
+			Let $ \D $ denote the open unit disc. Let $ f: \D \rightarrow \D  $ be a holomoprhic function s.t. $ f(0)=0 $. Then, \[ |f(z)| \leq |z|, \forall z \in \D, \text{ and } |f'(z)|\leq 1	  \]
+			Also, if $ |f(z)|=|z| $ for some $ z \in \D $ or if $ |f'(0)|=1 $ then $ \exists \lambda \in \C, |\lambda|=1 $ s.t. $ f(z)=\lambda z $.
 		\end{minipage}
 	};  
 	%------------ Schawrz lemma Header ---------------------
@@ -886,14 +885,100 @@ $f(\Omega)$ is an open set.
 \begin{tikzpicture}
 	\node [mybox] (box){%
 		\begin{minipage}{0.3\textwidth}
-			Let $ \Omega =\{z\in\Omega: a < \Re(z) < b\} $. Let $ f:\overline{\Omega} \rightarrow \C $, s.t. $ f $ is continous on $ \overline{\Omega} $ and holomorphic on $ \Omega $. Suppose for some $ z=x+iy $, we have $|f(z)|<B $ and let\\
+			Let $ \Omega =\{z\in\Omega: a < \Re(z) < b\} $. Let $ f:\overline{\Omega} \rightarrow \C $, s.t. $ f $ is continuous on $ \overline{\Omega} $ and holomorphic on $ \Omega $. Suppose for some $ z=x+iy $, we have $|f(z)|<B $ and let\\
 			 $ M(x)=\sup\{|f(x+iy)|:-\infty < y< \infty \} $. Then,
 			 \[ M(x)^{b-a}\leq M(a)^{b-x}M(b)^{x-a	} \]
-			 And further \[ |f(z)\leq M(x)\leq \max \{M(a),M(b)\}=\sup_{z\in \partial \Omega} |f(z)|\]
+			 And further \[ |f(z)|\leq M(x)\leq \max \{M(a),M(b)\}=\sup_{z\in \partial \Omega} |f(z)|\]
 		\end{minipage}
 	};  
 	%------------ Phragmén–Lindelöf method Header ---------------------
 	\node[fancytitle, right=10pt] at (box.north west) {Phragmén–Lindelöf method};
+\end{tikzpicture}
+
+
+%------------ Schawrz-Pick theorem ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			First define $ \rho (z,w)=\left| \frac{z-w}{1-\overline{w}z} \right|$ for $z,w \in \D$. Let $ f:\D \rightarrow \D $ be holomorphic. Then,
+			\[ \rho(f(z),f(w))\leq \rho (z,w)\ \forall z,w \in \D \]
+			and,
+			\[ \frac{|f'(z)|}{1-|f(z)|^2} \leq \frac{1}{1-|z|^2}\ \forall z \in \D\]
+		\end{minipage}
+	};  
+	%------------ Schawrz-Pick theorem Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Schawrz-Pick theorem};
+\end{tikzpicture}
+
+
+%------------ Lifting of maps ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			Let $ X, Y, Z $ be open subsets of $ \C $ and let $ f: Y \rightarrow X $ and $ g: Z \rightarrow X $ be continuous maps. Then we say, a map $ \widetilde{g}:Z\rightarrow Y $ is a lift of $ g $ w.r.t. $ f $ if $ f \circ \widetilde{g}=g$. \\
+			
+			\textbf{Uniqueness of lifts: }Let $ X, Y, Z $ be open connected subsets of $ \C $ and let $ f:Y \rightarrow X$ be a \emph{local} homeomorphism. Let $ g:Z\rightarrow X $ be a continuous map. Let $ \widetilde{g_1}$ and $ \widetilde{g_2} $ be lifts of $ g $ w.r.t. $ f $ and suppose they are equal at some point in $ Z $. Then $ \widetilde{g_1} \equiv \widetilde{g_2}$.
+			
+				
+			\begin{itemize}
+				\item Let $ f: Y \rightarrow X$ be a holomorphic map s.t. $ f'(y)\neq 0 $ on $ Y $. Let $ g: Z \rightarrow X $ be a holomorphic map s.t. $ \widetilde{g} : Z \rightarrow Y$ is a lift of $ g $ w.r.t. $ f $. Then $ \widetilde{g} $ is holomorphic.
+				\item Let $ X,Y $ be open subsets of $ \C $ let, $ f: Y \rightarrow X$ be a local homeomorphism. Let $ \gamma_0, \gamma_1 $ be curves in $ X $ from $ z_1 $ to $ z_2 $ which are homotopic. Suppose that for every $ s\in [0,1] $, we can lift $ \gamma_s(t)=H(s,t) $ to a path $ \widetilde{\gamma_s}:[a,b] \rightarrow Y$ w.r.t. $ f $ s.t. $ \widetilde{\gamma_s} (a)=\widetilde{z_1},\ \forall s \in [0,1].$ Then $ \widetilde{\gamma_0}, \widetilde{\gamma_1}$ are homotopic in $ Y $.
+			\end{itemize}
+		\end{minipage}
+	};  
+	%------------ Lifting of maps Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Lifting of maps};
+\end{tikzpicture}
+
+
+%------------ Covering spaces ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			Let $ X, Y $ be open subsets of $ \C $. We say that a continuous map $ f: Y \rightarrow X $ is a covering map if given $ x \in X $ there exists a neighbourhood $ U $ of $ X $ and open sets $ \{V_\alpha\}_{\alpha \in A} $ in $ Y $ s.t. $ f^{-1} (U) = \coprod_{\alpha \in A} V_\alpha$ (disjoint union of $ V_\alpha $) and $ f|_{V_\alpha}:V_\alpha \rightarrow U$ is a homeomorphism. Then $ Y $ is called a cover of $ X $.
+			\begin{itemize}
+				\item Let $ f: Y \rightarrow X $ be a covering map and $ \gamma [a,b]\rightarrow X  $ be a curve from $ x_0$ to $ x_1 $ in $ X $. Suppose $ y_0 \in f^{-1}(\{x_0\}) $. Then there exists a unique lift $ \widetilde{\gamma} [a,b]\rightarrow Y	$ of $ \gamma $ w.r.t. $ f $ s.t. $ \widetilde{\gamma} (a)=y_0.$
+				\item For connected $ X $ let $ f: Y \rightarrow X $ be a covering map. Suppose $ x_0,x_1 \in X $. Then the cardinality of $ f^{-1} (x_0)$ is the same as the cardinality of $ f^{-1}(x)$.
+				\item For open subsets $ X,Y $ of $ \C $ let, $ f: Y \rightarrow X $ be a covering map from $ Y $ to $ X $. Let $ Z $ be an open connected subset of $ \C $, which is simply connected and locally connected. Suppose $ g: Z \rightarrow X $ is a continuous map. Then given $ z_0 \in C $ and $ y_0 \in Y $ s.t. $ g(z_0)=f(y_0) $, then there exists a unique lift $ \widetilde{g}:Z \rightarrow Y $ of $ g $ w.r.t $ f $.
+				\item Let $ \Omega $ be a simply connected, locally connected, open connected subset of $ \C $ and $ g: \Omega \rightarrow \C^* $ be a holomorphic map. Then there exists a lift $ \widetilde{g} : \Omega \rightarrow \C$ s.t. $ \exp(\widetilde{g}) =g.$
+			\end{itemize}
+			
+		\end{minipage}
+	};  
+	%------------ Covering spaces Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Covering spaces};
+\end{tikzpicture}
+
+
+%------------ Bloch's theorem ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			\begin{itemize}
+				\item For $ f:\D \rightarrow \C $ s.t. $ f(0)=0, f'(0)=1 $ and $ |f(z)|\leq M\ \forall z \in \D$. Then $ B(0,\frac{1}{6M})\subseteq f(\D).$
+				\item Let $ f:B(0,R) \rightarrow \C $ be holomorphic s.t. $ f(0)=0, f'(0)=\mu $ for some $ \mu>0 $ and $ f|(z)|\leq M\ \forall z \in B(0,R). $ Then, $ B(0,\frac{R^2 \mu^2}{6M}) \subseteq f(B(0,R))$.
+			\end{itemize}
+			\textbf{Bloch's theorem: }Let $ \Omega $ be an open connected subset of $\C $ s.t. $ \overline{\D} \subset \Omega.$  Let$ f:\Omega \rightarrow \C $ s.t. $ f(0)=0, f'(0)=1 .$ Then there exists a ball $ B' $ contained in $ \D $ s.t. $ f|_{B'} $ is injective and $ B(0,\frac{1}{72}) \subseteq f(B') \subseteq f(\D)$.	
+		\end{minipage}
+	};  
+	%------------ Bloch's theorem Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Bloch's theorem};
+\end{tikzpicture}
+
+
+%------------ Little Picard's theorem ---------------
+\begin{tikzpicture};
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			\begin{itemize}
+				\item Let $ \Omega $ be an open connected subset of $ \C $ which is simply connected. Let $ f: \Omega \rightarrow \C $ which omits 0 and 1. Then there exists a holomorphic function $ g:\Omega \rightarrow \C $ s.t. $ f(z)=-\exp(\pi i \cosh (2g(z))) $
+				\item The function $ g $ as defined above doesn't contain any disk of radius $ 1 $.
+			\end{itemize}
+			\textbf{Little Picard's theorem: }If $ f $ is an entire function which omits two points, then $ f $ is a constant function.
+		\end{minipage}
+	};  
+	%------------ Little Picard's theorem Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Little Picard's theorem};
 \end{tikzpicture}
 
 % ==============================================================
