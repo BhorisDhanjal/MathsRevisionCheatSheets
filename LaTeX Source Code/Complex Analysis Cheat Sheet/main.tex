@@ -130,7 +130,7 @@
         \item \textbf{Density: }Let $E \subseteq D$, the closure of $E$ in $D$ is $D$. Then $E$ is called dense in $D$.
       
     \end{itemize}
-    \textbf{Path :} A path in a metric space from a point $x \in X$ to $y \in Y$ is a continuous mapping $\gamma: [0,1] \rightarrow x$ s.t. $\gamma(0)=x$ and $\gamma(1)=y$.\\
+	    \textbf{Path :} A path in a metric space from a point $x \in X$ to $y \in Y$ is a continuous mapping $\gamma: [0,1] \rightarrow X$ s.t. $\gamma(0)=x$ and $\gamma(1)=y$.\\
     \textbf{Separated and Connected}\\
     For a metric space $(X,d)$.
     \begin{itemize}
@@ -186,7 +186,7 @@
     \begin{itemize}
         \item Let $f$ be an isometry s.t. $f(0)=0$, then the inner product $\langle f(z), f(w)\rangle = \langle z, w \rangle\ , \forall z,w \in \C$.
         \item If $f$ is an isometry s.t. $f(0)=0$ then $f$ is a linear map.
-        \item The standard argument for $a+ib \in \C$, Arg$(a+ib)=tan^{-1}\frac{b}{a}$
+        \item The standard argument for $a+ib \in \C$, Arg$(a+ib)=\tan^{-1}\frac{b}{a}$
     \end{itemize}
     \end{minipage}
 };  
@@ -201,7 +201,7 @@
     \textbf{Uniform convergence: } Let $\Omega \subseteq \C$ and $f_1, \cdots, f_n: \Omega \rightarrow \C$ be a set of functions on $\Omega.$ We say, $\{f\}_{n \in \N}$ converges uniformly to $f$ if given $\varepsilon>0, \exists n \in \N$ s.t. $|f_n(x)-f(x)|<\varepsilon, \forall x\in \Omega$ and $n \geq N$.\\
     \textbf{Complex exponential: } For $z \in C$, exp$(z)=\sum_{n=0}^\infty \frac{z^n}{n!}$\\
     \textbf{Trigonometric functions: } For $z\in \C$, $\cos (x)=\frac{e^{iz}+e^{-iz}}{2}$ and $\sin (x)=\frac{e^{iz}-e^{iz}}{2}$\\
-    \textbf{Hyperbolic trigonometric functions: } For $z \in \C$, $\cosh(x)=\frac{e^{z}+e^{-z}}{2}$ and $sinh(z)=\frac{e^{z}-e^{-z}}{2}$
+    \textbf{Hyperbolic trigonometric functions: } For $z \in \C$, $\cosh(x)=\frac{e^{z}+e^{-z}}{2}$ and $\sinh(z)=\frac{e^{z}-e^{-z}}{2}$
     \end{minipage}
 };  
 %------------ Functions on the Complex Plane Header ---------------------
@@ -218,7 +218,7 @@
     \begin{itemize}
         \item Complex differentiability implies continuity.
         \item Complex derivatives of a function are linear transformations.
-        \item \textbf{Product rule: }If $f,g: \Omega \rightarrow \C$ are complex differentiable at $z_0 \in \Omega$. Then $fg$ is complex differentiable at $z_0$ with derivative $f'(z_0)g(z_0)+g'(z_0)f(z_0).$'
+        \item \textbf{Product rule: }If $f,g: \Omega \rightarrow \C$ are complex differentiable at $z_0 \in \Omega$. Then $fg$ is complex differentiable at $z_0$ with derivative $f'(z_0)g(z_0)+g'(z_0)f(z_0).$
         \item \textbf{Quotient rule: }If $f,g: \Omega \rightarrow \C$ are complex differentiable at $z_0 \in \Omega$, and $g$ doesn't vanish at $z_0$. Then $\left(\frac{f}{g}\right)'(z_0)=\frac{f'(z_0)g(z_0)-g'(z_0)f(z_0)}{g(z_0)^2}$
         \item \textbf{Chain rule: }If $f: \Omega \rightarrow \C$ and $g: D \rightarrow \C$ are complex differentiable at $z_0 \in \Omega$, and $f(\Omega)\subseteq D$. Then $g(f(x))'(z_0)=g'(f(z_0))f'(z_0)$
     \end{itemize}
@@ -239,7 +239,7 @@
         \item The series converges absolutely when $z \in B(z_0, R)$, and for $r< R$, the series converges uniformly, else if $|z-z_0|>R$ the series diverges.
         \item Let $z \in \C$ s.t. $|z-z_0|>R$, then $\exists$ infinitely many $n \in N$ s.t. $|a_n|^{-1/n}<|z-z_0|$.
     \end{itemize}
-    \textbf{Abels Theorem: }Let $F(z)=\sum_{n=0}^{\infty} a_n(z-z_0)^n$ be a power series with a positive radius of convergence $R$, suppose $z_1=z_0 + Re^{i \theta}$ be a point s.t. $F(z_1)$ converges. Then $\lim_{r \rightarrow R^-}F(z_0+re^{i \theta})=F(z_1)$
+    \textbf{Abel's Theorem: }Let $F(z)=\sum_{n=0}^{\infty} a_n(z-z_0)^n$ be a power series with a positive radius of convergence $R$, suppose $z_1=z_0 + Re^{i \theta}$ be a point s.t. $F(z_1)$ converges. Then $\lim_{r \rightarrow R^-}F(z_0+re^{i \theta})=F(z_1)$
     \end{minipage}
 };  
 %------------ Power Series Header ---------------------
@@ -499,7 +499,7 @@ Let $f:\Omega \rightarrow \C$ be a continuous function such that $\int_\gamma f=
 \node [mybox] (box){%
     \begin{minipage}{0.3\textwidth}
     \begin{itemize}
-        \item Let $\Omega$ be open and connected subset of $\C$. and $f,g:\Omega \rightarrow \C$ be analytic functions on $\Omega$. Suppose $f,g$ agree on a non-empty subset of $\Omega$. Then $f\equiv g$ on $\Omega$.
+        \item Let $\Omega$ be open and connected subset of $\C$. and $f,g:\Omega \rightarrow \C$ be analytic functions on $\Omega$. Suppose $f,g$ agree on a non-empty subset of $\Omega$, and this subset has an accumulation point. Then $f\equiv g$ on $\Omega$. 
         \item A consequence to this is that, non-trivial holomorphic functions have isolated zeros.
     \end{itemize}
     \end{minipage}
@@ -621,7 +621,7 @@ $f(\Omega)$ is an open set.
         \item $\Omega_-=\{z \in \Omega \mid \Im(z)<0\}$
         \item $I=\{ z \in \Omega \mid \Im(z)=0\}$
     \end{itemize}
-    \textbf{Schawrz reflection principle: } Let $\Omega$ be defined as above. Then if $f:\Omega_+ \bigcup I \rightarrow \C$ which is continuous on $\Omega_+ \bigcup I$ and holomorphic on $\Omega_+$. Suppose for $f(x)\in \R,\ \forall x \in I$ then there exists $g:\Omega \rightarrow \C$ holomorphic on $\Omega$ s.t. $g(z)=f(z)$ for $z \in \Omega_+\bigcup I$
+    \textbf{Schwarz reflection principle: } Let $\Omega$ be defined as above. Then if $f:\Omega_+ \bigcup I \rightarrow \C$ which is continuous on $\Omega_+ \bigcup I$ and holomorphic on $\Omega_+$. Suppose for $f(x)\in \R,\ \forall x \in I$ then there exists $g:\Omega \rightarrow \C$ holomorphic on $\Omega$ s.t. $g(z)=f(z)$ for $z \in \Omega_+\bigcup I$
     \end{minipage}
 };  
 %------------ Schwarz reflection principle Header ---------------------
@@ -844,7 +844,7 @@ $f(\Omega)$ is an open set.
 	\node[fancytitle, right=10pt] at (box.north west) {Branch of the complex logarithm};
 \end{tikzpicture}
 
-%------------ Schawrz lemma ---------------
+%------------ Schwarz lemma ---------------
 \begin{tikzpicture}
 	\node [mybox] (box){%
 		\begin{minipage}{0.3\textwidth}
@@ -852,8 +852,8 @@ $f(\Omega)$ is an open set.
 			Also, if $ |f(z)|=|z| $ for some $ z \in \D $ or if $ |f'(0)|=1 $ then $ \exists \lambda \in \C, |\lambda|=1 $ s.t. $ f(z)=\lambda z $.
 		\end{minipage}
 	};  
-	%------------ Schawrz lemma Header ---------------------
-	\node[fancytitle, right=10pt] at (box.north west) {Schawrz lemma};
+	%------------ Schwarz lemma Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Schwarz lemma};
 \end{tikzpicture}
 
 
@@ -896,7 +896,7 @@ $f(\Omega)$ is an open set.
 \end{tikzpicture}
 
 
-%------------ Schawrz-Pick theorem ---------------
+%------------ Schwarz-Pick theorem ---------------
 \begin{tikzpicture}
 	\node [mybox] (box){%
 		\begin{minipage}{0.3\textwidth}
@@ -906,8 +906,8 @@ $f(\Omega)$ is an open set.
 			\[ \frac{|f'(z)|}{1-|f(z)|^2} \leq \frac{1}{1-|z|^2}\ \forall z \in \D\]
 		\end{minipage}
 	};  
-	%------------ Schawrz-Pick theorem Header ---------------------
-	\node[fancytitle, right=10pt] at (box.north west) {Schawrz-Pick theorem};
+	%------------ Schwarz-Pick theorem Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Schwarz-Pick theorem};
 \end{tikzpicture}
 
 
