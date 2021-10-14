@@ -7,3 +7,5 @@ The topics included are:
 3. Introductory Complex Analysis
 
 You are free to use and share these sheets for academic and non-commerical purposes.
+
+If you wish to make other similar sheets feel free to download the .tex and just edit it.
