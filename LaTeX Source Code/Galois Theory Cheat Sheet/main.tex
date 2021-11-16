@@ -11,7 +11,7 @@
 \usepackage{enumitem}
 \usepackage{colortbl}
 \usepackage{mathtools}
-\usepackage{ mathrsfs }
+\usepackage{ mathrsfs }	
 \usepackage{ dsfont }
 \usepackage{ gensymb }
 \usepackage[activate={true,nocompatibility},final,tracking=true,kerning=true,spacing=true,factor=1100,stretch=10,shrink=10]{microtype}
@@ -21,7 +21,6 @@
 \newcommand*\bigcdot@[2]{\mathbin{\vcenter{\hbox{\scalebox{#2}{$\m@th#1\bullet$}}}}}
 \makeatother
 %Sheet made by Boris, Template is by Drew Ulick https://de.overleaf.com/articles/130-cheat-sheet/ntwtkmpxmgrp
-\title{Introductory Complex Analysis Cheat Sheet}
 \usepackage[english]{babel}
 \usepackage{palatino}
 \usepackage{bm}
@@ -40,6 +39,7 @@
 \newcommand{\Z}{\mathbb{Z}}
 \newcommand{\N}{\mathbb{N}}
 \newcommand{\D}{\mathbb{D}}
+\newcommand{\F}{\mathbb{F}}
 % \colorbox[HTML]{e4e4e4}{\makebox[\textwidth-2\fboxsep][l]{texto}}
 \begin{document}
 \definecolor{lavender}{RGB}{167,88,220}
@@ -110,7 +110,7 @@
 	\node [mybox] (box){%
 		\begin{minipage}{0.3\textwidth}
 			For a field extension $ K \subset L $.\\
-			\textbf{Algebraic element:} $ \alpha \in L $ is called algebraic if there exists a $P \in K[x] $ s.t. $ P(\alpha)=0.$\\
+			\textbf{Algebraic element:} $ \alpha \in L $ is called algebraic if $\exists P \in K[x] $ s.t. $ P(\alpha)=0.$\\
 			\textbf{Transcendental element:} If such a $ P $ does not exist then $ \alpha $	is transcendental. \\
 Consider the following definitions, 
 			\begin{itemize}
@@ -141,7 +141,7 @@ Consider the following definitions,
 \begin{tikzpicture}
 	\node [mybox] (box){%
 		\begin{minipage}{0.3\textwidth}
-			If $ \alpha $ is an algebraic element then there exists a unique monic polynomial $ P $ of minimal degree such that $ P(\alpha) =0$ such a polynomial is called the \textbf{minimal polynomial}.
+			If $ \alpha $ is an algebraic element then $\exists ! $ monic polynomial $ P $ of minimal degree such that $ P(\alpha) =0$ such a polynomial is called the \textbf{minimal polynomial}.
 			\begin{itemize}
 				\item The minimal polynomial is irreducible
 				\item Any other polynomial $ Q $ s.t. $ Q(\alpha) =0$ will be divisible by $ P $.
@@ -152,21 +152,28 @@ Consider the following definitions,
 	\node[fancytitle, right=10pt] at (box.north west) {Minimal Polynomial};
 \end{tikzpicture}
 
-%------------ Minimal Polynomial ---------------
+%------------ Pritmitive polynomials and Gauss' lemma ---------------
 \begin{tikzpicture}
 	\node [mybox] (box){%
 		\begin{minipage}{0.3\textwidth}
-			If $ \alpha $ is an algebraic element then there exists a unique monic polynomial $ P $ of minimal degree such that $ P(\alpha) =0$ such a polynomial is called the \textbf{minimal polynomial}.
-			\begin{itemize}
-				\item The minimal polynomial is irreducible
-				\item Any other polynomial $ Q $ s.t. $ Q(\alpha) =0$ will be divisible by $ P $.
-			\end{itemize}
+			\textbf{Primitive polynomial: }A polynomial $ P \in \Z[X] $ is called primitive if if has a positive degree and the gcd of its coefficients is 1.\\
+			\textbf{Gauss' lemma: }A polynomial $ P\in \Z[X] $ is irreducible over $ \Z[X] \iff $ it is primitive and irreducible over $ \Q[x] $
 		\end{minipage}
 	};
-	%------------Minimal Polynomial Header ---------------------
-	\node[fancytitle, right=10pt] at (box.north west) {Minimal Polynomial};
-\end{tikzpicture}	
+	%------------ Pritmitive polynomials and Gauss' lemma Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Pritmitive polynomials and Gauss' lemma};
+\end{tikzpicture}
 
+%------------ Eisenstein criterion for irreducibility ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			A polynomial $f(x)=a_nx^n+a_{n-1}x^{n-1}+\dots+ a_0\in \Z[x] $ is irreducible if $\exists  p $ prime s.t. $ p $ divides all coefficients except $ a_n $ and $ p^2 $ does not divide $ a_0 $.
+		\end{minipage}
+	};
+	%------------ Eisenstein criterion for irreducibility Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Eisenstein criterion for irreducibility};
+\end{tikzpicture}	
 
 %------------ Finite extensions ---------------
 \begin{tikzpicture}
@@ -187,29 +194,130 @@ Consider the following definitions,
 \end{tikzpicture}	
 
 
-%------------ Pritmitive polynomials and Gauss' lemma ---------------
+
+
+%------------ Stem field ---------------
 \begin{tikzpicture}
 	\node [mybox] (box){%
 		\begin{minipage}{0.3\textwidth}
-			\textbf{Primitive polynomial: }A polynomial $ P \in \Z[X] $ is called primitive if if has a positive degree and the gcd of its coefficients is 1.\\
-			\textbf{Gauss' lemma: }A polynomial $ P\in \Z[X] $ is irreducible over $ \Z[X] \iff $ it is primitive and irreducible over $ \Q[x] $
+			Let $ P \in K[X] $ be an irreducible monic polynomial. A field extension $ E $ is called a stem field of $ P $ if $ \exists \alpha \in E$, s.t. $ \alpha $ is a root of $ P $ and $ E=K[\alpha] $
+			\begin{itemize}
+				\item If $ E, E'$ are two stem fields for $ P \in K[x] $, s.t. $ E=K[\alpha], E'=K[\alpha']$ where $ \alpha, \alpha'  $ are roots of $ P $. Then $ \exists ! $ isomorphism $ E \cong E' $ of K-algebras which maps $ \alpha $ to $ \alpha' $.
+				\item If a stem field contains two roots of $ P $, then $ \exists ! $ automorphism that maps one root to another.
+				\item If $ E $ is a stem field, $ [E:K] =\deg P$
+				\item If $ [E:K] = \deg P$ and $ E $ contains a root of $ P $ then $ E $ is a stem field.
+			\end{itemize}
+		Some irreducibility criteria,
+		\begin{itemize}
+			\item $ P \in K[X] $ is irreducible over $ K \iff $ it does not have roots in $ L/K $ of degree $ \leq \deg P/ 2 $. 
+			\item $ P \in K[X] $ is irreducible over $K$ with $ \deg P=n $. If $ L/K $ with $ [L:K]=m $ if $ \gcd (m,n)=1 $ then $ P $ is irreducible over $ L $.
+		\end{itemize}
 		\end{minipage}
 	};
-	%------------ Pritmitive polynomials and Gauss' lemma Header ---------------------
-	\node[fancytitle, right=10pt] at (box.north west) {Pritmitive polynomials and Gauss' lemma};
-\end{tikzpicture}
-	
-%------------ Eisenstein criterion for irreducibility ---------------
-\begin{tikzpicture}
-	\node [mybox] (box){%
-		\begin{minipage}{0.3\textwidth}
-			A polynomial $f(x)=a_nx^n+a_{n-1}x^{n-1}+\dots+ a_0\in \Z[x] $ is irreducible if $\exists  p $ prime s.t. $ p $ divides all coefficients except $ a_n $ and $ p^2 $ does not divide $ a_0 $.
-		\end{minipage}
-	};
-	%------------ Eisenstein criterion for irreducibility Header ---------------------
-	\node[fancytitle, right=10pt] at (box.north west) {Eisenstein criterion for irreducibility};
+	%------------ Stem field Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Stem field};
 \end{tikzpicture}	
 
+
+%------------ Splitting field ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			Let $ P \in K[X] $. The splitting field of $ P $ over $ K $ is an extension of $ L $ where $ P $ is split into linear factors and the roots of $ P $ generate $ L $ (alternatively if $ P $ cannot be factored into any intermediate field).
+			\begin{itemize}
+				\item Splitting field $ L $ exists and its degree is $ \leq d! $, where $ d=\deg P $. And it is unique up to isomorphism.
+			\end{itemize}
+		\end{minipage}
+	};
+	%------------ Splitting field Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Splitting field};
+\end{tikzpicture}
+
+
+%------------ Algebraic closure ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			\begin{itemize}
+				\item A field $ K $ is algebraically closed if any non-constant polynomial $ P \in K[X] $ has a root in $ K $.
+				\item $ L $ is called an \textbf{algebraic closure} of $ K $ if it is algebraically closed and a field extension over $ K $.
+				\item Every field has an algebraic closure.
+				\item Algebraic closures of $ K $ are unique up to isomorphism as $ K- $algebras.
+			\end{itemize}
+			
+		\end{minipage}
+	};
+	%------------ Algebraic closure Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Algebraic closure};
+\end{tikzpicture}
+
+%------------ Properties of finite fields ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			Let $p$ be a prime integer and let $q=p^r$ for some positive integer $r$. Then the following statements hold.
+			\begin{itemize}[noitemsep,topsep=0pt]
+				\item There exists a field of order $q.$
+				\item Any two fields of order $q$ are isomorphic.
+				\item Let $K$ be a field of order $q$. The multiplicative group $K^\times$ of non-zero elements of $K$ is a cyclic group of order $q-1$.
+				\item Let $K$ be a field of order $q$. The elements of $K$ are the roots of $x^q-x \in \F_p[x]$.
+				\item A field of order $p^r$ contains a field of order $p^k \iff k|r$
+				\item The irreducible factors of $x^q-x$ over $\F_p$ are the irreducible polynomials in $\F_p[x]$ whose degree divides $r$.
+				\item The splitting field of $ x^q-x $ has $ q $ elements.
+				\item $  \F_q$ is a stem field and a splitting field of any irreducible polynomial $ P \in \F_p  $ of degree $ n $.
+			\end{itemize}
+		\end{minipage}
+	};
+	%------------ Properties of finite fields Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Properties of finite fields};
+\end{tikzpicture}
+
+%------------ Frobenius homomorphism ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			Let $ K $ be a field, $ \text{ch}(K)=p>0 $. There exists a homomorphism $ \varphi: K \rightarrow K $, s.t. $ \varphi(x)=x^p$. This is Frobenius homomorphism.
+			\begin{itemize}
+				\item The group of automorphisms over $ \F_{p^r} $ over $ \F_p $ is cyclic and is generated by the Frobenius map.
+			\end{itemize}
+		\end{minipage}
+	};			
+	%------------ Frobenius homomorphism Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Frobenius homomorphism};
+\end{tikzpicture}
+
+%------------ Separability ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			\begin{itemize}
+				\item \textbf{Separable polynomial: }A irreducible polynomial $ P \in K[X] $ is called seperable if $ \gcd(P, P')=1. $
+				\item \textbf{Degree of separability: } $ \deg_{\text{sep}} P=\deg Q $ for some $ P(X)=Q(X^p) $
+				\item \textbf{Degree of inseparability: }$ \deg_i P=\frac{\deg P}{\deg Q} $
+				\item \textbf{Purely inseparable polynomial: }$ P $ is purely inseparable if $ \deg_i P = \deg P  $. Also if $ P $ is purely inseparable $ P=X^{p^r}-a$
+				\item \textbf{Separable element: }If $ L/K $ is an algebraic extension, then $ \alpha \in L $ is called separable if its minimal polynomial over $ K $ is separable. And vice versa.
+				\item If $ \alpha \in K $ is separable then $ |\text{Hom}(K(\alpha), \overline{K}|=\deg P_{\min} (\alpha, K)) $
+				\item \textbf{Separable degree: } For $ L/K $, we have $ [	L:K]_{\text{sep}}=|\text{Hom}_K (K(\alpha),\overline{K}	)| $. Inseparable degree is degree of extension divded by separable degree.
+				\item \textbf{Separable extension: }$ L $ is separable over $ K $ if $ [L:K]_{\text{sep}}=[L:K]$.
+				\begin{itemize}
+					\item If $ \text{ch} (K) =0$ then any extension of $ K $ is separable.
+					\item If $ \text{ch} (K)=p$ then pure inseparable extension has degree $ p^r $ with degree of inseparability $ p^r $
+				\end{itemize}
+				\item Separable degrees obey the multiplicative property.
+				\item TFAE
+				\begin{itemize}
+					\item $ L $ is separable over $ K $
+					\item Any element of $ L $ is separable over $ K $
+					\item $L = K (\alpha_1, \alpha_2, \dots, \alpha_n)$, where each $ \alpha_i  $ is separable over $ K$.
+					\item $ L=K(\alpha_1, \alpha_2, \dots, \alpha_n) $, then $ \alpha_i $ is separable over $ K(\alpha_1, \dots, \alpha_{i-1}) $.
+				\end{itemize}
+				\item \textbf{Separable closure: }$ L^{\text{sep}}=\{x \mid x \text{ separable over } K\}$
+			\end{itemize}
+		\end{minipage}
+	};			
+	%------------ Separability Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Separability};
+\end{tikzpicture}
 % ==============================================================
 \end{multicols*}
 \end{document}
