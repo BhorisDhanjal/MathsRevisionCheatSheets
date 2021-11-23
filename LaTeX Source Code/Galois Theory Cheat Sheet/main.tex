@@ -14,9 +14,11 @@
 \usepackage{ mathrsfs }	
 \usepackage{ dsfont }
 \usepackage{ gensymb }
+
 \usepackage[activate={true,nocompatibility},final,tracking=true,kerning=true,spacing=true,factor=1100,stretch=10,shrink=10]{microtype}
 \makeatletter
 \setlist[itemize]{noitemsep, topsep=0pt}
+\usepackage{quiver}
 \newcommand*\bigcdot{\mathpalette\bigcdot@{.5}}
 \newcommand*\bigcdot@[2]{\mathbin{\vcenter{\hbox{\scalebox{#2}{$\m@th#1\bullet$}}}}}
 \makeatother
@@ -317,6 +319,88 @@ Consider the following definitions,
 	};			
 	%------------ Separability Header ---------------------
 	\node[fancytitle, right=10pt] at (box.north west) {Separability};
+\end{tikzpicture}
+
+
+%------------ Multilinear map ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			For a module $ M $ over ring $ A $. A function $ L $ from $ M^r =\underbrace{M \times M \times \cdots \times M}_{r\text{ times}}$ into $ A $ is called multilinear if $ L(\alpha_1, \dots, \alpha_r) $ is linear as a function of each $ \alpha_i $ when the other $ \alpha_j $ are fixed.
+		\end{minipage}
+	};			
+	%------------ Multilinear map Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Multilinear map };
+\end{tikzpicture}
+
+%------------ Tensor product ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			Consider a ring $ A $ and two $ A- $modules, $M,N$. The tensor product is denoted as $ M \otimes_A N$ is an $ A- $module along with a $ A- $bilinear map, \\$ \varphi:M\times N \rightarrow 	M \otimes_A N $ which a ``universal property''.\\
+			\textbf{Universal property of tensor product:}\\
+			For a $ A- $module $ P $, if for an $A-$bilinear map, $ f: M \times N \rightarrow P $, then $  \exists ! $ homomorphism $\tilde{f}$ of $A- $modules s.t. $ f=\tilde{f} \circ \varphi$
+			\[\begin{tikzcd}
+				{M \times N} && {M \otimes_A N} \\
+				\\
+				&& P
+				\arrow["{\tilde{f}}", dashed, from=1-3, to=3-3]
+				\arrow["\varphi", from=1-1, to=1-3]
+				\arrow["f"', from=1-1, to=3-3]
+			\end{tikzcd}\]
+			\begin{itemize}
+				\item Commutativity of tensor product $ M \otimes_A N \cong N \otimes_A M $
+				\item $A \otimes_A M \cong M$
+				\item The basis for the tensor product of free modules is the tensor product of their individual basis elements.
+				\item The tensor product is associative.
+			\end{itemize}
+		\textbf{Base change theorem:} For a ring $ A $, $ B $ an $ A- $algebra, $ M $ an $ A- $module and $N $ a $ B- $module. Then we have the following bijection
+		\[ \text{Hom}_A(M,N) \leftrightarrow \text{Hom}_B(B\otimes_A M,N)\]
+		\begin{itemize}
+			\item For $ I $ an ideal of a ring $ A$ and $ M $ an $ A- $module we have, $ A/I \otimes_A M \cong M/IM $
+		\end{itemize}
+		\end{minipage}
+	};			
+	%------------ Tensor product Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Tensor product};
+\end{tikzpicture}
+
+
+%------------ Chinese remainder theorem ideals ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			\textbf{Comaximal ideals: }Two ideals of a ring are called comaximal (or coprime) if their sum gives the ring itself.
+			\begin{enumerate}
+				\item If $ I,J $ are comaximal then $ IJ=I\bigcap J $
+				\item If $ I_1,\dots,I_k $ comaximal w.r.t $J $ then $ \prod_{i=1}^k I_i $ is also relatively prime with $ J $.
+				\item If $ I,J $ are comaximal then so are $ I^m, J^n $ for any $ m,n $.
+			\end{enumerate}
+			\textbf{Chinese remainder theorem: } 
+			For a ring $ A $, consider two comaximal ideals $ I,J $, then $ \forall a,b \in R, \exists x \in A $ s.t. $ x \equiv a (\text{mod } I)$ and $ x \equiv b (\text{mod } J) $\\
+			\textbf{Generalized Chinese remainder theorem: } For a ring $ A $, let $ I_1, \dots, I_n $ be ideals of the ring $ A $. Consider the map $ \pi: A \rightarrow A/I_1 \times \cdots \times A/I_n $ defined as $ \pi(a)=(a\mod I_1, \dots, a \mod I_n) $. Then $ \ker \pi = I_1 \bigcap \cdots \bigcap I_n $, i.e. it is surjective iff $ I_1,\cdots I_n $ are pairwise comaximal. If $ \pi $ is a surjection we have, \[ A/\bigcap I_k \cong A/\prod I_k \cong \prod (A/I_k)\]
+		\end{minipage}
+	};			
+	%------------ Chinese remainder theorem Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Chinese remainder theorem};
+\end{tikzpicture}
+
+
+%------------ Structure of finite algebras ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+				Let $ A $ be a finite $ K- $algebra then,
+				\begin{itemize}
+					\item There are only finitely many maximal ideals in $ A $.
+					\item For finitely many maximal ideals $ m_i $. Let $ J=m_1\bigcap \cdots \bigcap m_r.$ Then $ J^n=0 $ for some $ n $.
+					\item $ A \cong A/m_1^{n_1} \times \cdots \times A/m_r^{n_r}$ for some (not necessarily unique) $ n_1, \dots, n_r.$
+				\end{itemize}
+			
+		\end{minipage}
+	};			
+	%------------ Structure of finite algebras Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Structure of finite algebras};
 \end{tikzpicture}
 % ==============================================================
 \end{multicols*}
