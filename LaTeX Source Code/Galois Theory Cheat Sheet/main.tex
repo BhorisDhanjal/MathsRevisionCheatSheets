@@ -293,13 +293,13 @@ Consider the following definitions,
 	\node [mybox] (box){%
 		\begin{minipage}{0.3\textwidth}
 			\begin{itemize}
-				\item \textbf{Separable polynomial: }A irreducible polynomial $ P \in K[X] $ is called seperable if $ \gcd(P, P')=1. $
+				\item \textbf{Separable polynomial: }A irreducible polynomial $ P \in K[X] $ is called separable if $ \gcd(P, P')=1. $
 				\item \textbf{Degree of separability: } $ \deg_{\text{sep}} P=\deg Q $ for some $ P(X)=Q(X^p) $
 				\item \textbf{Degree of inseparability: }$ \deg_i P=\frac{\deg P}{\deg Q} $
 				\item \textbf{Purely inseparable polynomial: }$ P $ is purely inseparable if $ \deg_i P = \deg P  $. Also if $ P $ is purely inseparable $ P=X^{p^r}-a$
 				\item \textbf{Separable element: }If $ L/K $ is an algebraic extension, then $ \alpha \in L $ is called separable if its minimal polynomial over $ K $ is separable. And vice versa.
 				\item If $ \alpha \in K $ is separable then $ |\text{Hom}(K(\alpha), \overline{K}|=\deg P_{\min} (\alpha, K)) $
-				\item \textbf{Separable degree: } For $ L/K $, we have $ [	L:K]_{\text{sep}}=|\text{Hom}_K (K(\alpha),\overline{K}	)| $. Inseparable degree is degree of extension divded by separable degree.
+				\item \textbf{Separable degree: } For $ L/K $, we have $ [	L:K]_{\text{sep}}=|\text{Hom}_K (K(\alpha),\overline{K}	)| $. Inseparable degree is degree of extension divided by separable degree.
 				\item \textbf{Separable extension: }$ L $ is separable over $ K $ if $ [L:K]_{\text{sep}}=[L:K]$.
 				\begin{itemize}
 					\item If $ \text{ch} (K) =0$ then any extension of $ K $ is separable.
@@ -371,11 +371,11 @@ Consider the following definitions,
 	\node [mybox] (box){%
 		\begin{minipage}{0.3\textwidth}
 			\textbf{Comaximal ideals: }Two ideals of a ring are called comaximal (or coprime) if their sum gives the ring itself.
-			\begin{enumerate}
+			\begin{itemize}
 				\item If $ I,J $ are comaximal then $ IJ=I\bigcap J $
 				\item If $ I_1,\dots,I_k $ comaximal w.r.t $J $ then $ \prod_{i=1}^k I_i $ is also relatively prime with $ J $.
 				\item If $ I,J $ are comaximal then so are $ I^m, J^n $ for any $ m,n $.
-			\end{enumerate}
+			\end{itemize}
 			\textbf{Chinese remainder theorem: } 
 			For a ring $ A $, consider two comaximal ideals $ I,J $, then $ \forall a,b \in R, \exists x \in A $ s.t. $ x \equiv a (\text{mod } I)$ and $ x \equiv b (\text{mod } J) $\\
 			\textbf{Generalized Chinese remainder theorem: } For a ring $ A $, let $ I_1, \dots, I_n $ be ideals of the ring $ A $. Consider the map $ \pi: A \rightarrow A/I_1 \times \cdots \times A/I_n $ defined as $ \pi(a)=(a\mod I_1, \dots, a \mod I_n) $. Then $ \ker \pi = I_1 \bigcap \cdots \bigcap I_n $, i.e. it is surjective iff $ I_1,\cdots I_n $ are pairwise comaximal. If $ \pi $ is a surjection we have, \[ A/\bigcap I_k \cong A/\prod I_k \cong \prod (A/I_k)\]
@@ -395,13 +395,110 @@ Consider the following definitions,
 					\item There are only finitely many maximal ideals in $ A $.
 					\item For finitely many maximal ideals $ m_i $. Let $ J=m_1\bigcap \cdots \bigcap m_r.$ Then $ J^n=0 $ for some $ n $.
 					\item $ A \cong A/m_1^{n_1} \times \cdots \times A/m_r^{n_r}$ for some (not necessarily unique) $ n_1, \dots, n_r.$
-				\end{itemize}
-			
+				\end{itemize}	
+			\textbf{Reduced \textit{K}-Algebra: }If it has no nilpotent elements.\\
+			\textbf{Local ring: }If it has only one maximal ideal. A non zero ring in which every element is either a unit or nilpotent is local.
 		\end{minipage}
 	};			
 	%------------ Structure of finite algebras Header ---------------------
 	\node[fancytitle, right=10pt] at (box.north west) {Structure of finite algebras};
 \end{tikzpicture}
+
+
+%------------ Further results on separability  ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			Let $ L $ be a finite extension over $  K $ then the following hold,
+			\begin{itemize}
+				\item $ L $ is separable $ \iff  L \otimes_K \overline{K} $ is reduced.
+				\item $ L $ is purely inseparable $ \iff  L \otimes_K \overline{K} $ is local.
+				\item $ L $ is separable $ \iff  \forall $ algebraic extensions $ \Omega, L \otimes_K \Omega $ is reduced.
+				\item $ L $ is purely separable $ \iff  \forall $ algebraic extensions $ \Omega, L \otimes_K \Omega $ is local.
+				\item If $ L $ is separable then the map $ \varphi: L \otimes_K \overline{K} \rightarrow \overline{K}^n $ defined as $ \varphi(l \otimes k) = (k \varphi_1(l),\dots, k \varphi_n(l))$ (where $\varphi_i  $ are distinct homomorphisms from $ L $ to $ \overline{K} $), is an isomorphism.
+				\item Let $ L $ be a finite separable extension of $ K $ then it has only finitely many sub extensions.	
+			\end{itemize}
+		\end{minipage}
+	};			
+	%------------ Further results on separability Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Further results on separability};
+\end{tikzpicture}
+
+%------------ Primitive element theorem  ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			There exists $ \alpha \in L  $ s.t. $ L=K(\alpha) $ whenever $ L $ is finite and separable.
+		\end{minipage}
+	};			
+%------------ Primitive element theorem Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Primitive element theorem};
+\end{tikzpicture}
+
+
+%------------ Normal extensions  ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			A normal extension of $ K $ is a splitting field of a family of polynomials in $ K[X] $.\\
+			TFAE for an extension $ L $ of $ K $,
+			\begin{itemize}
+				\item $ \forall x \in L, P_{\min} (x,K) $ splits in $ L $.
+				\item $ L $ is a normal extension.
+				\item All homomorphisms from $ L $ to $ \overline{K} $ have the same image.
+				\item The group of automorphisms, $ \text{Aut}(L/K) $ acts transitively on $ \text{Hom}_K(L,\overline{K}) $.
+			\end{itemize}
+		\end{minipage}
+	};			
+	%------------ Normal extensions Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Normal extensions};
+f\end{tikzpicture}
+
+%------------ Galois extensions ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			
+			A field extension that is both normal and separable is called a Galois extension.
+			\begin{itemize}
+				\item For a finite extension $ L $ over $ K $ the number of automorphisms $ |\text{Aut}(L/K)| \leq [L:K]$. Equality holds iff $ L $ is a Galois` extension. 
+			\end{itemize}
+
+		If $ L $ is normal over $ K $ then,
+		\begin{itemize}
+			\item Isomorphism of sub extensions extend to automorphisms of $ L $.
+			\item $ \text{Aut} (L/K)$ acts transitively on the roots of any irreducible polynomial in $ K[X] $.
+			\item If $ \text{Aut} (L/K)$ fixes $ x \notin K$. Then $ x $ is purely inseparable.
+		\end{itemize}
+	
+		\end{minipage}
+	};			
+%------------ Galois extensions Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Galois extensions};
+	f\end{tikzpicture}
+
+%------------ Galois group ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+		If $ L $ is a Galois extension, $ G=\text{Gal}(L/K) = \text{Aut}(L/K)$ is called the Galois group of the extension.
+		\begin{itemize}
+			\item $ L^{\text{Gal}(L/K) } =K $, (i.e. the set of invariants in $ L $ with the action of the Galois group is equal to $ K $).
+			\item Let $ L $ be a field and $ G $ a subgroup of $ \text{Aut} (L)$, then
+			\begin{itemize}
+				\item If all orbits of $ G $ are finite, then $ L $ is a Galois extension of $ L^G $.
+				\item If order of $ G $ is finite then, $ [L,L^G] =n$ and $ G $ is a Galois group.
+			\end{itemize}
+		\end{itemize}
+	
+		\end{minipage}
+	};			
+%------------ Galois group Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Galois groups};
+\end{tikzpicture}
+
+
+
 % ==============================================================
 \end{multicols*}
 \end{document}
