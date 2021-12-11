@@ -448,6 +448,12 @@ Consider the following definitions,
 				\item All homomorphisms from $ L $ to $ \overline{K} $ have the same image.
 				\item The group of automorphisms, $ \text{Aut}(L/K) $ acts transitively on $ \text{Hom}_K(L,\overline{K}) $.
 			\end{itemize}
+		Some properties of normal extensions,
+		\begin{itemize}
+			\item $ K \subset L \subset M $, if $ M $ is normal over $ K $ then it is normal over $ L $, but $ L $ need not be normal over $ K $.
+			\item Extensions with degree 2 are normal.	
+			
+		\end{itemize}
 		\end{minipage}
 	};			
 	%------------ Normal extensions Header ---------------------
@@ -497,7 +503,70 @@ f\end{tikzpicture}
 	\node[fancytitle, right=10pt] at (box.north west) {Galois groups};
 \end{tikzpicture}
 
+%------------ The Fundamental theorem of Galois theory ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			Let $ L/K $ be a Galois extension, and $ \text{Aut}(L/K) =\text{Gal} (L/K)$ is its Galois group.
+			\begin{itemize}
+				\item If $ L $ is finite over $ K $, then for a intermediate field $ F $ and a subgroup $ H \subset \text{Gal} (L/K)$ we have the following correspondence,
+				\begin{itemize}
+					\item $ F \rightarrow \text{Gal}(L/F) $
+					\item $ H \rightarrow L^H $
+				\end{itemize}
+			\item $ F $ is Galois over $ K \iff g(F)=F,\ \forall g\in \text{Gal}(L/K)  \iff$ $ \text{Gal}(L/F) \trianglelefteq \text{Gal}(L/K)$ 
+			\end{itemize}
+		\end{minipage}
+	};			
+	%------------ The Fundamental theorem of Galois theory Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {The Fundamental theorem of Galois theory};
+\end{tikzpicture}
 
+
+%------------ Discriminant ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			For a polynomial with roots $ x_i $,the discriminant is $ \Delta = \prod_{i<j} (x_i-x_j)^2$. For $ \text{Gal}(P) \subset S_n$,
+			\begin{itemize}
+				\item $ \Delta $ is preserved by any permutation.
+				\item $ \sqrt{\Delta} $ is preserved only by even permutations
+				\item $ G \subset A_n \iff \sqrt{\Delta}\in K$
+			\end{itemize}
+		\end{minipage}
+	};			
+	%------------ Discriminant Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Discriminant};
+\end{tikzpicture}
+
+%------------ Cyclotomic polynomials ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			Let $ P_n=X^n -1$ where $ n $ is coprime to the characteristic of a finite field $ K $. \\
+			$ P_n $ has $ n $ distinct roots which form a cyclic multiplicative subgroup $ \mu_n \subset \overline{K}^\times$.\\
+			Let $ \mu_n* $ denote the set of \textbf{primitive roots of unity} (no roots of degree $ <n $).
+			\begin{itemize}
+				\item $ |\mu_n*|=\varphi(n) $
+			\end{itemize}
+		\textbf{Cyclotomic polynomials: }$ \Phi_n=\prod_{\alpha \in \mu_n*} (X-\alpha) \in \overline{K}[X].$
+		\begin{itemize}
+			\item $ P_n=\prod_{d \mid n} \Phi_d $.
+			\item $ \Phi_n  $ has coefficients in prime fields.
+			\item If $ \text{ch} (K)=0$ then $ \Phi_n\in \Z[X] $, else if $ \text{ch} (K)=p$, we have $ \Phi_n  $ is the reduction mod $ p $ of the $ n^{th }$ cyclotomic polynomial over $ \Z $.
+			\item If $ \text{ch} (K)=0, $ then $ \Phi_n  $ is irreducible over $ \Z[X] $.
+		\end{itemize}
+		Consider $ L $, splitting field of $ K $
+		\begin{itemize}
+			\item The splitting field of $ P_n $ over $ K $ is $ K(\zeta ) $ where $ \zeta  $ is a root of $ \Phi_n	 $.
+			\item All $ g \in \text{Gal} {L/K}$ acts as $\zeta \rightarrow \zeta^{a^g}, (a^g,n) =1 $.
+			\item $ \text{Gal}(L/K)$ injects into $ \Z/n\Z^\times $ and this is an isomorphism when $ \Phi_n  $ is irreducible over $ K $.
+		\end{itemize}
+		\end{minipage}
+	};			
+	%------------ Cyclotomic polynomial Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Cyclotomic polynomials};
+\end{tikzpicture}
 
 % ==============================================================
 \end{multicols*}
