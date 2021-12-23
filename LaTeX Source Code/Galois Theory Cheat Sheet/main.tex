@@ -539,7 +539,7 @@ f\end{tikzpicture}
 	\node[fancytitle, right=10pt] at (box.north west) {Discriminant};
 \end{tikzpicture}
 
-%------------ Cyclotomic polynomials ---------------
+%------------ Cyclotomic polynomials and extensions ---------------
 \begin{tikzpicture}
 	\node [mybox] (box){%
 		\begin{minipage}{0.3\textwidth}
@@ -559,13 +559,180 @@ f\end{tikzpicture}
 		Consider $ L $, splitting field of $ K $
 		\begin{itemize}
 			\item The splitting field of $ P_n $ over $ K $ is $ K(\zeta ) $ where $ \zeta  $ is a root of $ \Phi_n	 $.
-			\item All $ g \in \text{Gal} {L/K}$ acts as $\zeta \rightarrow \zeta^{a^g}, (a^g,n) =1 $.
+			\item All $ g \in \text{Gal} (L/K)\texttt{}$ acts as $\zeta \rightarrow \zeta^{a^g}, (a^g,n) =1 $.
 			\item $ \text{Gal}(L/K)$ injects into $ \Z/n\Z^\times $ and this is an isomorphism when $ \Phi_n  $ is irreducible over $ K $.
 		\end{itemize}
 		\end{minipage}
 	};			
-	%------------ Cyclotomic polynomial Header ---------------------
-	\node[fancytitle, right=10pt] at (box.north west) {Cyclotomic polynomials};
+	%------------ Cyclotomic polynomial and extensions Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Cyclotomic polynomials and extensions};
+\end{tikzpicture}
+
+
+
+%------------ Kummer extensions ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			A field extension $ L/K $ is called a Kummer extension if for some integer $ n>1 $
+			\begin{itemize}
+				\item $ K $ contains $ n $ distinct $ n^{th} $ roots of unity.
+				\item $\text{Gal}(L/K)$ is abelian group with lcm of the orders of group elements (exponent	) equal to $ n $.
+			\end{itemize}
+		Consider $ K $ s.t. for some $ n, (\text{ch}(K),n)=1$ and $ X^n-1 $ splits in $ K $, for any $  a \in K$ take $ d= \min\{i \mid a^{i/n}\in K	\} $ then we have,
+		\begin{itemize}
+			\item $ d \mid n $ and $ P_{\min}(a^{1/n})= X^d-a^{d/n}$
+			\item $ K(a^{1/n}) $ is Galois extension with cyclic Galois group of order $ d $.
+		\end{itemize}
+	The converse is also true.
+		\end{minipage}
+	};			
+	%------------ Kummer extensions Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Kummer extensions};
+\end{tikzpicture}
+
+
+%------------ Artin-Schreier extensions ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			Let $ L/K $ be a field extension s.t. $ \text{ch}(K)=p $ for prime $ p $. It is called Artin-Schreier if degree of extension $ L $ is $ p $.\\
+			\textbf{Artin-Schreier theorem: }Let $ \text{ch}(K)-p$ and let $ P=X^p-X-a \in K[X] $. Then $ P $ is either irreducible or splits in $ K $. Let $ \alpha  $ be a root of $ P $.
+			\begin{itemize}
+				\item If $ P $ is irreducible, then $ K(\alpha ) $ is a cyclic extension (i.e. Galois group is cyclic) of $ K $ of degree $ p $.
+				\item Any cyclic extension of degree $ p $ is obtained in the same way.
+			\end{itemize}
+		The theorem shows that Artin-Schreier extensions are cyclic and also Kummer extensions.
+		\end{minipage}
+	};			
+	%------------ Artin-Schreier extensions Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Artin-Schreier extensions};
+\end{tikzpicture}
+
+%------------ Composite extensions ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			Let $ L_1,L_2 $ be two intermediate extensions of $ K $ and some $ L/K $ that contains them both. Then $ L_1L_2=L_2L_1=K(L_1\bigcup L_2) $ the smallest extension that contains both $ L_1, L_2 $ is called composite extension.
+			\begin{itemize}
+				\item If $ L_1 $ is separable/purely inseparable/normal/finite over $ K $ then its composite field also possess that property.
+			\end{itemize}
+		
+		\end{minipage}
+	};			
+	%------------ Composite extensions Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Composite extensions};
+\end{tikzpicture}
+
+%------------ Linearly disjoint extensions ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			TFAE for algebraic extensions,
+			\begin{itemize}
+				\item $ L_1 \otimes_K L_2 $ is a field.
+				\item $ L_1 \otimes_K L_2 \rightarrow L $ is an injection.
+				\item A linearly independent set in $ L_1 $ is also linearly independent in $ L_2 $.
+				\item For linearly independent sets (over $ K $) $ A \in L_1, B \in L_2 $ we have $ A \times B $ is linearly independent over $ K $
+			\end{itemize}
+		$ L_1,L_2 $ satisfying these properties are called linearly disjoint extensions.
+		\begin{itemize}
+			\item If $ \deg L_1 $ is finite then $ [L_1L_2:L_2] = [L_1:K]$ equivalently $ [L_1L_2:K] =[L_1:K][L_2:K]$
+			\item Extensions which are relatively prime degrees are linearly disjoint.	
+		\end{itemize}
+	For $ \overline{K} $ the algebraic closure of $ K $,
+	\begin{itemize}
+		\item Let $ L_1,L_2 \subset \overline{K}$, if $ L_1 $ is Galois over $ K $ and let $ K'=L_1 \bigcap L_2 $. Then $ L_1L_2 $ is Galois over $ L_2 $. The map $ \phi: g \rightarrow g|_{L_1} $ of $ \text{Gal}(L_1L_2/L_2) \rightarrow \text{Gal} (L_1/K) $ is injective with image $ \text{Gal} (L_1,K') $ and $ L_1,L_2 $ linearly disjoint over $ K'. $
+	\end{itemize}
+		\end{minipage}
+	};			
+	%------------ Linearly disjoint extensions Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Linearly disjoint extensions};
+\end{tikzpicture}
+
+%------------ Solvable extensions and polynomials ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			 \textbf{Solvable extension: }A finite extension $ E $ of $ K $ is solvable by radicals if $\exists \alpha_1,\cdots,\alpha_r  $ generating $ E $ such that $ \alpha_i^{n_i} \in K(\alpha_1, \dots, \alpha_{i-1})$ for some $ n_i $.\\
+			\textbf{Solvable polynomials: } $ P \in K[X] $ is solvable by radicals if $ \exists  $ a solvable extension $ E $ containing its roots.
+			\begin{itemize}
+				\item A composite extension of solvable extensions is solvable.
+				\item For finite $L/K$ solvable $ \implies  \exists $ finite Galois extension also solvable.	
+			\end{itemize}
+			
+			
+		\end{minipage}
+	};			
+%------------ Solvable extensions and polynomials Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Solvable extensions and polynomials};
+\end{tikzpicture}
+
+
+%------------ Solvable groups ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+		A group $ G $ is called solvable if it has a finite sequence of normal subgroups, ($ I=G_0 \trianglelefteq G_1 \trianglelefteq \cdots \trianglelefteq G_r = G $) and also $ G_{i+1}/G_i$ is abelian.
+		\begin{itemize}
+			\item Subgroups of solvable groups are solvable.
+			\item If $ G $ is solvable and $ H \trianglelefteq G $ then $ G/H $ is solvable.
+			\item If $ G $ if a finite abelian group then $ G $ is solvable
+			\item $ S_n $ is not solvable for $ n \geq 5. $
+		\end{itemize}
+		\end{minipage}
+	};			
+	%------------ Solvable groups Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Solvable groups};
+\end{tikzpicture}
+
+
+%------------ Solvability by radicals  ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			Let	$ P \in K[X] $. $ P $ is a polynomial solvable by radicals if and only if $\text{Gal}(P) $ is solvable. Here $\text{Gal}(P)=\text{Gal}(F/K) $, where $ F $ is a splitting field of $ P $ over $ K $.
+		\end{minipage}
+	};			
+	%------------ Solvability by radicals Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Solvability by radicals};
+\end{tikzpicture}
+
+%------------ Abel-Ruffini theorem  ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			General polynomials of degree $ n\geq 5 $ are not solvable by radicals since $ S_n $ for $ n\geq5  $ is not solvable.
+		\end{minipage}
+	};			
+	%------------ Abel-Ruffini theorem Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Abel-Ruffini theorem};
+\end{tikzpicture}
+
+%------------ Group representations ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			For vector space $V,$, a representation of a finite group $G$ is a homomorphism $ \varphi: G \rightarrow GL(V) $. Where $ GL(V) $ is the 		group of automorphisms of $ V $.\\
+			\textbf{Regular representation:} For vector space $ V $ generated by elements of group $ G $. A homomorphism involving permuting this basis is called regular.
+			\begin{itemize}
+				\item For $ L/K $ as a vector space over $ K $ we have a representation of the Galois group $ \varphi: \text{Gal}(L/K) \rightarrow GL_K(L)$. This is a regular representation.
+			\end{itemize}
+		\end{minipage}
+	};			
+	%------------ Group representations Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Group representations};
+\end{tikzpicture}
+
+%------------ Normal basis theorem ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			There exist $ x\in L/K $ s.t. $ \{gx \mid g \in G\} $ is a $ K- $basis of $ L $.
+		\end{minipage}
+	};			
+	%------------ Normal basis theorem Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Normal basis theorem};
 \end{tikzpicture}
 
 % ==============================================================
