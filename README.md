@@ -5,8 +5,7 @@ The topics included are:
 1. Introductory Group Theory
 2. Introductory Ring and Field Theory
 3. Introductory Complex Analysis
-
-A sheet on Introductory Galois Theory is in the making.
+4. Introductory Galois Theory 
 
 You are free to use and share these sheets.
 
