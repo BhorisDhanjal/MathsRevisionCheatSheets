@@ -7,6 +7,8 @@ The topics included are:
 3. Introductory Complex Analysis
 4. Introductory Galois Theory 
 
+A sheet on Category Theory is in progress.
+
 You are free to use and share these sheets.
 
 If you wish to make other similar sheets feel free to download the .tex and just edit it.
