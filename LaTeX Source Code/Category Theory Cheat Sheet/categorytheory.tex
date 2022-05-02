@@ -248,11 +248,133 @@
 \begin{tikzpicture}
 	\node [mybox] (box){%
 		\begin{minipage}{0.3\textwidth}
-			Monomoprhism
+			\textbf{Monomoprhism: }In any category $ \mathbf{C} $, an arrow	$ f: A \to B  $ is called a monomorphism (monic), if for any $ g,h, :C \to A , fg=fh \implies g=h $.
+
+			\[\begin{tikzcd}
+			\arrow[r,shift right,swap,"h"] \arrow[r,shift left,"g"]	C &  
+				 A & B
+				\arrow["f", from=1-2, to=1-3]
+			\end{tikzcd}\]
+			
+			\textbf{Epimorphism: }In any category $ \mathbf{C} $, an arrow $ f: A \to B $ is called an epimorphism (epic), if for any $ i,j: B \to D $ $ if=jf\implies i=j $.
+			
+			\[\begin{tikzcd}
+				A &  \arrow[r,shift right,swap,"i"] \arrow[r,shift left,"j	"]
+				B & D
+				\arrow["f", from=1-1, to=1-2]
+			\end{tikzcd}\]
+			\begin{itemize}
+				\item We say, $ f: A\rightarrowtail B $ if $ f $ is a monomorphism and $ f: A \twoheadrightarrow B $ if $ f $ is an epimorphism.
+				\item Every isomorphism is both a monomorphism and an epimorphism. The converse need not be true.
+				\item A \textbf{split} mono (epi) is an arrow $ m : A \to B$ with a left (right) inverse $ r $. The inverse arrow $ r $ is called the \textit{retraction}, $ m $ is called a \textit{section} of $ r $ and $ A $ is called a \textit{retract} of $ B $.
+			\end{itemize}
+			
+
 		\end{minipage}
 	};
 	%------------ Types of morphisms Header ---------------------
 	\node[fancytitle, right=10pt] at (box.north west) {Types of morphisms};
+\end{tikzpicture}
+
+%------------ Initial and terminal objects ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			An object $ 0 \in \mathbf{C} $ is \textit{initial} if for any object $ C \in \mathbf{C} \exists!$ morphism $ 0 \to C $.\\
+			An object $ 1 \in \mathbf{C} $ is \textit{terminal} if for any object $ C \in \mathbf{C} \exists!$ morphism $ C \to 1 $.
+			
+			Initial and terminal objects are unique up to isomorphism.
+		\end{minipage}
+	};
+%------------ Initial and terminal objects Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Initial and terminal objects};
+\end{tikzpicture}
+
+%------------ Generalized elements ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			For an object $ A \in \mathbf{C} $ arbitrary arrows $ x:X\to A $ are called the \textit{generalized elements} of $ A $ with stage of definition given by $ X $.
+		\end{minipage}
+	};
+%------------ Generalized elements Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Generalized elements};
+\end{tikzpicture}
+
+%------------ Product of objects ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			In any category $ \mathbf{C} $, a product diagram for the objects $ A, B $ consists of an object $ P $ and arrows 
+			\[\begin{tikzcd}
+				A & P & B
+				\arrow["{p_1}"', from=1-2, to=1-1]
+				\arrow["{p_2}", from=1-2, to=1-3]
+			\end{tikzcd}\]
+		satisfying the following UMP. Given any diagram of the form
+		\[\begin{tikzcd}
+			A & X & B
+			\arrow["{x_1}"', from=1-2, to=1-1]
+			\arrow["{x_2}", from=1-2, to=1-3]
+		\end{tikzcd}\]
+		there exists a unique arrow $ u:X \to P $, making the following diagram commute
+		\[\begin{tikzcd}
+			& X \\
+			A & P & B
+			\arrow["{p_1}"', from=2-2, to=2-1]
+			\arrow["{p_2}", from=2-2, to=2-3]
+			\arrow["u", dashed, from=1-2, to=2-2]
+			\arrow["{x_1}"', from=1-2, to=2-1]
+			\arrow["{x_2}", from=1-2, to=2-3]
+		\end{tikzcd}\]
+	
+		The product $ P $ is unique up to isomorphism. 
+	 
+		\end{minipage}
+	};
+%------------ Product of objects Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Product of objects};
+\end{tikzpicture}
+
+
+%------------ Categories with products ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			A category which has a product for every pair of objects is said to have \textit{binary products}.
+			
+			A category is said to have \textit{all finite products}, if it has a terminal object and all binary products.
+			
+			A category has \textit{all small products} if every set of objects has a product.
+		\end{minipage}
+	};
+%------------ Categories with products Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Categories with products};
+\end{tikzpicture}
+
+
+%------------ Covariant representable functor ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+		The functor $ \mathrm{Hom}(A,-): \mathbf{C}\to \mathbf{Sets}$ is called a covariant representable functor (for some object $ A \in \mathbf{C} $).
+		
+		For a category with products a covariant representable functor preserves products.
+		\end{minipage}
+	};
+	%------------ Covariant representable functor Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Covariant representable functor};
+\end{tikzpicture}
+
+%------------ Duality ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			For any statement 
+		\end{minipage}
+	};
+	%------------ Duality Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Duality};
 \end{tikzpicture}
 
 % ==============================================================
