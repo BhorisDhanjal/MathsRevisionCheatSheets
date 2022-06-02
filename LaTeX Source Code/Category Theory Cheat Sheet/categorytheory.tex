@@ -453,9 +453,119 @@
 		\end{itemize}
 		\end{minipage}
 	};
-	%------------ Coequalizers Header ---------------------
+%------------ Coequalizers Header ---------------------
 	\node[fancytitle, right=10pt] at (box.north west) {Coequalizers};
 \end{tikzpicture}
+
+%------------ Groups in a category ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			 A group ($ \mathrm{Group}(\mathbf{C}) $) can be defined over a category $ \mathbf{C} $.
+			\[\begin{tikzcd}
+				{G\times G} & G & G \\
+				& 1
+				\arrow["m", from=1-1, to=1-2]
+				\arrow["i"', from=1-3, to=1-2]
+				\arrow["u", from=2-2, to=1-2]
+			\end{tikzcd}\]
+		Where the arrows obey the following,
+		$ m $ is associative, $ u $ is a unit, and $ i $ is an inverse for $ m $, i.e. the following diagrams commute
+			\[\begin{tikzcd}
+				{(G \times G) \times G} && {G \times (G \times G)} && G & {G \times G} \\
+				{G \times G} && {G \times G} && {G\times G} & G \\
+				& G \\
+				{G \times G} & G & {G \times G} \\
+				{G \times G} & G & {G \times G}
+				\arrow["m"', from=2-1, to=3-2]
+				\arrow["m", from=2-3, to=3-2]
+				\arrow["{m \times 1}"', from=1-1, to=2-1]
+				\arrow["{1 \times m}", from=1-3, to=2-3]
+				\arrow["\cong", from=1-1, to=1-3]
+				\arrow["m"', from=2-5, to=2-6]
+				\arrow["{1_G}"', from=1-5, to=2-6]
+				\arrow["m", from=1-6, to=2-6]
+				\arrow["{\langle 1_G, u \rangle}"', from=1-5, to=2-5]
+				\arrow["{\langle u, 1_G \rangle}", from=1-5, to=1-6]
+				\arrow["{\langle 1_G, 1_G \rangle}"', from=4-2, to=4-1]
+				\arrow["{\langle 1_G, 1_G \rangle}", from=4-2, to=4-3]
+				\arrow["{1_G \times i}"', from=4-1, to=5-1]
+				\arrow["u"', from=4-2, to=5-2]
+				\arrow["{i \times 1_G}", from=4-3, to=5-3]
+				\arrow["m"', from=5-1, to=5-2]
+				\arrow["m", from=5-3, to=5-2]
+			\end{tikzcd}\]
+		\begin{itemize}
+		\item A homomorphism $ h:G \to H $ of groups in a category $ \mathbf{C} $ is an arrow such that, $ h $ preserves $ m,u,i $, i.e. the following diagrams commmute.
+		\[\begin{tikzcd}
+			{G \times G} & {H \times H} && G & H && G & H \\
+			G & H && 1 &&& G & H
+			\arrow["{h \times h}", from=1-1, to=1-2]
+			\arrow["m"', from=1-1, to=2-1]
+			\arrow["m", from=1-2, to=2-2]
+			\arrow["h"', from=2-1, to=2-2]
+			\arrow["u", from=2-4, to=1-4]
+			\arrow["h", from=1-4, to=1-5]
+			\arrow["u"', from=2-4, to=1-5]
+			\arrow["h", from=1-7, to=1-8]
+			\arrow["i", from=1-8, to=2-8]
+			\arrow["i"', from=1-7, to=2-7]
+			\arrow["h"', from=2-7, to=2-8]
+		\end{tikzcd}\]
+		\item The objects in the category of groups (i.e. $ \mathrm{Group}(\mathbf{Grp}) $) are abelian groups.
+		\end{itemize}
+		\end{minipage}
+	};
+%------------ Groups in a category Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Groups in a category};
+\end{tikzpicture}
+
+%------------ Congruence ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			A \textit{congruence} on a category is a equivalance relation on arrows ($ f \sim g $) s.t.
+			\begin{itemize}
+				\item $ f \sim g \implies \mathrm{dom}(f)=\mathrm{dom}(f)$ and $ \mathrm{cod}(f)=\mathrm{cod}(g) $.
+				\item $ f \sim g \implies bfa \sim bga $
+			\end{itemize}
+		Let $ C_0, C_1 $ denote the class of objects and arrows for a category $ \mathbf{C} $. Then a \textit{congruence category} $ \mathbf{C}^\sim  $ is defined as follows,
+		\begin{itemize}
+			\item $ (\mathbf{C}^\sim)_0=\mathbf{C}_0 $
+			\item $ (\mathbf{C}^\sim)_1=\{\langle f,g \rangle| f \sim g\} $
+			\item $ \tilde{1}_C=\langle 1_C, 1_C \rangle $
+			\item $ \langle f', g' \rangle \circ \langle f,g \rangle = \langle f'f, g'g \rangle  $
+		\end{itemize}
+		\[\begin{tikzcd}
+			{\mathbf{C}^\sim} & {\mathbf{C}}
+			\arrow["{p_1}", shift left=2, from=1-1, to=1-2]
+			\arrow["{p_2}"', shift right=2, from=1-1, to=1-2]
+		\end{tikzcd}\]
+		We define the \textit{quotient category} of the congruence as the coequalizer, i.e,
+		\[\begin{tikzcd}
+			{\mathbf{C}^\sim} & {\mathbf{C}} & {\mathbf{C}/\sim}
+			\arrow["{p_1}", shift left=2, from=1-1, to=1-2]
+			\arrow["{p_2}"', shift right=2, from=1-1, to=1-2]
+			\arrow["\pi", from=1-2, to=1-3]
+		\end{tikzcd}\]
+		\end{minipage}
+	};
+%------------ Congruence Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Congruence};
+\end{tikzpicture}
+
+%------------ Finitely presented category ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			Consider the free category $ \mathbf{C} (G)$ on a finite graph $ G $. And the finite set of relations $ \sum  $ to be relations of the form $ (g_1\circ \dots \circ g_n)= (g_1'\circ \dots \circ g_m') $ for $ g_i \in G $ and $ \mathrm{dom}(g_n)=\mathrm{dom}(g_m') $ and $ \mathrm{cod}(g_1) =\mathrm{cod}(g_1')$. Let $ \sim_\Sigma  $ be the smallest congruence $ g \sim g' $ if $ g=g' \in \sum  $. We call the quotient by this congruence to be a \textit{fintely presented category}.
+		\end{minipage}
+	};
+%------------ Finitely presented category Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Finitely presented category};
+\end{tikzpicture}
+
+
 % ==============================================================
 \end{multicols*}
 \end{document}
