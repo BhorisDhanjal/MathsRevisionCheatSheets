@@ -7,7 +7,7 @@ The topics included are:
 3. Introductory Complex Analysis
 4. Introductory Galois Theory 
 
-A sheet on Category Theory is in progress.
+A sheet on Measure Theory is in progress. I've stopped updating the Category Theory sheet as I've not had the time to study it recently but I may pick up on it in the future.
 
 You are free to use and share these sheets.
 
