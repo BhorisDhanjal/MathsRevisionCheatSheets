@@ -85,7 +85,7 @@
 \begin{tikzpicture}
 	\node [mybox] (box){%
 		\begin{minipage}{0.3\textwidth}
-			A collection $ F $ of subsets of $ X $ is called a $ \sigma- $algebra if the following properties hold,
+			A collection $ F $ of subsets of $ X $ is called a $ \sigma- $algebra if the following properties hold
 			\begin{itemize}
 				\item $ X \in F $
 				\item If $ A \in F $ then $ A^C=A-X \in F $
@@ -179,10 +179,24 @@
 	\node[fancytitle, right=10pt] at (box.north west) {Positive measure};
 \end{tikzpicture}
 
+%------------ Arithmetic in [0,infty]---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			We understand $ a+\infty=\infty  $ for $ 0\leq a \leq \infty $ and $ a \cdot \infty = 
+				\infty \text{ if } 0 < a \leq \infty $ else $ 0 $.
+		\end{minipage}
+	};
+	%------------ Arithmetic in [0,infty] Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Arithmetic in $
+		[0,\infty]$};
+\end{tikzpicture}
+
 %------------ Lebesgue Integral ---------------
 \begin{tikzpicture}
 	\node [mybox] (box){%
 		\begin{minipage}{0.3\textwidth}
+			If $ X $ is a set with $ \sigma-$algebra $ F $ and positive measure $ \mu $. Then for a measurable simple function $ s:X \to [0,\infty] $ as defined previously, its Lebesgue integral over $ E \in F $ is defined as follows \[ \int_E s\, d\mu=\sum_{i=1}^n \alpha_i \mu \left(A_i \bigcap E\right) \]
 			
 		\end{minipage}
 	};
@@ -190,25 +204,68 @@
 	\node[fancytitle, right=10pt] at (box.north west) {Lebesgue integral};
 \end{tikzpicture}
 
+%------------ Lebesgue integrable functions ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			Define $ L^1(\mu) $ to be the collection of all complex measurable functions $ f $ on $ X $ for which $ \int_X |f| \,d \mu < \infty $ known as the Lebesgue integrable functions.
+			
+			For functions $ f $ with range in $ [-\infty, \infty] $ define $ \int_E f \,d \mu= \int_E f^+ \,d \mu - \int_E f^{-} \,d \mu $
+		\end{minipage}
+	};
+	%------------ Lebesgue integrable functions Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Lebesgue integrable functions};
+\end{tikzpicture}
+
+%------------ Zero measure ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			We say a property holds ``almost everywhere (a.e.)'' if it holds everywhere except on a set of measure zero.
+			
+			If any two function $ f=g $ a.e. then their Lebesgue integrals are the same. Set of measure zero don't impact the value of the Lebesgue integral
+		\end{minipage}
+	};
+	%------------ Zero measure Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Zero measure};
+\end{tikzpicture}
+
 %------------ Monotone convergence theorem ---------------
 \begin{tikzpicture}
 	\node [mybox] (box){%
 		\begin{minipage}{0.3\textwidth}
+			Let $ \{f_n\} $ be a sequence of measurable functions on $ X $ if $ 0\leq f_1(x)\leq f_2(x)\leq \dots \leq \infty $ a.e. and $ f_n(x)\to f(x) $ as $ n \to \infty $ a.e., then $ f $ is measurable and
+			\[ \lim_{n\to \infty} \int_X f_n\, d \mu = \int_X \lim_{n \to \infty} f_n\, d \mu  \]
+			
 			
 		\end{minipage}
 	};
+
 %------------ Monotone convergence theorem Header ---------------------
 	\node[fancytitle, right=10pt] at (box.north west) {Monotone convergence theorem};
 \end{tikzpicture}
-
+%------------ Consequences of MCT ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			\begin{itemize}
+				\item Applying MCT to sequence of partial sums of a convergent series $ f(x)=\sum_{n=1}^\infty f_n(x) $ we get, \[ \int_X f \,d \mu = \sum_{n=1}^\infty \int_X f_n \,d \mu \]
+				\item If $ f:X\to[0,\infty] $ is measurable with $ \sigma- $algebra $ F $ of $ X $ and $ \phi(E)=\int_E f \,d \mu $ for $ E \subset F$ then, $ \phi  $ is a measure on $ F $ and \[ \int_X g \,d \phi = \int_X gf \,d \mu \] for every measurable $ g:X \to [0,\infty]$.
+			\end{itemize}
+		\end{minipage}
+	};
+	%------------ Consequences of MCT Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Consequences of MCT};
+\end{tikzpicture}
 %------------ Fatou's lemma ---------------
 \begin{tikzpicture}
 	\node [mybox] (box){%
 		\begin{minipage}{0.3\textwidth}
-			
+			If $ f_n:X \to [0,\infty] $ is measurable for all $ n \in \N  $ then,\[ \int_X \liminf_{n \to \infty}f_n \, d \mu \leq \liminf_{n \to \infty} \int_X f_n \, d \mu \]
+		
 		\end{minipage}
 	};
-%------------ Fatour's lemma Header ---------------------
+%------------ Fatou's lemma Header ---------------------
 	\node[fancytitle, right=10pt] at (box.north west) {Fatou's lemma};
 \end{tikzpicture}
 
@@ -216,40 +273,58 @@
 \begin{tikzpicture}
 	\node [mybox] (box){%
 		\begin{minipage}{0.3\textwidth}
-			
+			If $ \{f_n\} $ us a sequence of complex measurable functions on $ X $ with $ \lim_{n\to \infty} f_n(x)=f(x) $ pointwise. If there exists a function $ g \in L^1(\mu) $ such that $ |f_n(x)| \leq g(x) $ for all $ n \in N$ and $ x \in X $ then $ f\in L^(1)(\mu) $ and \[ \lim_{n\to \infty} \int_X f \,d \mu=\int_X \lim_{n \to \infty} f_n(x) \,d \mu \]
 		\end{minipage}
 	};
 %------------ Dominated convergence theorem Header ---------------------
 	\node[fancytitle, right=10pt] at (box.north west) {Dominated convergence theorem};
 \end{tikzpicture}
+%------------ Compact support ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			A function has compact support if it is zero outside of a compact set, i.e. $ f\in C_c(X) $ if $ f $ has compact support on $ X $.
+		\end{minipage}
+	};
+	%------------ Compact support Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Compact support};
+\end{tikzpicture}
 
-%------------ Zero measure ---------------
+%------------ Locally compact Hausdorff spaces ---------------
 \begin{tikzpicture}
 	\node [mybox] (box){%
 		\begin{minipage}{0.3\textwidth}
 			
 		\end{minipage}
 	};
-%------------ Zero measure Header ---------------------
-	\node[fancytitle, right=10pt] at (box.north west) {Zero measure};
+	%------------ Locally compact Hausdorff spaces Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Locally compact Hausdorff spaces};
 \end{tikzpicture}
 
-%------------ Caratheodory's extension theorem ---------------
-\begin{tikzpicture}
-	\node [mybox] (box){%
-		\begin{minipage}{0.3\textwidth}
-			
-		\end{minipage}
-	};
-%------------ Caratheodory's extension theorem Header ---------------------
-	\node[fancytitle, right=10pt] at (box.north west) {Caratheodory's extension theorem};
-\end{tikzpicture}
+
+%%------------ Caratheodory's extension theorem ---------------
+%\begin{tikzpicture}
+%	\node [mybox] (box){%
+%		\begin{minipage}{0.3\textwidth}
+%			
+%		\end{minipage}
+%	};
+%%------------ Caratheodory's extension theorem Header ---------------------
+%	\node[fancytitle, right=10pt] at (box.north west) {Caratheodory's extension theorem};
+%\end{tikzpicture}
 
 %------------ Riesz representation theorem ---------------
 \begin{tikzpicture}
 	\node [mybox] (box){%
 		\begin{minipage}{0.3\textwidth}
-			
+			Let $ X $ is a locally compact Hausdorff space and $ T $ is a positive linear functional on $ C_c(X) $. Then there exists a $ \sigma- $algebra $ F $ of $ X $ which contains all Borel sets in $ X $ and there exists a unique positive measure $ \mu  $ on $ F $ such that for every $ f\in C_c(X) $\[ Tf=\int_X f \,d\mu \]
+			additionally the following properties hold,
+			\begin{itemize}
+				\item $ \mu(K)<\infty  $ for every compact $ K\subset X $
+				\item $ \mu(E)=\inf\{\mu(V): E\subset V, V \text{open} \} $ for all $ E \in F $.
+				\item $ \mu(E)=\sup\{\mu(K): K \subset E, K \text{compact} \} $ holds for every open set $ E \subset F $ with $ \mu(E)<\infty $
+				\item If $ E \in F $, $ A\subset E $ and $ \mu(E)=0 $ then $ A \in F $.
+			\end{itemize}
 		\end{minipage}
 	};
 %------------ Riesz representation theorem Header ---------------------
