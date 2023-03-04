@@ -279,6 +279,19 @@
 %------------ Dominated convergence theorem Header ---------------------
 	\node[fancytitle, right=10pt] at (box.north west) {Dominated convergence theorem};
 \end{tikzpicture}
+
+%------------ Complete measure ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			A measure is called complete if all subsets of sets of measure 0 are measurable.
+			
+			Every measure can be completed.
+		\end{minipage}
+	};
+	%------------ Complete measure Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Complete measure};
+\end{tikzpicture}
 %------------ Compact support ---------------
 \begin{tikzpicture}
 	\node [mybox] (box){%
@@ -294,7 +307,9 @@
 \begin{tikzpicture}
 	\node [mybox] (box){%
 		\begin{minipage}{0.3\textwidth}
+			A topological space $ X $ is called locally compact if every point $ x \in X $ has a compact neighbourhood.
 			
+			\textbf{Uryshon's lemma: }If $ X $ is a locally compact Hausdorff space. Let $ K \subseteq X $ is compact and $ U $ open s.t. $ K \subseteq U \subset X $, there exists $ f\in C_c(X) $ with $ 0\leq f \leq 1 $ such that $f_K \equiv 1$ and $ f\equiv 0 $ otherwise.
 		\end{minipage}
 	};
 	%------------ Locally compact Hausdorff spaces Header ---------------------
@@ -319,28 +334,41 @@
 		\begin{minipage}{0.3\textwidth}
 			Let $ X $ is a locally compact Hausdorff space and $ T $ is a positive linear functional on $ C_c(X) $. Then there exists a $ \sigma- $algebra $ F $ of $ X $ which contains all Borel sets in $ X $ and there exists a unique positive measure $ \mu  $ on $ F $ such that for every $ f\in C_c(X) $\[ Tf=\int_X f \,d\mu \]
 			additionally the following properties hold,
-			\begin{itemize}
+			\begin{enumerate}
 				\item $ \mu(K)<\infty  $ for every compact $ K\subset X $
 				\item $ \mu(E)=\inf\{\mu(V): E\subset V, V \text{open} \} $ for all $ E \in F $.
 				\item $ \mu(E)=\sup\{\mu(K): K \subset E, K \text{compact} \} $ holds for every open set $ E \subset F $ with $ \mu(E)<\infty $
 				\item If $ E \in F $, $ A\subset E $ and $ \mu(E)=0 $ then $ A \in F $.
-			\end{itemize}
+			\end{enumerate}
 		\end{minipage}
 	};
 %------------ Riesz representation theorem Header ---------------------
 	\node[fancytitle, right=10pt] at (box.north west) {Riesz representation theorem};
 \end{tikzpicture}
 
-%------------ Borel measures ---------------
+
+
+%------------ Regular Borel measures ---------------
 \begin{tikzpicture}
 	\node [mybox] (box){%
 		\begin{minipage}{0.3\textwidth}
+			A measure $ \mu  $ defined on the $ \sigma- $algebra of all Borel sets in a locally compact Hausdorff space $ X $.
 			
+			If $ \mu  $	is positive we also say a Borel set is,
+			\begin{itemize}
+				\item \textbf{Outer regular} if satisfies property 3 of the above theorem.
+				\item \textbf{Inner regular} if it satisfies property 4 of the above theorem.
+				\item \textbf{Regular} if it is both inner and outer regular.
+			\end{itemize}
+		
+		In a locally compact Hausdorff space $ X $ in which every open set can be written as a finite union of compact sets. If there exists a positive Borel measure $ \mu $ defined on $ X $ such that for $ K \subseteq X $ compact $ \mu(K)< \infty \implies  \mu $ is regular.
+	
 		\end{minipage}
 	};
-%------------ Borel measures Header ---------------------
-	\node[fancytitle, right=10pt] at (box.north west) {Borel measures};
+%------------ Regualar Borel measures Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Regular Borel measures};
 \end{tikzpicture}
+
 
 %------------ Lebesgue measure ---------------
 \begin{tikzpicture}
@@ -351,6 +379,18 @@
 	};
 %------------ Lebesgue measure Header ---------------------
 	\node[fancytitle, right=10pt] at (box.north west) {Lebesgue measure};
+\end{tikzpicture}
+
+
+%------------ Lusins theorem ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			
+		\end{minipage}
+	};
+	%------------ Lusins theorem Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Lusin's theorem};
 \end{tikzpicture}
 
 %------------ Convexity ---------------
@@ -464,6 +504,30 @@
 %------------ Product measures Header ---------------------
 	\node[fancytitle, right=10pt] at (box.north west) {Product measures};
 \end{tikzpicture}
+
+
+%------------ Product measures ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			
+		\end{minipage}
+	};
+	%------------ Product measures Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Product measures};
+\end{tikzpicture}
+
+%------------ Differentiation ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+				
+		\end{minipage}
+	};	
+%------------ Differentiation Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Differentiation};
+\end{tikzpicture}
+
 % ==============================================================
 \end{multicols*}
 \end{document}
