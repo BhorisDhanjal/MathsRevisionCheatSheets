@@ -349,17 +349,17 @@
 \end{tikzpicture}
 
 
-%------------ sigma finite ---------------
+%------------ sigma finite measure---------------
 \begin{tikzpicture}
 	\node [mybox] (box){%
 		\begin{minipage}{0.3\textwidth}
 			A set in a measure space is said to have a $ \sigma- $finite measure if it is the countable union of sets of finite measure.
 			
-			A set in a topological space is said to be $ \sigma- $compact measure if it is the countable union of compact sets.
+			A set in a topological space is said to be $ \sigma- $compact if it is the countable union of compact sets.
 		\end{minipage}
 	};
-%------------ sigma finite Header ---------------------
-	\node[fancytitle, right=10pt] at (box.north west) {$ \sigma- $finite };
+%------------ sigma finite measure Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {$ \sigma- $finite measure};
 \end{tikzpicture}
 
 %------------ Regular Borel measures ---------------
@@ -489,6 +489,40 @@
 %	%------------ Lusins theorem Header ---------------------
 %	\node[fancytitle, right=10pt] at (box.north west) {Lusin's theorem};
 %\end{tikzpicture}
+%------------ Product measures ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			Consider $ \mu_1 $ a measure defined on $ \sigma- $algebra $ F_1 $ of $ X_1 $ and $ \mu_2 $ measure defined on $ \sigma$-algebra $ F_2 $ of $ X_2 .$ Then the product measure $ \tilde{\mu}=\mu_1 \times \mu_2  $ is the Carathéodory extension of the premeasure $  \mu (A \times B)= \mu(A) \cdot \mu(B) $.
+			
+			\begin{itemize}
+				\item Note that the product $ \sigma- $algebra is the generated $ \sigma- $algebra of $ F_1 \times F_2 $ as the ordinary Cartesian product is only a semi ring.
+				\item The product measure is unique if $ \mu_1, \mu_2  $ are $ \sigma- $finite.
+			\end{itemize}
+
+		\end{minipage}
+	};
+	%------------ Product measures Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Product measures};
+\end{tikzpicture}
+
+
+%------------ Fubinis theorem ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			Similarly as defined above for $ \sigma- $finite measure spaces
+			\begin{align*}
+				 \int_{X\times Y} f(x,y) \, d(\mu_1 \times \mu_2)&=\int_{Y} \left( \int_{X} f(x,y) \, d\mu_1 \right) \, d\mu_2\\
+				 &= \int_{X} \left( \int_{Y} f(x,y) \, d\mu_2 \right) \, d\mu_1 
+			\end{align*}
+		\end{minipage}
+	};
+	%------------ Fubinis theorem Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Fubinis theorem};
+\end{tikzpicture}
+
+
 
 %------------ Convexity ---------------
 \begin{tikzpicture}
@@ -579,22 +613,31 @@
 \end{tikzpicture}
 
 
-%------------ Absolutely continuity and mutually singular ---------------
+%------------ Absolutely continuity ---------------
 \begin{tikzpicture}
 	\node [mybox] (box){%
 		\begin{minipage}{0.3\textwidth}
+			An arbitrary measure $ \lambda  $ is \textbf{absolutely continuous} with respect to a positive measure $ \mu  $, denoted as $ \lambda 	\ll \mu $ if $ \lambda(E)=0 $ for every measurable $ E $ for which $ \mu(E)=E $. 
 			
+			$ \lambda $ is said to be \textbf{concentrated} on measurable set $ A $ if $ \lambda(A)=\lambda\left(A\bigcap E \right) $ for every measurable set $ E $.
+			
+			For two measures $ \lambda_1, \lambda_2  $ if there exist disjoint measurable sets $ A,B $ such that $ \lambda_1 $ concentrated on $ A$ and $ \lambda_2 $ concentrated on $ B $ ten we say the measures are \textbf{mutually singular}, i.e. $ \lambda_1 \bot \lambda_2 $.
 		\end{minipage}
 	};
-%------------ Absolutely continuity and mutually singular Header ---------------------
-	\node[fancytitle, right=10pt] at (box.north west) {Absolutely continuity and mutually singular};
+%------------ Absolutely continuity  Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Absolutely continuity};
 \end{tikzpicture}
 
 %------------ Lebesgue-Radon-Nikodym theorem ---------------
 \begin{tikzpicture}
 	\node [mybox] (box){%
 		\begin{minipage}{0.3\textwidth}
-			
+			Let $ \mu  $ be a positive $ \sigma- $finite measure on a $ \sigma- $algebra $ F $ on set $ X $ and let $ \lambda  $ be a complex measure on $ F $. Then,
+			\begin{itemize}
+				\item There exists a unique pair of complex measures $ \lambda_a, \lambda_s $ on $ F $ such that $ \lambda=\lambda_a+\lambda_s  $ and $ \lambda_a \ll \mu, \lambda_s \bot \mu  $
+				\item There exists a unique $ h\in L^1(\mu ) $ such that \[ \lambda_a(E)=\int_E h \, d\mu \] for every $ E \in F $.
+			\end{itemize}
+		The integral defines a absolutely continuous measure wrt $ \mu  $ and $ h $ is referred to as the Radon-Nikodym derivative of $ \lambda_a $ wrt $ \mu  $.
 		\end{minipage}
 	};
 %------------ Lebesgue-Radon-Nikodym theorem Header ---------------------
@@ -602,39 +645,34 @@
 \end{tikzpicture}
 
 
-%------------ Product measures ---------------
+%------------ Consequences of Radon-Nikodym Theorem ---------------
 \begin{tikzpicture}
 	\node [mybox] (box){%
 		\begin{minipage}{0.3\textwidth}
+			\begin{itemize}
+				\item Alternate statement for absolute continuity: If for every $ \varepsilon>0 $ there exists a $ \delta>0 $ such that $ \mu(E)<\delta \implies |\lambda(E)|< \varepsilon $ for every measurable $ E $, then $ \lambda \ll \mu $.
+				\item Polar decomposition of $ \lambda: $ For complex measure $ \lambda  $ there exists a measurable function $ h $ such that $ |h(x)|=1 $ for all $ x \in X  $ such that $ d \mu= h d |\mu| $
+				\item Hahn decomposition theorem: For real measure $ \mu $ on $ \sigma-$ algebra in set $ X $ then there exists sets $ A, B $ in $ F $ such that $ A \bigcup B = X, A \bigcap B = \emptyset $ and $ \mu^+(E)= \mu(A \cap E), \mu^-(E)=-\mu(B\cap E) $ for measurable $ E $.
+			\end{itemize}
 			
 		\end{minipage}
 	};
-%------------ Product measures Header ---------------------
-	\node[fancytitle, right=10pt] at (box.north west) {Product measures};
+	%------------ Consequences of Radon-Nikodym Theorem Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Consequences of Radon-Nikodym Theorem};
 \end{tikzpicture}
 
 
-%------------ Product measures ---------------
-\begin{tikzpicture}
-	\node [mybox] (box){%
-		\begin{minipage}{0.3\textwidth}
-			
-		\end{minipage}
-	};
-	%------------ Product measures Header ---------------------
-	\node[fancytitle, right=10pt] at (box.north west) {Product measures};
-\end{tikzpicture}
 
-%------------ Differentiation ---------------
-\begin{tikzpicture}
-	\node [mybox] (box){%
-		\begin{minipage}{0.3\textwidth}
-				
-		\end{minipage}
-	};	
-%------------ Differentiation Header ---------------------
-	\node[fancytitle, right=10pt] at (box.north west) {Differentiation};
-\end{tikzpicture}
+%%------------ Differentiation ---------------
+%\begin{tikzpicture}
+%	\node [mybox] (box){%
+%		\begin{minipage}{0.3\textwidth}
+%				
+%		\end{minipage}
+%	};	
+%%------------ Differentiation Header ---------------------
+%	\node[fancytitle, right=10pt] at (box.north west) {Differentiation};
+%\end{tikzpicture}
 
 % ==============================================================
 \end{multicols*}
