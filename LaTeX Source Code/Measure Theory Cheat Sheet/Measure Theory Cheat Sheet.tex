@@ -89,7 +89,7 @@
 			A collection $ F $ of subsets of $ X $ is called a $ \sigma- $algebra if the following properties hold
 			\begin{itemize}
 				\item $ X \in F $
-				\item If $ A \in F $ then $ A^C=A-X \in F $
+				\item If $ A \in F $ then $ A^C=X-A \in F $
 				\item Closed under unions
 			\end{itemize}
 		\end{minipage}
@@ -250,7 +250,7 @@
 	\node [mybox] (box){%
 		\begin{minipage}{0.3\textwidth}
 			\begin{itemize}
-				\item Applying MCT to sequence of partial sums of a convergent series $ f(x)=\sum_{n=1}^\infty f_n(x) $ we get, \[ \int_X f \,d \mu = \sum_{n=1}^\infty \int_X f_n \,d \mu \]
+				\item Applying MCT to sequence of partial sums of a convergent series $ f(x)=\sum_{n=1}^\infty f_n(x) $ where $ f_n:X \to [0,\infty] $ measurable for all $ n $ we get, \[ \int_X f \,d \mu = \sum_{n=1}^\infty \int_X f_n \,d \mu \]
 				\item If $ f:X\to[0,\infty] $ is measurable with $ \sigma- $algebra $ F $ of $ X $ and $ \phi(E)=\int_E f \,d \mu $ for $ E \subset F$ then, $ \phi  $ is a measure on $ F $ and \[ \int_X g \,d \phi = \int_X gf \,d \mu \] for every measurable $ g:X \to [0,\infty]$.
 			\end{itemize}
 		\end{minipage}
