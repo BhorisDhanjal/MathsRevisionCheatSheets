@@ -8,6 +8,9 @@ The topics included are:
 4. Galois Theory 
 5. Measure Theory
 
+In progress
+1. Commutative algebra
+
 I've stopped updating the Category Theory sheet as I've not had the time to study it recently but I may pick up on it in the future.
 
 You are free to use and share these sheets.
