@@ -2,11 +2,11 @@
 I have stored here a few Mathematics Revision Cheat Sheets I've made on LaTeX.
 
 The topics included are:
-1. [Group Theory](Group Theory Cheat Sheet.pdf)
-2. [Ring and Field Theory](Ring and Field Theory Cheat Sheet.pdf)
-3. [Complex Analysis](Complex Analysis Cheat Sheet.pdf)
-4. [Galois Theory](Galois Theory Cheat Sheet.pdf)
-5. [Measure Theory](Measure Theory Cheat Sheet.pdf)
+1. [Group Theory](Group%20Theory%20Cheat%20Sheet.pdf)
+2. [Ring and Field Theory](Ring%20and%20Field%20Theory%20Cheat%20Sheet.pdf)
+3. [Complex Analysis](Complex%20Analysis%20Cheat%20Sheet.pdf)
+4. [Galois Theory](Galois%20Theory%20Cheat%20Sheet.pdf)
+5. [Measure Theory](Measure%20Theory%20Cheat%20Sheet.pdf)
 
 In progress
 1. Commutative Algebra
