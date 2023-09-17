@@ -2,14 +2,14 @@
 I have stored here a few Mathematics Revision Cheat Sheets I've made on LaTeX.
 
 The topics included are:
-1. Group Theory
-2. Ring and Field Theory
-3. Complex Analysis
-4. Galois Theory 
-5. Measure Theory
+1. [Group Theory](Group Theory Cheat Sheet.pdf)
+2. [Ring and Field Theory](Ring and Field Theory Cheat Sheet.pdf)
+3. [Complex Analysis](Complex Analysis Cheat Sheet.pdf)
+4. [Galois Theory](Galois Theory Cheat Sheet.pdf)
+5. [Measure Theory](Measure Theory Cheat Sheet.pdf)
 
 In progress
-1. Commutative algebra
+1. Commutative Algebra
 
 I've stopped updating the Category Theory sheet as I've not had the time to study it recently but I may pick up on it in the future.
 
