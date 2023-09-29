@@ -1,28 +1,24 @@
-
-\documentclass{article}
+\documentclass[dvipsnames]{article}
 \usepackage{geometry}
 \geometry{a3paper, landscape, margin=2in}
 \usepackage{url}
 \usepackage{multicol}
-\usepackage{amsmath}
 \usepackage{esint}
 \usepackage{amsfonts}
 \usepackage{tikz}
 \usetikzlibrary{decorations.pathmorphing}
 \usepackage{amsmath,amssymb}
-
-\usepackage{colortbl}
-\usepackage{xcolor}
-\usepackage{mathtools}
-\usepackage{amsmath,amssymb}
 \usepackage{enumitem}
-\makeatletter
+\usepackage{colortbl}
+\usepackage{mathtools}
+\usepackage{ mathrsfs }	
+\usepackage{ dsfont }
+\usepackage{ gensymb }
 
-\newcommand*\bigcdot{\mathpalette\bigcdot@{.5}}
-\newcommand*\bigcdot@[2]{\mathbin{\vcenter{\hbox{\scalebox{#2}{$\m@th#1\bullet$}}}}}
-\makeatother
+\usepackage[activate={true,nocompatibility},final,tracking=true,kerning=true,spacing=true,factor=1100,stretch=10,shrink=10]{microtype}
+\makeatletter
+\setlist[itemize]{noitemsep, topsep=0pt}
 %Template by Drew Ulick https://de.overleaf.com/articles/130-cheat-sheet/ntwtkmpxmgrp
-\title{Intro Group Theory Cheat Sheet}
 \usepackage[english]{babel}
 \usepackage{lmodern}
 	
@@ -37,7 +33,7 @@
 %\colorbox[HTML]{e4e4e4}{\makebox[\textwidth-2\fboxsep][l]{texto}
 \begin{document}
 
-\begin{center}{\fontsize{35}{60}{\textcolor{purple}{\textbf{Intro Group Theory Cheat Sheet}}}}\\
+\begin{center}{\fontsize{35}{60}{\textcolor{purple}{\textbf{Group Theory Cheat Sheet}}}}\\
 \end{center}
 \begin{multicols*}{3}
 
@@ -49,43 +45,50 @@
 \begin{tikzpicture}
 \node [mybox] (box){%
     \begin{minipage}{0.3\textwidth}
-    A group is an ordered pair (G, *) where G is a set and * is a binary operation on G satisfying the following axioms:\\
-    \textbf{i. Closure:} $\forall$ a, b $\in$ G, a * b, is also in G\\
-    \textbf{ii. Associativity:} (a * b) * c = a * (b * c), $\forall$ a, b, c $\in$ G\\
-    \textbf{iii. Identity:} $\exists$ e $\in$ G, called an identity of G,\\ s.t. $\forall$ a $\in$ G we have a * e = e * a = a\\
-    \textbf{iv. Inverse} $\forall$ a $\in$ G $\exists \ a^{-1} \in$ G, called an inverse of a, s.t. a * $a^{-1}$ = $a^{-1}$ * a = e.
+    A group is an ordered pair $(G, *)$ where $G$ is a set and $*$ is a binary operation on $G$ satisfying the following axioms:
+    \begin{itemize}
+    	\item \textbf{Associativity:} $(a * b) * c = a * (b * c) \forall a, b, c \in G$
+    	\item \textbf{Identity:} $\exists e \in G$, called an identity element of $G$, s.t. $\forall a \in G$ we have $a*e = e * a = a$.
+    	\item \textbf{Inverse} $\forall a  \in G \exists \ a^{-1} \in G$, called an inverse of $a$, s.t. $a *a^{-1} = a^{-1} * a = e.$
+    \end{itemize}
+    Closure is guaranteed due to the definition of binary operation.
+    
+    Identity and inverses are unique.
     \end{minipage}
 };
 %------------ Group Definitons Header ---------------------
 \node[fancytitle, right=10pt] at (box.north west) {Group Axioms};
 \end{tikzpicture}
-
-%------------ Some Properties of Groups ---------------
-\begin{tikzpicture}
-\node [mybox] (box){%
-    \begin{minipage}{0.3\textwidth}
-    \textbf{i. Abelian group} A group G is abelian if a * b = b * a $\forall$ a, b $\in$ G\\
-    \textbf{ii. Finite group} A group G is finite if the number of elements in G are finite\\
-    \textbf{iii. Cancellation property} suppose that a * b = a * c,  $\forall$ a, b, c $\in$ G, $\Rightarrow$ b = c\\
-    \textbf{iv. Uniqueness of Inverse and Identity}\\ • The identity of G is unique\\
-    • $\forall$ a $\in$ G, $a^{-1}$ is uniquely determined\\
-    • $(a^{-1})^{-1}$ = a $\forall$ a $\in$ G\\
-    • $(a * b)^{-1}$ = $(b^{-1})\ *\ (a^{-1})$\\
-    • for any $a_1 , a_2, ... , a_n$ $\in$ G the value of $a_1 * a_2 * · · · *a_n$ is independent of how the expression is bracketed
-    \end{minipage}
-};
-%------------ Mixing Header ---------------------
-\node[fancytitle, right=10pt] at (box.north west) {Some Properties of Groups};
-\end{tikzpicture}
+%
+%%------------ Some Properties of Groups ---------------
+%\begin{tikzpicture}
+%\node [mybox] (box){%
+%    \begin{minipage}{0.3\textwidth}
+%    \begin{itemize}
+%    	\item A group G is called \textbf{abelian} if $a * b = b * a \forall a, b \in G$
+%    \end{itemize}
+%    \textbf{iii. Cancellation property} suppose that a * b = a * c,  $\forall$ a, b, c $\in$ G, $\Rightarrow$ b = c\\
+%    \textbf{iv. Uniqueness of Inverse and Identity}\\ • The identity of G is unique\\
+%    • $\forall$ a $\in$ G, $a^{-1}$ is uniquely determined\\
+%    • $(a^{-1})^{-1}$ = a $\forall$ a $\in$ G\\
+%    • $(a * b)^{-1}$ = $(b^{-1})\ *\ (a^{-1})$\\
+%    • for any $a_1 , a_2, ... , a_n$ $\in$ G the value of $a_1 * a_2 * · · · *a_n$ is independent of how the expression is bracketed
+%    \end{minipage}
+%};
+%%------------ Mixing Header ---------------------
+%\node[fancytitle, right=10pt] at (box.north west) {Some Properties of Groups};
+%\end{tikzpicture}
 
 %------------ Some special groups ---------------
 \begin{tikzpicture}
 \node [mybox] (box){%
     \begin{minipage}{0.3\textwidth}
-    \textbf{i. Dihedral Group ($D_n\ \text{or}\ D_{2n}$)} is a group of symmetries of a n-sided regular polygon. Order = 2n\\
-    \textbf{ii. Symmetric Group ($S_n$)} is the group whose elements are all the bijections from the set to itself.\\Order = n!\\
-    \textbf{iii. Klein-4 Group ($K_4$ or $V$)} is a group with 4 elements in which each element is a self inverse.
-    \textbf{}
+    	\begin{itemize}
+    		\item A group is called \textbf{abelian} if it is commutative.
+    		\item The group of all symmetries of a $n-$sided regular polygon is called the \textbf{dihedral group}. It is represented as, \[ D_{2n}= \langle r,s \mid r^{n}=s^{2}=1, rs=sr^{-1} \rangle. \] 
+    		\item The group of all bijections on a set on $n$ elements is called the \textbf{symmetric} group denoted as $S_n$.
+    		\item The \textbf{Klein-4} group is a group with 4 elements in which each element is a self inverse.
+    	\end{itemize}
     \end{minipage}
 };
 %------------ Some Special Groups Space Header ---------------------
@@ -96,64 +99,92 @@
 \begin{tikzpicture}
 \node [mybox] (box){%
     \begin{minipage}{0.3\textwidth}
-    \textbf{i. Homomorphisms}\\Let (G , *) and (H, $\circ$) be groups. \\A map $\varphi$ : $G \rightarrow H,\ s.t.\ \varphi(x * y) = \varphi(x) \circ \varphi(y)\ \forall\ x, y \in G$ is called a \textbf{homomorphism.}\\
-    \textbf{ii. Isomorphism}\\ For $\varphi$ : G $\rightarrow$ H is called an \textbf{isomorphism} if:\\
-    i. $\varphi$ is a homomorphism\\
-    ii. $\varphi$ is a bijection
+    Let $(G , *)$ and $(H, \circ)$ be groups. A map $\varphi : G \to H,\ s.t.\ \varphi(x * y) = \varphi(x) \circ \varphi(y)\ \forall\ x, y \in G$ is called a \textbf{homomorphism.}\\
+    A bijective homomorphism is called an \textbf{isomorphism}.
 
     \end{minipage}
 };
 %------------ Homomorphisms and Isomoprhisms Header ---------------------
 \node[fancytitle, right=10pt] at (box.north west) {Homomorphisms and Isomorphisms};
 \end{tikzpicture}
+
+%------------ Subgroups ---------------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			For a Group $G$ a subset $H \subseteq G$, is a \textbf{subgroup} of $G$, i.e. $H \leq G$ if it is non empty and a group with the binary operation of $G$ restricted to $H$.
+			
+			Alternatively, a subset of a group is a subgroup if it is non empty and closed under products and inverses, i.e. for $H \subseteq G$
+			\begin{itemize}
+				\item $H \neq \emptyset$
+				\item $xy^{-1} \in H, \forall x,y \in H$
+			\end{itemize}
+			
+			A subgroup $N$ of $ G$ is called \textbf{normal}, denoted as $N \trianglelefteq G$ if $gng^{-1} \in N, \forall\ g \in G,  n \in N.$
+			
+		\end{minipage}
+	};
+	%------------ Subgroups Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Subgroups};
+\end{tikzpicture}
+
 %------------ Group Actions ---------------
 \begin{tikzpicture}
 \node [mybox] (box){%
     \begin{minipage}{0.3\textwidth}
-    A \textbf{group action} of a group G on a set A is a map from G $\times$ A to A satisfying the following properties\\
-    \textbf{i. Identity:} $e \cdot x = x$ and,\\
-    \textbf{ii. Compatibility:} $g \cdot (h \cdot x)=(gh) \cdot x$
+    A \textbf{group action} of a group $(G,*)$ on a set $X$ is a map $\circ:G \times X \to X$ satisfying the following properties,
+    \begin{itemize}
+    	\item \textbf{Identity:} $e \circ x = x, \forall x \in X$
+    	\item \textbf{Compatibility:} $g \circ (h \circ x)=g*h \circ x, \forall g,h \in G, x \in X$
+    \end{itemize}
+    Alternatively a group action on a set $X$ can be thought of as a homomorphism from $G$ to the symmetric group of $X$.
+    
+    The \textbf{conjugation action} is a homomorphism $\varphi_x: G \to G$ for some fixed $x \in G$ is defined as $\varphi_x(g)=xgx^{-1}$.
 
     \end{minipage}
 };
 %------------ Group Actions Header ---------------------
 \node[fancytitle, right=10pt] at (box.north west) {Group Actions};
 \end{tikzpicture}
-%------------ Subgroups ---------------------
+
+
+%------------ Stablizer, Kernel of Group Action ---------------------
 \begin{tikzpicture}
-\node [mybox] (box){%
-    \begin{minipage}{0.3\textwidth}
-    For a Group G. The subset H of G, is a \textbf{Subgroup} of G, i.e. H $\leq$ G if\\
-    \textbf{i.} H is non-empty\\
-    \textbf{ii.} H is closed under products and inverses\\
-    • \textbf{A Normal subgroup} N of G, (i.e. $N \trianglelefteq G$) iff $gng^{-1} \in N\ \forall\ g \in G\ \text{and}\ n \in N.$\\
-    \textbf{The Subgroup Criterion}\\
-    A subset H of group G is a subgroup of G iff\\
-    \textbf{i.} H $\neq \emptyset$\\
-    \textbf{ii.} $\forall\  x,\ y \in H\ xy^{-1} \in H$
-    \end{minipage}
-};
-%------------ Variation of Parameters Header ---------------------
-\node[fancytitle, right=10pt] at (box.north west) {Subgroups};
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			If $G$ acts on a set $X$ then we define the following,
+			
+			\textbf{Orbit} of a $x \in X$ is the set $Gx=\{gx \in X \mid g \in G\}$. Alternatively its the equivalence class induced by the group action.
+			
+			\textbf{Stablizer} of an element $x \in X$ is the set of elements from the group which leave $x$ fixed, i.e. $G_x=\{g \in G \mid gx=x\}$
+			
+			\textbf{Kernel} of a group action is the kernel of the associated group homomorphism i.e., $\{g \in G \mid gx=x, \forall x \in X\}$ 
+			
+			An action is called \textbf{transitive} if it has only one orbit, and is called \textbf{faithful} if its kernel is trivial.
+			
+			\textbf{Conjugacy classes} of $G$ is the equivalence classes of G when it acts on itself with conjugation. i.e. $\{gag^{-1}\ |\ g \in G \}$
+		\end{minipage}
+	};
+	%------------ Stabl4izer, Kernel of Group Action Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Stablizer, Kernel of Group Action};
 \end{tikzpicture}
 
-%------------ CNSK Content ---------------
+%------------ Centralizers and Normalizers Content ---------------
 \begin{tikzpicture}
 \node [mybox] (box){%
     \begin{minipage}{0.3\textwidth}
-    \textbf{• Centralizer} of A in G is a subset of G defined as $C_G(A) = \{ g \in G\ |\ gag^{-1} = a\ \forall\ a \in A \}$,\\ \emph{it is the set of all elements of G which commute with every element of A.} \\
-    \textbf{• Center} of G is the subset of G defined as\\ $Z(G) = \{ g \in G\ |\ gx = xg\ \forall\ x \in G \}$,\\
-    \emph{it is the set of elements commutating with all the elements of G.} Note, this is case $Z(G)=C_G(G)\ \text{so}\ Z(G) \leq G$.\\
-    \textbf{• Normalizer} of A in G is defined as the set\\
-    $N_G(A)=\{ g \in G\ |\ gAg^{-1} = A\}\ \text{where, }\\ gAg^{-1}=\{gag^{-1}\ |\ a \in A\}$. Note that $C_G(A) \leq N_G(A).$\\
-    \textbf{• Stabilizer} on a set S with element s in G is defined as the set\\ 
-    $G_s=\{g \in G\ |\ g \cdot s = s\}.$ Note that $G_S \leq G.$\\
-    \textbf{• Kernel} of G on S is defined as the set\\
-    $Ker(f)=\{ g \in G\ |\ g \cdot s = s\ \forall\ s \in S\}$
+    \textbf{Centralizer} of $A \subseteq G$ in $G$ is a subset of $G$ defined as $$C_G(A) = \{ g \in G\ |\ gag^{-1} = a\ \forall\ a \in A \}.$$ It is the set of all elements of $G$ which commute with every element of $A$.
+    
+    \textbf{Center} of $G$ is the subset of G defined as $$Z(G) = \{ g \in G\ |\ gx = xg\ \forall\ x \in G \}.$$ It is the set of elements commutating with all the elements of G. It is the kernel of the conjugation action.
+    
+    \textbf{Normalizer} of $A$ in $G$ is defined as
+    $$N_G(A)=\{ g \in G\ |\ gAg^{-1} = A\}$$ 
+    $gAg^{-1}=\{gag^{-1}\ |\ a \in A\}$. Note that $C_G(A) \leq N_G(A).$
+   The normalizer of a subset is its stabilizer under conjugation action.
     \end{minipage}
 };
-%------------ CNSK Header ---------------------
-\node[fancytitle, right=10pt] at (box.north west) {Centralizers, Normalizers, Stabilizers and Kernels};
+%------------ Centralizers and Normalizers Header ---------------------
+\node[fancytitle, right=10pt] at (box.north west) {Centralizers and Normalizers};
 \end{tikzpicture}
 
 
@@ -161,11 +192,14 @@
 \begin{tikzpicture}
 \node [mybox] (box){%
     \begin{minipage}{0.3\textwidth}
-    A Group H is \textbf{Cyclic} if $\exists\ x \in H\ \text{s.t. } H = \{ x^n\ |\ n \in \boldsymbol{Z} \}$\\
-    For the above case we say $H \left < x \right >$ and that $H$ is generated by $x$. \\
-   • A cyclic group can have more than one generator.\\• All cyclic groups are abelian.\\
-   • If $H=\left<x\right>$ then $|H| = |x|,$ if $|H|=n<\infty$ then $x^n=1$\\
-   • Any two cyclic groups of the same order are isomorphic.\\
+    A Group $H$ is \textbf{cyclic} if $\exists\ x \in H\ \text{s.t. } H = \{ x^n\ |\ n \in \mathbb{Z} \}$\\
+    For the above case we say $H =\left < x \right >$ and that $H$ is generated by $x$.
+    \begin{itemize}
+    	\item A cyclic group can have more than one generator.
+    	\item All cyclic groups are abelian.
+    	\item If $H=\left<x\right>$ then $|H| = |x|,$ if $|H|=n<\infty$ then $x^n=1$
+    	\item Any two cyclic groups of the same order are isomorphic.\
+    \end{itemize}
    \hrule
    \vspace{0.2cm}
    Two-Line to Cycle notation for permutations\\
@@ -180,6 +214,23 @@ Here, the last form is a case of 2-cycle (transposition).
 \node[fancytitle, right=10pt] at (box.north west) {Cyclic Groups and Cycle Notation};
 \end{tikzpicture}
 
+%------------ Parity of Permutations and Alternating Groups Content ---------------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			The parity of any permutation $\sigma$ is given by the parity of the number of its 2-cycles (transpositions).
+			\hrule
+			\vspace{0.2cm}
+			\textbf{Alternating Groups}:\\
+			An alternating group is the group of even permutations of a finite set of length $n$. It is denoted by $A_n$ it's order is $\frac{n!}{2}$
+			
+		\end{minipage}
+	};
+	%------------ Parity of Permutations and Alternating Groups Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Parity of Permutations and Alternating Groups};
+\end{tikzpicture}
+
+
 %------------ Cosets and Quotient Groups Content ---------------
 \begin{tikzpicture}
 \node [mybox] (box){%
@@ -191,6 +242,8 @@ Here, the last form is a case of 2-cycle (transposition).
     \hrule
     \vspace{0.2cm}
     For a Group $G\ \text{and}\ N \trianglelefteq G$, the \textbf{quotient group} of N in G (i.e. G/N), is the set of cosets of N in G.
+    
+    The definition of a normal subgroup is the same as left and right cosets being equal.
     
     \end{minipage}
 };
@@ -230,13 +283,14 @@ Here, the last form is a case of 2-cycle (transposition).
 \begin{tikzpicture}
 \node [mybox] (box){%
     \begin{minipage}{0.3\textwidth}
-	\textbf{i. The First Isomorphism Theorem:}\\
-	If $\varphi:G \rightarrow\  \text{H is a homomorphism of groups. Then }ker\ \varphi \trianglelefteq G\text{ and, }\\
-	G/ker \varphi \cong \varphi(G)$.\\
-	\textbf{ii. The Second Isomoprhism Theorem:}\\
+	\textbf{First Isomorphism Theorem:}\\
+	If $\varphi:G \to H$ is a homomorphism of groups. Then $\mathrm{ker} \varphi \trianglelefteq G$ and,
+	$G/\mathrm{ker}\varphi \cong \varphi(G)$.
+	
+	\textbf{Second Isomorphism Theorem:}\\
 	For a group $G$ with, $A, B \leq G$ and, $A \trianglelefteq N_G(B)$.
 Then $AB \leq G, \\ B\trianglelefteq AB, A \cap B \trianglelefteq A$ and, $AB/B \cong A/ A \cap B$\\
-	\textbf{iii. The Third Isomoprhism Theorem:}\\
+	\textbf{The Third Isomoprhism Theorem:}\\
 	For a group $G$ with, $H, K \trianglelefteq G$ and, $H\leq K$. Then $K/H \trianglelefteq G/H$ and, $\frac{G/H}{K/H}\cong G/K$
 	\end{minipage}
 };
@@ -244,35 +298,8 @@ Then $AB \leq G, \\ B\trianglelefteq AB, A \cap B \trianglelefteq A$ and, $AB/B 
 \node[fancytitle, right=10pt] at (box.north west) {The Isomorphism Theorems};
 \end{tikzpicture}
 
-%------------ Parity of Permutations and Alternating Groups Content ---------------------
-\begin{tikzpicture}
-\node [mybox] (box){%
-    \begin{minipage}{0.3\textwidth}
-    The parity of any permutation $\sigma$ is given by the parity of the number of its 2-cycles (transpositions).
-    \hrule
-    \vspace{0.2cm}
-    \textbf{Alternating Groups}:\\
-    An alternating group is the group of even permutations of a finite set of length $n$. It is denoted by $A_n$ it's order is $\frac{n!}{2}$
 
-	\end{minipage}
-};
-%------------ Parity of Permutations and Alternating Groups Header ---------------------
-\node[fancytitle, right=10pt] at (box.north west) {Parity of Permutations and Alternating Groups};
-\end{tikzpicture}
 
-%------------ Equivalence Classes and Orbits Content ---------------
-\begin{tikzpicture}
-\node [mybox] (box){%
-    \begin{minipage}{0.3\textwidth}
-    • If $G$ is a group acting on the non-empty set $A$. Then $a \sim b \iff a=g\cdot b$ for some $g \in G$. Where $\sim$ is an equivalence relation.\\
-    • The \textbf{orbit} of $G$ containing $a$ is given as $\mathcal{O}_a=\{g \cdot a\ |\ g\in G\}$\\
-    • The action of $G$ on $A$ is called transitive if there is only one orbit.\\
-    • \textbf{Conjugacy classes} of G is the equivalence classes of G when it acts on itself with conjugation. i.e. $\{gag^{-1}\ |\ g \in G \}$
-    \end{minipage}
-};
-%------------ Equivalence Classes and Orbits Header ---------------------
-'\node[fancytitle, right=10pt] at (box.north west) {Equivalence Classes and Orbits};
-\end{tikzpicture}
 
 %------------ Class equations and Orbit-stabilizer Theorem Content ---------------
 \begin{tikzpicture}
@@ -281,7 +308,7 @@ Then $AB \leq G, \\ B\trianglelefteq AB, A \cap B \trianglelefteq A$ and, $AB/B 
     \textbf{Class equation} of a finite group $G$ is written as:\\
     $|G|=|Z(G)|+|\sum(\text{Conjugancy classes of G})|$\\
     \textbf{Oribit-stabilizer Theorem:}\\
-    For a group $G$ acting on a set $S$, for any $s\ \in\ S$ we have,  $|\mathcal{O}_s||G_s|=|G|$
+    For a group $G$ acting on a set $X$, for any $x\ \in\ X$ we have,  $|Gx||G_x|=|G|$
     
     \end{minipage}
 };
@@ -330,20 +357,157 @@ Then $AB \leq G, \\ B\trianglelefteq AB, A \cap B \trianglelefteq A$ and, $AB/B 
 \begin{tikzpicture}
 \node [mybox] (box){%
     \begin{minipage}{0.3\textwidth}
-    \textbf{i. The First Sylow Theorem:}\\
+    \textbf{First Sylow Theorem:}\\
     If $p$ divides $|G|$, then $G$ has a Sylow p-subgroup.\\
-    \textbf{ii. The Second Sylow Theorem:}\\
+    \textbf{Second Sylow Theorem:}\\
     All Sylow p-subgroups of $G$ are conjugate to each other for a fixed $p$.\\
-    \textbf{iii. The Third Sylow Theorem:}\\
+    \textbf{Third Sylow Theorem:}\\
     $n_p \equiv 1 (\text{mod}\ p)$, where $n_p$ is the number of Sylow p-subgroups of G.
     \end{minipage}
 };
 %------------ The Sylow Theorems Header ---------------------
 '\node[fancytitle, right=10pt] at (box.north west) {The Sylow Theorems};
 \end{tikzpicture}
+
+%------------ Commutators Content ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			For a group $G$ and $x,y \in G$ call $[x,y]=x^{-1}y^{-1}xy$ the \textbf{commutator} of $x$ and $y$.
+			
+			For subsets $A,B \subseteq G$ define the group generated by its commutators as $[A,B]=\langle [a,b] \mid a\in A, b \in B\rangle$.
+			
+			Similarly $G'=[G,G]$ is the subgroup of $G$ generated by all commutators, its called the commutator subgroup of $G$, or its \textbf{derived subgroup}.	
+			
+			The following are some useful properties of commutators,
+			\begin{itemize}
+				\item $xy=yx \iff [x,y]=1$
+				\item $H \trianglelefteq G \iff [H,G] \leq H$
+				\item $G/G'$ is abelian and its the largest abelian quotient of $G.$ It is called the \textbf{abelianization} of $G$.
+				\item Any homomorphism from $G$ to an abelian group $A$ factors through $G'$. i.e. its universal 
+			\end{itemize}
+		\end{minipage}
+	};
+	%------------ Commutators Header ---------------------
+	'\node[fancytitle, right=10pt] at (box.north west) {Commutators};
+	
+\end{tikzpicture}
+
+%------------ Direct products Content ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			The \textbf{direct product} $G_1 \times G_2 \times \cdots $of groups $G_1, G_2, \dots$ is set of sequences $(g_1,g_2, \cdots)$ with $g_i \in G_i$ and operation $*$ defined component wise.
+			
+			If $H, K$ are normal subgroups of $G$ with $H \cap K =1$ then $HK \cong H \times K$
+		\end{minipage}
+	};
+	%------------ Direct products Header ---------------------
+	'\node[fancytitle, right=10pt] at (box.north west) {Direct products};
+	
+\end{tikzpicture}
+
+%------------ Semidirect products Content ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			Let $H, K$ be groups and $\varphi $ be a homomorphism from $K \to \textrm{Aut}(H)$. The semidirect product of $H $ and $K$ with respect to $\varphi $ denoted as $H \rtimes_\varphi H$ is defined as an ordered pair $(h,k), h \in H, k \in K$ with multiplication defined as $(h_1,k_1)(h_2,k_2)=(h_1k_1h_2, k_1k_2).$
+		\end{minipage}
+	};
+	%------------ Semidirect products Header ---------------------
+	'\node[fancytitle, right=10pt] at (box.north west) {Semidirect products};
+	
+\end{tikzpicture}
+
+
+%------------ Fundamental theorem of finite abelian groups Content ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			Every finite abelian group can be written as a direct product of cyclic groups of prime power order.
+		\end{minipage}
+	};
+%------------ Fundamental theorem of finite abelian groups Header ---------------------
+	'\node[fancytitle, right=10pt] at (box.north west) {Fundamental theorem of finite abelian groups};
+\end{tikzpicture}
+
+%------------ Schur-Zassenhaus Theorem Content ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			If $G$ is a finite group and $N \trianglelefteq G	$ and $(|G|, |G/N|)=1$ then $G=N \rtimes G/N$
+		\end{minipage}
+	};
+	%------------ Schur-Zassenhaus Theorem Header ---------------------
+	'\node[fancytitle, right=10pt] at (box.north west) {Schur-Zassenhaus Theorem};
+	
+\end{tikzpicture}
+
+%------------ Simple groups and Composition Series Content ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			A group $G$ is called \textbf{simple} if $|G|>1$ and its only normal subgroups are $1$ and $G$.
+			
+			A sequence of subgroups as follows (called a subnormal sequence),\[ 1=N_0 \trianglelefteq N_1 \trianglelefteq \cdots \trianglelefteq N_{k-1} \leq N_k = G \] is called a \textbf{composition series} if $N_{i+1}/N_i$ is simple, for $i=0,\dots k-1$. The quotient groups are called composition factors.
+		\end{minipage}
+	};
+	%------------ Simple groups and Composition Series Header ---------------------
+	'\node[fancytitle, right=10pt] at (box.north west) {Simple groups and Composition Series};
+\end{tikzpicture}
+
+%------------ Jordan H\"{o}lder theorem Content ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			Every finite non trivial group $G$ has a composition series and the composition factors are unique up to permutation.
+		\end{minipage}
+	};
+	%------------ Jordan H\"{o}lder theorem Header ---------------------
+	'\node[fancytitle, right=10pt] at (box.north west) {Jordan H\"{o}lder theorem};
+\end{tikzpicture}
+
+
+%------------ Solvable groups Content ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			A group $G$ is called \textbf{solvable} if there is a chain of normal subgroups with each subsequent quotient group being abelian.
+			
+			Alternatively if there exists $G^{(n)}=1$ for some $n\geq 0$ where we define the \textbf{commutator/derived series} as follows,
+			\[ G^{(0)}=G, G^{(1)}=[G,G], \text{ and } G^{(i+1)}=[G^{(i)},G^{(i)}]\]
+			
+			\begin{itemize}
+				\item If $N \trianglelefteq G$ and $N, G/N$ are solvable then $G$ is solvable.
+				\item Burnsides theorem: If $|G|=p^aq^b$ for primes $p,q$ then $G$ is solvable
+				\item Feit-Thompson: All finite groups of odd order are solvable.
+			\end{itemize}
+			
+			
+		\end{minipage}
+	};
+%------------ Solvable groups Header ---------------------
+	'\node[fancytitle, right=10pt] at (box.north west) {Solvable groups};
+\end{tikzpicture}
+
+%------------ Nilpotent groups Content ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			A group is called \textbf{nilpotent} if its \textbf{lower central series} defined below terminates,
+			\[ G=G_0\trianglerighteq G_1 \trianglerighteq \cdots \trianglerighteq G_n = 1, G_{i+1}=[G_i,G].\]
+			and $n$ is called its nilpotency class.
+			
+			
+		\end{minipage}
+	};
+	%------------ Nilpotent groups Header ---------------------
+	'\node[fancytitle, right=10pt] at (box.north west) {Nilpotent groups};
+\end{tikzpicture}
+
+
 \end{multicols*}
 \end{document}
 
 
-Contact GitHub API Training Shop Blog About
 © 2016 GitHub, Inc. Terms Privacy Security Status Help
