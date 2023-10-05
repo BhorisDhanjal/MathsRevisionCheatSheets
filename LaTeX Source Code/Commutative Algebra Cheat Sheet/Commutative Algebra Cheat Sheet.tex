@@ -148,6 +148,8 @@
 			A proper ideal $\mathfrak{m} \in A$ is called \textbf{maximal} if it is maximal with respect to inclusion alternatively if $A/\mathfrak{m}$ is a field.
 			
 			A ring with exactly one maximal ideal is called a \textbf{local} ring. And its subsequent quotient is called the \textbf{residue field} of the ring. If number of maximal ideals are finite then it is called \textbf{semi local}.
+			
+			A ring is local iff its set of non units form an ideal.5\
 		\end{minipage}
 	};
 %------------ Prime and Maximal ideals Header ---------------------
@@ -195,11 +197,11 @@ And the contraction of $\mathfrak{b}$ just its preimage in $A$ which is always a
 \begin{tikzpicture}
 	\node [mybox] (box){%
 		\begin{minipage}{0.3\textwidth}
-			The \textbf{nilradical} of a ring $A$ is denoted by $\mathfrak{N}_R$ and consists of the set of all nilpotent elements of $A$. Equivalently it is the intersection of all prime ideals.
+			The \textbf{nilradical} of a ring $A$ is denoted by $ N(R)$ and consists of the set of all nilpotent elements of $A$. Equivalently it is the intersection of all prime ideals.
 			
 			This shows that a radical of an ideal is just the intersection of prime ideals containing it. 
 			
-			The \textbf{Jacobson} radical of a ring $A$ is the intersection of all its maximal ideals.
+			The \textbf{Jacobson} radical of a ring $A$ denoted by $J(R)$ is the intersection of all its maximal ideals. An element $x$ is in the Jacobson radical $ \iff 1-xy $ is a unit in $ A, \forall y \in A. $
 		\end{minipage}
 	};
 %------------ Nilradical and Jacobson ideal Header ---------------------
@@ -210,13 +212,35 @@ And the contraction of $\mathfrak{b}$ just its preimage in $A$ which is always a
 \begin{tikzpicture}
 	\node [mybox] (box){%
 		\begin{minipage}{0.3\textwidth}
-			
+			For a ring $ A $, let $ I_1, \dots, I_n $ be ideals of the ring $ A $. Consider the map $ \pi: A \rightarrow A/I_1 \times \cdots \times A/I_n $ defined as $ \pi(a)=(a\mod I_1, \dots, a \mod I_n) $. Then $ \ker \pi = I_1 \bigcap \cdots \bigcap I_n $, i.e. it is surjective iff $ I_1,\cdots I_n $ are pairwise comaximal. If $ \pi $ is a surjection we have, \[ A/\bigcap I_k = A/\prod I_k \cong \prod (A/I_k)\]
 		\end{minipage}
 	};
 %------------ Chinese Remainder Theorem Header ---------------------
 	\node[fancytitle, right=10pt] at (box.north west) {Chinese Remainder Theorem};
 \end{tikzpicture}
 
+
+%------------ Nakayama's Lemma	 ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			For $ M $ a finitely generated $ A $ module then for its Jacobson radical $J(A) $ we have $ J(A)M=M \implies M=0 $
+		\end{minipage}
+	};
+	%------------ Nakayama's Lemma Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Nakayama's Lemma};
+\end{tikzpicture}
+
+%------------ Prime Avoidance theorem  ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			For ring $ A $ consider $ \mathfrak{a} \subset A$ that is stable under addition and multiplication and $ \mathfrak{p}_1, \dots , \mathfrak{p}_n $ ideals such that $ \mathfrak{p}_3, \dots, \mathfrak{p}_n $ are prime in $ A $. If $ \mathfrak{a} $ is contained in the union of all $ \mathfrak{p}_i $ then $ \mathfrak a  \subset \mathfrak p_i$ for some $ i. $
+		\end{minipage}
+	};
+	%------------ Prime Avoidance theorem  Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Prime avoidance theorem};
+\end{tikzpicture}
 
 % ==============================================================
 \end{multicols*}
