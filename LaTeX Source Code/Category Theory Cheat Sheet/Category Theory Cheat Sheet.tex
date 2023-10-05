@@ -61,7 +61,7 @@
 \begin{tikzpicture}
 \node [mybox] (box){%
     \begin{minipage}{0.3\textwidth}
-	    A \textit{category} consists of the following,
+	    A \textbf{category} consists of the following,
 	    \begin{itemize}
 	    	\item Objects: A,B,C,\dots
 	    	\item Arrows/Morphisms: f,g,h,\dots
@@ -95,7 +95,7 @@
 \begin{tikzpicture}
 	\node [mybox] (box){%
 		\begin{minipage}{0.3\textwidth}
-		A \textit{functor} $ F: C \to D $ between $ C $ and $D $ is a mapping of objects and arrows to arrows, such that
+		For categories $\mathbf{C}, \mathbf{D}$ we define a \textbf{functor} $ F: C \to D $ to be a a mapping of objects and arrows to objects and arrows, such that
 		\begin{itemize}
 			\item $ F(f:A\to B) =F(f):F(A)\to F(B)$
 			\item $ F(1_a)=1_{F(A)} $
@@ -122,14 +122,11 @@
 \begin{tikzpicture}
 	\node [mybox] (box){%
 		\begin{minipage}{0.3\textwidth}
-			A set $ M $ with binary operation $ \cdot $ is called a \textit{monoid} if it is associative and has an identity $ u \in M $, i.e., for $ x,y,z \in M $
-			\begin{itemize}
-				\item $ x\cdot (y\cdot z)=(x \cdot y)\cdot z $
-				\item $ u\cdot x=x=x\cdot u $.
-			\end{itemize}
-		
-		A monoid with an inverse for each element is called a \textit{group}.
+			A set $ M $ with binary operation $ \cdot $ is called a \textbf{monoid} if it is associative and has an identity 
 		\begin{itemize}
+			\item A monoid can be understood as a single element category.
+			\item $\mathrm{Hom}_\mathbf{C}(C,C)$ forms a monoid under composition.
+			\item A monoid with existence of inverses is a group.
 			\item \textit{Cayley's theorem: }Every group G is isomorphic to a group of permutations.
 		\end{itemize}
 		\end{minipage}
@@ -145,10 +142,9 @@
 		\begin{itemize}
 			\item \textbf{Product category: } The product of two categories $ \mathbf{C} $ and $ \mathbf{D}$ written as $ \mathbf{C}\times \mathbf{D} $ has objects of the form $ (C,D) $ for $ C \in \mathbf{C} $ and $ D \in \mathbf{D} $, and arrows of the form $ (f,g) :(C,D)\to (C', D')$ for $ f:C \to C' \in \mathbf{C} $ and $ g:D\to D' \in \mathbf{D} $.
 			
-			Composition and units are defined componentwise, i.e. $ (f',g')\circ(f,g)=(f'\circ f, g' \circ g) $ and $ 1_{(C,D)}=(1_C,1_D)$.
-			\item \textbf{Opposite/Dual category: }For category $ \mathbf{C} $ its opposite category $ \mathbf{C}^{\mathrm op} $ has the same objects as $ \mathbf{C} $ but an arrow $ f:C \to D $ in $ \mathbf{C}^{\mathrm op} $ is an arrow $ f: D \to C $ in $ \mathbf{C} $.
+			Composition and units are defined componentwise.
 			
-			For notational simplicity we say $ f^*:D^*\to C^* $ in $ \mathbf{C}^{\mathrm op} $ for $ f:C \to D $ in $ \mathbf{C} $. Composition and units are therefore defined as follows, $ f^*\circ g*=(g\circ f)^*$ and $ (1_{C^*} =1_C)^*$
+			\item \textbf{Opposite/Dual category: }For category $ \mathbf{C} $ its opposite category $ \mathbf{C}^{\mathrm op} $ has the same objects as $ \mathbf{C} $ but an arrow $ f:C \to D $ in $ \mathbf{C}^{\mathrm op} $ is an arrow $ f: D \to C $ in $ \mathbf{C} $.
 		\end{itemize}
 		\end{minipage}
 	};
@@ -192,7 +188,9 @@
 \begin{tikzpicture}
 	\node [mybox] (box){%
 		\begin{minipage}{0.3\textwidth}
-			For a set $ A $ a \textit{word} over $ A $ is any finite sequence of its elements. The \textit{Kleene closure} of $ A $ is defined to be the set of all words over $ A $. Define the binary operation of concatenation on $ A* $. Since it is associative, $ A $ along with $ * $ with the empty word $ ``-'' $ is a monoid called the \textbf{free monoid} on the set $ A $.		
+			For a set $ A $ a \textit{word} over $ A $ is any finite sequence of its elements. 
+			
+			The \textbf{Kleene closure} of $ A $ is defined to be the set of all words over $ A $ denoted as $A^*$. With the binary operation of concatenation $A^*$ forms a monoid and is called the \textbf{free monoid} on $A$.
 			
 			\textbf{Universal mapping property (UMP) of free monoid: }Let $ M(A) $ be the free monoid on a set $ A $. There is a function $ i: A\to |M(A)|, $ and given any monoid $ N $ and any function $ f:A \to |N| $, there is a unique monoid homomorphism $ \overline{f}:M(A)\to N$ s.t. $ |\overline{f}|\circ i=f $.
 			\[\begin{tikzcd}
