@@ -111,7 +111,7 @@
 \begin{tikzpicture}
 	\node [mybox] (box){%
 		\begin{minipage}{0.3\textwidth}
-			In any category $ \mathbf{C}, $ an arrow $ f:A\to B$ is called an \textit{isomorphism} if there exists an arrow $ g:B \to C $ s.t. $ g \circ f=1_A  $ and $ f \circ g=1_B $. We say, $ g=f^{-1} $. And that $ A \cong B $, i.e., $ A $ is isomorphic to $ B $.
+			In any category $ \mathbf{C}, $ an arrow $ f:A\to B$ is called an \textbf{isomorphism} if there exists an arrow $ g:B \to C $ s.t. $ g \circ f=1_A  $ and $ f \circ g=1_B $. We say, $ g=f^{-1} $. And that $ A \cong B $, i.e., $ A $ is isomorphic to $ B $.
 		\end{minipage}
 	};
 %------------ Isomorphism Header ---------------------
@@ -167,16 +167,20 @@
 					\arrow["{f'}", from=1-2, to=2-2]
 				\end{tikzcd}\]
 			where $ g_1,g_2 $ are arrows in $ \mathbf{C} $, i.e. an arrow is a pair of arrows $ g=(g_1,g_2) $ s.t. $ g_2 \circ f = f' \circ g_1 $. The identity of an object $ f:A \to B $ is the pair $ (1_A,1_B) $ and composition is componentwise.	
-				\item \textbf{Slice category: }For category $ \mathbf{C} $ its slice category over $ C \in \mathbf{C} $ is $ \mathbf{C}/C$ where its objects are all arrows $ f\in \mathbf{C} $ s.t. $ \mathrm{cod} (f)=C$. An arrow $ a $ from $ f:X\to C $ to $ f':X' \to C $ is an arrow $ a: X \to X' $ in $ \mathbf{C} $ s.t. $ f'\circ a=f  $, i.e.
+				\item \textbf{Slice category: }For category $ \mathbf{C} $ its slice category over $ C \in \mathbf{C} $ denoted as $ \mathbf{C}/C$. it contains objects as all arrows in $\mathbf{C} $ who map to $C$. And arrows in $\mathbf{C}/C$ are arrows between the $\mathrm{dom}$ of the object arrows, i.e., $ a $ as seen below.
 				\[\begin{tikzcd}
 					X && {X'} \\
 					& C
 					\arrow["a", from=1-1, to=1-3]
 					\arrow["f"', from=1-1, to=2-2]
-					\arrow["{f'}"', from=2-2, to=1-3]
+					\arrow["{f'}", from=1-3, to=2-2]
 				\end{tikzcd}\]
+			\begin{itemize}
+				\item The prototypical example is that of a slice of an element in a poset category being the principal ideal.
+			\end{itemize}
 			
-				If $ g:C \to D $ is any arrow then there exists a composition functor $ g_*:\mathbf{C}/C \to \mathbf{C}/D $ defined as $ g_*(f) = g \circ f$. Therefore the slice category of $ \mathbf{C} $ with any of its objects is a functor from $ \mathbf{C} \to \mathbf{\mathrm Cat}$. This is called the \textit{forgetful} functor as the base object is ''forgetten".
+			\item \textbf{Co-slice category:} Denoted as $C/ \mathbf{C}$ is the dual of a slice category with objects as arrows mapping from $C$.
+			
 			\end{itemize}
 		\end{minipage}
 	};
@@ -201,7 +205,7 @@
 				\arrow["f", from=2-3, to=1-4]
 				\arrow["{|\overline{f}|}", from=1-3, to=1-4]
 			\end{tikzcd}\]
-			$ A* $ has the UMP of the free monoid on $ A $.
+			$ A	 * $ has the UMP of the free monoid on $ A $.
 		\end{minipage}
 	};
 %------------ Free monoid Header ---------------------
@@ -233,9 +237,9 @@
 \begin{tikzpicture}
 	\node [mybox] (box){%
 		\begin{minipage}{0.3\textwidth}
-			A category is called \textit{small} if it has a small set of objects and arrows. (i.e., not classes). It is called large otherwise.
+			A category is called \textbf{small} if it has a small set of objects and arrows. (i.e., not classes). It is called large otherwise.
 			
-			A category $ \mathbf{C} $ is \textit{locally small} if for all objects $ X,Y \in \mathbf{C} $, the collection $ \mathrm{Hom}_\mathbf{C}(X,Y)=\{f \in \mathbf{C}_1 \mid f: X \to Y \}$ is a small set.
+			A category $ \mathbf{C} $ is \textbf{locally small} if for all objects $ X,Y \in \mathbf{C} $, the collection $ \mathrm{Hom}_\mathbf{C}(X,Y)=\{f \in \mathbf{C}_1 \mid f: X \to Y \}$ is a small set.
 		\end{minipage}
 	};
 %------------ Small categories Header ---------------------
@@ -246,7 +250,7 @@
 \begin{tikzpicture}
 	\node [mybox] (box){%
 		\begin{minipage}{0.3\textwidth}
-			\textbf{Monomoprhism: }In any category $ \mathbf{C} $, an arrow	$ f: A \to B  $ is called a monomorphism (monic), if for any $ g,h, :C \to A , fg=fh \implies g=h $.
+			\textbf{Monomorphism: }In any category $ \mathbf{C} $, an arrow	$ f: A \to B  $ is called a monomorphism (monic), if for any $ g,h, :C \to A , fg=fh \implies g=h $.
 
 			\[\begin{tikzcd}
 			\arrow[r,shift right,swap,"h"] \arrow[r,shift left,"g"]	C &  
@@ -264,7 +268,7 @@
 			\begin{itemize}
 				\item We say, $ f: A\rightarrowtail B $ if $ f $ is a monomorphism and $ f: A \twoheadrightarrow B $ if $ f $ is an epimorphism.
 				\item Every isomorphism is both a monomorphism and an epimorphism. The converse need not be true.
-				\item A \textbf{split} mono (epi) is an arrow $ m : A \to B$ with a left (right) inverse $ r $. The inverse arrow $ r $ is called the \textit{retraction}, $ m $ is called a \textit{section} of $ r $ and $ A $ is called a \textit{retract} of $ B $.
+				\item A \textbf{split} mono (epi) is an arrow $ m : A \to B$ with a left (right) inverse $ r $. The inverse arrow $ r $ is called the \textbf{retraction}, $ m $ is called a \textit{section} of $ r $ and $ A $ is called a \textbf{retract} of $ B $.
 			\end{itemize}
 			
 
@@ -278,8 +282,8 @@
 \begin{tikzpicture}
 	\node [mybox] (box){%
 		\begin{minipage}{0.3\textwidth}
-			An object $ 0 \in \mathbf{C} $ is \textit{initial} if for any object $ C \in \mathbf{C} \exists!$ morphism $ 0 \to C $.\\
-			An object $ 1 \in \mathbf{C} $ is \textit{terminal} if for any object $ C \in \mathbf{C} \exists!$ morphism $ C \to 1 $.
+			An object $ 0 \in \mathbf{C} $ is \textbf{initial} if for any object $ C \in \mathbf{C} \exists!$ morphism $ 0 \to C $.\\
+			An object $ 1 \in \mathbf{C} $ is \textbf{terminal} if for any object $ C \in \mathbf{C} \exists!$ morphism $ C \to 1 $.
 			
 			Initial and terminal objects are unique up to isomorphism.
 		\end{minipage}
@@ -292,7 +296,7 @@
 \begin{tikzpicture}
 	\node [mybox] (box){%
 		\begin{minipage}{0.3\textwidth}
-			For an object $ A \in \mathbf{C} $ arbitrary arrows $ x:X\to A $ are called the \textit{generalized elements} of $ A $ with stage of definition given by $ X $.
+			For an object $ A \in \mathbf{C} $ arbitrary arrows $ x:X\to A $ are called the \textbf{generalized elements} of $ A $ with stage of definition given by $ X $.
 		\end{minipage}
 	};
 %------------ Generalized elements Header ---------------------
@@ -339,11 +343,11 @@
 \begin{tikzpicture}
 	\node [mybox] (box){%
 		\begin{minipage}{0.3\textwidth}
-			A category which has a product for every pair of objects is said to have \textit{binary products}.
+			A category which has a product for every pair of objects is said to have \textbf{binary products}.
 			
-			A category is said to have \textit{all finite products}, if it has a terminal object and all binary products.
+			A category is said to have \textbf{all finite products}, if it has a terminal object and all binary products.
 			
-			A category has \textit{all small products} if every set of objects has a product.
+			A category has \textbf{all small products} if every set of objects has a product.
 		\end{minipage}
 	};
 %------------ Categories with products Header ---------------------
@@ -405,7 +409,7 @@
 				\arrow["g"', shift right=2, from=1-1, to=1-2]
 				\arrow["f", shift left=2, from=1-1, to=1-2]
 			\end{tikzcd}\]
-			We say an \textit{equalizer} of $ f,g $ consists of an object $ E $ and an arrow $ e:E \to A $ universal such that \[ f \circ e = g \circ e \]
+			We say an \textbf{equalizer} of $ f,g $ consists of an object $ E $ and an arrow $ e:E \to A $ universal such that \[ f \circ e = g \circ e \]
 			i.e., for any $ z:Z\to A $ with $ f \circ z= g \circ z $, there exists a unique $ u:Z \to E $ with $ e \circ u=z $
 			\[\begin{tikzcd}
 				E & A & B \\
@@ -418,6 +422,7 @@
 			\end{tikzcd}\]
 		\begin{itemize}
 			\item Equalizers are monic.
+			\item It is analogous to the notion of a kernel.
 		\end{itemize}
 		\end{minipage}
 	};
@@ -435,7 +440,7 @@
 				\arrow["g"', shift right=2, from=1-1, to=1-2]
 				\arrow["f", shift left=2, from=1-1, to=1-2]
 			\end{tikzcd}\]
-			We say a \textit{coequalizer} of $ f,g $ consists of an object $ Q $ and an arrow $ q:B \to Q $ universal such that \[ q \circ f = q \circ g \]
+			We say a \textbf{coequalizer} of $ f,g $ consists of an object $ Q $ and an arrow $ q:B \to Q $ universal such that \[ q \circ f = q \circ g \]
 			i.e., for any $ z:B\to Z $ with $ z \circ f= z \circ g $, there exists a unique $ u:Q \to Z $ with $ u \circ q=z $
 			\[\begin{tikzcd}
 				A & B & Q \\
@@ -448,6 +453,7 @@
 			\end{tikzcd}\]
 		\begin{itemize}
 			\item Coequalizers are epic.
+			\item It is analogous to the notion of a quotient.
 		\end{itemize}
 		\end{minipage}
 	};
@@ -522,12 +528,12 @@
 \begin{tikzpicture}
 	\node [mybox] (box){%
 		\begin{minipage}{0.3\textwidth}
-			A \textit{congruence} on a category is a equivalance relation on arrows ($ f \sim g $) s.t.
+			A \textbf{congruence} on a category is a equivalance relation on arrows ($ f \sim g $) s.t.
 			\begin{itemize}
 				\item $ f \sim g \implies \mathrm{dom}(f)=\mathrm{dom}(f)$ and $ \mathrm{cod}(f)=\mathrm{cod}(g) $.
 				\item $ f \sim g \implies bfa \sim bga $
 			\end{itemize}
-		Let $ C_0, C_1 $ denote the class of objects and arrows for a category $ \mathbf{C} $. Then a \textit{congruence category} $ \mathbf{C}^\sim  $ is defined as follows,
+		Let $ C_0, C_1 $ denote the class of objects and arrows for a category $ \mathbf{C} $. Then a \textbf{congruence category} $ \mathbf{C}^\sim  $ is defined as follows,
 		\begin{itemize}
 			\item $ (\mathbf{C}^\sim)_0=\mathbf{C}_0 $
 			\item $ (\mathbf{C}^\sim)_1=\{\langle f,g \rangle| f \sim g\} $
@@ -539,7 +545,7 @@
 			\arrow["{p_1}", shift left=2, from=1-1, to=1-2]
 			\arrow["{p_2}"', shift right=2, from=1-1, to=1-2]
 		\end{tikzcd}\]
-		We define the \textit{quotient category} of the congruence as the coequalizer, i.e,
+		We define the \textbf{quotient category} of the congruence as the coequalizer, i.e,
 		\[\begin{tikzcd}
 			{\mathbf{C}^\sim} & {\mathbf{C}} & {\mathbf{C}/\sim}
 			\arrow["{p_1}", shift left=2, from=1-1, to=1-2]
@@ -556,11 +562,64 @@
 \begin{tikzpicture}
 	\node [mybox] (box){%
 		\begin{minipage}{0.3\textwidth}
-			Consider the free category $ \mathbf{C} (G)$ on a finite graph $ G $. And the finite set of relations $ \sum  $ to be relations of the form $ (g_1\circ \dots \circ g_n)= (g_1'\circ \dots \circ g_m') $ for $ g_i \in G $ and $ \mathrm{dom}(g_n)=\mathrm{dom}(g_m') $ and $ \mathrm{cod}(g_1) =\mathrm{cod}(g_1')$. Let $ \sim_\Sigma  $ be the smallest congruence $ g \sim g' $ if $ g=g' \in \sum  $. We call the quotient by this congruence to be a \textit{fintely presented category}.
+			Consider the free category $ \mathbf{C} (G)$ on a finite graph $ G $. And the finite set of relations $ \sum  $ to be relations of the form $ (g_1\circ \dots \circ g_n)= (g_1'\circ \dots \circ g_m') $ for $ g_i \in G $ and $ \mathrm{dom}(g_n)=\mathrm{dom}(g_m') $ and $ \mathrm{cod}(g_1) =\mathrm{cod}(g_1')$. Let $ \sim_\Sigma  $ be the smallest congruence $ g \sim g' $ if $ g=g' \in \sum  $. We call the quotient by this congruence to be a \textbf{fintely presented category}.
 		\end{minipage}
 	};
 %------------ Finitely presented category Header ---------------------
 	\node[fancytitle, right=10pt] at (box.north west) {Finitely presented category};
+\end{tikzpicture}
+
+
+%------------ Subobjects ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			A \textbf{subobject} for some $X \in \mathbf{C}$ is a monomorphism into $X$.
+			\begin{itemize}
+				\item Arrows between subobjects of the same $X$ are arrows in the slice category of $X$. So collection of subobjects form a category with a preorder (with inclusion) we call $\mathrm{Sub}_\mathbf{C}(X)$
+
+			\end{itemize}
+		\end{minipage}
+	};
+%------------ Subobjects Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Subobjects};
+\end{tikzpicture}
+
+%------------ Pullback ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+		In a category $\mathbf{C}$ a \textbf{pullback} of arrows $f,g$ with the same image
+		\[\begin{tikzcd}
+			& B \\
+			A & C
+			\arrow["g", from=1-2, to=2-2]
+			\arrow["f"', from=2-1, to=2-2]
+		\end{tikzcd}\]\\
+		is the pair of universal arrows $p_1, p_2$ such that $fp_1=gp_2$ (i.e. $u$ unique below)	 
+		\[\begin{tikzcd}
+			Z \\
+			& P & B \\
+			& A & C
+			\arrow["{p_2}"', from=2-2, to=2-3]
+			\arrow["{p_1}", from=2-2, to=3-2]
+			\arrow["g", from=2-3, to=3-3]
+			\arrow["f"', from=3-2, to=3-3]
+			\arrow["{z_1}"', from=1-1, to=3-2]
+			\arrow["{z_2}", from=1-1, to=2-3]
+			\arrow["u"{description}, dashed, from=1-1, to=2-2]
+		\end{tikzcd}\]
+		\begin{itemize}
+			\item Rephrased in terms of products the pullback can be considered as a subobject of $A\times B$ determined as the equalizer of projection maps composed with $f,g$. Every category with products and equalizers has pullbacks defined like this and vice versa.
+			\item For two pullback squares side by side sharing a morphism the larger rectangle forms a pullback square too.
+			\item The pullback of a commutative triangle is also a commutative triangle by the above point.
+			\item Pullbacks define a functor between slice categories.
+		\end{itemize}
+		
+		\end{minipage}
+	};
+	%------------ Pullback Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Pullback};
 \end{tikzpicture}
 
 
