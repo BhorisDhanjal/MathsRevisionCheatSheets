@@ -82,14 +82,18 @@
 \node[fancytitle, right=10pt] at (box.north west) {Rings};
 \end{tikzpicture}
 
-%------------ Universal mapping property ---------------
+%------------ Universal property ---------------
 \begin{tikzpicture}
 	\node [mybox] (box){%
 		\begin{minipage}{0.3\textwidth}
+			A universal property is some notion of a construction that uniquely determines it. In particular for some functor $F$ between categories $\mathbf{C}, \mathbf{D}$ an arrow $X\to F$ for $X \in \mathbf{D}$ is said to be universal if there exists some arrow $u$ and $C \in \mathbf{C}$ such that all other arrows $X \to F(C')$ necessarily factor through $u: X \to F(C)$ uniquely.
 			
+			This will be very useful in characterizing certain constructions later.
+			
+			For example in the first isomorphism theorem infact the quotient of kernel is universal as all mappings to the image algebra factor through it.
 		\end{minipage}
 	};
-	%------------ Universal mapping property Header ---------------------
+	%------------ Universal property Header ---------------------
 	\node[fancytitle, right=10pt] at (box.north west) {Universal mapping property};
 \end{tikzpicture}
 
@@ -146,14 +150,27 @@
 			A proper ideal $\mathfrak{p} \in A$ is called \textbf{prime} if for $xy \in \mathfrak{a} \implies x \in \mathfrak{p}$ or $y \in \mathfrak{p}$ alternatively if $A/\mathfrak{p}$ is an integral domain.
 			
 			A proper ideal $\mathfrak{m} \in A$ is called \textbf{maximal} if it is maximal with respect to inclusion alternatively if $A/\mathfrak{m}$ is a field.
-			
-			A ring with exactly one maximal ideal is called a \textbf{local} ring. And its subsequent quotient is called the \textbf{residue field} of the ring. If number of maximal ideals are finite then it is called \textbf{semi local}.
-			
-			A ring is local iff its set of non units form an ideal.5\
+		
 		\end{minipage}
 	};
 %------------ Prime and Maximal ideals Header ---------------------
 	\node[fancytitle, right=10pt] at (box.north west) {Prime and Maximal ideals};
+\end{tikzpicture}
+
+%------------ Local rings ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			F	A ring with exactly one maximal ideal is called a \textbf{local} ring. And its subsequent quotient is called the \textbf{residue field} of the ring. If number of maximal ideals are finite then it is called \textbf{semi local}.
+			\begin{itemize}
+				\item A ring is local iff its set of non units form an ideal (which is consequently maximal)
+				\item If $M\subset A$ is maximal then if $1+m$ is a unit for all $m \in M \implies A$ is local.
+				\item A local ring has no idempotents except 0 and 1.
+			\end{itemize}
+		\end{minipage}
+	};
+	%------------ Local rings Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Local rings};
 \end{tikzpicture}
 
 %------------ Ideal operations ---------------
@@ -208,6 +225,19 @@ And the contraction of $\mathfrak{b}$ just its preimage in $A$ which is always a
 	\node[fancytitle, right=10pt] at (box.north west) {Nilradical and Jacobson ideal};
 \end{tikzpicture}
 
+%------------ Prime Avoidance theorem  ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			For ring $ A $ consider $ \mathfrak{a} \subset A$ that is stable under addition and multiplication and $ \mathfrak{p}_1, \dots , \mathfrak{p}_n $ ideals such that $ \mathfrak{p}_3, \dots, \mathfrak{p}_n $ are prime in $ A $. If $ \mathfrak{a} $ is contained in the union of all $ \mathfrak{p}_i $ then $ \mathfrak a  \subset \mathfrak p_i$ for some $ i. $
+		\end{minipage}
+	};
+	%------------ Prime Avoidance theorem  Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Prime avoidance theorem};
+\end{tikzpicture}
+
+
+
 %------------ Chinese Remainder Theorem ---------------
 \begin{tikzpicture}
 	\node [mybox] (box){%
@@ -218,6 +248,68 @@ And the contraction of $\mathfrak{b}$ just its preimage in $A$ which is always a
 %------------ Chinese Remainder Theorem Header ---------------------
 	\node[fancytitle, right=10pt] at (box.north west) {Chinese Remainder Theorem};
 \end{tikzpicture}
+
+%------------ Modules  ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			For ring $A$ we define an $ A-$\textbf{module} $M$ to be an abelian group with addition along with scalar multiplication $A \times M \to M$ such that the following hold for $a,b \in A, m,n \in M$
+			\begin{itemize}
+				\item $a(m+n)=am+an$ and $(a+b)m=am+bm$
+				\item $a(bm)=(ab)m$
+				\item $1m=m$
+			\end{itemize}
+We also define the following notions pertaining to modules,
+			\begin{itemize}
+				\item A \textbf{submodule} $N$ of $M$ is simply a subgroup closed under scalar multiplication.
+				\item For a submodule $N$ of $M$ its quotient module $M/N$ is defined naturally.
+				\item The submodules of a module form a complete lattice w.r.t. inclusion.
+				\item Define an \textbf{annihilator} of $m \in M$ to be $\mathrm{Ann}(m)=\{x \in A \mid xm=0\}$ this extends to the full module as well. They are ideals of $A$. Furthermore $M$ can be seen as a $A/\mathfrak{a}$ module for $\mathfrak{a} \subset \mathrm{Ann}(M)$ naturally.
+				
+				
+			\end{itemize}
+		\end{minipage}
+	};
+	%------------ Modules  Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Modules};
+\end{tikzpicture}
+
+
+%------------ Module homomorphisms.	 ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			For $A-$modules $M,N$ a mapping $f: M \to N$ is a \textbf{module homomorphism} if $f(x+y)=f(x)+f(y)$ and $f(ax)=af(x)$ for $a \in A, x,y \in M$
+			\begin{itemize}
+				 \item The set of all homomorphisms between modules, i.e. $\mathrm{Hom}_A(M,N)$ determines another $A-$module naturally.
+				 \item $\mathrm{Hom}_A(A,M) \cong M$ where $\varphi(f(x))=f(1)$ defines the isomorphism.
+				 \item For a module homomorphism $f:M\to M$, its kernel and image are submodules.
+				 \item We define cokernel and coimages as the categorical dual of kernels and images. Explicitly as follows, for $f: M \to N$ homomorphism between $A-$modules, $\mathrm{Coker}(f)=N/\mathrm{Im}(f)$ and $\mathrm{Coim}(f)=M/\mathrm{Ker}(f)$
+				 \item $\mathrm{Ker}(f)$ has the following UMP, for $i$ defined to be the inclusion,
+				 \[\begin{tikzcd}
+				 	& N \\
+				 	& {\mathrm{Ker}(f)} & M \\
+				 	K
+				 	\arrow["f"', from=2-3, to=1-2]
+				 	\arrow["i", from=2-2, to=2-3]
+				 	\arrow["0"', from=2-2, to=1-2]
+				 	\arrow["g"', curve={height=12pt}, from=3-1, to=2-3]
+				 	\arrow["0", curve={height=-6pt}, from=3-1, to=1-2]
+				 	\arrow["{\exists!}"', dashed, from=3-1, to=2-2]
+				 \end{tikzcd}\]
+				 \item The module of endomorphisms $\mathrm{Hom}_A(M,M)$ also denoted $\mathrm{End}_A(M)$ is in fact a ring (not necessarily commutative). A module is \textbf{faithful} if the map from $A \to \mathrm{End}_A(M)$ is injective equivalently if $\mathrm{Ann}(M)=0$. Also $\mathrm{End}_R(M) \subset \mathrm{End}_{\mathbb{Z}}R(M)$ as we can consider $M$ as an abelian group hence as a $\mathbb{Z}-$module
+			\end{itemize}
+			We have the following isomorphism theorems in modules, $A-$modules $L \subset N, M \subset N$
+			\begin{itemize}
+				\item $L+M$ forms a module and $f: L\to L+M \to (L+M)/M$ has kernel $L \cap M$ so we have $L/(L \cap M)\cong (L+M)/M$
+				\item If $L \subset M$ we have $N/M \cong (N/L)/(M/L))$ as $f: \to N \to N/L \to (N/L)/(M/L)$ forms a surjection with kernel $M$.
+			\end{itemize} 
+		\end{minipage}
+	};
+	%------------  Modules homomorphisms. Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Module homomorphisms};
+\end{tikzpicture}
+
 
 
 %------------ Nakayama's Lemma	 ---------------
@@ -231,16 +323,20 @@ And the contraction of $\mathfrak{b}$ just its preimage in $A$ which is always a
 	\node[fancytitle, right=10pt] at (box.north west) {Nakayama's Lemma};
 \end{tikzpicture}
 
-%------------ Prime Avoidance theorem  ---------------
+%------------ Localization ---------------
 \begin{tikzpicture}
 	\node [mybox] (box){%
 		\begin{minipage}{0.3\textwidth}
-			For ring $ A $ consider $ \mathfrak{a} \subset A$ that is stable under addition and multiplication and $ \mathfrak{p}_1, \dots , \mathfrak{p}_n $ ideals such that $ \mathfrak{p}_3, \dots, \mathfrak{p}_n $ are prime in $ A $. If $ \mathfrak{a} $ is contained in the union of all $ \mathfrak{p}_i $ then $ \mathfrak a  \subset \mathfrak p_i$ for some $ i. $
+			For a multiplicatively closed subset $S$ of $A$ the \textbf{localization} of $A$ at $S$ denoted as $S^{-1}A$ is a ring which consists of tuples $(a,s)$ for $a \in A, s \in S$ and is characterized by the equivalence relation $$(a,s) \sim (a',s') \iff \exists t \in S, t(as'-sa')=0$$.
+			
+			For representatives of equivalence classes given as $[(a,s)] , [(a',s')]$ addition is defined as $[(as'+sa',ss')]$ and multiplication is componentwise.
 		\end{minipage}
 	};
-	%------------ Prime Avoidance theorem  Header ---------------------
-	\node[fancytitle, right=10pt] at (box.north west) {Prime avoidance theorem};
+	%------------ Localization Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Localization};
 \end{tikzpicture}
+
+
 
 % ==============================================================
 \end{multicols*}

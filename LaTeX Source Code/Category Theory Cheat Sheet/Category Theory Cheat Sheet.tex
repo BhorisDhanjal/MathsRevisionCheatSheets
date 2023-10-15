@@ -610,16 +610,125 @@
 			\arrow["u"{description}, dashed, from=1-1, to=2-2]
 		\end{tikzcd}\]
 		\begin{itemize}
-			\item Rephrased in terms of products the pullback can be considered as a subobject of $A\times B$ determined as the equalizer of projection maps composed with $f,g$. Every category with products and equalizers has pullbacks defined like this and vice versa.
+			\item $P$ is often denoted as $A\times_C B$. Rephrased in terms of products the pullback can be considered as a subobject of $A\times B$ determined as the equalizer of projection maps composed with $f,g$. Every category with products and equalizers has pullbacks defined like this and vice versa.
 			\item For two pullback squares side by side sharing a morphism the larger rectangle forms a pullback square too.
 			\item The pullback of a commutative triangle is also a commutative triangle by the above point.
-			\item Pullbacks define a functor between slice categories.
+			\item Pullbacks define a functor between slice categories, for fixed $f: A \to B $ $f^*: \mathbf{C}/B \to \mathbf{C}/A$ defined as $ (D\xrightarrow{\alpha}B) \mapsto (A\times_B D \xrightarrow{\alpha^*} A) $ is functorial.
+			\item This pullback functor makes the following diagram commute,
+			\[\begin{tikzcd}
+				{\mathrm{Sub}(A)} && {\mathrm{Sub}(B)} \\
+				\\
+				{\mathbf{C}/A} && {\mathbf{C}/B}
+				\arrow[from=1-3, to=3-3]
+				\arrow["{f^*}", from=3-3, to=3-1]
+				\arrow["{f^{-1}}"', from=1-3, to=1-1]
+				\arrow[from=1-1, to=3-1]
+			\end{tikzcd}\]
+			where $f^{-1}$ is the restriction of $f^*$.
+			\item A category with pullbacks and terminal objects $\iff $ it has finite products and equalizers
 		\end{itemize}
-		
+	
 		\end{minipage}
 	};
-	%------------ Pullback Header ---------------------
+%------------ Pullback Header ---------------------
 	\node[fancytitle, right=10pt] at (box.north west) {Pullback};
+\end{tikzpicture}
+
+%------------ Diagram ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			For categories $\mathbf{J}, \mathbf{C}$ a \textbf{diagram} of type $\mathbf{J}$ in $\mathbf{C}$ is a functor $D: \mathbf{J} \to \mathbf{C}$ where $\mathbf J$ admits an indexing. This is a formalization of the notion of `diagram' we use intuitively. It can be thought of as the image of $\mathbf J$ in $\mathbf C$, the actual stucture of $\mathbf J$ is largely irrelevant.
+			
+			For example,
+			\[\begin{tikzcd}
+				& {\mathbf{J}} &&& {\text{Diagram}} \\
+				\bullet && \bullet & {D_1} && {D_2}
+				\arrow["f", shift left=2, from=2-1, to=2-3]
+				\arrow["g"', shift right=2, from=2-1, to=2-3]
+				\arrow["{D_f}", shift left=2, from=2-4, to=2-6]
+				\arrow["{D_g}"', shift right=2, from=2-4, to=2-6]
+			\end{tikzcd}\]
+
+		\end{minipage}
+	};
+	%------------ Diagram Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Diagram};
+\end{tikzpicture}
+
+%------------ Cones ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			Given $\mathbf{J}, \mathbf{C}$ and a diagram of type $\mathbf{J}$ in $\mathbf{C}$, $D: \mathbf{J} \to \mathbf{C}$ we define a \textbf{cone} to the diagram $D$ for an object (vertex) $C$ of $\mathbf{C}$ and family of arrows $c_j:C \to D_j$ for all $j \in \mathbf{J}$ such for $\alpha: i \to j$ the following commute,
+			\[\begin{tikzcd}
+				& C \\
+				{D_i} && {D_j}
+				\arrow["{c_i}"', from=1-2, to=2-1]
+				\arrow["{c_j}", from=1-2, to=2-3]
+				\arrow["{D_\alpha}"', from=2-1, to=2-3]
+			\end{tikzcd}\]
+			Furthermore we can have a morphism between cones in the natural way $\vartheta: (C, c_j) \to (C', c_j')$ making every such triangle commute,
+			\[\begin{tikzcd}
+				C & {C'} \\
+				& {D_j}
+				\arrow["\vartheta", from=1-1, to=1-2]
+				\arrow["{c_j'}", from=1-2, to=2-2]
+				\arrow["{c_j}"', from=1-1, to=2-2]
+			\end{tikzcd}\]
+			This lets us define a category of cones into $D$ denoted as $\mathbf{Cone}(D)$. Its dual is called a cocone.
+		\end{minipage}
+	};
+	%------------ Cones Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Cone};
+\end{tikzpicture}
+
+%------------ Comma category ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+		We define the \textbf{comma category} ($S \downarrow T$) categories $\mathbf{A, B, C}$ which are related as $\mathbf{A} \xrightarrow{S} \mathbf{C} \xleftarrow{T} \mathbf{B}$.
+		With objects as $3-$tuples $(A,B,h), A\in \mathbf{A}, B \in \mathbf{B}, (h:S(A)\to T(B)) \in \mathbf{C}$ and arrows between them defined naturally as follows, all $(f,g)$ for $f:A \to A', g: B \to B'$ such that the following commutes,
+		\[\begin{tikzcd}
+			{S(A)} && {S(A')} \\
+			\\
+			{T(B)} && {T(B')}
+			\arrow["{S(f)}", from=1-1, to=1-3]
+			\arrow["{h'}", from=1-3, to=3-3]
+			\arrow["h"', from=1-1, to=3-1]
+			\arrow["{T(g)}"', from=3-1, to=3-3]
+		\end{tikzcd}\]
+		
+		A cone can alternatively be understood as a comma category $(\Delta \downarrow D)$, for the diagram $D$ as a functor from $\Delta: C \to \mathrm{Fun}(\mathbf{J}, \mathbf{C}) $ sometimes denoted as $C^J$. $\mathrm{Fun}(\mathbf{J},\mathbf{C})$ is the functor category which is defined later.
+		
+		Defined as sending $\Delta(C):\mathbf{J} \to \mathbf{C}$ which just maps $C $ to $C$. This functor is usually called the \textbf{diagonal functor}.
+		\end{minipage}
+	};
+	%------------ Comma category Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Comma category};
+\end{tikzpicture}
+
+%------------ Limit ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			Given a diagram $D: \mathbf{J} \to \mathbf{C}$ its \textbf{limit} is a terminal object in $\mathbf{Cone}(D)$, denoted as $p_i: \lim_{\leftarrow_j}D_j \to D_i$.
+			
+			If $\mathbf{J}$ is finite the limit is called a finite limit.	
+			
+			\begin{itemize}
+				\item A category has finite limits $\iff $ it has finite products and equalizers (and so pullbacks and terminal objects.)
+			\end{itemize}
+			
+			A functor $F$ is said to \textbf{preserve limits} of type $J$ if $F(\lim_{\leftarrow} D_j) \cong \lim_\leftarrow F(D_j)$. Such a functor is called continuous.
+			
+			\begin{itemize}
+				\item Representable functors in locally small categories are continuous.
+			\end{itemize}
+		\end{minipage}
+	};
+	%------------ Limit Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Limit};
 \end{tikzpicture}
 
 
