@@ -8,6 +8,8 @@ Textbook references
 7. Commutative Rings - Kaplansky
 8. Category Theory - Awodey
 9. Category Theory in Context - Riehl
+10. Algebraic Topology - Hatcher
+11. Topology: A Categorical Approach - Bradley, Bryson and Terilla
 
 Online resources
 1. Wolfram Mathworld

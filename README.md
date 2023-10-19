@@ -14,8 +14,7 @@ The topics I've included are:
 In progress
 1. Commutative Algebra
 2. Category Theory
-
-I'll probably do one for Algebraic Topology eventually.
+3. Algebraic topology (I don't aim to fully complete this anytime soon only going through chp 1 and 4 of Hatcher)
 
 You are free to use and share these sheets. If you notice a mistake or want to collaborate to add a new subject feel free to make a pull request here.
 

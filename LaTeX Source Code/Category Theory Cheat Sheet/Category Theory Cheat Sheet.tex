@@ -708,6 +708,7 @@
 	\node[fancytitle, right=10pt] at (box.north west) {Comma category};
 \end{tikzpicture}
 
+
 %------------ Limit ---------------
 \begin{tikzpicture}
 	\node [mybox] (box){%
@@ -724,11 +725,78 @@
 			
 			\begin{itemize}
 				\item Representable functors in locally small categories are continuous.
+					\item Colimts are the dual notion of limits, e.g. direct limit of groups.
 			\end{itemize}
 		\end{minipage}
 	};
 	%------------ Limit Header ---------------------
 	\node[fancytitle, right=10pt] at (box.north west) {Limit};
+\end{tikzpicture}
+
+
+%------------ Exponentials ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			For a category $\mathbf C$ with binary products there exists an exponential of objects $B, C$ which consists of an object $B^C$ and an arrow $\epsilon : C^B \times B \to C$ universal as seen below,
+			\[\begin{tikzcd}
+				{C^B} && {C^B \times B} && C \\
+				\\
+				Z && {Z \times B}
+				\arrow["{\tilde{f}}", dashed, from=3-1, to=1-1]
+				\arrow["{\tilde{f}\times1_B}", from=3-3, to=1-3]
+				\arrow["\epsilon", from=1-3, to=1-5]
+				\arrow["f"', from=3-3, to=1-5]
+			\end{tikzcd}\]
+		\end{minipage}
+	};
+	%------------ Exponentials Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Exponentials};
+\end{tikzpicture}
+
+%------------ Cartesian closed categories ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			A category is \textbf{cartesian closed} if it has finite products and exponentials.
+			
+			\begin{itemize}
+				\item Exponentiation is functorial in a cartesian closed category.
+			\end{itemize}
+		\end{minipage}
+	};
+	%------------ Cartesian closed categories Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Cartesian closed categories};
+\end{tikzpicture}
+
+%------------ Heyting algebra ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			A Heyting algebra is a poset with finite meets, joins, least and greatest element (0 and 1) and exponentials defined as implications, $a \wedge b  \leq c$ iff $a \leq b \implies c$.
+			\begin{itemize}
+				\item A Heyting algebra is a distributive lattice. But only complete distributive lattices form Heyting algebras.
+				\item Every boolean algebra is a Heyting algebra with implication defined classically $p \implies q $ iff $\neg p \vee q$.
+				\item Heyting algebras form an algebraic analogue for intuitionistic propositional calculi as every IPC gives rise to an associated Heyting algebra where formulae are identified by syntactic equivalence. In particular this gives a correspondence between Heyting algebras and IPC.
+			\end{itemize}
+		\end{minipage}
+	};
+	%------------ Heyting algebra Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Heyting algebra};
+\end{tikzpicture}
+
+%------------ Lambda Calculus ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			$\lambda-$calculus is a formal system relying on two symbols $\lambda $ and a dot $``."$. 
+			
+			There exists a correspondence between typed $\lambda-$ calculus and cartesian closed categories. With the objects in the associated category being types and arrows defined as equivalence classes of terms of a type identified when equal.
+ 
+		\end{minipage}	
+	};
+	%------------ Lambda Calculus Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {$\lambda-$calculus};
 \end{tikzpicture}
 
 
