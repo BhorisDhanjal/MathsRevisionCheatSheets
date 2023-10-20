@@ -688,6 +688,7 @@
 	\node [mybox] (box){%
 		\begin{minipage}{0.3\textwidth}
 		We define the \textbf{comma category} ($S \downarrow T$) categories $\mathbf{A, B, C}$ which are related as $\mathbf{A} \xrightarrow{S} \mathbf{C} \xleftarrow{T} \mathbf{B}$.
+		
 		With objects as $3-$tuples $(A,B,h), A\in \mathbf{A}, B \in \mathbf{B}, (h:S(A)\to T(B)) \in \mathbf{C}$ and arrows between them defined naturally as follows, all $(f,g)$ for $f:A \to A', g: B \to B'$ such that the following commutes,
 		\[\begin{tikzcd}
 			{S(A)} && {S(A')} \\
@@ -791,13 +792,80 @@
 		\begin{minipage}{0.3\textwidth}
 			$\lambda-$calculus is a formal system relying on two symbols $\lambda $ and a dot $``."$. 
 			
-			There exists a correspondence between typed $\lambda-$ calculus and cartesian closed categories. With the objects in the associated category being types and arrows defined as equivalence classes of terms of a type identified when equal.
+			There exists a correspondence between typed $\lambda-$ calculus and Cartesian closed categories. With the objects in the associated category being types and arrows defined as equivalence classes of terms of a type identified when equal.
  
 		\end{minipage}	
 	};
 	%------------ Lambda Calculus Header ---------------------
 	\node[fancytitle, right=10pt] at (box.north west) {$\lambda-$calculus};
 \end{tikzpicture}
+
+
+%------------ Full and faithful functors ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			A functor $F: \mathbf{C} \to \mathbf{D} $ induces a map in locally small categories 
+			
+			$F_{A,B}=\mathrm{Hom}_\mathbf{C}(A,B) \to \mathrm{Hom}_\mathbf{D}(F(A),F(B))$. 
+			
+			The functor $F$ is said to be \textbf{faithful} if $F_{A,B}$ is injective for all pairs of objects and \textbf{full} if it is surjective.
+			
+			Note that this is not the same as the functor being injective/surjective on objects/arrows.
+			
+			\begin{itemize}
+				\item Covariant and contravariant representable functors are faithful.
+			\end{itemize}
+		\end{minipage}	
+	};
+	%------------ Full and faithful functors Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Full and faithful functors};
+\end{tikzpicture}
+
+%------------ Natural transformations and naturality ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			A \textbf{natural transformation} is a map between functors.
+			
+			 For functors $F,G: \mathbf{C} \to \mathbf{D}$ a natural transformation $\eta: F \to G$ is a family of morphisms (in $\mathbf{D}$) which consist of \textbf{components} $\eta_X	$ which associates for every object $C \in \mathbf{C} $ a morphism between objects in $\mathbf{D}$, $\eta_C:F(C)\to G(C)$. Also components must commute naturally, in particular for $f: C \to C' $ we have $\eta_{C'} \circ F(f)=G(f)\circ\eta_C$, i.e. below diagram commutes,
+			 \[\begin{tikzcd}
+			 	C && {F(C)} && {G(C)} \\
+			 	\\
+			 	{C'} && {F(C')} && {G(C')}
+			 	\arrow["{\eta_C}", from=1-3, to=1-5]
+			 	\arrow["{\eta_{C'}}", from=3-3, to=3-5]
+			 	\arrow["{F(f)}"', from=1-3, to=3-3]
+			 	\arrow["{G(f)}", from=1-5, to=3-5]
+			 	\arrow["f"', from=1-1, to=3-1]
+			 \end{tikzcd}\]
+			 
+	
+		\end{minipage}	
+	};
+	%------------ Natural transformations Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Natural transformations};
+\end{tikzpicture}
+
+%------------ Functor categories and exponentials ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+		For two categories $\mathbf{C}, \mathbf{D}$ we can define the \textbf{functor category} as the category whose objects are functors between $\mathbf{C}$ and $\mathbf{D}$ and morphisms are natural transformations. It is denoted as $\mathrm{Fun}(\mathbf{C,D})$
+		
+		In $\mathbf{Cat}$ (Category of small categories) the functor category between two categories defines its exponential. Therefore, $\mathbf{Cat}$ is Cartesian closed.
+		
+		\begin{itemize}
+			\item A \textbf{natural isomorphism} is a natural transformation which is an isomorphism in the functor category
+		\end{itemize}
+		
+	
+		\end{minipage}	
+	};
+	%------------ Functor categories and exponentials Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Functor categories and exponentials};
+\end{tikzpicture}
+
 
 
 % ==============================================================
