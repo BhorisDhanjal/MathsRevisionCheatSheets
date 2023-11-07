@@ -111,7 +111,7 @@
 \begin{tikzpicture}
 	\node [mybox] (box){%
 		\begin{minipage}{0.3\textwidth}
-			In any category $ \mathbf{C}, $ an arrow $ f:A\to B$ is called an \textbf{isomorphism} if there exists an arrow $ g:B \to C $ s.t. $ g \circ f=1_A  $ and $ f \circ g=1_B $. We say, $ g=f^{-1} $. And that $ A \cong B $, i.e., $ A $ is isomorphic to $ B $.
+			In any category $ \mathbf{C}, $ an arrow $ f:A\to B$ is called an \textbf{isomorphism} if there exists an arrow $ g:B \to A $ s.t. $ g \circ f=1_A  $ and $ f \circ g=1_B $. We say, $ g=f^{-1} $. And that $ A \cong B $, i.e., $ A $ is isomorphic to $ B $.
 		\end{minipage}
 	};
 %------------ Isomorphism Header ---------------------
@@ -867,6 +867,219 @@
 \end{tikzpicture}
 
 
+%------------ Bifunctors ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			A \textbf{bifunctor} is any functor of two variables i.e. domain in terms of a product category.
+			
+			A mapping $F: \mathbf{A} \times \mathbf{B} \to \mathbf{C}$ is a bifunctor if its functorial in each component and the following square commutes,
+			\[\begin{tikzcd}
+				{A'} & {B'} && {F(A,B)} && {F(A,B')} \\
+				\\
+				A & B && {F(A',B)} && {F(A',B')}
+				\arrow["{F(A,g)}", from=1-4, to=1-6]
+				\arrow["{F(A',g)}"', from=3-4, to=3-6]
+				\arrow["{F(f,B')}", from=1-6, to=3-6]
+				\arrow["{F(f,B)}"', from=1-4, to=3-4]
+				\arrow["g"{description}, from=3-2, to=1-2]
+				\arrow["f"{description}, from=3-1, to=1-1]
+			\end{tikzcd}\]
+		\end{minipage}	
+	};
+	%------------ Bifunctors Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Bifunctors};
+\end{tikzpicture}
+
+%------------ Equivalence of categories  ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			For categories $\mathbf{C},\mathbf{D}$ they is said to be an equivalence between them if there exist functors $E:\mathbf{C}\rightleftarrows \mathbf{D}:F$ and a pair of natural \textit{isomorphisms} $\alpha: 1_\mathbf{C} \to F \circ E$ and $\beta: 1_\mathbf{D} \to E \circ F$. 
+			
+			This is a weaker condition than isomorphism.
+			
+			$F:\mathbf{C} \to \mathbf{D}$ is a part of an equivalence of categories if it is full and faithful and for all $D \in \mathbf{D}$ there exists $C \in \mathbf{C}, F(C)\cong D$
+		\end{minipage}	
+	};
+	%------------ Equivalence of categories Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Equivalence of categories};
+\end{tikzpicture}
+
+%------------ Yoneda embedding  ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			The \textbf{Yoneda embedding} is a functor $y:\mathbf{C}\to \mathbf{Sets}^{\mathbf{C}^\text{Op}}$ mapping objects to their contravariant representable functor (i.e. presheaves). In particular $y(C)=\textrm{Hom}_\mathbf{C}(-,C)$ it takes arrows to the natural transformation $yf=\mathrm{Hom}_\mathbf{C}(-,f):\mathrm{Hom}_\mathbf{C}(-,C) \to \mathrm{Hom}_\mathbf{C}(-,D)$
+		\end{minipage}	
+	};
+%------------ Yoneda embedding Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Yoneda embedding};
+\end{tikzpicture}
+
+%------------ Yoneda lemma  ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			For a locally small category $\mathbf{C}$ we have $\textrm{Hom}(yC,F) \cong FC$ for $C \in \mathbf{C}$ and a functor $F \in \mathbf{Sets}^{\mathbf{C}^{op}}$. The isomorphism is natural in both $C$ and $F$.
+		\end{minipage}	
+	};
+%------------ Yoneda lemma Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Yoneda lemma};
+\end{tikzpicture}
+
+%------------ Applications of yoneda lemma  ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			For locally small categories
+			\begin{itemize}
+				\item The Yoneda embedding $y: \mathbf{C} \to \mathbf{Sets}^{\mathbf{C}^\mathbf{op}}$ is full and faithful.
+				\item $yC \cong yC' \implies C \cong C'$ for objects $C,C'$
+			\end{itemize}
+		\end{minipage}	
+	};
+	%------------ Applications of yoneda lemma Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Applications of yoneda lemma};
+\end{tikzpicture}
+
+%------------ Category of presheaves  ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			For locally small category $\mathbf{C}$ its category of presheaves $\mathbf{Sets}^{\mathbf{C}^{op}} $ is complete, cocomplete and is cartesian closed. Due to these properties its often useful to examine the presheaves of a category.
+			
+			We also have that the Yoneda embedding preserves products, exponentials and is continuous (preserves limits).
+		\end{minipage}	
+	};
+	%------------Category of presheaves Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Category of presheaves};
+\end{tikzpicture}
+
+%------------ Monoidal categories  ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+				A monoidal category is a category $\mathbf{C}$ with a bifunctor $ \otimes: \mathbf{C} \times \mathbf{C} \to \mathbf{C}$, a `unit' element $I$, and natural isomorphisms that make the functor associative and unital with $I$ as expected. It is a generalization of the notion of a `tensor product'. Its used to define enriched categories.
+				
+				This can be formalized as follows, there exists $I \in \mathbf{C}$ and natural isomorphisms,
+				\begin{itemize}
+					\item $\alpha_{ABC}: A \otimes (B \otimes C) \to (A \otimes B) \otimes C$
+					\item $\lambda_A : I \otimes A \to A$ (read as left)
+					\item $\rho_A: A \otimes I \to A$ (read as right)
+				\end{itemize}
+				And the following diagrams commute,
+				\[\begin{tikzcd}
+					& {(A\otimes B)\otimes (C \otimes D)} \\
+					{A \otimes(B \otimes(C\otimes D))} && {((A\otimes B)\otimes C)\otimes D} \\
+					{A \otimes ((B \otimes C) \otimes D)} && {(A \otimes (B\otimes C))\otimes D}
+					\arrow[from=2-1, to=1-2]
+					\arrow[from=1-2, to=2-3]
+					\arrow[from=3-1, to=3-3]
+					\arrow[from=3-3, to=2-3]
+					\arrow[from=2-1, to=3-1]
+				\end{tikzcd}\]
+				\[\begin{tikzcd}
+					{A\otimes(I\otimes B)} && {(A\otimes I)\otimes B} \\
+					& {A\otimes B}
+					\arrow[from=1-1, to=1-3]
+					\arrow[from=1-3, to=2-2]
+					\arrow[from=1-1, to=2-2]
+				\end{tikzcd}\]
+		\end{minipage}	
+	};
+	%------------Monodial categories Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Monoidal categories};
+\end{tikzpicture}
+
+
+%------------ Topoi  ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			A \textbf{topoi} is a category which is has small limits, has exponentials and has a subobject classifier.
+			
+			A \textbf{subobject classifer} is an object $\Omega $ along with an arrow $1 \to \Omega $ universal such that it induces a subobject $S$ as the pullback to the following diagram for some arbitrary object $C$,
+		\[\begin{tikzcd}
+			U && 1 \\
+			\\
+			C && \Omega
+			\arrow["u"', dashed, from=3-1, to=3-3]
+			\arrow["t", from=1-3, to=3-3]
+			\arrow[tail, from=1-1, to=3-1]
+			\arrow[from=1-1, to=1-3]
+		\end{tikzcd}\]
+		
+		The notion of a subobject classifier is intuitively understood as a `truth value` function which assigns a true value for elements of $U\in  C$.
+		In particular topoi are used in logic due to a similar notion as just described.
+			
+			Presheaves form a topoi.
+			
+		
+		\end{minipage}	
+	};
+%------------ Topoi Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Topoi};
+\end{tikzpicture}
+
+%------------ Adjoint functors  ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			The functors $F: \mathbf{C} \rightleftarrows \mathbf{D}: U$ form an \textbf{adjunction} between categories if there exists a natural transformation $\eta: 1_\mathbf{C} \to U \circ F$ with this unit having the following UMP,
+			\[\begin{tikzcd}
+				D && {U(F(C))} && {U(D)} \\
+				\\
+				{F(C)} && C
+				\arrow["f"', from=3-3, to=1-5]
+				\arrow["{\eta_C}", from=3-3, to=1-3]
+				\arrow["{U(g)}", from=1-3, to=1-5]
+				\arrow[dashed, from=3-1, to=1-1]
+			\end{tikzcd}\]
+			
+			$F$ is called the left adjoint of $U$ and vice versa, and is denoted as $F \dashv U$.
+			
+			Alternatively we also have the following formulation, $F \dashv U$ if for $C\in \mathbf{C}, D \in \mathbf{D}$ there exist natural isomorphisms $\phi: \textrm{Hom}_\mathbf{D}(FC, D) \cong \textrm{Hom}_\mathbf{C}(C, UD)$
+		\end{minipage}	
+	};
+%------------ Adjoint functors Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Adjoint functors};
+\end{tikzpicture}
+
+%------------ Properties and examples of adjunctions  ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			Adjunctions are unique up to isomorphism.
+		\end{minipage}	
+	};
+	%------------ Properties and examples of adjunctions Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Properties and examples of adjunctions};
+\end{tikzpicture}
+
+
+
+%------------ Monads  ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			
+		\end{minipage}	
+	};
+	%------------ Monads Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Monads};
+\end{tikzpicture}
+
+%------------ Kan extensions  ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			
+		\end{minipage}	
+	};
+	%------------ Kan extensions Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Kan extensions};
+\end{tikzpicture}
 
 % ==============================================================
 \end{multicols*}
