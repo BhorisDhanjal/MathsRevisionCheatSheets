@@ -936,18 +936,20 @@
 			\begin{itemize}
 				\item The Yoneda embedding $y: \mathbf{C} \to \mathbf{Sets}^{\mathbf{C}^\mathbf{op}}$ is full and faithful.
 				\item $yC \cong yC' \implies C \cong C'$ for objects $C,C'$
-			\end{itemize}
+				\item All objects in presheaves are colimits of some representable functors (in particular the end). 
+				\item So Yoneda embedding is the free cocompletion of any category. In particular there is a UMP for maps from $\mathbf{C}$ to any cocomplete categories factoring through presheaves wrt Yoneda embedding
+			\end{itemize}	
 		\end{minipage}	
 	};
 	%------------ Applications of yoneda lemma Header ---------------------
-	\node[fancytitle, right=10pt] at (box.north west) {Applications of yoneda lemma};
+	\node[fancytitle, right=10pt] at (box.north west) {Applications of oneda lemma};
 \end{tikzpicture}
 
 %------------ Category of presheaves  ---------------
 \begin{tikzpicture}
 	\node [mybox] (box){%
 		\begin{minipage}{0.3\textwidth}
-			For locally small category $\mathbf{C}$ its category of presheaves $\mathbf{Sets}^{\mathbf{C}^{op}} $ is complete, cocomplete and is cartesian closed. Due to these properties its often useful to examine the presheaves of a category.
+			For locally small category $\mathbf{C}$ its category of presheaves denoted as $\mathbf{Sets}^{\mathbf{C}^{op}} $ or $[\mathbf{C}^{\mathrm{op}}, \mathbf{Sets}]$ or $\hat{\mathbf{C}}$ is complete, cocomplete and is cartesian closed. Due to these properties its often useful to examine the presheaves of a category.
 			
 			We also have that the Yoneda embedding preserves products, exponentials and is continuous (preserves limits).
 		\end{minipage}	
@@ -1039,7 +1041,9 @@
 			
 			$F$ is called the left adjoint of $U$ and vice versa, and is denoted as $F \dashv U$.
 			
-			Alternatively we also have the following formulation, $F \dashv U$ if for $C\in \mathbf{C}, D \in \mathbf{D}$ there exist natural isomorphisms $\phi: \textrm{Hom}_\mathbf{D}(FC, D) \cong \textrm{Hom}_\mathbf{C}(C, UD)$
+			Alternatively we also have the following formulation, $F \dashv U$ if for $C\in \mathbf{C}, D \in \mathbf{D}$ there exist natural isomorphisms $\phi: \textrm{Hom}_\mathbf{D}(FC, D) \cong \textrm{Hom}_\mathbf{C}(C, UD):\psi$
+			
+			A third more general formulation is given later.
 		\end{minipage}	
 	};
 %------------ Adjoint functors Header ---------------------
@@ -1050,11 +1054,76 @@
 \begin{tikzpicture}
 	\node [mybox] (box){%
 		\begin{minipage}{0.3\textwidth}
-			Adjunctions are unique up to isomorphism.
+			\begin{itemize}
+				\item Adjunctions are unique up to isomorphisms.
+				\item Adjunctions between prosets are called 'Galois connections', they involve order preserving maps.
+				\item Operations in Heyting algebras can interpreted as biconditions and now its clear to see how they are built on adjoints.
+				\item In first order logic, quantifiers form adjoints, in particular if you have a functor between propositions of some $\mathcal{L}-$structures then $\forall$ is its right adjoint and $\exists $ is its left adjoint
+				\item For arbitrary diagonal functors over some small index category say $J$, $\lim_{\rightarrow_J} \dashv \Delta_J \dashv \lim_{\leftarrow_J}$, in particular when diagonal functor is over 2 we get $+ \dashv \Delta_2 \dashv \times $
+				\item Free functors are right adjoint to forgetful functors
+				\item Right adjoints preserve limits and left adjoints preserve colimits.
+			\end{itemize}
+		
 		\end{minipage}	
 	};
 	%------------ Properties and examples of adjunctions Header ---------------------
 	\node[fancytitle, right=10pt] at (box.north west) {Properties and examples of adjunctions};
+\end{tikzpicture}
+
+%------------ Ends and Coends  ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			
+		\end{minipage}	
+	};
+	%------------ Ends and coends Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Ends and coends};
+\end{tikzpicture}
+	
+%------------ Kan extensions  ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			A functor $f: \mathbf{C} \to \mathbf{D}$ induces a functor between its presheaves,\\ $f^*: [\mathbf{D}^{\mathrm{op}}, \mathbf{Sets}] \to [\mathbf{C}^{\mathrm{op}}, \mathbf{Sets}]$, given by precomposition $f^*(Q)(C)=Q(fC)$ and this induced functor has both left and right adjoints which we call left and right \textbf{Kan extensions}, i.e. $f_! \dashv f^* \dashv f_*$ and left Kan extensions are naturally isomorphic with the Yoneda embedding as such, $f_! y_\mathbf{C} \cong y_\mathbf{D}f$	
+		\end{minipage}	
+	};
+	%------------ Kan extensions Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Kan extensions};
+\end{tikzpicture}
+
+%------------ Locally cartesian closed categories  ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			A category is said to be locally cartesian closed if its slice categories are cartesian closed.
+		\end{minipage}	
+	};
+	%------------ Locally cartesian closed categories Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Locally cartesian closed categories};
+\end{tikzpicture}
+
+
+%------------ Adjoint functor theorem  ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			For a locally small, complete category $\mathbf{C}$, some other category $\mathbf{X}$. A limit preserving functor $U:\mathbf{C} \to \mathbf{X}$ has a left adjoint	iff
+		\end{minipage}	
+	};
+	%------------ Adjoint functor theorem Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Adjoint functor theorem};
+\end{tikzpicture}
+
+%------------ Adjoints in terms of units and counits  ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			For a locally small, complete category $\mathbf{C}$, some other category $\mathbf{X}$. A limit preserving functor $U:\mathbf{C} \to \mathbf{X}$ has a left adjoint	iff
+		\end{minipage}	
+	};
+	%------------ Adjoints in terms of units and counits Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Adjoints in terms of units and counits};
 \end{tikzpicture}
 
 
@@ -1070,15 +1139,82 @@
 	\node[fancytitle, right=10pt] at (box.north west) {Monads};
 \end{tikzpicture}
 
-%------------ Kan extensions  ---------------
+%------------ Enriched categories  ---------------
 \begin{tikzpicture}
 	\node [mybox] (box){%
 		\begin{minipage}{0.3\textwidth}
 			
 		\end{minipage}	
 	};
-	%------------ Kan extensions Header ---------------------
-	\node[fancytitle, right=10pt] at (box.north west) {Kan extensions};
+	%------------ Enriched categories Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Enriched categories move this after monoidal};
+\end{tikzpicture}
+
+%------------ Abelian/Derived categories  ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			
+		\end{minipage}	
+	};
+	%------------ Abelian/Derived categories  Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Abelian/Derived categories};
+\end{tikzpicture}
+
+%------------ Simplical sets ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			
+		\end{minipage}	
+	};
+	%------------ Simplical sets Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Simplical sets};
+\end{tikzpicture}
+
+%------------ 2-categories  ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			
+		\end{minipage}	
+	};
+	%------------ 2-categories Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {2-categories};
+\end{tikzpicture}
+
+%------------ Infinity groupoids  ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			
+		\end{minipage}	
+	};
+	%------------ Infinity groupoids Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {$\mathbf{\infty}$ groupoids};
+\end{tikzpicture}
+
+
+%------------ Higher categories  ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			
+		\end{minipage}	
+	};
+	%------------ Higher categories Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Higher categories};
+\end{tikzpicture}
+
+%------------ Model categories  ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			
+		\end{minipage}	
+	};
+	%------------ Model categories Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Model categories};
 \end{tikzpicture}
 
 % ==============================================================
