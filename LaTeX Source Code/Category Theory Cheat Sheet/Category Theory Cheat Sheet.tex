@@ -95,10 +95,10 @@
 \begin{tikzpicture}
 	\node [mybox] (box){%
 		\begin{minipage}{0.3\textwidth}
-		For categories $\mathbf{C}, \mathbf{D}$ we define a \textbf{functor} $ F: C \to D $ to be a a mapping of objects and arrows to objects and arrows, such that
+		For categories $\mathbf{C}, \mathbf{D}$ we define a \textbf{functor} $ F: \mathbf{C} \to \mathbf{D} $ to be a a mapping of objects and arrows to objects and arrows, such that
 		\begin{itemize}
 			\item $ F(f:A\to B) =F(f):F(A)\to F(B)$
-			\item $ F(1_a)=1_{F(A)} $
+			\item $ F(1_A)=1_{F(A)} $
 			\item $ F(g \circ f) = F(g)\circ F(f)$.
 		\end{itemize}
 		\end{minipage}
@@ -122,7 +122,7 @@
 \begin{tikzpicture}
 	\node [mybox] (box){%
 		\begin{minipage}{0.3\textwidth}
-			A set $ M $ with binary operation $ \cdot $ is called a \textbf{monoid} if it is associative and has an identity 
+			A set $ M $ with binary operation $ \circ $ is called a \textbf{monoid} if it is associative and has an identity 
 		\begin{itemize}
 			\item A monoid can be understood as a single element category.
 			\item $\mathrm{Hom}_\mathbf{C}(C,C)$ forms a monoid under composition.
@@ -703,6 +703,10 @@
 		A cone can alternatively be understood as a comma category $(\Delta \downarrow D)$, for the diagram $D$ as a functor from $\Delta: C \to \mathrm{Fun}(\mathbf{J}, \mathbf{C}) $ sometimes denoted as $C^J$. $\mathrm{Fun}(\mathbf{J},\mathbf{C})$ is the functor category which is defined later.
 		
 		Defined as sending $\Delta(C):\mathbf{J} \to \mathbf{C}$ which just maps $C $ to $C$. This functor is usually called the \textbf{diagonal functor}.
+		
+		\begin{itemize}
+			\item (Co)slice categories are a special case of comma categories.
+		\end{itemize}
 		\end{minipage}
 	};
 	%------------ Comma category Header ---------------------
@@ -867,7 +871,7 @@
 \end{tikzpicture}
 
 
-%------------ Bifunctors ---------------
+%------------ Bifunctors and profunctors ---------------
 \begin{tikzpicture}
 	\node [mybox] (box){%
 		\begin{minipage}{0.3\textwidth}
@@ -885,10 +889,12 @@
 				\arrow["g"{description}, from=3-2, to=1-2]
 				\arrow["f"{description}, from=3-1, to=1-1]
 			\end{tikzcd}\]
+			
+			A bifunctor is called a \textbf{profunctor} if its of the form $\mathbf{B}^{\mathrm{op}}\times \mathbf{C} \to \mathbf{Set}$ like Hom/Internal hom.
 		\end{minipage}	
 	};
-	%------------ Bifunctors Header ---------------------
-	\node[fancytitle, right=10pt] at (box.north west) {Bifunctors};
+	%------------ Bifunctors and profunctors Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Bifunctors and profunctors};
 \end{tikzpicture}
 
 %------------ Equivalence of categories  ---------------
@@ -942,7 +948,7 @@
 		\end{minipage}	
 	};
 	%------------ Applications of yoneda lemma Header ---------------------
-	\node[fancytitle, right=10pt] at (box.north west) {Applications of oneda lemma};
+	\node[fancytitle, right=10pt] at (box.north west) {Applications of Yoneda lemma};
 \end{tikzpicture}
 
 %------------ Category of presheaves  ---------------
@@ -966,27 +972,27 @@
 				
 				This can be formalized as follows, there exists $I \in \mathbf{C}$ and natural isomorphisms,
 				\begin{itemize}
-					\item $\alpha_{ABC}: A \otimes (B \otimes C) \to (A \otimes B) \otimes C$
-					\item $\lambda_A : I \otimes A \to A$ (read as left)
-					\item $\rho_A: A \otimes I \to A$ (read as right)
+					\item $\alpha_{A,B,C}: A \otimes (B \otimes C) \to (A \otimes B) \otimes C$ (read as associator)
+					\item $\lambda_A : I \otimes A \to A$ (read as left unitor)
+					\item $\rho_A: A \otimes I \to A$ (read as right unitor)
 				\end{itemize}
 				And the following diagrams commute,
 				\[\begin{tikzcd}
 					& {(A\otimes B)\otimes (C \otimes D)} \\
 					{A \otimes(B \otimes(C\otimes D))} && {((A\otimes B)\otimes C)\otimes D} \\
 					{A \otimes ((B \otimes C) \otimes D)} && {(A \otimes (B\otimes C))\otimes D}
-					\arrow[from=2-1, to=1-2]
-					\arrow[from=1-2, to=2-3]
-					\arrow[from=3-1, to=3-3]
-					\arrow[from=3-3, to=2-3]
-					\arrow[from=2-1, to=3-1]
+					\arrow["\alpha_{A,B,C\otimes D}",from=2-1, to=1-2]
+					\arrow["\alpha_{A\otimes B, C, D}",from=1-2, to=2-3]
+					\arrow["\alpha_{A,B\otimes C,D}",from=3-1, to=3-3]
+					\arrow["\alpha_{A,B,C}\otimes1_D"',from=3-3, to=2-3]
+					\arrow["1_A \otimes \alpha_{B,C,D}"',from=2-1, to=3-1]
 				\end{tikzcd}\]
 				\[\begin{tikzcd}
 					{A\otimes(I\otimes B)} && {(A\otimes I)\otimes B} \\
 					& {A\otimes B}
-					\arrow[from=1-1, to=1-3]
-					\arrow[from=1-3, to=2-2]
-					\arrow[from=1-1, to=2-2]
+					\arrow["\alpha_{A,I,B}",from=1-1, to=1-3]
+					\arrow["\rho_A \otimes 1_B",from=1-3, to=2-2]
+					\arrow["1_A\otimes \lambda B"',from=1-1, to=2-2]
 				\end{tikzcd}\]
 		\end{minipage}	
 	};
@@ -994,6 +1000,60 @@
 	\node[fancytitle, right=10pt] at (box.north west) {Monoidal categories};
 \end{tikzpicture}
 
+%------------ Enriched categories  ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			For a monoidal category as defined above $(\mathbf{V},\otimes, I ,\alpha, \lambda, \rho)$ a category $\mathbf{C}$ enriched over $\mathbf{V}$ is a category along with the following data
+			\begin{itemize}
+				\item Associated to all ordered pair $(A,B)$ of objects in $\mathbf{C}$, a hom object $\mathbf{C}(A,B)\in \mathrm{Ob}(\mathbf{V})$.
+				\item Associated to all objects $A$ in $\mathbf{C}$, an identity morphism $\mathrm{id}_A:I \to \mathbf{C}(A,A)$
+				\item Associated to each ordered triple $(A,B,C) $ of objects in $\mathbf{C}$ say $(A,B,C)$, a morphism in $\mathrm{Ob}(\mathbf{V})$, $\circ_{A,B,C}: \mathbf{C}(B,C)\otimes \mathbf{C}(A,B) \to \mathbf{C}(A,C)$
+				\item Also the following diagrams commute,
+			\end{itemize}
+			\[\begin{tikzcd}[column sep=0.05em]
+				& {\mathbf{C}(A,D)} \\
+				{\mathbf{C}(B,D)\otimes\mathbf{C}(A,B)} && {\mathbf{C}(C,D)\otimes \mathbf{C}(A,C)} \\
+				{(\mathbf{C}(C,D) \otimes \mathbf{C}(B,C)) \otimes \mathbf{C}(A,B)} && {\mathbf{C}(C,D) \otimes (\mathbf{C}(B,C) \otimes \mathbf{C}(A,B))}
+				\arrow["{\circ_{A,B,D}}", from=2-1, to=1-2]
+				\arrow["{\circ_{A,C,D}}"', from=2-3, to=1-2]
+				\arrow["{\circ_{B,C,D}\otimes 1_{\mathbf{C}(A,B)}}", from=3-1, to=2-1]
+				\arrow["{1_{\mathbf{C}(C,D)}\otimes \circ_{A,B,C}}"', from=3-3, to=2-3]
+				\arrow["\alpha"', from=3-1, to=3-3]
+			\end{tikzcd}\]
+			\[\begin{tikzcd}
+				{I \otimes \mathbf{C}(A,B)} && {\mathbf{C}(A,B)\otimes I} \\
+				& {\mathbf{C}(A,B)} \\
+				{\mathbf{C}(B,B)\otimes \mathbf{C}(A,B)} && {\mathbf{C}(A,B)\otimes \mathbf{C}(A,A)}
+				\arrow["\rho"', from=1-3, to=2-2]
+				\arrow["{\circ_{A,A,B}}"', from=3-3, to=2-2]
+				\arrow["{\circ_{A,B,B}}", from=3-1, to=2-2]
+				\arrow["{1_{\mathbf{C}(A,B)}\otimes \mathrm{id}_A}", from=1-3, to=3-3]
+				\arrow["{ \mathrm{id}_B\otimes1_{\mathbf{C}(A,B)}}"', from=1-1, to=3-1]
+				\arrow["\lambda", from=1-1, to=2-2]
+			\end{tikzcd}\]
+		\end{minipage}	
+	};
+	%------------ Enriched categories Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Enriched categories (monoidal)};
+\end{tikzpicture}
+
+%------------ 2-categories  ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			The classical definition for 2-categories also called strict 2-categories are categories enriched over $\mathbf{Cat}$, it gives us the following data \begin{itemize}
+				\item Collection of objects
+				\item For each pair of objects we have associated to it a hom-category. 
+				\item 1-morphisms between objects, realized as objects of hom-categories.
+				\item 2-morphisms between 1-morphisms, realized as morphisms of hom-categories.
+			\end{itemize}
+			
+		\end{minipage}	
+	};
+	%------------ 2-categories Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {2-categories};
+\end{tikzpicture}
 
 %------------ Topoi  ---------------
 \begin{tikzpicture}
@@ -1070,6 +1130,17 @@
 	\node[fancytitle, right=10pt] at (box.north west) {Properties and examples of adjunctions};
 \end{tikzpicture}
 
+%------------ Wedges ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+				
+		\end{minipage}	
+	};
+	%------------ Wedges Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Wedges};
+\end{tikzpicture}
+
 %------------ Ends and Coends  ---------------
 \begin{tikzpicture}
 	\node [mybox] (box){%
@@ -1079,6 +1150,17 @@
 	};
 	%------------ Ends and coends Header ---------------------
 	\node[fancytitle, right=10pt] at (box.north west) {Ends and coends};
+\end{tikzpicture}
+
+%------------ Nerves and realizations  ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			
+		\end{minipage}	
+	};
+	%------------ Nerves and realizations Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Nerves and realizations};
 \end{tikzpicture}
 	
 %------------ Kan extensions  ---------------
@@ -1139,16 +1221,7 @@
 	\node[fancytitle, right=10pt] at (box.north west) {Monads};
 \end{tikzpicture}
 
-%------------ Enriched categories  ---------------
-\begin{tikzpicture}
-	\node [mybox] (box){%
-		\begin{minipage}{0.3\textwidth}
-			
-		\end{minipage}	
-	};
-	%------------ Enriched categories Header ---------------------
-	\node[fancytitle, right=10pt] at (box.north west) {Enriched categories move this after monoidal};
-\end{tikzpicture}
+
 
 %------------ Abelian/Derived categories  ---------------
 \begin{tikzpicture}
@@ -1172,16 +1245,7 @@
 	\node[fancytitle, right=10pt] at (box.north west) {Simplical sets};
 \end{tikzpicture}
 
-%------------ 2-categories  ---------------
-\begin{tikzpicture}
-	\node [mybox] (box){%
-		\begin{minipage}{0.3\textwidth}
-			
-		\end{minipage}	
-	};
-	%------------ 2-categories Header ---------------------
-	\node[fancytitle, right=10pt] at (box.north west) {2-categories};
-\end{tikzpicture}
+
 
 %------------ Infinity groupoids  ---------------
 \begin{tikzpicture}
