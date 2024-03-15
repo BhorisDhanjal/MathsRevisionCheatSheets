@@ -8,10 +8,13 @@ Textbook references
 7. Commutative Rings - Kaplansky
 8. Category Theory - Awodey
 9. Category Theory in Context - Riehl
-10. Algebraic Topology - Hatcher
-11. Topology: A Categorical Approach - Bradley, Bryson and Terilla
+10. Categorical Homotopy Theory - Riehl
+11. Algebraic Topology - Hatcher
+12. Topology: A Categorical Approach - Bradley, Bryson and Terilla
 
-Online resources
+Online references
 1. Wolfram Mathworld
 2. nLab
 3. Stacks Project (few references from chapter 9 on Fields)
+4. n-Category Cafe (I read it so while making the sheets when I forget something I'm sure I've used it as a reference sometimes)
+5. TheCatsters (In the same vein as above)

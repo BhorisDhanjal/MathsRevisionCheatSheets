@@ -1000,6 +1000,21 @@
 	\node[fancytitle, right=10pt] at (box.north west) {Monoidal categories};
 \end{tikzpicture}
 
+%------------ Special monoidal categories ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			\begin{itemize}
+				\item Strict
+				\item Symmetric
+				\item Braided
+			\end{itemize}
+		\end{minipage}	
+	};
+	%------------ Special monoidal categories Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Special monoidal categories};
+\end{tikzpicture}
+
 %------------ Enriched categories  ---------------
 \begin{tikzpicture}
 	\node [mybox] (box){%
@@ -1053,6 +1068,17 @@
 	};
 	%------------ 2-categories Header ---------------------
 	\node[fancytitle, right=10pt] at (box.north west) {2-categories};
+\end{tikzpicture}
+
+%------------ String diagrams and Poincare duaality  ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			
+		\end{minipage}	
+	};
+	%------------ String diagrams and Poincare duaality Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {String diagrams and Poincare duaality};
 \end{tikzpicture}
 
 %------------ Topoi  ---------------
@@ -1130,26 +1156,80 @@
 	\node[fancytitle, right=10pt] at (box.north west) {Properties and examples of adjunctions};
 \end{tikzpicture}
 
-%------------ Wedges ---------------
-\begin{tikzpicture}
-	\node [mybox] (box){%
-		\begin{minipage}{0.3\textwidth}
-				
-		\end{minipage}	
-	};
-	%------------ Wedges Header ---------------------
-	\node[fancytitle, right=10pt] at (box.north west) {Wedges};
-\end{tikzpicture}
-
-%------------ Ends and Coends  ---------------
+%------------ Filtered limits ---------------
 \begin{tikzpicture}
 	\node [mybox] (box){%
 		\begin{minipage}{0.3\textwidth}
 			
 		\end{minipage}	
 	};
+	%------------ Filtered limits Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Filtered limits};
+\end{tikzpicture}
+
+%------------Ind-objects---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			
+		\end{minipage}	
+	};
+	%------------ Ind-objects Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Ind-objects};
+\end{tikzpicture}
+
+%------------ Wedges ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+				A wedge (denoted as $e\to F$) for a functor $F:\mathbf{C}^\mathrm{op}\times \mathbf{C} \to \mathbf{D}$ is an object $e\in \mathrm{Ob}(\mathbf{D})$ with morphisms $\omega_A: e \to F(A,A)$ for all $A \in \mathrm{Ob}(\mathbf{C})$ such that the following diagram commutes,
+				\[\begin{tikzcd}
+					A && e && {F(A,A)} \\
+					\\
+					B && {F(B,B)} && {F(A,B)}
+					\arrow["{\omega_A}", from=1-3, to=1-5]
+					\arrow["{F(1_A,B)}", from=1-5, to=3-5]
+					\arrow["{\omega_B}"', from=1-3, to=3-3]
+					\arrow["{F(f,1_B)}"', from=3-3, to=3-5]
+					\arrow["f", from=1-1, to=3-1]
+				\end{tikzcd}\]
+		\end{minipage}	
+	};
+	%------------ Wedges Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Wedges};
+\end{tikzpicture}
+
+%------------Extranatural transformation---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			
+		\end{minipage}	
+	};
+	%------------ Extranatural transformation Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Extranatural transformation};
+\end{tikzpicture}
+
+%------------ Ends and Coends  ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			An end is a universal wedge $E\to F$ denoted as $\int_{C \in \mathbf{C}} F(C,C)$, i.e. there is a unique map from every wedge $e \to F$ into it $e \to E \to F$. 
+		\end{minipage}	
+	};
 	%------------ Ends and coends Header ---------------------
 	\node[fancytitle, right=10pt] at (box.north west) {Ends and coends};
+\end{tikzpicture}
+
+%------------ Extranatural transformations  ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			
+		\end{minipage}	
+	};
+	%------------ Extranatural transformations Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Extranatural transformations};
 \end{tikzpicture}
 
 %------------ Nerves and realizations  ---------------
@@ -1161,6 +1241,17 @@
 	};
 	%------------ Nerves and realizations Header ---------------------
 	\node[fancytitle, right=10pt] at (box.north west) {Nerves and realizations};
+\end{tikzpicture}
+
+%------------ Filtered limits ---------------
+\begin{tikzpicture}
+	\node [mybox] (box){%
+		\begin{minipage}{0.3\textwidth}
+			
+		\end{minipage}	
+	};
+%------------ Filtered limits Header ---------------------
+	\node[fancytitle, right=10pt] at (box.north west) {Filtered limits};
 \end{tikzpicture}
 	
 %------------ Kan extensions  ---------------
