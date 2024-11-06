@@ -14,7 +14,7 @@
 \usepackage{ mathrsfs }	
 \usepackage{ dsfont }
 \usepackage{ gensymb }
-
+\usepackage{ skull }
 \usepackage[activate={true,nocompatibility},final,tracking=true,kerning=true,spacing=true,factor=1100,stretch=10,shrink=10]{microtype}
 \makeatletter
 \setlist[itemize]{noitemsep, topsep=0pt}
@@ -26,7 +26,7 @@
 \usepackage[english]{babel}
 \usepackage{lmodern}
 \usepackage{bm}
-	\definecolor{cobalt}{rgb}{0.0, 0.28, 0.67}
+\definecolor{cobalt}{rgb}{0.0, 0.28, 0.67}
 \advance\topmargin-1.2in
 \advance\textheight3in
 \advance\textwidth3in
@@ -44,1334 +44,1411 @@
 \newcommand{\F}{\mathbb{F}}
 % \colorbox[HTML]{e4e4e4}{\makebox[\textwidth-2\fboxsep][l]{texto}}
 \begin{document}
-\definecolor{orange}{RGB}{255, 115,0}
-\begin{center}{\fontsize{35}{60}{\textcolor{orange}{\textbf{Category Theory Cheat Sheet}}}}\\
-\end{center}
-\begin{multicols*}{3}
-\tikzset{every loop/.style={min distance=5mm,in=20,out=90,looseness=1}}
-\tikzstyle{mybox} = [draw=orange, fill=white, very thick,
-    rectangle, rounded corners, inner sep=10pt, inner ysep=10pt]
-\tikzstyle{fancytitle} =[fill=orange	, text=white, font=\bfseries]
-
-% ------------------------------------------------------
-% Start of Sheet
-% ------------------------------------------------------
-
-%------------ Category ---------------
-\begin{tikzpicture}
-\node [mybox] (box){%
-    \begin{minipage}{0.3\textwidth}
-	    A \textbf{category} consists of the following,
-	    \begin{itemize}
-	    	\item Objects: A,B,C,\dots
-	    	\item Arrows/Morphisms: f,g,h,\dots
-	    	\item For each $ f $ there exists, $ \mathrm{dom}(f) , \mathrm{cod}(f)$ called domain and codomain of $ f $. We write $ f: A \to B $ to indicate $ A=\mathrm{dom}(f) $ and $ B=\mathrm{cod}(f) $.
-	    	\item Given  $ f: A \to B$ and $ g: B \to C $ there exists, $ g \circ f: A \to C $ called the \textit{composite} of $ f $ and $ g $.
-	    	\item For each $ A $, there exists $ 1_A:A\to A $ called the \textit{identity arrow} of $ A $.
-	    	\item Arrows should also satisfy the following,
-	    	\begin{itemize}
-	    		\item Associativity: $ h \circ(g \circ f) = (h \circ g) \circ f,$ for all $ f:A \to B, g:B \to C, h: C \to D $.
-	    		\item Unit: $ f\circ 1_A=f=1_B\circ f, $ for all $ f:A \to B $.	
-	    	\end{itemize}
-	    \end{itemize}
-    \[\begin{tikzcd}
-    	A \arrow[loop above,"1_A"] & {} & B \arrow[loop above,"1_B"]\\
-    	&&& {} \\
-    	&& C \arrow[loop below,"1_C"] && D \arrow[loop below,"1_D"]
-    	\arrow["f", from=1-1, to=1-3]
-    	\arrow["g", from=1-3, to=3-3]
-    	\arrow["{g \circ f}"', from=1-1, to=3-3]
-    	\arrow["{h \circ g}", from=1-3, to=3-5]
-    	\arrow["h"', from=3-3, to=3-5]
-    \end{tikzcd}\]
-    \end{minipage}
-};
-%------------ Category Header ---------------------
-\node[fancytitle, right=10pt] at (box.north west) {Category};
-\end{tikzpicture}
-
-
-%------------ Functor ---------------
-\begin{tikzpicture}
-	\node [mybox] (box){%
-		\begin{minipage}{0.3\textwidth}
-		For categories $\mathbf{C}, \mathbf{D}$ we define a \textbf{functor} $ F: \mathbf{C} \to \mathbf{D} $ to be a a mapping of objects and arrows to objects and arrows, such that
-		\begin{itemize}
-			\item $ F(f:A\to B) =F(f):F(A)\to F(B)$
-			\item $ F(1_A)=1_{F(A)} $
-			\item $ F(g \circ f) = F(g)\circ F(f)$.
-		\end{itemize}
-		\end{minipage}
-	};
-%------------ Functor Header ---------------------
-	\node[fancytitle, right=10pt] at (box.north west) {Functor};
-\end{tikzpicture}
-
-%------------ Isomorphism ---------------
-\begin{tikzpicture}
-	\node [mybox] (box){%
-		\begin{minipage}{0.3\textwidth}
-			In any category $ \mathbf{C}, $ an arrow $ f:A\to B$ is called an \textbf{isomorphism} if there exists an arrow $ g:B \to A $ s.t. $ g \circ f=1_A  $ and $ f \circ g=1_B $. We say, $ g=f^{-1} $. And that $ A \cong B $, i.e., $ A $ is isomorphic to $ B $.
-		\end{minipage}
-	};
-%------------ Isomorphism Header ---------------------
-	\node[fancytitle, right=10pt] at (box.north west) {Isomorphism};
-\end{tikzpicture}
-
-%------------ Monoid ---------------
-\begin{tikzpicture}
-	\node [mybox] (box){%
-		\begin{minipage}{0.3\textwidth}
-			A set $ M $ with binary operation $ \circ $ is called a \textbf{monoid} if it is associative and has an identity 
-		\begin{itemize}
-			\item A monoid can be understood as a single element category.
-			\item $\mathrm{Hom}_\mathbf{C}(C,C)$ forms a monoid under composition.
-			\item A monoid with existence of inverses is a group.
-			\item \textit{Cayley's theorem: }Every group G is isomorphic to a group of permutations.
-		\end{itemize}
-		\end{minipage}
-	};
-%------------ Monoid Header ---------------------
-	\node[fancytitle, right=10pt] at (box.north west) {Monoid};
-\end{tikzpicture}
-
-%------------ Constructions on categories ---------------
-\begin{tikzpicture}
-	\node [mybox] (box){%
-		\begin{minipage}{0.3\textwidth}
-		\begin{itemize}
-			\item \textbf{Product category: } The product of two categories $ \mathbf{C} $ and $ \mathbf{D}$ written as $ \mathbf{C}\times \mathbf{D} $ has objects of the form $ (C,D) $ for $ C \in \mathbf{C} $ and $ D \in \mathbf{D} $, and arrows of the form $ (f,g) :(C,D)\to (C', D')$ for $ f:C \to C' \in \mathbf{C} $ and $ g:D\to D' \in \mathbf{D} $.
-			
-			Composition and units are defined componentwise.
-			
-			\item \textbf{Opposite/Dual category: }For category $ \mathbf{C} $ its opposite category $ \mathbf{C}^{\mathrm op} $ has the same objects as $ \mathbf{C} $ but an arrow $ f:C \to D $ in $ \mathbf{C}^{\mathrm op} $ is an arrow $ f: D \to C $ in $ \mathbf{C} $.
-		\end{itemize}
-		\end{minipage}
-	};
-%------------ Constructions on categories Header ---------------------
-	\node[fancytitle, right=10pt] at (box.north west) {Constructions on categories};
-\end{tikzpicture}
-
-%------------ Constructions on categories contd. ---------------
-\begin{tikzpicture}
-	\node [mybox] (box){%
-		\begin{minipage}{0.3\textwidth}
-			\begin{itemize}
-				\item \textbf{Arrow category: }For category $ \mathbf{C} $ its arrow category $ \mathbf{C}^\to $ has the arrows of $ \mathbf{C} $ as objects and an arrow $ g $ from $ f:A\to B $ to $f':A' \to B' $ in $ \mathbf{C}^\to  $ is the following commutative square	
-				\[\begin{tikzcd}
-					A & {A'} \\
-					B & {B'}
-					\arrow["{g_1}", from=1-1, to=1-2]
-					\arrow["f"', from=1-1, to=2-1]
-					\arrow["{g_2}"', from=2-1, to=2-2]
-					\arrow["{f'}", from=1-2, to=2-2]
-				\end{tikzcd}\]
-			where $ g_1,g_2 $ are arrows in $ \mathbf{C} $, i.e. an arrow is a pair of arrows $ g=(g_1,g_2) $ s.t. $ g_2 \circ f = f' \circ g_1 $. The identity of an object $ f:A \to B $ is the pair $ (1_A,1_B) $ and composition is componentwise.	
-				\item \textbf{Slice category: }For category $ \mathbf{C} $ its slice category over $ C \in \mathbf{C} $ denoted as $ \mathbf{C}/C$. it contains objects as all arrows in $\mathbf{C} $ who map to $C$. And arrows in $\mathbf{C}/C$ are arrows between the $\mathrm{dom}$ of the object arrows, i.e., $ a $ as seen below.
-				\[\begin{tikzcd}
-					X && {X'} \\
-					& C
-					\arrow["a", from=1-1, to=1-3]
-					\arrow["f"', from=1-1, to=2-2]
-					\arrow["{f'}", from=1-3, to=2-2]
-				\end{tikzcd}\]
-			\begin{itemize}
-				\item The prototypical example is that of a slice of an element in a poset category being the principal ideal.
-			\end{itemize}
-			
-			\item \textbf{Co-slice category:} Denoted as $C/ \mathbf{C}$ is the dual of a slice category with objects as arrows mapping from $C$.
-			
-			\end{itemize}
-		\end{minipage}
-	};
-%------------ Constructions on categories contd. Header ---------------------
-	\node[fancytitle, right=10pt] at (box.north west) {Constructions on categories contd.};
-\end{tikzpicture}
-
-%------------ Free monoid ---------------
-\begin{tikzpicture}
-	\node [mybox] (box){%
-		\begin{minipage}{0.3\textwidth}
-			For a set $ A $ a \textit{word} over $ A $ is any finite sequence of its elements. 
-			
-			The \textbf{Kleene closure} of $ A $ is defined to be the set of all words over $ A $ denoted as $A^*$. With the binary operation of concatenation $A^*$ forms a monoid and is called the \textbf{free monoid} on $A$.
-			
-			\textbf{Universal mapping property (UMP) of free monoid: }Let $ M(A) $ be the free monoid on a set $ A $. There is a function $ i: A\to |M(A)|, $ and given any monoid $ N $ and any function $ f:A \to |N| $, there is a unique monoid homomorphism $ \overline{f}:M(A)\to N$ s.t. $ |\overline{f}|\circ i=f $.
-			\[\begin{tikzcd}
-				{M(A)} && {|M(A)|} & {|N|} \\
-				N && A 
-				\arrow["{\overline{f}}", dashed, from=1-1, to=2-1]
-				\arrow["i", from=2-3, to=1-3]
-				\arrow["f", from=2-3, to=1-4]
-				\arrow["{|\overline{f}|}", from=1-3, to=1-4]
-			\end{tikzcd}\]
-			$ A	 * $ has the UMP of the free monoid on $ A $.
-		\end{minipage}
-	};
-%------------ Free monoid Header ---------------------
-	\node[fancytitle, right=10pt] at (box.north west) {Free monoid};
-\end{tikzpicture}
-
-%------------ Free category ---------------
-\begin{tikzpicture}
-	\node [mybox] (box){%
-		\begin{minipage}{0.3\textwidth}
-		A directed graph $ G $ ``generates'' a free category $ \mathbf{C}(G) $ whose objects are the vertices of the graph and its arrows are paths. Composition of arrows is defined as concatenation of paths.
+	\definecolor{orange}{RGB}{255, 115,0}
+	\begin{center}{\fontsize{35}{60}{\textcolor{orange}{\textbf{Basic Category Theory Cheat Sheet}}}}\\
+	\end{center}
+	\begin{multicols*}{3}
+		\tikzset{every loop/.style={min distance=5mm,in=20,out=90,looseness=1}}
+		\tikzstyle{mybox} = [draw=orange, fill=white, very thick,
+		rectangle, rounded corners, inner sep=10pt, inner ysep=10pt]
+		\tikzstyle{fancytitle} =[fill=orange	, text=white, font=\bfseries]
 		
-		\textbf{UMP of} $ \mathbf{C}(G)$ There is a graphic homomorphism $ i:G\to |\mathbf{C}(G)| ,$ and given any category $ \mathbf{D} $ and any graph homomorphism $ h: G \to |\mathbf{D}|, $ there is a unique functor $ \overline{h}:\mathbf{C}(G) \to \mathbf{D} $ with $ \overline{h} \circ i=h $.
-		\[\begin{tikzcd}
-			{\mathbf{C}(G)} && {|\mathbf{C}(G)|} & {|\mathbf{D}|} \\
-			\mathbf{D} && G
-			\arrow["{\overline{h}}", dashed, from=1-1, to=2-1]
-			\arrow["i", from=2-3, to=1-3]
-			\arrow["h", from=2-3, to=1-4]
-			\arrow["{|\overline{h}|}", from=1-3, to=1-4]
-		\end{tikzcd}\]
-		\end{minipage}
-	};
-%------------ Free category Header ---------------------
-	\node[fancytitle, right=10pt] at (box.north west) {Free category};
-\end{tikzpicture}
-
-%------------ Small categories ---------------
-\begin{tikzpicture}
-	\node [mybox] (box){%
-		\begin{minipage}{0.3\textwidth}
-			A category is called \textbf{small} if it has a small set of objects and arrows. (i.e., not classes). It is called large otherwise.
-			
-			A category $ \mathbf{C} $ is \textbf{locally small} if for all objects $ X,Y \in \mathbf{C} $, the collection $ \mathrm{Hom}_\mathbf{C}(X,Y)=\{f \in \mathbf{C}_1 \mid f: X \to Y \}$ is a small set.
-		\end{minipage}
-	};
-%------------ Small categories Header ---------------------
-	\node[fancytitle, right=10pt] at (box.north west) {Small categories};
-\end{tikzpicture}
-
-%------------ Types of morphisms ---------------
-\begin{tikzpicture}
-	\node [mybox] (box){%
-		\begin{minipage}{0.3\textwidth}
-			\textbf{Monomorphism: }In any category $ \mathbf{C} $, an arrow	$ f: A \to B  $ is called a monomorphism (monic), if for any $ g,h, :C \to A , fg=fh \implies g=h $.
-
-			\[\begin{tikzcd}
-			\arrow[r,shift right,swap,"h"] \arrow[r,shift left,"g"]	C &  
-				 A & B
-				\arrow["f", from=1-2, to=1-3]
-			\end{tikzcd}\]
-			
-			\textbf{Epimorphism: }In any category $ \mathbf{C} $, an arrow $ f: A \to B $ is called an epimorphism (epic), if for any $ i,j: B \to D $ $ if=jf\implies i=j $.
-			
-			\[\begin{tikzcd}
-				A &  \arrow[r,shift right,swap,"i"] \arrow[r,shift left,"j	"]
-				B & D
-				\arrow["f", from=1-1, to=1-2]
-			\end{tikzcd}\]
-			\begin{itemize}
-				\item We say, $ f: A\rightarrowtail B $ if $ f $ is a monomorphism and $ f: A \twoheadrightarrow B $ if $ f $ is an epimorphism.
-				\item Every isomorphism is both a monomorphism and an epimorphism. The converse need not be true.
-				\item A \textbf{split} mono (epi) is an arrow $ m : A \to B$ with a left (right) inverse $ r $. The inverse arrow $ r $ is called the \textbf{retraction}, $ m $ is called a \textit{section} of $ r $ and $ A $ is called a \textbf{retract} of $ B $.
-			\end{itemize}
-			
-
-		\end{minipage}
-	};
-%------------ Types of morphisms Header ---------------------
-	\node[fancytitle, right=10pt] at (box.north west) {Types of morphisms};
-\end{tikzpicture}
-
-%------------ Initial and terminal objects ---------------
-\begin{tikzpicture}
-	\node [mybox] (box){%
-		\begin{minipage}{0.3\textwidth}
-			An object $ 0 \in \mathbf{C} $ is \textbf{initial} if for any object $ C \in \mathbf{C} \exists!$ morphism $ 0 \to C $.\\
-			An object $ 1 \in \mathbf{C} $ is \textbf{terminal} if for any object $ C \in \mathbf{C} \exists!$ morphism $ C \to 1 $.
-			
-			Initial and terminal objects are unique up to isomorphism.
-		\end{minipage}
-	};
-%------------ Initial and terminal objects Header ---------------------
-	\node[fancytitle, right=10pt] at (box.north west) {Initial and terminal objects};
-\end{tikzpicture}
-
-%------------ Generalized elements ---------------
-\begin{tikzpicture}
-	\node [mybox] (box){%
-		\begin{minipage}{0.3\textwidth}
-			For an object $ A \in \mathbf{C} $ arbitrary arrows $ x:X\to A $ are called the \textbf{generalized elements} of $ A $ with stage of definition given by $ X $.
-		\end{minipage}
-	};
-%------------ Generalized elements Header ---------------------
-	\node[fancytitle, right=10pt] at (box.north west) {Generalized elements};
-\end{tikzpicture}
-
-%------------ Product of objects ---------------
-\begin{tikzpicture}
-	\node [mybox] (box){%
-		\begin{minipage}{0.3\textwidth}
-			In any category $ \mathbf{C} $, a product diagram for the objects $ A, B $ consists of an object $ P $ and arrows 
-			\[\begin{tikzcd}
-				A & P & B
-				\arrow["{p_1}"', from=1-2, to=1-1]
-				\arrow["{p_2}", from=1-2, to=1-3]
-			\end{tikzcd}\]
-		satisfying the following UMP. Given any diagram of the form
-		\[\begin{tikzcd}
-			A & X & B
-			\arrow["{x_1}"', from=1-2, to=1-1]
-			\arrow["{x_2}", from=1-2, to=1-3]
-		\end{tikzcd}\]
-		there exists a unique arrow $ u:X \to P $, making the following diagram commute
-		\[\begin{tikzcd}
-			& X \\
-			A & P & B
-			\arrow["{p_1}"', from=2-2, to=2-1]
-			\arrow["{p_2}", from=2-2, to=2-3]
-			\arrow["u", dashed, from=1-2, to=2-2]
-			\arrow["{x_1}"', from=1-2, to=2-1]
-			\arrow["{x_2}", from=1-2, to=2-3]
-		\end{tikzcd}\]
-	
-		The product $ P $ is unique up to isomorphism. 
-	 
-		\end{minipage}
-	};
-%------------ Product of objects Header ---------------------
-	\node[fancytitle, right=10pt] at (box.north west) {Product of objects};
-\end{tikzpicture}
-
-
-%------------ Categories with products ---------------
-\begin{tikzpicture}
-	\node [mybox] (box){%
-		\begin{minipage}{0.3\textwidth}
-			A category which has a product for every pair of objects is said to have \textbf{binary products}.
-			
-			A category is said to have \textbf{all finite products}, if it has a terminal object and all binary products.
-			
-			A category has \textbf{all small products} if every set of objects has a product.
-		\end{minipage}
-	};
-%------------ Categories with products Header ---------------------
-	\node[fancytitle, right=10pt] at (box.north west) {Categories with products};
-\end{tikzpicture}
-
-
-%------------ Covariant representable functor ---------------
-\begin{tikzpicture}
-	\node [mybox] (box){%
-		\begin{minipage}{0.3\textwidth}
-		The functor $ \mathrm{Hom}(A,-): \mathbf{C}\to \mathbf{Sets}$ is called a covariant representable functor (for some object $ A \in \mathbf{C} $).
+		% ------------------------------------------------------
+		% Start of Sheet
+		% ------------------------------------------------------
 		
-		For a category with products a covariant representable functor preserves products.
-		\end{minipage}
-	};
-%------------ Covariant representable functor Header ---------------------
-	\node[fancytitle, right=10pt] at (box.north west) {Covariant representable functor};
-\end{tikzpicture}
-
-%------------ Duality ---------------
-\begin{tikzpicture}
-	\node [mybox] (box){%
-		\begin{minipage}{0.3\textwidth}
-			If any statement about categories holds for all categories then so does the dual statement.
-		\end{minipage}
-	};
-%------------ Duality Header ---------------------
-	\node[fancytitle, right=10pt] at (box.north west) {Duality};
-\end{tikzpicture}
-
-%------------ Coproducts ---------------
-\begin{tikzpicture}
-	\node [mybox] (box){%
-		\begin{minipage}{0.3\textwidth}
-			A diagram $ A \xrightarrow{q_1}Q\xleftarrow{q_2}B $ is a coproduct of $ A $ and $ B $ if for any $ Z $ and $ A \xrightarrow{z_1}Z\xleftarrow{z_2}B $ there is a unique $ u: Q \to Z $ making the diagram commute.
-			\[\begin{tikzcd}
-				& Z \\
-				A & Q & B
-				\arrow["{z_1}", from=2-1, to=1-2]
-				\arrow["{z_2}"', from=2-3, to=1-2]
-				\arrow["{q_1}"', from=2-1, to=2-2]
-				\arrow["{q_2}", from=2-3, to=2-2]
-				\arrow["u"', dashed, from=2-2, to=1-2]
-			\end{tikzcd}\]
-		 \end{minipage}
-	};
-%------------ Coproducts Header ---------------------
-	\node[fancytitle, right=10pt] at (box.north west) {Coproducts};
-\end{tikzpicture}
-
-%------------ Equalizers ---------------
-\begin{tikzpicture}
-	\node [mybox] (box){%
-		\begin{minipage}{0.3\textwidth}
-			In some category $ \mathbf{C} $ given the following diagram
-			\[\begin{tikzcd}
-				A & B
-				\arrow["g"', shift right=2, from=1-1, to=1-2]
-				\arrow["f", shift left=2, from=1-1, to=1-2]
-			\end{tikzcd}\]
-			We say an \textbf{equalizer} of $ f,g $ consists of an object $ E $ and an arrow $ e:E \to A $ universal such that \[ f \circ e = g \circ e \]
-			i.e., for any $ z:Z\to A $ with $ f \circ z= g \circ z $, there exists a unique $ u:Z \to E $ with $ e \circ u=z $
-			\[\begin{tikzcd}
-				E & A & B \\
-				Z
-				\arrow["g"', shift right=2, from=1-2, to=1-3]
-				\arrow["f", shift left=2, from=1-2, to=1-3]
-				\arrow["e", from=1-1, to=1-2]
-				\arrow["u", dashed, from=2-1, to=1-1]
-				\arrow["z", from=2-1, to=1-2]
-			\end{tikzcd}\]
-		\begin{itemize}
-			\item Equalizers are monic.
-			\item It is analogous to the notion of a kernel.
-		\end{itemize}
-		\end{minipage}
-	};
-%------------ Equalizers Header ---------------------
-	\node[fancytitle, right=10pt] at (box.north west) {Equalizers};
-\end{tikzpicture}
-
-%------------ Coequalizers ---------------
-\begin{tikzpicture}
-	\node [mybox] (box){%
-		\begin{minipage}{0.3\textwidth}
-				In some category $ \mathbf{C} $ given the following diagram
-			\[\begin{tikzcd}
-				A & B
-				\arrow["g"', shift right=2, from=1-1, to=1-2]
-				\arrow["f", shift left=2, from=1-1, to=1-2]
-			\end{tikzcd}\]
-			We say a \textbf{coequalizer} of $ f,g $ consists of an object $ Q $ and an arrow $ q:B \to Q $ universal such that \[ q \circ f = q \circ g \]
-			i.e., for any $ z:B\to Z $ with $ z \circ f= z \circ g $, there exists a unique $ u:Q \to Z $ with $ u \circ q=z $
-			\[\begin{tikzcd}
-				A & B & Q \\
-				&& Z
-				\arrow["g"', shift right=2, from=1-1, to=1-2]
-				\arrow["f", shift left=2, from=1-1, to=1-2]
-				\arrow["q", from=1-2, to=1-3]
-				\arrow["z"', from=1-2, to=2-3]
-				\arrow["u", dashed, from=1-3, to=2-3]
-			\end{tikzcd}\]
-		\begin{itemize}
-			\item Coequalizers are epic.
-			\item It is analogous to the notion of a quotient.
-		\end{itemize}
-		\end{minipage}
-	};
-%------------ Coequalizers Header ---------------------
-	\node[fancytitle, right=10pt] at (box.north west) {Coequalizers};
-\end{tikzpicture}
-
-%------------ Groups in a category ---------------
-\begin{tikzpicture}
-	\node [mybox] (box){%
-		\begin{minipage}{0.3\textwidth}
-			 A group ($ \mathrm{Group}(\mathbf{C}) $) can be defined over a category $ \mathbf{C} $.
-			\[\begin{tikzcd}
-				{G\times G} & G & G \\
-				& 1
-				\arrow["m", from=1-1, to=1-2]
-				\arrow["i"', from=1-3, to=1-2]
-				\arrow["u", from=2-2, to=1-2]
-			\end{tikzcd}\]
-		Where the arrows obey the following,
-		$ m $ is associative, $ u $ is a unit, and $ i $ is an inverse for $ m $, i.e. the following diagrams commute
-			\[\begin{tikzcd}
-				{(G \times G) \times G} && {G \times (G \times G)} && G & {G \times G} \\
-				{G \times G} && {G \times G} && {G\times G} & G \\
-				& G \\
-				{G \times G} & G & {G \times G} \\
-				{G \times G} & G & {G \times G}
-				\arrow["m"', from=2-1, to=3-2]
-				\arrow["m", from=2-3, to=3-2]
-				\arrow["{m \times 1}"', from=1-1, to=2-1]
-				\arrow["{1 \times m}", from=1-3, to=2-3]
-				\arrow["\cong", from=1-1, to=1-3]
-				\arrow["m"', from=2-5, to=2-6]
-				\arrow["{1_G}"', from=1-5, to=2-6]
-				\arrow["m", from=1-6, to=2-6]
-				\arrow["{\langle 1_G, u \rangle}"', from=1-5, to=2-5]
-				\arrow["{\langle u, 1_G \rangle}", from=1-5, to=1-6]
-				\arrow["{\langle 1_G, 1_G \rangle}"', from=4-2, to=4-1]
-				\arrow["{\langle 1_G, 1_G \rangle}", from=4-2, to=4-3]
-				\arrow["{1_G \times i}"', from=4-1, to=5-1]
-				\arrow["u"', from=4-2, to=5-2]
-				\arrow["{i \times 1_G}", from=4-3, to=5-3]
-				\arrow["m"', from=5-1, to=5-2]
-				\arrow["m", from=5-3, to=5-2]
-			\end{tikzcd}\]
-		\begin{itemize}
-		\item A homomorphism $ h:G \to H $ of groups in a category $ \mathbf{C} $ is an arrow such that, $ h $ preserves $ m,u,i $, i.e. the following diagrams commmute.
-		\[\begin{tikzcd}
-			{G \times G} & {H \times H} && G & H && G & H \\
-			G & H && 1 &&& G & H
-			\arrow["{h \times h}", from=1-1, to=1-2]
-			\arrow["m"', from=1-1, to=2-1]
-			\arrow["m", from=1-2, to=2-2]
-			\arrow["h"', from=2-1, to=2-2]
-			\arrow["u", from=2-4, to=1-4]
-			\arrow["h", from=1-4, to=1-5]
-			\arrow["u"', from=2-4, to=1-5]
-			\arrow["h", from=1-7, to=1-8]
-			\arrow["i", from=1-8, to=2-8]
-			\arrow["i"', from=1-7, to=2-7]
-			\arrow["h"', from=2-7, to=2-8]
-		\end{tikzcd}\]
-		\item The objects in the category of groups (i.e. $ \mathrm{Group}(\mathbf{Grp}) $) are abelian groups.
-		\end{itemize}
-		\end{minipage}
-	};
-%------------ Groups in a category Header ---------------------
-	\node[fancytitle, right=10pt] at (box.north west) {Groups in a category};
-\end{tikzpicture}
-
-%------------ Congruence ---------------
-\begin{tikzpicture}
-	\node [mybox] (box){%
-		\begin{minipage}{0.3\textwidth}
-			A \textbf{congruence} on a category is a equivalance relation on arrows ($ f \sim g $) s.t.
-			\begin{itemize}
-				\item $ f \sim g \implies \mathrm{dom}(f)=\mathrm{dom}(f)$ and $ \mathrm{cod}(f)=\mathrm{cod}(g) $.
-				\item $ f \sim g \implies bfa \sim bga $
-			\end{itemize}
-		Let $ C_0, C_1 $ denote the class of objects and arrows for a category $ \mathbf{C} $. Then a \textbf{congruence category} $ \mathbf{C}^\sim  $ is defined as follows,
-		\begin{itemize}
-			\item $ (\mathbf{C}^\sim)_0=\mathbf{C}_0 $
-			\item $ (\mathbf{C}^\sim)_1=\{\langle f,g \rangle| f \sim g\} $
-			\item $ \tilde{1}_C=\langle 1_C, 1_C \rangle $
-			\item $ \langle f', g' \rangle \circ \langle f,g \rangle = \langle f'f, g'g \rangle  $
-		\end{itemize}
-		\[\begin{tikzcd}
-			{\mathbf{C}^\sim} & {\mathbf{C}}
-			\arrow["{p_1}", shift left=2, from=1-1, to=1-2]
-			\arrow["{p_2}"', shift right=2, from=1-1, to=1-2]
-		\end{tikzcd}\]
-		We define the \textbf{quotient category} of the congruence as the coequalizer, i.e,
-		\[\begin{tikzcd}
-			{\mathbf{C}^\sim} & {\mathbf{C}} & {\mathbf{C}/\sim}
-			\arrow["{p_1}", shift left=2, from=1-1, to=1-2]
-			\arrow["{p_2}"', shift right=2, from=1-1, to=1-2]
-			\arrow["\pi", from=1-2, to=1-3]
-		\end{tikzcd}\]
-		\end{minipage}
-	};
-%------------ Congruence Header ---------------------
-	\node[fancytitle, right=10pt] at (box.north west) {Congruence};
-\end{tikzpicture}
-
-%------------ Finitely presented category ---------------
-\begin{tikzpicture}
-	\node [mybox] (box){%
-		\begin{minipage}{0.3\textwidth}
-			Consider the free category $ \mathbf{C} (G)$ on a finite graph $ G $. And the finite set of relations $ \sum  $ to be relations of the form $ (g_1\circ \dots \circ g_n)= (g_1'\circ \dots \circ g_m') $ for $ g_i \in G $ and $ \mathrm{dom}(g_n)=\mathrm{dom}(g_m') $ and $ \mathrm{cod}(g_1) =\mathrm{cod}(g_1')$. Let $ \sim_\Sigma  $ be the smallest congruence $ g \sim g' $ if $ g=g' \in \sum  $. We call the quotient by this congruence to be a \textbf{fintely presented category}.
-		\end{minipage}
-	};
-%------------ Finitely presented category Header ---------------------
-	\node[fancytitle, right=10pt] at (box.north west) {Finitely presented category};
-\end{tikzpicture}
-
-
-%------------ Subobjects ---------------
-\begin{tikzpicture}
-	\node [mybox] (box){%
-		\begin{minipage}{0.3\textwidth}
-			A \textbf{subobject} for some $X \in \mathbf{C}$ is a monomorphism into $X$.
-			\begin{itemize}
-				\item Arrows between subobjects of the same $X$ are arrows in the slice category of $X$. So collection of subobjects form a category with a preorder (with inclusion) we call $\mathrm{Sub}_\mathbf{C}(X)$
-
-			\end{itemize}
-		\end{minipage}
-	};
-%------------ Subobjects Header ---------------------
-	\node[fancytitle, right=10pt] at (box.north west) {Subobjects};
-\end{tikzpicture}
-
-%------------ Pullback ---------------
-\begin{tikzpicture}
-	\node [mybox] (box){%
-		\begin{minipage}{0.3\textwidth}
-		In a category $\mathbf{C}$ a \textbf{pullback} of arrows $f,g$ with the same image
-		\[\begin{tikzcd}
-			& B \\
-			A & C
-			\arrow["g", from=1-2, to=2-2]
-			\arrow["f"', from=2-1, to=2-2]
-		\end{tikzcd}\]\\
-		is the pair of universal arrows $p_1, p_2$ such that $fp_1=gp_2$ (i.e. $u$ unique below)	 
-		\[\begin{tikzcd}
-			Z \\
-			& P & B \\
-			& A & C
-			\arrow["{p_2}"', from=2-2, to=2-3]
-			\arrow["{p_1}", from=2-2, to=3-2]
-			\arrow["g", from=2-3, to=3-3]
-			\arrow["f"', from=3-2, to=3-3]
-			\arrow["{z_1}"', from=1-1, to=3-2]
-			\arrow["{z_2}", from=1-1, to=2-3]
-			\arrow["u"{description}, dashed, from=1-1, to=2-2]
-		\end{tikzcd}\]
-		\begin{itemize}
-			\item $P$ is often denoted as $A\times_C B$. Rephrased in terms of products the pullback can be considered as a subobject of $A\times B$ determined as the equalizer of projection maps composed with $f,g$. Every category with products and equalizers has pullbacks defined like this and vice versa.
-			\item For two pullback squares side by side sharing a morphism the larger rectangle forms a pullback square too.
-			\item The pullback of a commutative triangle is also a commutative triangle by the above point.
-			\item Pullbacks define a functor between slice categories, for fixed $f: A \to B $ $f^*: \mathbf{C}/B \to \mathbf{C}/A$ defined as $ (D\xrightarrow{\alpha}B) \mapsto (A\times_B D \xrightarrow{\alpha^*} A) $ is functorial.
-			\item This pullback functor makes the following diagram commute,
-			\[\begin{tikzcd}
-				{\mathrm{Sub}(A)} && {\mathrm{Sub}(B)} \\
-				\\
-				{\mathbf{C}/A} && {\mathbf{C}/B}
-				\arrow[from=1-3, to=3-3]
-				\arrow["{f^*}", from=3-3, to=3-1]
-				\arrow["{f^{-1}}"', from=1-3, to=1-1]
-				\arrow[from=1-1, to=3-1]
-			\end{tikzcd}\]
-			where $f^{-1}$ is the restriction of $f^*$.
-			\item A category with pullbacks and terminal objects $\iff $ it has finite products and equalizers
-		\end{itemize}
-	
-		\end{minipage}
-	};
-%------------ Pullback Header ---------------------
-	\node[fancytitle, right=10pt] at (box.north west) {Pullback};
-\end{tikzpicture}
-
-%------------ Diagram ---------------
-\begin{tikzpicture}
-	\node [mybox] (box){%
-		\begin{minipage}{0.3\textwidth}
-			For categories $\mathbf{J}, \mathbf{C}$ a \textbf{diagram} of type $\mathbf{J}$ in $\mathbf{C}$ is a functor $D: \mathbf{J} \to \mathbf{C}$ where $\mathbf J$ admits an indexing. This is a formalization of the notion of `diagram' we use intuitively. It can be thought of as the image of $\mathbf J$ in $\mathbf C$, the actual stucture of $\mathbf J$ is largely irrelevant.
-			
-			For example,
-			\[\begin{tikzcd}
-				& {\mathbf{J}} &&& {\text{Diagram}} \\
-				\bullet && \bullet & {D_1} && {D_2}
-				\arrow["f", shift left=2, from=2-1, to=2-3]
-				\arrow["g"', shift right=2, from=2-1, to=2-3]
-				\arrow["{D_f}", shift left=2, from=2-4, to=2-6]
-				\arrow["{D_g}"', shift right=2, from=2-4, to=2-6]
-			\end{tikzcd}\]
-
-		\end{minipage}
-	};
-	%------------ Diagram Header ---------------------
-	\node[fancytitle, right=10pt] at (box.north west) {Diagram};
-\end{tikzpicture}
-
-%------------ Cones ---------------
-\begin{tikzpicture}
-	\node [mybox] (box){%
-		\begin{minipage}{0.3\textwidth}
-			Given $\mathbf{J}, \mathbf{C}$ and a diagram of type $\mathbf{J}$ in $\mathbf{C}$, $D: \mathbf{J} \to \mathbf{C}$ we define a \textbf{cone} to the diagram $D$ for an object (vertex) $C$ of $\mathbf{C}$ and family of arrows $c_j:C \to D_j$ for all $j \in \mathbf{J}$ such for $\alpha: i \to j$ the following commute,
-			\[\begin{tikzcd}
-				& C \\
-				{D_i} && {D_j}
-				\arrow["{c_i}"', from=1-2, to=2-1]
-				\arrow["{c_j}", from=1-2, to=2-3]
-				\arrow["{D_\alpha}"', from=2-1, to=2-3]
-			\end{tikzcd}\]
-			Furthermore we can have a morphism between cones in the natural way $\vartheta: (C, c_j) \to (C', c_j')$ making every such triangle commute,
-			\[\begin{tikzcd}
-				C & {C'} \\
-				& {D_j}
-				\arrow["\vartheta", from=1-1, to=1-2]
-				\arrow["{c_j'}", from=1-2, to=2-2]
-				\arrow["{c_j}"', from=1-1, to=2-2]
-			\end{tikzcd}\]
-			This lets us define a category of cones into $D$ denoted as $\mathbf{Cone}(D)$. Its dual is called a cocone.
-		\end{minipage}
-	};
-	%------------ Cones Header ---------------------
-	\node[fancytitle, right=10pt] at (box.north west) {Cone};
-\end{tikzpicture}
-
-%------------ Comma category ---------------
-\begin{tikzpicture}
-	\node [mybox] (box){%
-		\begin{minipage}{0.3\textwidth}
-		We define the \textbf{comma category} ($S \downarrow T$) categories $\mathbf{A, B, C}$ which are related as $\mathbf{A} \xrightarrow{S} \mathbf{C} \xleftarrow{T} \mathbf{B}$.
+		%------------ Category ---------------
+		\begin{tikzpicture}
+			\node [mybox] (box){%
+				\begin{minipage}{0.3\textwidth}
+					A \textbf{category} $\mathbf{C}$ consists of the following data,
+					\begin{itemize}
+						\item $\mathrm{Ob}(\mathbf{C})$ collection of Objects: $A,B,C, \dots$ 
+						\item $\mathrm{Mor}(\mathbf{C})$ collection of Arrows/Morphisms: $f,g,h, \dots$
+						\item For each $ f $ there exists, $ \mathrm{dom}(f) , \mathrm{cod}(f)$ called domain and codomain of $ f $. We write $ f: A \to B $ to indicate $ A=\mathrm{dom}(f) $ and $ B=\mathrm{cod}(f) $.
+						\item Given  $ f: A \to B$ and $ g: B \to C $ there exists, $ g \circ f: A \to C $ called the \textit{composite} of $ f $ and $ g $.
+						\item For each $ A $, there exists $ 1_A:A\to A $ called the \textit{identity arrow} of $ A $.
+						\item Arrows should also satisfy the following,
+						\begin{itemize}
+							\item Associativity: $ h \circ(g \circ f) = (h \circ g) \circ f,$ for all $ f:A \to B, g:B \to C, h: C \to D $.
+							\item Unit: $ f\circ 1_A=f=1_B\circ f, $ for all $ f:A \to B $.	
+						\end{itemize}
+					\end{itemize}
+					\[\begin{tikzcd}
+						A \arrow[loop above,"1_A"] & {} & B \arrow[loop above,"1_B"]\\
+						&&& {} \\
+						&& C \arrow[loop below,"1_C"] && D \arrow[loop below,"1_D"]
+						\arrow["f", from=1-1, to=1-3]
+						\arrow["g", from=1-3, to=3-3]
+						\arrow["{g \circ f}"', from=1-1, to=3-3]
+						\arrow["{h \circ g}", from=1-3, to=3-5]
+						\arrow["h"', from=3-3, to=3-5]
+					\end{tikzcd}\]
+				\end{minipage}
+			};
+			%------------ Category Header ---------------------
+			\node[fancytitle, right=10pt] at (box.north west) {Category};
+		\end{tikzpicture}
 		
-		With objects as $3-$tuples $(A,B,h), A\in \mathbf{A}, B \in \mathbf{B}, (h:S(A)\to T(B)) \in \mathbf{C}$ and arrows between them defined naturally as follows, all $(f,g)$ for $f:A \to A', g: B \to B'$ such that the following commutes,
-		\[\begin{tikzcd}
-			{S(A)} && {S(A')} \\
-			\\
-			{T(B)} && {T(B')}
-			\arrow["{S(f)}", from=1-1, to=1-3]
-			\arrow["{h'}", from=1-3, to=3-3]
-			\arrow["h"', from=1-1, to=3-1]
-			\arrow["{T(g)}"', from=3-1, to=3-3]
-		\end{tikzcd}\]
 		
-		A cone can alternatively be understood as a comma category $(\Delta \downarrow D)$, for the diagram $D$ as a functor from $\Delta: C \to \mathrm{Fun}(\mathbf{J}, \mathbf{C}) $ sometimes denoted as $C^J$. $\mathrm{Fun}(\mathbf{J},\mathbf{C})$ is the functor category which is defined later.
+		%------------ Functor ---------------
+		\begin{tikzpicture}
+			\node [mybox] (box){%
+				\begin{minipage}{0.3\textwidth}
+					For categories $\mathbf{C}, \mathbf{D}$ we define a \textbf{functor} $ F: \mathbf{C} \to \mathbf{D} $ to be a a mapping of objects and arrows to objects and arrows, such that
+					\begin{itemize}
+						\item $ F(f:A\to B) =F(f):F(A)\to F(B)$
+						\item $ F(1_A)=1_{F(A)} $
+						\item $ F(g \circ f) = F(g)\circ F(f)$.
+					\end{itemize}
+				\end{minipage}
+			};
+			%------------ Functor Header ---------------------
+			\node[fancytitle, right=10pt] at (box.north west) {Functor};
+		\end{tikzpicture}
 		
-		Defined as sending $\Delta(C):\mathbf{J} \to \mathbf{C}$ which just maps $C $ to $C$. This functor is usually called the \textbf{diagonal functor}.
 		
-		\begin{itemize}
-			\item (Co)slice categories are a special case of comma categories.
-		\end{itemize}
-		\end{minipage}
-	};
-	%------------ Comma category Header ---------------------
-	\node[fancytitle, right=10pt] at (box.north west) {Comma category};
-\end{tikzpicture}
-
-
-%------------ Limit ---------------
-\begin{tikzpicture}
-	\node [mybox] (box){%
-		\begin{minipage}{0.3\textwidth}
-			Given a diagram $D: \mathbf{J} \to \mathbf{C}$ its \textbf{limit} is a terminal object in $\mathbf{Cone}(D)$, denoted as $p_i: \lim_{\leftarrow_j}D_j \to D_i$.
-			
-			If $\mathbf{J}$ is finite the limit is called a finite limit.	
-			
-			\begin{itemize}
-				\item A category has finite limits $\iff $ it has finite products and equalizers (and so pullbacks and terminal objects.)
-			\end{itemize}
-			
-			A functor $F$ is said to \textbf{preserve limits} of type $J$ if $F(\lim_{\leftarrow} D_j) \cong \lim_\leftarrow F(D_j)$. Such a functor is called continuous.
-			
-			\begin{itemize}
-				\item Representable functors in locally small categories are continuous.
-					\item Colimts are the dual notion of limits, e.g. direct limit of groups.
-			\end{itemize}
-		\end{minipage}
-	};
-	%------------ Limit Header ---------------------
-	\node[fancytitle, right=10pt] at (box.north west) {Limit};
-\end{tikzpicture}
-
-
-%------------ Exponentials ---------------
-\begin{tikzpicture}
-	\node [mybox] (box){%
-		\begin{minipage}{0.3\textwidth}
-			For a category $\mathbf C$ with binary products there exists an exponential of objects $B, C$ which consists of an object $B^C$ and an arrow $\epsilon : C^B \times B \to C$ universal as seen below,
-			\[\begin{tikzcd}
-				{C^B} && {C^B \times B} && C \\
-				\\
-				Z && {Z \times B}
-				\arrow["{\tilde{f}}", dashed, from=3-1, to=1-1]
-				\arrow["{\tilde{f}\times1_B}", from=3-3, to=1-3]
-				\arrow["\epsilon", from=1-3, to=1-5]
-				\arrow["f"', from=3-3, to=1-5]
-			\end{tikzcd}\]
-		\end{minipage}
-	};
-	%------------ Exponentials Header ---------------------
-	\node[fancytitle, right=10pt] at (box.north west) {Exponentials};
-\end{tikzpicture}
-
-%------------ Cartesian closed categories ---------------
-\begin{tikzpicture}
-	\node [mybox] (box){%
-		\begin{minipage}{0.3\textwidth}
-			A category is \textbf{cartesian closed} if it has finite products and exponentials.
-			
-			\begin{itemize}
-				\item Exponentiation is functorial in a cartesian closed category.
-			\end{itemize}
-		\end{minipage}
-	};
-	%------------ Cartesian closed categories Header ---------------------
-	\node[fancytitle, right=10pt] at (box.north west) {Cartesian closed categories};
-\end{tikzpicture}
-
-%------------ Heyting algebra ---------------
-\begin{tikzpicture}
-	\node [mybox] (box){%
-		\begin{minipage}{0.3\textwidth}
-			A Heyting algebra is a poset with finite meets, joins, least and greatest element (0 and 1) and exponentials defined as implications, $a \wedge b  \leq c$ iff $a \leq b \implies c$.
-			\begin{itemize}
-				\item A Heyting algebra is a distributive lattice. But only complete distributive lattices form Heyting algebras.
-				\item Every boolean algebra is a Heyting algebra with implication defined classically $p \implies q $ iff $\neg p \vee q$.
-				\item Heyting algebras form an algebraic analogue for intuitionistic propositional calculi as every IPC gives rise to an associated Heyting algebra where formulae are identified by syntactic equivalence. In particular this gives a correspondence between Heyting algebras and IPC.
-			\end{itemize}
-		\end{minipage}
-	};
-	%------------ Heyting algebra Header ---------------------
-	\node[fancytitle, right=10pt] at (box.north west) {Heyting algebra};
-\end{tikzpicture}
-
-%------------ Lambda Calculus ---------------
-\begin{tikzpicture}
-	\node [mybox] (box){%
-		\begin{minipage}{0.3\textwidth}
-			$\lambda-$calculus is a formal system relying on two symbols $\lambda $ and a dot $``."$. 
-			
-			There exists a correspondence between typed $\lambda-$ calculus and Cartesian closed categories. With the objects in the associated category being types and arrows defined as equivalence classes of terms of a type identified when equal.
- 
-		\end{minipage}	
-	};
-	%------------ Lambda Calculus Header ---------------------
-	\node[fancytitle, right=10pt] at (box.north west) {$\lambda-$calculus};
-\end{tikzpicture}
-
-
-%------------ Full and faithful functors ---------------
-\begin{tikzpicture}
-	\node [mybox] (box){%
-		\begin{minipage}{0.3\textwidth}
-			A functor $F: \mathbf{C} \to \mathbf{D} $ induces a map in locally small categories 
-			
-			$F_{A,B}=\mathrm{Hom}_\mathbf{C}(A,B) \to \mathrm{Hom}_\mathbf{D}(F(A),F(B))$. 
-			
-			The functor $F$ is said to be \textbf{faithful} if $F_{A,B}$ is injective for all pairs of objects and \textbf{full} if it is surjective.
-			
-			Note that this is not the same as the functor being injective/surjective on objects/arrows.
-			
-			\begin{itemize}
-				\item Covariant and contravariant representable functors are faithful.
-			\end{itemize}
-		\end{minipage}	
-	};
-	%------------ Full and faithful functors Header ---------------------
-	\node[fancytitle, right=10pt] at (box.north west) {Full and faithful functors};
-\end{tikzpicture}
-
-%------------ Natural transformations and naturality ---------------
-\begin{tikzpicture}
-	\node [mybox] (box){%
-		\begin{minipage}{0.3\textwidth}
-			A \textbf{natural transformation} is a map between functors.
-			
-			 For functors $F,G: \mathbf{C} \to \mathbf{D}$ a natural transformation $\eta: F \to G$ is a family of morphisms (in $\mathbf{D}$) which consist of \textbf{components} $\eta_X	$ which associates for every object $C \in \mathbf{C} $ a morphism between objects in $\mathbf{D}$, $\eta_C:F(C)\to G(C)$. Also components must commute naturally, in particular for $f: C \to C' $ we have $\eta_{C'} \circ F(f)=G(f)\circ\eta_C$, i.e. below diagram commutes,
-			 \[\begin{tikzcd}
-			 	C && {F(C)} && {G(C)} \\
-			 	\\
-			 	{C'} && {F(C')} && {G(C')}
-			 	\arrow["{\eta_C}", from=1-3, to=1-5]
-			 	\arrow["{\eta_{C'}}", from=3-3, to=3-5]
-			 	\arrow["{F(f)}"', from=1-3, to=3-3]
-			 	\arrow["{G(f)}", from=1-5, to=3-5]
-			 	\arrow["f"', from=1-1, to=3-1]
-			 \end{tikzcd}\]
-			 
-	
-		\end{minipage}	
-	};
-	%------------ Natural transformations Header ---------------------
-	\node[fancytitle, right=10pt] at (box.north west) {Natural transformations};
-\end{tikzpicture}
-
-%------------ Functor categories and exponentials ---------------
-\begin{tikzpicture}
-	\node [mybox] (box){%
-		\begin{minipage}{0.3\textwidth}
-		For two categories $\mathbf{C}, \mathbf{D}$ we can define the \textbf{functor category} as the category whose objects are functors between $\mathbf{C}$ and $\mathbf{D}$ and morphisms are natural transformations. It is denoted as $\mathrm{Fun}(\mathbf{C,D})$
 		
-		In $\mathbf{Cat}$ (Category of small categories) the functor category between two categories defines its exponential. Therefore, $\mathbf{Cat}$ is Cartesian closed.
+		%------------ Isomorphism ---------------
+		\begin{tikzpicture}
+			\node [mybox] (box){%
+				\begin{minipage}{0.3\textwidth}
+					In any category $ \mathbf{C}, $ an arrow $ f:A\to B$ is called an \textbf{isomorphism} if there exists an arrow $ g:B \to A $ s.t. $ g \circ f=1_A  $ and $ f \circ g=1_B $. We say, $ g=f^{-1} $. And that $ A \cong B $, i.e., $ A $ is isomorphic to $ B $.
+				\end{minipage}
+			};
+			%------------ Isomorphism Header ---------------------
+			\node[fancytitle, right=10pt] at (box.north west) {Isomorphism};
+		\end{tikzpicture}
 		
-		\begin{itemize}
-			\item A \textbf{natural isomorphism} is a natural transformation which is an isomorphism in the functor category
-		\end{itemize}
+		%------------ Monoid ---------------
+		\begin{tikzpicture}
+			\node [mybox] (box){%
+				\begin{minipage}{0.3\textwidth}
+					A set $ M $ with binary operation $ \circ $ is called a \textbf{monoid} if it is associative and has an identity 
+					\begin{itemize}
+						\item A monoid can be understood as a single element category.
+						\item $\mathrm{Hom}_\mathbf{C}(C,C)$ forms a monoid under composition.
+						\item A monoid with existence of inverses is a group. i.e. a group is a single element category with all morphisms invertible
+						\item Similarly a groupoid is a category with all arrows invertible (not necessarily just one element)
+						%			\item \textit{Cayley's theorem: }Every group G is isomorphic to a group of permutations.
+					\end{itemize}
+				\end{minipage}
+			};
+			%------------ Monoid Header ---------------------
+			\node[fancytitle, right=10pt] at (box.north west) {Monoid};
+		\end{tikzpicture}
 		
-	
-		\end{minipage}	
-	};
-	%------------ Functor categories and exponentials Header ---------------------
-	\node[fancytitle, right=10pt] at (box.north west) {Functor categories and exponentials};
-\end{tikzpicture}
-
-
-%------------ Bifunctors and profunctors ---------------
-\begin{tikzpicture}
-	\node [mybox] (box){%
-		\begin{minipage}{0.3\textwidth}
-			A \textbf{bifunctor} is any functor of two variables i.e. domain in terms of a product category.
-			
-			A mapping $F: \mathbf{A} \times \mathbf{B} \to \mathbf{C}$ is a bifunctor if its functorial in each component and the following square commutes,
-			\[\begin{tikzcd}
-				{A'} & {B'} && {F(A,B)} && {F(A,B')} \\
-				\\
-				A & B && {F(A',B)} && {F(A',B')}
-				\arrow["{F(A,g)}", from=1-4, to=1-6]
-				\arrow["{F(A',g)}"', from=3-4, to=3-6]
-				\arrow["{F(f,B')}", from=1-6, to=3-6]
-				\arrow["{F(f,B)}"', from=1-4, to=3-4]
-				\arrow["g"{description}, from=3-2, to=1-2]
-				\arrow["f"{description}, from=3-1, to=1-1]
-			\end{tikzcd}\]
-			
-			A bifunctor is called a \textbf{profunctor} if its of the form $\mathbf{B}^{\mathrm{op}}\times \mathbf{C} \to \mathbf{Set}$ like Hom/Internal hom.
-		\end{minipage}	
-	};
-	%------------ Bifunctors and profunctors Header ---------------------
-	\node[fancytitle, right=10pt] at (box.north west) {Bifunctors and profunctors};
-\end{tikzpicture}
-
-%------------ Equivalence of categories  ---------------
-\begin{tikzpicture}
-	\node [mybox] (box){%
-		\begin{minipage}{0.3\textwidth}
-			For categories $\mathbf{C},\mathbf{D}$ they is said to be an equivalence between them if there exist functors $E:\mathbf{C}\rightleftarrows \mathbf{D}:F$ and a pair of natural \textit{isomorphisms} $\alpha: 1_\mathbf{C} \to F \circ E$ and $\beta: 1_\mathbf{D} \to E \circ F$. 
-			
-			This is a weaker condition than isomorphism.
-			
-			$F:\mathbf{C} \to \mathbf{D}$ is a part of an equivalence of categories if it is full and faithful and for all $D \in \mathbf{D}$ there exists $C \in \mathbf{C}, F(C)\cong D$
-		\end{minipage}	
-	};
-	%------------ Equivalence of categories Header ---------------------
-	\node[fancytitle, right=10pt] at (box.north west) {Equivalence of categories};
-\end{tikzpicture}
-
-%------------ Yoneda embedding  ---------------
-\begin{tikzpicture}
-	\node [mybox] (box){%
-		\begin{minipage}{0.3\textwidth}
-			The \textbf{Yoneda embedding} is a functor $y:\mathbf{C}\to \mathbf{Sets}^{\mathbf{C}^\text{Op}}$ mapping objects to their contravariant representable functor (i.e. presheaves). In particular $y(C)=\textrm{Hom}_\mathbf{C}(-,C)$ it takes arrows to the natural transformation $yf=\mathrm{Hom}_\mathbf{C}(-,f):\mathrm{Hom}_\mathbf{C}(-,C) \to \mathrm{Hom}_\mathbf{C}(-,D)$
-		\end{minipage}	
-	};
-%------------ Yoneda embedding Header ---------------------
-	\node[fancytitle, right=10pt] at (box.north west) {Yoneda embedding};
-\end{tikzpicture}
-
-%------------ Yoneda lemma  ---------------
-\begin{tikzpicture}
-	\node [mybox] (box){%
-		\begin{minipage}{0.3\textwidth}
-			For a locally small category $\mathbf{C}$ we have $\textrm{Hom}(yC,F) \cong FC$ for $C \in \mathbf{C}$ and a functor $F \in \mathbf{Sets}^{\mathbf{C}^{op}}$. The isomorphism is natural in both $C$ and $F$.
-		\end{minipage}	
-	};
-%------------ Yoneda lemma Header ---------------------
-	\node[fancytitle, right=10pt] at (box.north west) {Yoneda lemma};
-\end{tikzpicture}
-
-%------------ Applications of yoneda lemma  ---------------
-\begin{tikzpicture}
-	\node [mybox] (box){%
-		\begin{minipage}{0.3\textwidth}
-			For locally small categories
-			\begin{itemize}
-				\item The Yoneda embedding $y: \mathbf{C} \to \mathbf{Sets}^{\mathbf{C}^\mathbf{op}}$ is full and faithful.
-				\item $yC \cong yC' \implies C \cong C'$ for objects $C,C'$
-				\item All objects in presheaves are colimits of some representable functors (in particular the end). 
-				\item So Yoneda embedding is the free cocompletion of any category. In particular there is a UMP for maps from $\mathbf{C}$ to any cocomplete categories factoring through presheaves wrt Yoneda embedding
-			\end{itemize}	
-		\end{minipage}	
-	};
-	%------------ Applications of yoneda lemma Header ---------------------
-	\node[fancytitle, right=10pt] at (box.north west) {Applications of Yoneda lemma};
-\end{tikzpicture}
-
-%------------ Category of presheaves  ---------------
-\begin{tikzpicture}
-	\node [mybox] (box){%
-		\begin{minipage}{0.3\textwidth}
-			For locally small category $\mathbf{C}$ its category of presheaves denoted as $\mathbf{Sets}^{\mathbf{C}^{op}} $ or $[\mathbf{C}^{\mathrm{op}}, \mathbf{Sets}]$ or $\hat{\mathbf{C}}$ is complete, cocomplete and is cartesian closed. Due to these properties its often useful to examine the presheaves of a category.
-			
-			We also have that the Yoneda embedding preserves products, exponentials and is continuous (preserves limits).
-		\end{minipage}	
-	};
-	%------------Category of presheaves Header ---------------------
-	\node[fancytitle, right=10pt] at (box.north west) {Category of presheaves};
-\end{tikzpicture}
-
-%------------ Monoidal categories  ---------------
-\begin{tikzpicture}
-	\node [mybox] (box){%
-		\begin{minipage}{0.3\textwidth}
-				A monoidal category is a category $\mathbf{C}$ with a bifunctor $ \otimes: \mathbf{C} \times \mathbf{C} \to \mathbf{C}$, a `unit' element $I$, and natural isomorphisms that make the functor associative and unital with $I$ as expected. It is a generalization of the notion of a `tensor product'. Its used to define enriched categories.
-				
-				This can be formalized as follows, there exists $I \in \mathbf{C}$ and natural isomorphisms,
-				\begin{itemize}
-					\item $\alpha_{A,B,C}: A \otimes (B \otimes C) \to (A \otimes B) \otimes C$ (read as associator)
-					\item $\lambda_A : I \otimes A \to A$ (read as left unitor)
-					\item $\rho_A: A \otimes I \to A$ (read as right unitor)
-				\end{itemize}
-				And the following diagrams commute,
-				\[\begin{tikzcd}
-					& {(A\otimes B)\otimes (C \otimes D)} \\
-					{A \otimes(B \otimes(C\otimes D))} && {((A\otimes B)\otimes C)\otimes D} \\
-					{A \otimes ((B \otimes C) \otimes D)} && {(A \otimes (B\otimes C))\otimes D}
-					\arrow["\alpha_{A,B,C\otimes D}",from=2-1, to=1-2]
-					\arrow["\alpha_{A\otimes B, C, D}",from=1-2, to=2-3]
-					\arrow["\alpha_{A,B\otimes C,D}",from=3-1, to=3-3]
-					\arrow["\alpha_{A,B,C}\otimes1_D"',from=3-3, to=2-3]
-					\arrow["1_A \otimes \alpha_{B,C,D}"',from=2-1, to=3-1]
-				\end{tikzcd}\]
-				\[\begin{tikzcd}
-					{A\otimes(I\otimes B)} && {(A\otimes I)\otimes B} \\
-					& {A\otimes B}
-					\arrow["\alpha_{A,I,B}",from=1-1, to=1-3]
-					\arrow["\rho_A \otimes 1_B",from=1-3, to=2-2]
-					\arrow["1_A\otimes \lambda B"',from=1-1, to=2-2]
-				\end{tikzcd}\]
-		\end{minipage}	
-	};
-	%------------Monodial categories Header ---------------------
-	\node[fancytitle, right=10pt] at (box.north west) {Monoidal categories};
-\end{tikzpicture}
-
-%------------ Special monoidal categories ---------------
-\begin{tikzpicture}
-	\node [mybox] (box){%
-		\begin{minipage}{0.3\textwidth}
-			\begin{itemize}
-				\item Strict
-				\item Symmetric
-				\item Braided
-			\end{itemize}
-		\end{minipage}	
-	};
-	%------------ Special monoidal categories Header ---------------------
-	\node[fancytitle, right=10pt] at (box.north west) {Special monoidal categories};
-\end{tikzpicture}
-
-%------------ Enriched categories  ---------------
-\begin{tikzpicture}
-	\node [mybox] (box){%
-		\begin{minipage}{0.3\textwidth}
-			For a monoidal category as defined above $(\mathbf{V},\otimes, I ,\alpha, \lambda, \rho)$ a category $\mathbf{C}$ enriched over $\mathbf{V}$ is a category along with the following data
-			\begin{itemize}
-				\item Associated to all ordered pair $(A,B)$ of objects in $\mathbf{C}$, a hom object $\mathbf{C}(A,B)\in \mathrm{Ob}(\mathbf{V})$.
-				\item Associated to all objects $A$ in $\mathbf{C}$, an identity morphism $\mathrm{id}_A:I \to \mathbf{C}(A,A)$
-				\item Associated to each ordered triple $(A,B,C) $ of objects in $\mathbf{C}$ say $(A,B,C)$, a morphism in $\mathrm{Ob}(\mathbf{V})$, $\circ_{A,B,C}: \mathbf{C}(B,C)\otimes \mathbf{C}(A,B) \to \mathbf{C}(A,C)$
-				\item Also the following diagrams commute,
-			\end{itemize}
-			\[\begin{tikzcd}[column sep=0.05em]
-				& {\mathbf{C}(A,D)} \\
-				{\mathbf{C}(B,D)\otimes\mathbf{C}(A,B)} && {\mathbf{C}(C,D)\otimes \mathbf{C}(A,C)} \\
-				{(\mathbf{C}(C,D) \otimes \mathbf{C}(B,C)) \otimes \mathbf{C}(A,B)} && {\mathbf{C}(C,D) \otimes (\mathbf{C}(B,C) \otimes \mathbf{C}(A,B))}
-				\arrow["{\circ_{A,B,D}}", from=2-1, to=1-2]
-				\arrow["{\circ_{A,C,D}}"', from=2-3, to=1-2]
-				\arrow["{\circ_{B,C,D}\otimes 1_{\mathbf{C}(A,B)}}", from=3-1, to=2-1]
-				\arrow["{1_{\mathbf{C}(C,D)}\otimes \circ_{A,B,C}}"', from=3-3, to=2-3]
-				\arrow["\alpha"', from=3-1, to=3-3]
-			\end{tikzcd}\]
-			\[\begin{tikzcd}
-				{I \otimes \mathbf{C}(A,B)} && {\mathbf{C}(A,B)\otimes I} \\
-				& {\mathbf{C}(A,B)} \\
-				{\mathbf{C}(B,B)\otimes \mathbf{C}(A,B)} && {\mathbf{C}(A,B)\otimes \mathbf{C}(A,A)}
-				\arrow["\rho"', from=1-3, to=2-2]
-				\arrow["{\circ_{A,A,B}}"', from=3-3, to=2-2]
-				\arrow["{\circ_{A,B,B}}", from=3-1, to=2-2]
-				\arrow["{1_{\mathbf{C}(A,B)}\otimes \mathrm{id}_A}", from=1-3, to=3-3]
-				\arrow["{ \mathrm{id}_B\otimes1_{\mathbf{C}(A,B)}}"', from=1-1, to=3-1]
-				\arrow["\lambda", from=1-1, to=2-2]
-			\end{tikzcd}\]
-		\end{minipage}	
-	};
-	%------------ Enriched categories Header ---------------------
-	\node[fancytitle, right=10pt] at (box.north west) {Enriched categories (monoidal)};
-\end{tikzpicture}
-
-%------------ 2-categories  ---------------
-\begin{tikzpicture}
-	\node [mybox] (box){%
-		\begin{minipage}{0.3\textwidth}
-			The classical definition for 2-categories also called strict 2-categories are categories enriched over $\mathbf{Cat}$, it gives us the following data \begin{itemize}
-				\item Collection of objects
-				\item For each pair of objects we have associated to it a hom-category. 
-				\item 1-morphisms between objects, realized as objects of hom-categories.
-				\item 2-morphisms between 1-morphisms, realized as morphisms of hom-categories.
-			\end{itemize}
-			
-		\end{minipage}	
-	};
-	%------------ 2-categories Header ---------------------
-	\node[fancytitle, right=10pt] at (box.north west) {2-categories};
-\end{tikzpicture}
-
-%------------ String diagrams and Poincare duaality  ---------------
-\begin{tikzpicture}
-	\node [mybox] (box){%
-		\begin{minipage}{0.3\textwidth}
-			
-		\end{minipage}	
-	};
-	%------------ String diagrams and Poincare duaality Header ---------------------
-	\node[fancytitle, right=10pt] at (box.north west) {String diagrams and Poincare duaality};
-\end{tikzpicture}
-
-%------------ Topoi  ---------------
-\begin{tikzpicture}
-	\node [mybox] (box){%
-		\begin{minipage}{0.3\textwidth}
-			A \textbf{topoi} is a category which is has small limits, has exponentials and has a subobject classifier.
-			
-			A \textbf{subobject classifer} is an object $\Omega $ along with an arrow $1 \to \Omega $ universal such that it induces a subobject $S$ as the pullback to the following diagram for some arbitrary object $C$,
-		\[\begin{tikzcd}
-			U && 1 \\
-			\\
-			C && \Omega
-			\arrow["u"', dashed, from=3-1, to=3-3]
-			\arrow["t", from=1-3, to=3-3]
-			\arrow[tail, from=1-1, to=3-1]
-			\arrow[from=1-1, to=1-3]
-		\end{tikzcd}\]
+		%------------ Constructions on categories ---------------
+		\begin{tikzpicture}
+			\node [mybox] (box){%
+				\begin{minipage}{0.3\textwidth}
+					\begin{itemize}
+						\item \textbf{Product category: } The product of two categories $ \mathbf{C} $ and $ \mathbf{D}$ written as $ \mathbf{C}\times \mathbf{D} $ has objects of the form $ (C,D) $ for $ C \in \mathbf{C} $ and $ D \in \mathbf{D} $, and arrows of the form $ (f,g) :(C,D)\to (C', D')$ for $ f:C \to C' \in \mathbf{C} $ and $ g:D\to D' \in \mathbf{D} $.
+						
+						Composition and units are defined componentwise.
+						
+						\item \textbf{Opposite/Dual category: }For category $ \mathbf{C} $ its opposite category $ \mathbf{C}^{\mathrm op} $ has the same objects as $ \mathbf{C} $ but an arrow $ f:C \to D $ in $ \mathbf{C}^{\mathrm op} $ is an arrow $ f: D \to C $ in $ \mathbf{C} $.
+					\end{itemize}
+				\end{minipage}
+			};
+			%------------ Constructions on categories Header ---------------------
+			\node[fancytitle, right=10pt] at (box.north west) {Constructions on categories};
+		\end{tikzpicture}
 		
-		The notion of a subobject classifier is intuitively understood as a `truth value` function which assigns a true value for elements of $U\in  C$.
-		In particular topoi are used in logic due to a similar notion as just described.
-			
-			Presheaves form a topoi.
-			
+		%------------ Duality ---------------
+		\begin{tikzpicture}
+			\node [mybox] (box){%
+				\begin{minipage}{0.3\textwidth}
+					If any statement about categories holds for all categories then so does the dual statement (the statement in $\mathbf{C}^{\mathrm{op}}$).
+				\end{minipage}
+			};
+			%------------ Duality Header ---------------------
+			\node[fancytitle, right=10pt] at (box.north west) {Duality};
+		\end{tikzpicture}
 		
-		\end{minipage}	
-	};
-%------------ Topoi Header ---------------------
-	\node[fancytitle, right=10pt] at (box.north west) {Topoi};
-\end{tikzpicture}
-
-%------------ Adjoint functors  ---------------
-\begin{tikzpicture}
-	\node [mybox] (box){%
-		\begin{minipage}{0.3\textwidth}
-			The functors $F: \mathbf{C} \rightleftarrows \mathbf{D}: U$ form an \textbf{adjunction} between categories if there exists a natural transformation $\eta: 1_\mathbf{C} \to U \circ F$ with this unit having the following UMP,
-			\[\begin{tikzcd}
-				D && {U(F(C))} && {U(D)} \\
-				\\
-				{F(C)} && C
-				\arrow["f"', from=3-3, to=1-5]
-				\arrow["{\eta_C}", from=3-3, to=1-3]
-				\arrow["{U(g)}", from=1-3, to=1-5]
-				\arrow[dashed, from=3-1, to=1-1]
-			\end{tikzcd}\]
-			
-			$F$ is called the left adjoint of $U$ and vice versa, and is denoted as $F \dashv U$.
-			
-			Alternatively we also have the following formulation, $F \dashv U$ if for $C\in \mathbf{C}, D \in \mathbf{D}$ there exist natural isomorphisms $\phi: \textrm{Hom}_\mathbf{D}(FC, D) \cong \textrm{Hom}_\mathbf{C}(C, UD):\psi$
-			
-			A third more general formulation is given later.
-		\end{minipage}	
-	};
-%------------ Adjoint functors Header ---------------------
-	\node[fancytitle, right=10pt] at (box.north west) {Adjoint functors};
-\end{tikzpicture}
-
-%------------ Properties and examples of adjunctions  ---------------
-\begin{tikzpicture}
-	\node [mybox] (box){%
-		\begin{minipage}{0.3\textwidth}
-			\begin{itemize}
-				\item Adjunctions are unique up to isomorphisms.
-				\item Adjunctions between prosets are called 'Galois connections', they involve order preserving maps.
-				\item Operations in Heyting algebras can interpreted as biconditions and now its clear to see how they are built on adjoints.
-				\item In first order logic, quantifiers form adjoints, in particular if you have a functor between propositions of some $\mathcal{L}-$structures then $\forall$ is its right adjoint and $\exists $ is its left adjoint
-				\item For arbitrary diagonal functors over some small index category say $J$, $\lim_{\rightarrow_J} \dashv \Delta_J \dashv \lim_{\leftarrow_J}$, in particular when diagonal functor is over 2 we get $+ \dashv \Delta_2 \dashv \times $
-				\item Free functors are right adjoint to forgetful functors
-				\item Right adjoints preserve limits and left adjoints preserve colimits.
-			\end{itemize}
+		%------------ Constructions on categories contd. ---------------
+		\begin{tikzpicture}
+			\node [mybox] (box){%
+				\begin{minipage}{0.3\textwidth}
+					\begin{itemize}
+						\item \textbf{Arrow category: }For category $ \mathbf{C} $ its arrow category $ \mathbf{C}^\to $ has the arrows of $ \mathbf{C} $ as objects and an arrow $ g $ from $ f:A\to B $ to $f':A' \to B' $ in $ \mathbf{C}^\to  $ is the following commutative square	
+						\[\begin{tikzcd}
+							A & {A'} \\
+							B & {B'}
+							\arrow["{g_1}", from=1-1, to=1-2]
+							\arrow["f"', from=1-1, to=2-1]
+							\arrow["{g_2}"', from=2-1, to=2-2]
+							\arrow["{f'}", from=1-2, to=2-2]
+						\end{tikzcd}\]
+						where $ g_1,g_2 $ are arrows in $ \mathbf{C} $, i.e. an arrow is a pair of arrows $ g=(g_1,g_2) $ s.t. $ g_2 \circ f = f' \circ g_1 $. The identity of an object $ f:A \to B $ is the pair $ (1_A,1_B) $ and composition is componentwise (gluing two squares).	
+						\item \textbf{Slice/Over category: }For category $ \mathbf{C} $ its slice category over $ A \in \mathbf{C} $ denoted as $ \mathbf{C}/A$. it contains objects as all arrows in $\mathbf{C} $ who map to $A$. And arrows in $\mathbf{C}/A$ are arrows between the $\mathrm{dom}$ of the object arrows, i.e., $ h $ as seen below.
+						\[\begin{tikzcd}
+							X && {Y} \\
+							& A
+							\arrow["h", from=1-1, to=1-3]
+							\arrow["f"', from=1-1, to=2-2]
+							\arrow["{g}", from=1-3, to=2-2]
+						\end{tikzcd}\]
+						\begin{itemize}
+							\item The prototypical example is that of a slice of an element in a poset category is the down set of that element.
+						\end{itemize}
+						
+						\item \textbf{Co-slice category:} Denoted as $A/ \mathbf{C}$ is the dual of a slice category with objects as arrows mapping from $C$.
+						
+					\end{itemize}
+				\end{minipage}
+			};
+			%------------ Constructions on categories contd. Header ---------------------
+			\node[fancytitle, right=10pt] at (box.north west) {Constructions on categories contd.};
+		\end{tikzpicture}
 		
-		\end{minipage}	
-	};
-	%------------ Properties and examples of adjunctions Header ---------------------
-	\node[fancytitle, right=10pt] at (box.north west) {Properties and examples of adjunctions};
-\end{tikzpicture}
-
-%------------ Filtered limits ---------------
-\begin{tikzpicture}
-	\node [mybox] (box){%
-		\begin{minipage}{0.3\textwidth}
-			
-		\end{minipage}	
-	};
-	%------------ Filtered limits Header ---------------------
-	\node[fancytitle, right=10pt] at (box.north west) {Filtered limits};
-\end{tikzpicture}
-
-%------------Ind-objects---------------
-\begin{tikzpicture}
-	\node [mybox] (box){%
-		\begin{minipage}{0.3\textwidth}
-			
-		\end{minipage}	
-	};
-	%------------ Ind-objects Header ---------------------
-	\node[fancytitle, right=10pt] at (box.north west) {Ind-objects};
-\end{tikzpicture}
-
-%------------ Wedges ---------------
-\begin{tikzpicture}
-	\node [mybox] (box){%
-		\begin{minipage}{0.3\textwidth}
-				A wedge (denoted as $e\to F$) for a functor $F:\mathbf{C}^\mathrm{op}\times \mathbf{C} \to \mathbf{D}$ is an object $e\in \mathrm{Ob}(\mathbf{D})$ with morphisms $\omega_A: e \to F(A,A)$ for all $A \in \mathrm{Ob}(\mathbf{C})$ such that the following diagram commutes,
-				\[\begin{tikzcd}
-					A && e && {F(A,A)} \\
-					\\
-					B && {F(B,B)} && {F(A,B)}
-					\arrow["{\omega_A}", from=1-3, to=1-5]
-					\arrow["{F(1_A,B)}", from=1-5, to=3-5]
-					\arrow["{\omega_B}"', from=1-3, to=3-3]
-					\arrow["{F(f,1_B)}"', from=3-3, to=3-5]
-					\arrow["f", from=1-1, to=3-1]
-				\end{tikzcd}\]
-		\end{minipage}	
-	};
-	%------------ Wedges Header ---------------------
-	\node[fancytitle, right=10pt] at (box.north west) {Wedges};
-\end{tikzpicture}
-
-%------------Extranatural transformation---------------
-\begin{tikzpicture}
-	\node [mybox] (box){%
-		\begin{minipage}{0.3\textwidth}
-			
-		\end{minipage}	
-	};
-	%------------ Extranatural transformation Header ---------------------
-	\node[fancytitle, right=10pt] at (box.north west) {Extranatural transformation};
-\end{tikzpicture}
-
-%------------ Ends and Coends  ---------------
-\begin{tikzpicture}
-	\node [mybox] (box){%
-		\begin{minipage}{0.3\textwidth}
-			An end is a universal wedge $E\to F$ denoted as $\int_{C \in \mathbf{C}} F(C,C)$, i.e. there is a unique map from every wedge $e \to F$ into it $e \to E \to F$. 
-		\end{minipage}	
-	};
-	%------------ Ends and coends Header ---------------------
-	\node[fancytitle, right=10pt] at (box.north west) {Ends and coends};
-\end{tikzpicture}
-
-%------------ Extranatural transformations  ---------------
-\begin{tikzpicture}
-	\node [mybox] (box){%
-		\begin{minipage}{0.3\textwidth}
-			
-		\end{minipage}	
-	};
-	%------------ Extranatural transformations Header ---------------------
-	\node[fancytitle, right=10pt] at (box.north west) {Extranatural transformations};
-\end{tikzpicture}
-
-%------------ Nerves and realizations  ---------------
-\begin{tikzpicture}
-	\node [mybox] (box){%
-		\begin{minipage}{0.3\textwidth}
-			
-		\end{minipage}	
-	};
-	%------------ Nerves and realizations Header ---------------------
-	\node[fancytitle, right=10pt] at (box.north west) {Nerves and realizations};
-\end{tikzpicture}
-
-%------------ Filtered limits ---------------
-\begin{tikzpicture}
-	\node [mybox] (box){%
-		\begin{minipage}{0.3\textwidth}
-			
-		\end{minipage}	
-	};
-%------------ Filtered limits Header ---------------------
-	\node[fancytitle, right=10pt] at (box.north west) {Filtered limits};
-\end{tikzpicture}
-	
-%------------ Kan extensions  ---------------
-\begin{tikzpicture}
-	\node [mybox] (box){%
-		\begin{minipage}{0.3\textwidth}
-			A functor $f: \mathbf{C} \to \mathbf{D}$ induces a functor between its presheaves,\\ $f^*: [\mathbf{D}^{\mathrm{op}}, \mathbf{Sets}] \to [\mathbf{C}^{\mathrm{op}}, \mathbf{Sets}]$, given by precomposition $f^*(Q)(C)=Q(fC)$ and this induced functor has both left and right adjoints which we call left and right \textbf{Kan extensions}, i.e. $f_! \dashv f^* \dashv f_*$ and left Kan extensions are naturally isomorphic with the Yoneda embedding as such, $f_! y_\mathbf{C} \cong y_\mathbf{D}f$	
-		\end{minipage}	
-	};
-	%------------ Kan extensions Header ---------------------
-	\node[fancytitle, right=10pt] at (box.north west) {Kan extensions};
-\end{tikzpicture}
-
-%------------ Locally cartesian closed categories  ---------------
-\begin{tikzpicture}
-	\node [mybox] (box){%
-		\begin{minipage}{0.3\textwidth}
-			A category is said to be locally cartesian closed if its slice categories are cartesian closed.
-		\end{minipage}	
-	};
-	%------------ Locally cartesian closed categories Header ---------------------
-	\node[fancytitle, right=10pt] at (box.north west) {Locally cartesian closed categories};
-\end{tikzpicture}
-
-
-%------------ Adjoint functor theorem  ---------------
-\begin{tikzpicture}
-	\node [mybox] (box){%
-		\begin{minipage}{0.3\textwidth}
-			For a locally small, complete category $\mathbf{C}$, some other category $\mathbf{X}$. A limit preserving functor $U:\mathbf{C} \to \mathbf{X}$ has a left adjoint	iff
-		\end{minipage}	
-	};
-	%------------ Adjoint functor theorem Header ---------------------
-	\node[fancytitle, right=10pt] at (box.north west) {Adjoint functor theorem};
-\end{tikzpicture}
-
-%------------ Adjoints in terms of units and counits  ---------------
-\begin{tikzpicture}
-	\node [mybox] (box){%
-		\begin{minipage}{0.3\textwidth}
-			For a locally small, complete category $\mathbf{C}$, some other category $\mathbf{X}$. A limit preserving functor $U:\mathbf{C} \to \mathbf{X}$ has a left adjoint	iff
-		\end{minipage}	
-	};
-	%------------ Adjoints in terms of units and counits Header ---------------------
-	\node[fancytitle, right=10pt] at (box.north west) {Adjoints in terms of units and counits};
-\end{tikzpicture}
-
-
-
-%------------ Monads  ---------------
-\begin{tikzpicture}
-	\node [mybox] (box){%
-		\begin{minipage}{0.3\textwidth}
-			
-		\end{minipage}	
-	};
-	%------------ Monads Header ---------------------
-	\node[fancytitle, right=10pt] at (box.north west) {Monads};
-\end{tikzpicture}
-
-
-
-%------------ Abelian/Derived categories  ---------------
-\begin{tikzpicture}
-	\node [mybox] (box){%
-		\begin{minipage}{0.3\textwidth}
-			
-		\end{minipage}	
-	};
-	%------------ Abelian/Derived categories  Header ---------------------
-	\node[fancytitle, right=10pt] at (box.north west) {Abelian/Derived categories};
-\end{tikzpicture}
-
-%------------ Simplical sets ---------------
-\begin{tikzpicture}
-	\node [mybox] (box){%
-		\begin{minipage}{0.3\textwidth}
-			
-		\end{minipage}	
-	};
-	%------------ Simplical sets Header ---------------------
-	\node[fancytitle, right=10pt] at (box.north west) {Simplical sets};
-\end{tikzpicture}
-
-
-
-%------------ Infinity groupoids  ---------------
-\begin{tikzpicture}
-	\node [mybox] (box){%
-		\begin{minipage}{0.3\textwidth}
-			
-		\end{minipage}	
-	};
-	%------------ Infinity groupoids Header ---------------------
-	\node[fancytitle, right=10pt] at (box.north west) {$\mathbf{\infty}$ groupoids};
-\end{tikzpicture}
-
-
-%------------ Higher categories  ---------------
-\begin{tikzpicture}
-	\node [mybox] (box){%
-		\begin{minipage}{0.3\textwidth}
-			
-		\end{minipage}	
-	};
-	%------------ Higher categories Header ---------------------
-	\node[fancytitle, right=10pt] at (box.north west) {Higher categories};
-\end{tikzpicture}
-
-%------------ Model categories  ---------------
-\begin{tikzpicture}
-	\node [mybox] (box){%
-		\begin{minipage}{0.3\textwidth}
-			
-		\end{minipage}	
-	};
-	%------------ Model categories Header ---------------------
-	\node[fancytitle, right=10pt] at (box.north west) {Model categories};
-\end{tikzpicture}
-
-% ==============================================================
-\end{multicols*}
+		%------------ Free monoid ---------------
+		\begin{tikzpicture}
+			\node [mybox] (box){%
+				\begin{minipage}{0.3\textwidth}
+					For a set $ A $ a \textit{word} over $ A $ is any finite sequence of its elements. 
+					
+					The \textbf{Kleene closure} of $ A $ is defined to be the set of all words over $ A $ denoted as $A^*$. With the binary operation of concatenation $A^*$ forms a monoid and is called the \textbf{free monoid} on $A$.
+					
+					\textbf{Universal mapping property (UMP) of free monoid: }Let $ M(A) $ be the free monoid on a set $ A $. There is a function $ i: A\to |M(A)|, $ and given any monoid $ N $ and any function $ f:A \to |N| $, there is a unique monoid homomorphism $ \overline{f}:M(A)\to N$ s.t. $ |\overline{f}|\circ i=f $.
+					\[\begin{tikzcd}
+						{M(A)} && {|M(A)|} & {|N|} \\
+						N && A 
+						\arrow["{\overline{f}}", dashed, from=1-1, to=2-1]
+						\arrow["i", from=2-3, to=1-3]
+						\arrow["f", from=2-3, to=1-4]
+						\arrow["{|\overline{f}|}", from=1-3, to=1-4]
+					\end{tikzcd}\]
+					$ A	 * $ has the UMP of the free monoid on $ A $.
+				\end{minipage}
+			};
+			%------------ Free monoid Header ---------------------
+			\node[fancytitle, right=10pt] at (box.north west) {Free monoid};
+		\end{tikzpicture}
+		
+		%------------ Free category ---------------
+		\begin{tikzpicture}
+			\node [mybox] (box){%
+				\begin{minipage}{0.3\textwidth}
+					A directed graph $ G $ ``generates'' a free category $ \mathbf{C}(G) $ whose objects are the vertices of the graph and its arrows are paths. Composition of arrows is defined as concatenation of paths.
+					
+					\textbf{UMP of} $ \mathbf{C}(G)$ There is a graph homomorphism $ i:G\to |\mathbf{C}(G)| ,$ and given any category $ \mathbf{D} $ and any graph homomorphism $ h: G \to |\mathbf{D}|, $ there is a unique functor $ \overline{h}:\mathbf{C}(G) \to \mathbf{D} $ with $ \overline{h} \circ i=h $.
+					\[\begin{tikzcd}
+						{\mathbf{C}(G)} && {|\mathbf{C}(G)|} & {|\mathbf{D}|} \\
+						\mathbf{D} && G
+						\arrow["{\overline{h}}", dashed, from=1-1, to=2-1]
+						\arrow["i", from=2-3, to=1-3]
+						\arrow["h", from=2-3, to=1-4]
+						\arrow["{|\overline{h}|}", from=1-3, to=1-4]
+					\end{tikzcd}\]
+				\end{minipage}
+			};
+			%------------ Free category Header ---------------------
+			\node[fancytitle, right=10pt] at (box.north west) {Free category};
+		\end{tikzpicture}
+		
+		
+		
+		
+		
+		%------------ Types of morphisms ---------------
+		\begin{tikzpicture}
+			\node [mybox] (box){%
+				\begin{minipage}{0.3\textwidth}
+					\textbf{Monomorphism: }In any category $ \mathbf{C} $, an arrow	$ f: A \to B  $ is called a monomorphism (monic), if for any $ g,h, :C \to A , fg=fh \implies g=h $.
+					
+					\[\begin{tikzcd}
+						\arrow[r,shift right,swap,"h"] \arrow[r,shift left,"g"]	C &  
+						A & B
+						\arrow["f", from=1-2, to=1-3]
+					\end{tikzcd}\]
+					
+					\textbf{Epimorphism: }In any category $ \mathbf{C} $, an arrow $ f: A \to B $ is called an epimorphism (epic), if for any $ i,j: B \to D $ $ if=jf\implies i=j $.
+					
+					\[\begin{tikzcd}
+						A &  \arrow[r,shift right,swap,"i"] \arrow[r,shift left,"j	"]
+						B & D
+						\arrow["f", from=1-1, to=1-2]
+					\end{tikzcd}\]
+					\begin{itemize}
+						\item We say, $ f: A\rightarrowtail B $ if $ f $ is a monomorphism and $ f: A \twoheadrightarrow B $ if $ f $ is an epimorphism.
+						\item Every isomorphism is both a monomorphism and an epimorphism. The converse need not be true.
+						\item A \textbf{split} mono (epi) is an arrow $ m : A \to B$ with a left (right) inverse $ r $. The inverse arrow $ r $ is called the \textbf{retraction}, $ m $ is called a \textit{section} of $ r $ and $ A $ is called a \textbf{retract} of $ B $.
+					\end{itemize}
+					
+					
+				\end{minipage}
+			};
+			%------------ Types of morphisms Header ---------------------
+			\node[fancytitle, right=10pt] at (box.north west) {Types of morphisms};
+		\end{tikzpicture}
+		
+		
+		%------------ Small categories ---------------
+		\begin{tikzpicture}
+			\node [mybox] (box){%
+				\begin{minipage}{0.3\textwidth}
+					A category is called \textbf{small} if it has a small set of objects and arrows. (i.e., not classes). It is called large otherwise.
+					
+					A category $ \mathbf{C} $ is \textbf{locally small} if for all objects $ X,Y \in \mathbf{C} $, the collection $ \mathrm{Hom}_\mathbf{C}(X,Y)=\{f \in \mathbf{C} \mid f: X \to Y \}$ is a small set.
+				\end{minipage}
+			};
+			%------------ Small categories Header ---------------------
+			\node[fancytitle, right=10pt] at (box.north west) {Small categories};
+		\end{tikzpicture}
+		
+		%------------ Ty]pes of functors ---------------
+		\begin{tikzpicture}
+			\node [mybox] (box){%
+				\begin{minipage}{0.3\textwidth}
+					A functor $F: \mathbf{C} \to \mathbf{D} $ induces a map in locally small categories 
+					
+					$F_{A,B}=\mathrm{Hom}_\mathbf{C}(A,B) \to \mathrm{Hom}_\mathbf{D}(F(A),F(B))$. 
+					
+					The functor $F$ is said to be \textbf{faithful} if $F_{A,B}$ is injective for all pairs of objects and \textbf{full} if it is surjective.
+					
+					Note that this is not the same as the functor being injective/surjective 
+					on objects/arrows.
+					
+					A functor $F:\mathbf{C}\to \mathbf{D}$ is \textbf{essentially} injective/surjective if its injective/surjective on objects up to isomorphism.
+					
+					
+					\begin{itemize}
+						\item Covariant and contravariant representable functors are faithful.
+					\end{itemize}
+				\end{minipage}	
+			};
+			%------------ Types of functors Header ---------------------
+			\node[fancytitle, right=10pt] at (box.north west) {Types of functors};
+		\end{tikzpicture}
+		
+		%------------ Subcategories and skeletons ---------------
+		\begin{tikzpicture}
+			\node [mybox] (box){%
+				\begin{minipage}{0.3\textwidth}
+					A \textbf{subcategory} $\mathbf{D}$ of a category $\mathbf{C}$ is some category such that its collection of objects and arrows are subcollections from $\mathbf{C}$. The identity arrows for objects and arrow composition are equal.
+					
+					\begin{itemize}
+						\item A subcategory is \textbf{full} if the inclusion functor is full (the function between homsets for all pairs of objects is surjective)
+					\end{itemize}
+					
+					A full subcategory $\skull (\mathbf{C})$ of $\mathbf{C} $ with one representative object chosen for each isomorphism class of objects in $\mathbf{C} $ such that the inclusion induces a equivalence of categories is called a \textbf{skeleton} of $\mathbf{C}$. 
+					
+					If a category is a skeleton of itself it is called \textbf{skeletal}.
+				\end{minipage}
+			};
+			%------------ Subcategories and skeletons Header ---------------------
+			\node[fancytitle, right=10pt] at (box.north west) {Subcategories and skeletons};
+		\end{tikzpicture}
+		
+		%------------ Initial and terminal objects ---------------
+		\begin{tikzpicture}
+			\node [mybox] (box){%
+				\begin{minipage}{0.3\textwidth}
+					An object $ 0 \in \mathbf{C} $ is \textbf{initial} if for any object $ C \in \mathbf{C} \exists!$ morphism $ 0 \to C $.\\
+					An object $ 1 \in \mathbf{C} $ is \textbf{terminal} if for any object $ C \in \mathbf{C} \exists!$ morphism $ C \to 1 $.
+					
+					Initial and terminal objects are unique up to isomorphism.
+				\end{minipage}
+			};
+			%------------ Initial and terminal objects Header ---------------------
+			\node[fancytitle, right=10pt] at (box.north west) {Initial and terminal objects};
+		\end{tikzpicture}
+		
+		%------------ Generalized elements ---------------
+		\begin{tikzpicture}
+			\node [mybox] (box){%
+				\begin{minipage}{0.3\textwidth}
+					For an object $ A \in \mathbf{C} $ arbitrary arrows $ x: X \to A $ are called the \textbf{generalized elements} of $ A $.
+				\end{minipage}
+			};
+			%------------ Generalized elements Header ---------------------
+			\node[fancytitle, right=10pt] at (box.north west) {Generalized elements};
+		\end{tikzpicture}
+		
+		%------------ Product of objects ---------------
+		\begin{tikzpicture}
+			\node [mybox] (box){%
+				\begin{minipage}{0.3\textwidth}
+					In any category $ \mathbf{C} $, a product diagram for the objects $ A, B $ consists of an object $ A \times B $ and arrows 
+					\[\begin{tikzcd}
+						A & P & B
+						\arrow["{p_1}"', from=1-2, to=1-1]
+						\arrow["{p_2}", from=1-2, to=1-3]
+					\end{tikzcd}\]
+					satisfying the following UMP. Given any diagram of the form
+					\[\begin{tikzcd}
+						A & X & B
+						\arrow["{x_1}"', from=1-2, to=1-1]
+						\arrow["{x_2}", from=1-2, to=1-3]
+					\end{tikzcd}\]
+					there exists a unique arrow $ f:X \to P $, making the following diagram commute
+					\[\begin{tikzcd}
+						& X \\
+						A & A \times B & B
+						\arrow["{p_1}"', from=2-2, to=2-1]
+						\arrow["{p_2}", from=2-2, to=2-3]
+						\arrow["f", dashed, from=1-2, to=2-2]
+						\arrow["{x_1}"', from=1-2, to=2-1]
+						\arrow["{x_2}", from=1-2, to=2-3]
+					\end{tikzcd}\]
+					
+					The product $ A \times B $ is unique up to isomorphism. 
+					
+				\end{minipage}
+			};
+			%------------ Product of objects Header ---------------------
+			\node[fancytitle, right=10pt] at (box.north west) {Product of objects};
+		\end{tikzpicture}
+		
+		
+		%------------ Categories with products ---------------
+		\begin{tikzpicture}
+			\node [mybox] (box){%
+				\begin{minipage}{0.3\textwidth}
+					A category which has a product for every pair of objects is said to have \textbf{binary products}.
+					
+					A category is said to have \textbf{all finite products}, if it has a terminal object and all binary products.
+					
+					A category has \textbf{all small products} if every set of objects has a product.
+				\end{minipage}
+			};
+			%------------ Categories with products Header ---------------------
+			\node[fancytitle, right=10pt] at (box.north west) {Categories with products};
+		\end{tikzpicture}
+		
+		
+		%------------ Covariant representable functor ---------------
+		\begin{tikzpicture}
+			\node [mybox] (box){%
+				\begin{minipage}{0.3\textwidth}
+					The functor $ \mathrm{Hom}(A,-): \mathbf{C}\to \mathbf{Sets}$ is called a covariant representable functor (for some object $ A \in \mathbf{C} $).
+					
+					For a category with products a covariant representable functor preserves products.
+				\end{minipage}
+			};
+			%------------ Covariant representable functor Header ---------------------
+			\node[fancytitle, right=10pt] at (box.north west) {Covariant representable functor};
+		\end{tikzpicture}
+		
+		
+		
+		%------------ Finitely presented category ---------------
+		\begin{tikzpicture}
+			\node [mybox] (box){%
+				\begin{minipage}{0.3\textwidth}
+					Consider the free category $ \mathbf{C} (G)$ on a finite graph $ G $. And the finite set of relations $ \sum  $ to be relations of the form $ (g_1\circ \dots \circ g_n)= (g_1'\circ \dots \circ g_m') $ for $ g_i \in G $ and $ \mathrm{dom}(g_n)=\mathrm{dom}(g_m') $ and $ \mathrm{cod}(g_1) =\mathrm{cod}(g_1')$. Let $ \sim_\Sigma  $ be the smallest congruence $ g \sim g' $ if $ g=g' \in \sum  $. We call the quotient by this congruence to be a \textbf{fintely presented category}.
+				\end{minipage}
+			};
+			%------------ Finitely presented category Header ---------------------
+			\node[fancytitle, right=10pt] at (box.north west) {Finitely presented category};
+		\end{tikzpicture}
+		
+		
+		%------------ Subobjects ---------------
+		\begin{tikzpicture}
+			\node [mybox] (box){%
+				\begin{minipage}{0.3\textwidth}
+					A \textbf{subobject} for some $X \in \mathbf{C}$ is a monomorphism into $X$.
+					\begin{itemize}
+						\item Arrows between subobjects of the same $X$ are arrows in the slice category of $X$. So collection of subobjects form a category with a preorder (with inclusion) we call $\mathrm{Sub}_\mathbf{C}(X)$
+						
+					\end{itemize}
+				\end{minipage}
+			};
+			%------------ Subobjects Header ---------------------
+			\node[fancytitle, right=10pt] at (box.north west) {Subobjects};
+		\end{tikzpicture}
+		
+		%------------ Coproducts ---------------
+		\begin{tikzpicture}
+			\node [mybox] (box){%
+				\begin{minipage}{0.3\textwidth}
+					This is the dual of a product. For objects $A,B$ it is denoted as $A \coprod B$. It makes the below diagram commute.
+					\[\begin{tikzcd}
+						A & X & B \\
+						& {A \coprod B}
+						\arrow["{i_1}"', from=1-1, to=2-2]
+						\arrow["{x_1}"', from=1-2, to=1-1]
+						\arrow["{x_2}", from=1-2, to=1-3]
+						\arrow["f", dashed, from=1-2, to=2-2]
+						\arrow["{i_2}", from=1-3, to=2-2]
+					\end{tikzcd}\]
+				\end{minipage}
+			};
+			%------------ Coproducts Header ---------------------
+			\node[fancytitle, right=10pt] at (box.north west) {Coproducts};
+		\end{tikzpicture}
+		
+		%------------ Equalizers ---------------
+		\begin{tikzpicture}
+			\node [mybox] (box){%
+				\begin{minipage}{0.3\textwidth}
+					In some category $ \mathbf{C} $ given the following diagram
+					\[\begin{tikzcd}
+						A & B
+						\arrow["g"', shift right=2, from=1-1, to=1-2]
+						\arrow["f", shift left=2, from=1-1, to=1-2]
+					\end{tikzcd}\]
+					We say an \textbf{equalizer} of $ f,g $ consists of an object $ E $ and an arrow $ e:E \to A $ universal such that \[ f \circ e = g \circ e \]
+					i.e., for any $ z:Z\to A $ with $ f \circ z= g \circ z $, there exists a unique $ u:Z \to E $ with $ e \circ u=z $
+					\[\begin{tikzcd}
+						E & A & B \\
+						Z
+						\arrow["g"', shift right=2, from=1-2, to=1-3]
+						\arrow["f", shift left=2, from=1-2, to=1-3]
+						\arrow["e", from=1-1, to=1-2]
+						\arrow["u", dashed, from=2-1, to=1-1]
+						\arrow["z", from=2-1, to=1-2]
+					\end{tikzcd}\]
+					\begin{itemize}
+						\item Equalizers are monic.
+						\item It is analogous to the notion of a kernel.
+					\end{itemize}
+				\end{minipage}
+			};
+			%------------ Equalizers Header ---------------------
+			\node[fancytitle, right=10pt] at (box.north west) {Equalizers};
+		\end{tikzpicture}
+		
+		%------------ Coequalizers ---------------
+		\begin{tikzpicture}
+			\node [mybox] (box){%
+				\begin{minipage}{0.3\textwidth}
+					In some category $ \mathbf{C} $ given the following diagram
+					\[\begin{tikzcd}
+						A & B
+						\arrow["g"', shift right=2, from=1-1, to=1-2]
+						\arrow["f", shift left=2, from=1-1, to=1-2]
+					\end{tikzcd}\]
+					We say a \textbf{coequalizer} of $ f,g $ consists of an object $ Q $ and an arrow $ q:B \to Q $ universal such that \[ q \circ f = q \circ g \]
+					i.e., for any $ z:B\to Z $ with $ z \circ f= z \circ g $, there exists a unique $ u:Q \to Z $ with $ u \circ q=z $
+					\[\begin{tikzcd}
+						A & B & Q \\
+						&& Z
+						\arrow["g"', shift right=2, from=1-1, to=1-2]
+						\arrow["f", shift left=2, from=1-1, to=1-2]
+						\arrow["q", from=1-2, to=1-3]
+						\arrow["z"', from=1-2, to=2-3]
+						\arrow["u", dashed, from=1-3, to=2-3]
+					\end{tikzcd}\]
+					\begin{itemize}
+						\item Coequalizers are epic.
+						\item It is analogous to the notion of a quotient.
+					\end{itemize}
+				\end{minipage}
+			};
+			%------------ Coequalizers Header ---------------------
+			\node[fancytitle, right=10pt] at (box.north west) {Coequalizers};
+		\end{tikzpicture}
+		
+		%%------------ Groups in a category ---------------
+		%\begin{tikzpicture}
+		%	\node [mybox] (box){%
+			%		\begin{minipage}{0.3\textwidth}
+				%			 A group ($ \mathrm{Group}(\mathbf{C}) $) can be defined over a category $ \mathbf{C} $.
+				%			\[\begin{tikzcd}
+					%				{G\times G} & G & G \\
+					%				& 1
+					%				\arrow["m", from=1-1, to=1-2]
+					%				\arrow["i"', from=1-3, to=1-2]
+					%				\arrow["u", from=2-2, to=1-2]
+					%			\end{tikzcd}\]
+				%		Where the arrows obey the following,
+				%		$ m $ is associative, $ u $ is a unit, and $ i $ is an inverse for $ m $, i.e. the following diagrams commute
+				%			\[\begin{tikzcd}
+					%				{(G \times G) \times G} && {G \times (G \times G)} && G & {G \times G} \\
+					%				{G \times G} && {G \times G} && {G\times G} & G \\
+					%				& G \\
+					%				{G \times G} & G & {G \times G} \\
+					%				{G \times G} & G & {G \times G}
+					%				\arrow["m"', from=2-1, to=3-2]
+					%				\arrow["m", from=2-3, to=3-2]
+					%				\arrow["{m \times 1}"', from=1-1, to=2-1]
+					%				\arrow["{1 \times m}", from=1-3, to=2-3]
+					%				\arrow["\cong", from=1-1, to=1-3]
+					%				\arrow["m"', from=2-5, to=2-6]
+					%				\arrow["{1_G}"', from=1-5, to=2-6]
+					%				\arrow["m", from=1-6, to=2-6]
+					%				\arrow["{\langle 1_G, u \rangle}"', from=1-5, to=2-5]
+					%				\arrow["{\langle u, 1_G \rangle}", from=1-5, to=1-6]
+					%				\arrow["{\langle 1_G, 1_G \rangle}"', from=4-2, to=4-1]
+					%				\arrow["{\langle 1_G, 1_G \rangle}", from=4-2, to=4-3]
+					%				\arrow["{1_G \times i}"', from=4-1, to=5-1]
+					%				\arrow["u"', from=4-2, to=5-2]
+					%				\arrow["{i \times 1_G}", from=4-3, to=5-3]
+					%				\arrow["m"', from=5-1, to=5-2]
+					%				\arrow["m", from=5-3, to=5-2]
+					%			\end{tikzcd}\]
+				%		\begin{itemize}
+					%		\item A homomorphism $ h:G \to H $ of groups in a category $ \mathbf{C} $ is an arrow such that, $ h $ preserves $ m,u,i $, i.e. the following diagrams commmute.
+					%		\[\begin{tikzcd}
+						%			{G \times G} & {H \times H} && G & H && G & H \\
+						%			G & H && 1 &&& G & H
+						%			\arrow["{h \times h}", from=1-1, to=1-2]
+						%			\arrow["m"', from=1-1, to=2-1]
+						%			\arrow["m", from=1-2, to=2-2]
+						%			\arrow["h"', from=2-1, to=2-2]
+						%			\arrow["u", from=2-4, to=1-4]
+						%			\arrow["h", from=1-4, to=1-5]
+						%			\arrow["u"', from=2-4, to=1-5]
+						%			\arrow["h", from=1-7, to=1-8]
+						%			\arrow["i", from=1-8, to=2-8]
+						%			\arrow["i"', from=1-7, to=2-7]
+						%			\arrow["h"', from=2-7, to=2-8]
+						%		\end{tikzcd}\]
+					%		\item The objects in the category of groups (i.e. $ \mathrm{Group}(\mathbf{Grp}) $) are abelian groups.
+					%		\end{itemize}
+				%		\end{minipage}
+			%	};
+		%%------------ Groups in a category Header ---------------------
+		%	\node[fancytitle, right=10pt] at (box.north west) {Groups in a category};
+		%\end{tikzpicture}
+		
+		%------------ Congruence ---------------
+		\begin{tikzpicture}
+			\node [mybox] (box){%
+				\begin{minipage}{0.3\textwidth}
+					A \textbf{congruence} on a category is a equivalance relation on arrows ($ f \sim g $) s.t.
+					\begin{itemize}
+						\item $ f \sim g \implies \mathrm{dom}(f)=\mathrm{dom}(f)$ and $ \mathrm{cod}(f)=\mathrm{cod}(g) $.
+						\item $ f \sim g \implies bfa \sim bga $
+					\end{itemize}
+					Let $ C_0, C_1 $ denote the class of objects and arrows for a category $ \mathbf{C} $. Then a \textbf{congruence category} $ \mathbf{C}^\sim  $ is defined as follows,
+					\begin{itemize}
+						\item $ (\mathbf{C}^\sim)_0=\mathbf{C}_0 $
+						\item $ (\mathbf{C}^\sim)_1=\{\langle f,g \rangle| f \sim g\} $
+						\item $ \tilde{1}_C=\langle 1_C, 1_C \rangle $
+						\item $ \langle f', g' \rangle \circ \langle f,g \rangle = \langle f'f, g'g \rangle  $
+					\end{itemize}
+					\[\begin{tikzcd}
+						{\mathbf{C}^\sim} & {\mathbf{C}}
+						\arrow["{p_1}", shift left=2, from=1-1, to=1-2]
+						\arrow["{p_2}"', shift right=2, from=1-1, to=1-2]
+					\end{tikzcd}\]
+					We define the \textbf{quotient category} of the congruence as the coequalizer, i.e,
+					\[\begin{tikzcd}
+						{\mathbf{C}^\sim} & {\mathbf{C}} & {\mathbf{C}/\sim}
+						\arrow["{p_1}", shift left=2, from=1-1, to=1-2]
+						\arrow["{p_2}"', shift right=2, from=1-1, to=1-2]
+						\arrow["\pi", from=1-2, to=1-3]
+					\end{tikzcd}\]
+				\end{minipage}
+			};
+			%------------ Congruence Header ---------------------
+			\node[fancytitle, right=10pt] at (box.north west) {Congruence};
+		\end{tikzpicture}
+		
+		
+		
+		%------------ Pullback ---------------
+		\begin{tikzpicture}
+			\node [mybox] (box){%
+				\begin{minipage}{0.3\textwidth}
+					In a category $\mathbf{C}$ a \textbf{pullback} of arrows $f,g$ with the same image
+					\[\begin{tikzcd}
+						& B \\
+						A & C
+						\arrow["g", from=1-2, to=2-2]
+						\arrow["f"', from=2-1, to=2-2]
+					\end{tikzcd}\]\\
+					is the pair of universal arrows $p_1, p_2$ such that $fp_1=gp_2$ (i.e. $u$ unique below)	 
+					\[\begin{tikzcd}
+						Z \\
+						& P & B \\
+						& A & C
+						\arrow["{p_2}"', from=2-2, to=2-3]
+						\arrow["{p_1}", from=2-2, to=3-2]
+						\arrow["g", from=2-3, to=3-3]
+						\arrow["f"', from=3-2, to=3-3]
+						\arrow["{z_1}"', from=1-1, to=3-2]
+						\arrow["{z_2}", from=1-1, to=2-3]
+						\arrow["u"{description}, dashed, from=1-1, to=2-2]
+					\end{tikzcd}\]
+					\begin{itemize}
+						\item $P$ is often denoted as $A\times_C B$. Rephrased in terms of products the pullback can be considered as a subobject of $A\times B$ determined as the equalizer of projection maps composed with $f,g$. Every category with products and equalizers has pullbacks defined like this and vice versa.
+						\item For two pullback squares side by side sharing a morphism the larger rectangle forms a pullback square too.
+						\item The pullback of a commutative triangle is also a commutative triangle by the above point.
+						\item Pullbacks define a functor between slice categories, for fixed $f: A \to B $ $f^*: \mathbf{C}/B \to \mathbf{C}/A$ defined as $ (D\xrightarrow{\alpha}B) \mapsto (A\times_B D \xrightarrow{\alpha^*} A) $ is functorial.
+						\item This pullback functor makes the following diagram commute,
+						\[\begin{tikzcd}
+							{\mathrm{Sub}(A)} && {\mathrm{Sub}(B)} \\
+							\\
+							{\mathbf{C}/A} && {\mathbf{C}/B}
+							\arrow[from=1-3, to=3-3]
+							\arrow["{f^*}", from=3-3, to=3-1]
+							\arrow["{f^{-1}}"', from=1-3, to=1-1]
+							\arrow[from=1-1, to=3-1]
+						\end{tikzcd}\]
+						where $f^{-1}$ is the restriction of $f^*$.
+						\item A category with pullbacks and terminal objects $\iff $ it has finite products and equalizers
+					\end{itemize}
+					
+				\end{minipage}
+			};
+			%------------ Pullback Header ---------------------
+			\node[fancytitle, right=10pt] at (box.north west) {Pullback};
+		\end{tikzpicture}
+		
+		%------------ Diagram ---------------
+		\begin{tikzpicture}
+			\node [mybox] (box){%
+				\begin{minipage}{0.3\textwidth}
+					For categories $\mathbf{J}, \mathbf{C}$ a \textbf{diagram} of type $\mathbf{J}$ in $\mathbf{C}$ is a functor $D: \mathbf{J} \to \mathbf{C}$ where $\mathbf J$ admits an indexing. This is a formalization of the notion of `diagram' we use intuitively. It can be thought of as the image of $\mathbf J$ in $\mathbf C$, the actual stucture of $\mathbf J$ is largely irrelevant.
+					
+					For example,
+					\[\begin{tikzcd}
+						& {\mathbf{J}} &&& {\text{Diagram}} \\
+						\bullet && \bullet & {D_1} && {D_2}
+						\arrow["f", shift left=2, from=2-1, to=2-3]
+						\arrow["g"', shift right=2, from=2-1, to=2-3]
+						\arrow["{D_f}", shift left=2, from=2-4, to=2-6]
+						\arrow["{D_g}"', shift right=2, from=2-4, to=2-6]
+					\end{tikzcd}\]
+					
+				\end{minipage}
+			};
+			%------------ Diagram Header ---------------------
+			\node[fancytitle, right=10pt] at (box.north west) {Diagram};
+		\end{tikzpicture}
+		
+		%------------ Cones ---------------
+		\begin{tikzpicture}
+			\node [mybox] (box){%
+				\begin{minipage}{0.3\textwidth}
+					Given $\mathbf{J}, \mathbf{C}$ and a diagram of type $\mathbf{J}$ in $\mathbf{C}$, $D: \mathbf{J} \to \mathbf{C}$ we define a \textbf{cone} to the diagram $D$ for an object (vertex) $C$ of $\mathbf{C}$ and family of arrows $c_j:C \to D_j$ for all $j \in \mathbf{J}$ such for $\alpha: i \to j$ the following commute,
+					\[\begin{tikzcd}
+						& C \\
+						{D_i} && {D_j}
+						\arrow["{c_i}"', from=1-2, to=2-1]
+						\arrow["{c_j}", from=1-2, to=2-3]
+						\arrow["{D_\alpha}"', from=2-1, to=2-3]
+					\end{tikzcd}\]
+					Furthermore we can have a morphism between cones in the natural way $\vartheta: (C, c_j) \to (C', c_j')$ making every such triangle commute,
+					\[\begin{tikzcd}
+						C & {C'} \\
+						& {D_j}
+						\arrow["\vartheta", from=1-1, to=1-2]
+						\arrow["{c_j'}", from=1-2, to=2-2]
+						\arrow["{c_j}"', from=1-1, to=2-2]
+					\end{tikzcd}\]
+					This lets us define a category of cones into $D$ denoted as $\mathbf{Cone}(D)$. Its dual is called a cocone.
+				\end{minipage}
+			};
+			%------------ Cones Header ---------------------
+			\node[fancytitle, right=10pt] at (box.north west) {Cone};
+		\end{tikzpicture}
+		
+		%------------ Comma category ---------------
+		\begin{tikzpicture}
+			\node [mybox] (box){%
+				\begin{minipage}{0.3\textwidth}
+					We define the \textbf{comma category} ($S \downarrow T$) categories $\mathbf{A, B, C}$ which are related as $\mathbf{A} \xrightarrow{S} \mathbf{C} \xleftarrow{T} \mathbf{B}$.
+					
+					With objects as $3-$tuples $(A,B,h), A\in \mathbf{A}, B \in \mathbf{B}, (h:S(A)\to T(B)) \in \mathbf{C}$ and arrows between them defined naturally as follows, all $(f,g)$ for $f:A \to A', g: B \to B'$ such that the following commutes,
+					\[\begin{tikzcd}
+						{S(A)} && {S(A')} \\
+						\\
+						{T(B)} && {T(B')}
+						\arrow["{S(f)}", from=1-1, to=1-3]
+						\arrow["{h'}", from=1-3, to=3-3]
+						\arrow["h"', from=1-1, to=3-1]
+						\arrow["{T(g)}"', from=3-1, to=3-3]
+					\end{tikzcd}\]
+					
+					A cone can alternatively be understood as a comma category $(\Delta \downarrow D)$, for the diagram $D$ as a functor from $\Delta: C \to \mathrm{Fun}(\mathbf{J}, \mathbf{C}) $ sometimes denoted as $C^J$. $\mathrm{Fun}(\mathbf{J},\mathbf{C})$ is the functor category which is defined later.
+					
+					Defined as sending $\Delta(C):\mathbf{J} \to \mathbf{C}$ which just maps $C $ to $C$. This functor is usually called the \textbf{diagonal functor}.
+					
+					\begin{itemize}
+						\item (Co)slice categories are a special case of comma categories.
+					\end{itemize}
+				\end{minipage}
+			};
+			%------------ Comma category Header ---------------------
+			\node[fancytitle, right=10pt] at (box.north west) {Comma category};
+		\end{tikzpicture}
+		
+		
+		%------------ Limit ---------------
+		\begin{tikzpicture}
+			\node [mybox] (box){%
+				\begin{minipage}{0.3\textwidth}
+					Given a diagram $D: \mathbf{J} \to \mathbf{C}$ its \textbf{limit} is a terminal object in $\mathbf{Cone}(D)$, denoted as $p_i: \lim_{\leftarrow_j}D_j \to D_i$.
+					
+					If $\mathbf{J}$ is finite the limit is called a finite limit.	
+					
+					\begin{itemize}
+						\item A category has finite limits $\iff $ it has finite products and equalizers (and so pullbacks and terminal objects.)
+					\end{itemize}
+					
+					A functor $F$ is said to \textbf{preserve limits} of type $J$ if $F(\lim_{\leftarrow} D_j) \cong \lim_\leftarrow F(D_j)$. Such a functor is called continuous.
+					
+					\begin{itemize}
+						\item Representable functors in locally small categories are continuous.
+						\item Colimts are the dual notion of limits, e.g. direct limit of groups.
+					\end{itemize}
+				\end{minipage}
+			};
+			%------------ Limit Header ---------------------
+			\node[fancytitle, right=10pt] at (box.north west) {Limit};
+		\end{tikzpicture}
+		
+		
+		%------------ Exponentials ---------------
+		\begin{tikzpicture}
+			\node [mybox] (box){%
+				\begin{minipage}{0.3\textwidth}
+					For a category $\mathbf C$ with binary products there exists an exponential of objects $B, C$ which consists of an object $B^C$ and an arrow $\epsilon : C^B \times B \to C$ universal as seen below,
+					\[\begin{tikzcd}
+						{C^B} && {C^B \times B} && C \\
+						\\
+						Z && {Z \times B}
+						\arrow["{\tilde{f}}", dashed, from=3-1, to=1-1]
+						\arrow["{\tilde{f}\times1_B}", from=3-3, to=1-3]
+						\arrow["\epsilon", from=1-3, to=1-5]
+						\arrow["f"', from=3-3, to=1-5]
+					\end{tikzcd}\]
+				\end{minipage}
+			};
+			%------------ Exponentials Header ---------------------
+			\node[fancytitle, right=10pt] at (box.north west) {Exponentials};
+		\end{tikzpicture}
+		
+		%------------ Cartesian closed categories ---------------
+		\begin{tikzpicture}
+			\node [mybox] (box){%
+				\begin{minipage}{0.3\textwidth}
+					A category is \textbf{cartesian closed} if it has finite products and exponentials.
+					
+					\begin{itemize}
+						\item Exponentiation is functorial in a cartesian closed category.
+					\end{itemize}
+				\end{minipage}
+			};
+			%------------ Cartesian closed categories Header ---------------------
+			\node[fancytitle, right=10pt] at (box.north west) {Cartesian closed categories};
+		\end{tikzpicture}
+		
+		%------------ Heyting algebra ---------------
+		\begin{tikzpicture}
+			\node [mybox] (box){%
+				\begin{minipage}{0.3\textwidth}
+					A Heyting algebra is a poset with finite meets, joins, least and greatest element (0 and 1) and exponentials defined as implications, $a \wedge b  \leq c$ iff $a \leq b \implies c$.
+					\begin{itemize}
+						\item A Heyting algebra is a distributive lattice. But only complete distributive lattices form Heyting algebras.
+						\item Every boolean algebra is a Heyting algebra with implication defined classically $p \implies q $ iff $\neg p \vee q$.
+						\item Heyting algebras form an algebraic analogue for intuitionistic propositional calculi as every IPC gives rise to an associated Heyting algebra where formulae are identified by syntactic equivalence. In particular this gives a correspondence between Heyting algebras and IPC.
+					\end{itemize}
+				\end{minipage}
+			};
+			%------------ Heyting algebra Header ---------------------
+			\node[fancytitle, right=10pt] at (box.north west) {Heyting algebra};
+		\end{tikzpicture}
+		
+		%------------ Lambda Calculus ---------------
+		\begin{tikzpicture}
+			\node [mybox] (box){%
+				\begin{minipage}{0.3\textwidth}
+					$\lambda-$calculus is a formal system relying on two symbols $\lambda $ and a dot $``."$. 
+					
+					There exists a correspondence between typed $\lambda-$ calculus and Cartesian closed categories. With the objects in the associated category being types and arrows defined as equivalence classes of terms of a type identified when equal.
+					
+				\end{minipage}	
+			};
+			%------------ Lambda Calculus Header ---------------------
+			\node[fancytitle, right=10pt] at (box.north west) {$\lambda-$calculus};
+		\end{tikzpicture}
+		
+		
+		
+		
+		%------------ Natural transformations and naturality ---------------
+		\begin{tikzpicture}
+			\node [mybox] (box){%
+				\begin{minipage}{0.3\textwidth}
+					A \textbf{natural transformation} is a map between functors.
+					
+					For functors $F,G: \mathbf{C} \to \mathbf{D}$ a natural transformation $\eta: F \to G$ is a family of morphisms (in $\mathbf{D}$) which consist of \textbf{components} $\eta_X	$ which associates for every object $C \in \mathbf{C} $ a morphism between objects in $\mathbf{D}$, $\eta_C:F(C)\to G(C)$. Also components must commute naturally, in particular for $f: C \to C' $ we have $\eta_{C'} \circ F(f)=G(f)\circ\eta_C$, i.e. below diagram commutes,
+					\[\begin{tikzcd}
+						C && {F(C)} && {G(C)} \\
+						\\
+						{C'} && {F(C')} && {G(C')}
+						\arrow["{\eta_C}", from=1-3, to=1-5]
+						\arrow["{\eta_{C'}}", from=3-3, to=3-5]
+						\arrow["{F(f)}"', from=1-3, to=3-3]
+						\arrow["{G(f)}", from=1-5, to=3-5]
+						\arrow["f"', from=1-1, to=3-1]
+					\end{tikzcd}\]
+					
+					
+				\end{minipage}	
+			};
+			%------------ Natural transformations Header ---------------------
+			\node[fancytitle, right=10pt] at (box.north west) {Natural transformations};
+		\end{tikzpicture}
+		
+		%------------ Functor categories and exponentials ---------------
+		\begin{tikzpicture}
+			\node [mybox] (box){%
+				\begin{minipage}{0.3\textwidth}
+					For two categories $\mathbf{C}, \mathbf{D}$ we can define the \textbf{functor category} as the category whose objects are functors between $\mathbf{C}$ and $\mathbf{D}$ and morphisms are natural transformations. It is denoted as $\mathrm{Fun}(\mathbf{C,D})$
+					
+					In $\mathbf{Cat}$ (Category of small categories) the functor category between two categories defines its exponential. Therefore, $\mathbf{Cat}$ is Cartesian closed.
+					
+					\begin{itemize}
+						\item A \textbf{natural isomorphism} is a natural transformation which is an isomorphism in the functor category
+					\end{itemize}
+					
+					
+				\end{minipage}	
+			};
+			%------------ Functor categories and exponentials Header ---------------------
+			\node[fancytitle, right=10pt] at (box.north west) {Functor categories and exponentials};
+		\end{tikzpicture}
+		
+		
+		%------------ Bifunctors and profunctors ---------------
+		\begin{tikzpicture}
+			\node [mybox] (box){%
+				\begin{minipage}{0.3\textwidth}
+					A \textbf{bifunctor} is any functor of two variables i.e. domain in terms of a product category.
+					
+					A mapping $F: \mathbf{A} \times \mathbf{B} \to \mathbf{C}$ is a bifunctor if its functorial in each component and the following square commutes,
+					\[\begin{tikzcd}
+						{A'} & {B'} && {F(A,B)} && {F(A,B')} \\
+						\\
+						A & B && {F(A',B)} && {F(A',B')}
+						\arrow["{F(A,g)}", from=1-4, to=1-6]
+						\arrow["{F(A',g)}"', from=3-4, to=3-6]
+						\arrow["{F(f,B')}", from=1-6, to=3-6]
+						\arrow["{F(f,B)}"', from=1-4, to=3-4]
+						\arrow["g"{description}, from=3-2, to=1-2]
+						\arrow["f"{description}, from=3-1, to=1-1]
+					\end{tikzcd}\]
+					
+					A bifunctor is called a \textbf{profunctor} if its of the form $\mathbf{B}^{\mathrm{op}}\times \mathbf{C} \to \mathbf{Set}$ like Hom/Internal hom.
+				\end{minipage}	
+			};
+			%------------ Bifunctors and profunctors Header ---------------------
+			\node[fancytitle, right=10pt] at (box.north west) {Bifunctors and profunctors};
+		\end{tikzpicture}
+		
+		%------------ Equivalence of categories  ---------------
+		\begin{tikzpicture}
+			\node [mybox] (box){%
+				\begin{minipage}{0.3\textwidth}
+					For categories $\mathbf{C},\mathbf{D}$ they is said to be an equivalence between them if there exist functors $E:\mathbf{C}\rightleftarrows \mathbf{D}:F$ and a pair of natural \textit{isomorphisms} $\alpha: 1_\mathbf{C} \to F \circ E$ and $\beta: 1_\mathbf{D} \to E \circ F$. 
+					
+					This is a weaker condition than isomorphism.
+					
+					$F:\mathbf{C} \to \mathbf{D}$ is a part of an equivalence of categories if it is full and faithful and for all $D \in \mathbf{D}$ there exists $C \in \mathbf{C}, F(C)\cong D$
+				\end{minipage}	
+			};
+			%------------ Equivalence of categories Header ---------------------
+			\node[fancytitle, right=10pt] at (box.north west) {Equivalence of categories};
+		\end{tikzpicture}
+		
+		%------------ Yoneda embedding  ---------------
+		\begin{tikzpicture}
+			\node [mybox] (box){%
+				\begin{minipage}{0.3\textwidth}
+					The \textbf{Yoneda embedding} is a functor $y:\mathbf{C}\to \mathbf{Sets}^{\mathbf{C}^\text{Op}}$ mapping objects to their contravariant representable functor (i.e. presheaves). In particular $y(C)=\textrm{Hom}_\mathbf{C}(-,C)$ it takes arrows to the natural transformation $yf=\mathrm{Hom}_\mathbf{C}(-,f):\mathrm{Hom}_\mathbf{C}(-,C) \to \mathrm{Hom}_\mathbf{C}(-,D)$
+				\end{minipage}	
+			};
+			%------------ Yoneda embedding Header ---------------------
+			\node[fancytitle, right=10pt] at (box.north west) {Yoneda embedding};
+		\end{tikzpicture}
+		
+		%------------ Yoneda lemma  ---------------
+		\begin{tikzpicture}
+			\node [mybox] (box){%
+				\begin{minipage}{0.3\textwidth}
+					For a locally small category $\mathbf{C}$ we have $\textrm{Hom}(yC,F) \cong FC$ for $C \in \mathbf{C}$ and a functor $F \in \mathbf{Sets}^{\mathbf{C}^{op}}$. The isomorphism is natural in both $C$ and $F$.
+				\end{minipage}	
+			};
+			%------------ Yoneda lemma Header ---------------------
+			\node[fancytitle, right=10pt] at (box.north west) {Yoneda lemma};
+		\end{tikzpicture}
+		
+		%------------ Applications of yoneda lemma  ---------------
+		\begin{tikzpicture}
+			\node [mybox] (box){%
+				\begin{minipage}{0.3\textwidth}
+					For locally small categories
+					\begin{itemize}
+						\item The Yoneda embedding $y: \mathbf{C} \to \mathbf{Sets}^{\mathbf{C}^\mathbf{op}}$ is full and faithful.
+						\item $yC \cong yC' \implies C \cong C'$ for objects $C,C'$
+						\item All objects in presheaves are colimits of some representable functors (in particular the end). 
+						\item So Yoneda embedding is the free cocompletion of any category. In particular there is a UMP for maps from $\mathbf{C}$ to any cocomplete categories factoring through presheaves wrt Yoneda embedding
+					\end{itemize}	
+				\end{minipage}	
+			};
+			%------------ Applications of yoneda lemma Header ---------------------
+			\node[fancytitle, right=10pt] at (box.north west) {Applications of Yoneda lemma};
+		\end{tikzpicture}
+		
+		%------------ Category of presheaves  ---------------
+		\begin{tikzpicture}
+			\node [mybox] (box){%
+				\begin{minipage}{0.3\textwidth}
+					For locally small category $\mathbf{C}$ its category of presheaves denoted as $\mathbf{Sets}^{\mathbf{C}^{op}} $ or $[\mathbf{C}^{\mathrm{op}}, \mathbf{Sets}]$ or $\hat{\mathbf{C}}$ is complete, cocomplete and is cartesian closed. Due to these properties its often useful to examine the presheaves of a category.
+					
+					We also have that the Yoneda embedding preserves products, exponentials and is continuous (preserves limits).
+				\end{minipage}	
+			};
+			%------------Category of presheaves Header ---------------------
+			\node[fancytitle, right=10pt] at (box.north west) {Category of presheaves};
+		\end{tikzpicture}
+		
+		%------------ Monoidal categories  ---------------
+		\begin{tikzpicture}
+			\node [mybox] (box){%
+				\begin{minipage}{0.3\textwidth}
+					A monoidal category is a category $\mathbf{C}$ with a bifunctor $ \otimes: \mathbf{C} \times \mathbf{C} \to \mathbf{C}$, a `unit' element $I$, and natural isomorphisms that make the functor associative and unital with $I$ as expected. It is a generalization of the notion of a `tensor product'. Its used to define enriched categories.
+					
+					This can be formalized as follows, there exists $I \in \mathbf{C}$ and natural isomorphisms,
+					\begin{itemize}
+						\item $\alpha_{A,B,C}: A \otimes (B \otimes C) \to (A \otimes B) \otimes C$ (read as associator)
+						\item $\lambda_A : I \otimes A \to A$ (read as left unitor)
+						\item $\rho_A: A \otimes I \to A$ (read as right unitor)
+					\end{itemize}
+					And the following diagrams commute,
+					\[\begin{tikzcd}
+						& {(A\otimes B)\otimes (C \otimes D)} \\
+						{A \otimes(B \otimes(C\otimes D))} && {((A\otimes B)\otimes C)\otimes D} \\
+						{A \otimes ((B \otimes C) \otimes D)} && {(A \otimes (B\otimes C))\otimes D}
+						\arrow["\alpha_{A,B,C\otimes D}",from=2-1, to=1-2]
+						\arrow["\alpha_{A\otimes B, C, D}",from=1-2, to=2-3]
+						\arrow["\alpha_{A,B\otimes C,D}",from=3-1, to=3-3]
+						\arrow["\alpha_{A,B,C}\otimes1_D"',from=3-3, to=2-3]
+						\arrow["1_A \otimes \alpha_{B,C,D}"',from=2-1, to=3-1]
+					\end{tikzcd}\]
+					\[\begin{tikzcd}
+						{A\otimes(I\otimes B)} && {(A\otimes I)\otimes B} \\
+						& {A\otimes B}
+						\arrow["\alpha_{A,I,B}",from=1-1, to=1-3]
+						\arrow["\rho_A \otimes 1_B",from=1-3, to=2-2]
+						\arrow["1_A\otimes \lambda B"',from=1-1, to=2-2]
+					\end{tikzcd}\]
+				\end{minipage}	
+			};
+			%------------Monodial categories Header ---------------------
+			\node[fancytitle, right=10pt] at (box.north west) {Monoidal categories};
+		\end{tikzpicture}
+		
+		%------------ Enriched categories  ---------------
+		\begin{tikzpicture}
+			\node [mybox] (box){%
+				\begin{minipage}{0.3\textwidth}
+					For a monoidal category as defined above $(\mathbf{V},\otimes, I ,\alpha, \lambda, \rho)$ a category $\mathbf{C}$ enriched over $\mathbf{V}$ is a category along with the following data
+					\begin{itemize}
+						\item Associated to all ordered pair $(A,B)$ of objects in $\mathbf{C}$, a hom object $\mathbf{C}(A,B)\in \mathrm{Ob}(\mathbf{V})$.
+						\item Associated to all objects $A$ in $\mathbf{C}$, an identity morphism $\mathrm{id}_A:I \to \mathbf{C}(A,A)$
+						\item Associated to each ordered triple $(A,B,C) $ of objects in $\mathbf{C}$ say $(A,B,C)$, a morphism in $\mathrm{Ob}(\mathbf{V})$, $\circ_{A,B,C}: \mathbf{C}(B,C)\otimes \mathbf{C}(A,B) \to \mathbf{C}(A,C)$
+						\item Also the following diagrams commute,
+					\end{itemize}
+					\[\begin{tikzcd}[column sep=0.05em]
+						& {\mathbf{C}(A,D)} \\
+						{\mathbf{C}(B,D)\otimes\mathbf{C}(A,B)} && {\mathbf{C}(C,D)\otimes \mathbf{C}(A,C)} \\
+						{(\mathbf{C}(C,D) \otimes \mathbf{C}(B,C)) \otimes \mathbf{C}(A,B)} && {\mathbf{C}(C,D) \otimes (\mathbf{C}(B,C) \otimes \mathbf{C}(A,B))}
+						\arrow["{\circ_{A,B,D}}", from=2-1, to=1-2]
+						\arrow["{\circ_{A,C,D}}"', from=2-3, to=1-2]
+						\arrow["{\circ_{B,C,D}\otimes 1_{\mathbf{C}(A,B)}}", from=3-1, to=2-1]
+						\arrow["{1_{\mathbf{C}(C,D)}\otimes \circ_{A,B,C}}"', from=3-3, to=2-3]
+						\arrow["\alpha"', from=3-1, to=3-3]
+					\end{tikzcd}\]
+					\[\begin{tikzcd}
+						{I \otimes \mathbf{C}(A,B)} && {\mathbf{C}(A,B)\otimes I} \\
+						& {\mathbf{C}(A,B)} \\
+						{\mathbf{C}(B,B)\otimes \mathbf{C}(A,B)} && {\mathbf{C}(A,B)\otimes \mathbf{C}(A,A)}
+						\arrow["\rho"', from=1-3, to=2-2]
+						\arrow["{\circ_{A,A,B}}"', from=3-3, to=2-2]
+						\arrow["{\circ_{A,B,B}}", from=3-1, to=2-2]
+						\arrow["{1_{\mathbf{C}(A,B)}\otimes \mathrm{id}_A}", from=1-3, to=3-3]
+						\arrow["{ \mathrm{id}_B\otimes1_{\mathbf{C}(A,B)}}"', from=1-1, to=3-1]
+						\arrow["\lambda", from=1-1, to=2-2]
+					\end{tikzcd}\]
+				\end{minipage}	
+			};
+			%------------ Enriched categories Header ---------------------
+			\node[fancytitle, right=10pt] at (box.north west) {Enriched categories (monoidal)};
+		\end{tikzpicture}
+		
+		
+		%------------ String diagram  ---------------
+		\begin{tikzpicture}
+			\node [mybox] (box){%
+				\begin{minipage}{0.3\textwidth}
+					
+					
+				\end{minipage}	
+			};
+			%------------ String diagram Header ---------------------
+			\node[fancytitle, right=10pt] at (box.north west) {String diagram};
+		\end{tikzpicture}
+		
+		%------------ 2-categories  ---------------
+		\begin{tikzpicture}
+			\node [mybox] (box){%
+				\begin{minipage}{0.3\textwidth}
+					The classical definition for 2-categories also called strict 2-categories are categories enriched over $\mathbf{Cat}$, it gives us the following data \begin{itemize}
+						\item Collection of objects
+						\item For each pair of objects we have associated to it a hom-category. 
+						\item 1-morphisms between objects, realized as objects of hom-categories.
+						\item 2-morphisms between 1-morphisms, realized as morphisms of hom-categories.
+					\end{itemize}
+					
+				\end{minipage}	
+			};
+			%------------ 2-categories Header ---------------------
+			\node[fancytitle, right=10pt] at (box.north west) {2-categories};
+		\end{tikzpicture}
+		
+		%------------ Topoi  ---------------
+		\begin{tikzpicture}
+			\node [mybox] (box){%
+				\begin{minipage}{0.3\textwidth}
+					A \textbf{topoi} is a category which is has small limits, has exponentials and has a subobject classifier.
+					
+					A \textbf{subobject classifer} is an object $\Omega $ along with an arrow $1 \to \Omega $ universal such that it induces a subobject $S$ as the pullback to the following diagram for some arbitrary object $C$,
+					\[\begin{tikzcd}
+						U &1 \\
+						C & \Omega
+						\arrow["u"', dashed, from=2-1, to=2-2]
+						\arrow["t", from=1-2, to=2-2]
+						\arrow[tail, from=1-1, to=2-1]
+						\arrow["\lrcorner"{anchor=center, pos=0.125}, draw=none, from=1-1, to=2-2]
+						\arrow[from=1-1, to=1-2]
+					\end{tikzcd}\]
+					
+					The notion of a subobject classifier is intuitively understood as a `truth value` function which assigns a true value for elements of $U\in  C$.
+					In particular topoi are used in logic due to a similar notion as just described.
+					
+					Presheaves form a topoi.
+					
+					
+				\end{minipage}	
+			};
+			%------------ Topoi Header ---------------------
+			\node[fancytitle, right=10pt] at (box.north west) {Topoi};
+		\end{tikzpicture}
+		
+		%------------ Adjoint functors  ---------------
+		\begin{tikzpicture}
+			\node [mybox] (box){%
+				\begin{minipage}{0.3\textwidth}
+					The functors $F: \mathbf{C} \rightleftarrows \mathbf{D}: U$ form an \textbf{adjunction} between categories if there exists a natural transformation $\eta: 1_\mathbf{C} \to U \circ F$ with this unit having the following UMP,
+					\[\begin{tikzcd}
+						D && {U(F(C))} && {U(D)} \\
+						\\
+						{F(C)} && C
+						\arrow["f"', from=3-3, to=1-5]
+						\arrow["{\eta_C}", from=3-3, to=1-3]
+						\arrow["{U(g)}", from=1-3, to=1-5]
+						\arrow[dashed, from=3-1, to=1-1]
+					\end{tikzcd}\]
+					
+					$F$ is called the left adjoint of $U$ and vice versa, and is denoted as $F \dashv U$.
+					
+					Alternatively we also have the following formulation, $F \dashv U$ if for $C\in \mathbf{C}, D \in \mathbf{D}$ there exist natural isomorphisms $\phi: \textrm{Hom}_\mathbf{D}(FC, D) \cong \textrm{Hom}_\mathbf{C}(C, UD):\psi$
+					
+					A third more general formulation is given later.
+				\end{minipage}	
+			};
+			%------------ Adjoint functors Header ---------------------
+			\node[fancytitle, right=10pt] at (box.north west) {Adjoint functors};
+		\end{tikzpicture}
+		
+		%------------ Properties and examples of adjunctions  ---------------
+		\begin{tikzpicture}
+			\node [mybox] (box){%
+				\begin{minipage}{0.3\textwidth}
+					\begin{itemize}
+						\item Adjunctions are unique up to isomorphisms.
+						\item Adjunctions between prosets are called 'Galois connections', they involve order preserving maps.
+						\item Operations in Heyting algebras can interpreted as biconditions and now its clear to see how they are built on adjoints.
+						\item In first order logic, quantifiers form adjoints, in particular if you have a functor between propositions of some $\mathcal{L}-$structures then $\forall$ is its right adjoint and $\exists $ is its left adjoint
+						\item For arbitrary diagonal functors over some small index category say $J$, $\lim_{\rightarrow_J} \dashv \Delta_J \dashv \lim_{\leftarrow_J}$, in particular when diagonal functor is over 2 we get $+ \dashv \Delta_2 \dashv \times $
+						\item Free functors are right adjoint to forgetful functors
+						\item Right adjoints preserve limits and left adjoints preserve colimits.
+					\end{itemize}
+					
+				\end{minipage}	
+			};
+			%------------ Properties and examples of adjunctions Header ---------------------
+			\node[fancytitle, right=10pt] at (box.north west) {Properties and examples of adjunctions};
+		\end{tikzpicture}
+		
+		
+		%%------------ Locally cartesian closed categories  ---------------
+		%\begin{tikzpicture}
+		%	\node [mybox] (box){%
+			%		\begin{minipage}{0.3\textwidth}
+				%			A category is said to be locally cartesian closed if its slice categories are cartesian closed.
+				%		\end{minipage}	
+			%	};
+		%	%------------ Locally cartesian closed categories Header ---------------------
+		%	\node[fancytitle, right=10pt] at (box.north west) {Locally cartesian closed categories};
+		%\end{tikzpicture}
+		
+		
+		%------------ Adjoint functor theorem  ---------------
+		\begin{tikzpicture}
+			\node [mybox] (box){%
+				\begin{minipage}{0.3\textwidth}
+					For a locally small, complete category $\mathbf{C}$, some other category $\mathbf{D}$. A limit preserving functor $F:\mathbf{C} \to \mathbf{D}$ has a left adjoint	iff it satisfies the following `solution set' condition
+					
+					For all objects $X \in \mathbf{D}$ there is a `solution' set of $\{S_i\}_{i=I} \in \mathbf{C}$ such that for any object $A \in \mathbf{C}$ and arrow $f:X \to F(C)$ there exists a particular $i \in I $ such the the below maps exist and commute,
+					
+					\[\begin{tikzcd}
+						{S_i} && X & {F(S_i)} \\
+						A &&& {F(A)}
+						\arrow["{\bar{f}}", dashed, from=1-1, to=2-1]
+						\arrow["g", dashed, from=1-3, to=1-4]
+						\arrow["f"', from=1-3, to=2-4]
+						\arrow["{F(\bar{f})}", from=1-4, to=2-4]
+					\end{tikzcd}\]
+				\end{minipage}	
+			};
+			%------------ Adjoint functor theorem Header ---------------------
+			\node[fancytitle, right=10pt] at (box.north west) {Adjoint functor theorem};
+		\end{tikzpicture}
+		
+		%------------ Adjoints in terms of units and counits  ---------------
+		\begin{tikzpicture}
+			\node [mybox] (box){%
+				\begin{minipage}{0.3\textwidth}
+					For a locally small, complete category $\mathbf{C}$, some other category $\mathbf{D}$. A limit preserving functor $U:\mathbf{C} \to \mathbf{X}$ has a left adjoint	iff
+				\end{minipage}	
+			};
+			%------------ Adjoints in terms of units and counits Header ---------------------
+			\node[fancytitle, right=10pt] at (box.north west) {Adjoints in terms of units and counits};
+		\end{tikzpicture}
+		
+		
+		
+		%------------ Monads  ---------------
+		\begin{tikzpicture}
+			\node [mybox] (box){%
+				\begin{minipage}{0.3\textwidth}
+					
+				\end{minipage}	
+			};
+			%------------ Monads Header ---------------------
+			\node[fancytitle, right=10pt] at (box.north west) {Monads};
+		\end{tikzpicture} 
+		
+		
+		%------------ Wedges ---------------
+		\begin{tikzpicture}
+			\node [mybox] (box){%
+				\begin{minipage}{0.3\textwidth}
+					A wedge is defined for a functor $F: \mathbf{C}^{op}\times \mathbf{C} \to \mathbf{D}$ as an object and along with a class of morphisms $(E,w_{-})$ where, $E \in \mathrm{Ob}({\mathbf{C}})$ and $w_A: e\to F(A,A)$ satisfying the naturality condition
+					
+					\[\begin{tikzcd}
+						B && e & {F(A,A)} \\
+						A && {F(B,B)} & {F(A,B)}
+						\arrow["{w_A}", from=1-3, to=1-4]
+						\arrow["{w_B}"', from=1-3, to=2-3]
+						\arrow["{F(1_A,f)}", from=1-4, to=2-4]
+						\arrow["f"', from=2-1, to=1-1]
+						\arrow["{F(f,1_B)}"', from=2-3, to=2-4]
+					\end{tikzcd}\]
+				\end{minipage}	
+			};
+			%------------ Wedges Header ---------------------
+			\node[fancytitle, right=10pt] at (box.north west) {Wedges};
+		\end{tikzpicture}
+		
+		%------------ Ends and Coends  ---------------
+		\begin{tikzpicture}
+			\node [mybox] (box){%
+				\begin{minipage}{0.3\textwidth}
+					An end is a universal wedge (i.e. a wedge such that all other wedges factor through it uniquely). It is denoted as $\int_{A \in \mathbf{C}} F(A,A)$. 
+					Coends are the dual notion to this and denoted as $\int^{A \in \mathbf{C}} F(A,A)$
+					\begin{enumerate}
+						\item Similar to how (co)limits are (left)right adjoints to a diagonal functor (co)ends are (left)right adjoints to the Hom bifunctor.
+					\end{enumerate}
+				\end{minipage}	
+			};
+			%------------ Ends and coends Header ---------------------
+			\node[fancytitle, right=10pt] at (box.north west) {Ends and coends};
+		\end{tikzpicture}
+		
+		
+		
+		%------------ Kan extensions  ---------------
+		\begin{tikzpicture}
+			\node [mybox] (box){%
+				\begin{minipage}{0.3\textwidth}
+					A functor $f: \mathbf{C} \to \mathbf{D}$ induces a functor between its presheaves,\\ $f^*: [\mathbf{D}^{\mathrm{op}}, \mathbf{Sets}] \to [\mathbf{C}^{\mathrm{op}}, \mathbf{Sets}]$, given by precomposition $f^*(Q)(C)=Q(fC)$ and this induced functor has both left and right adjoints which we call left and right \textbf{Kan extensions}, i.e. $f_! \dashv f^* \dashv f_*$ and left Kan extensions are naturally isomorphic with the Yoneda embedding as such, $f_! y_\mathbf{C} \cong y_\mathbf{D}f$	
+				\end{minipage}	
+			};
+			%------------ Kan extensions Header ---------------------
+			\node[fancytitle, right=10pt] at (box.north west) {Kan extensions};
+		\end{tikzpicture}
+		
+		
+		
+		
+		
+		
+		
+		
+		%------------ n simplex  ---------------
+		\begin{tikzpicture}
+			\node [mybox] (box){%
+				\begin{minipage}{0.3\textwidth}
+					We begin with a notion of a purely combinatorial construction $\Delta$ denote the category with objects as non empty finite ordered sets and order preserving maps. Objects in $\Delta$ are denoted as $[n]=\{1,2,\dots,n\}$, i.e. an $n-$simplex. This is sometimes defined as the full subcategory of $\mathrm{Cat}$ on free categories of finite directed graphs equivalently finite ordinals with order preserving maps.
+				\end{minipage}	
+			};
+			%------------ n simplex Header ---------------------
+			\node[fancytitle, right=10pt] at (box.north west) {$n-$simplex};
+		\end{tikzpicture}
+		
+		%------------ Simplical sets ---------------
+		\begin{tikzpicture}
+			\node [mybox] (box){%
+				\begin{minipage}{0.3\textwidth}
+					
+					A \textbf{simplicial set} is a functor $X: \Delta^\mathrm{op} \to \mathbf{Set}$, i.e. presheaves on $\Delta$. It comprises of a collection of sets $X_n$ which we to be the set of $n-$simplices of $X$ with maps between them corresponding naturally with maps in $\Delta$.
+					
+					
+					\begin{itemize}
+						\item By Yoneda we have $X_n\cong \mathrm{Hom}(\Delta[n],X)$
+						\item As $\mathbf{sSet}$ is determined via presheaves it is (co)complete and all (co)limits over small diagrams can be computed objectwise.
+						Any simplicial set can be expressed as a colimit of standard n simplicies.
+						\item Corresponding to injections from $[n-1] \to [n]$ in $\Delta$ we get a family of \textbf{face maps} between simplices $d_i:X_n \to X_{n-1}$, $0\leq i \leq n$.
+						\item Corresponding to surjections $ [n+1] \to n$ we get\textbf{ degeneracy maps} as a family of maps $s_i: X_n \to X_{n+1}$.
+						
+					\end{itemize}
+					These obey the standard relations,
+					\begin{align*}
+						d_id_j &= d_{j-1}d_i, &i <j\\
+						s_is_j&=s_{j+1}s_im &i \leq j\\
+						d_is_j&=1, &i=j,j+1\\
+						d_is_j&=s_{j-1}d_i,& i<j\\
+						d_is_j&=s_jd_{i-1},& i>j+1
+					\end{align*}
+					
+					Recall that for some topological space $X$ we define its singular simplicial set as $\mathrm{Hom}(\Delta_n,X)$, this infact forms an adjoint pair along with `geometric realization' the functor  $||: \mathbf{sSet} \to \mathbf{Top}$ sending standard $n-$simplicies to topological simplicies, in particular $$||:\mathbf{sSet} \rightleftarrows \mathbf{Top}: \mathrm{Sing}, || \dashv \mathrm{Sing}$$
+					
+					A \textbf{simplicial object} over $\mathbf{C}$ is a functor $X: \Delta^{op} \to \mathbf{C}$.		
+				\end{minipage}	
+			};
+			%------------ Simplical sets Header ---------------------
+			\node[fancytitle, right=10pt] at (box.north west) {Simplical sets};
+		\end{tikzpicture}
+		
+		%------------ Dold-Kan Correspondence  ---------------
+		\begin{tikzpicture}
+			\node [mybox] (box){%
+				\begin{minipage}{0.3\textwidth}
+					
+				\end{minipage}	
+			};
+			%------------Dold-Kan Correspondence Header ---------------------
+			\node[fancytitle, right=10pt] at (box.north west) {Dold-Kan Correspondence};
+		\end{tikzpicture}
+		
+		
+		%------------ Nerves and realizations  ---------------
+		\begin{tikzpicture}
+			\node [mybox] (box){%
+				\begin{minipage}{0.3\textwidth}
+					This forms a generalization of the discussion of simplical sets over enriched categories
+				\end{minipage}	
+			};
+			%------------ Nerves and realizations Header ---------------------
+			\node[fancytitle, right=10pt] at (box.north west) {Nerves and realizations};
+		\end{tikzpicture}
+		
+		
+		%------------ Abelian/Derived categories  ---------------
+		\begin{tikzpicture}
+			\node [mybox] (box){%
+				\begin{minipage}{0.3\textwidth}
+					An additive category is an Ab-Enriched category which has all finite coproducts.
+					
+					A kernel is a pullback of a morphism $f:A \to B$ and the unique morphism from $0 \to B$. Provided initials and pullbacks exist.
+					
+					\[\begin{tikzcd}
+						{\ker f} & 0 \\
+						A & B
+						\arrow["f", from=2-1, to=2-2]
+						\arrow[from=1-2, to=2-2]
+						\arrow[from=1-1, to=1-2]
+						\arrow[from=1-1, to=2-1]
+						\arrow["\lrcorner"{anchor=center, pos=0.125}, draw=none, from=1-1, to=2-2]
+					\end{tikzcd}\]
+					
+					A pre-abelian category is an additive category with all morphism having kernels and cokernels.
+					
+					An abelian category is a pre-abelian categories for which each mono is a kernel and each epic is a cokernel.
+				\end{minipage}	
+			};
+			%------------ Abelian/Derived categories  Header ---------------------
+			\node[fancytitle, right=10pt] at (box.north west) {Abelian/Derived categories};
+		\end{tikzpicture}
+		
+		%------------ Freyd-Mitchell Embedding  ---------------
+		\begin{tikzpicture}
+			\node [mybox] (box){%
+				\begin{minipage}{0.3\textwidth}
+					There exists a full, faithful and exact functor from every small abelian category to some $R-$Mod category where $R$ is a commutative ring.
+				\end{minipage}	
+			};
+			%------------ Freyd-Mitchell Embedding Header ---------------------
+			\node[fancytitle, right=10pt] at (box.north west) {Freyd-Mitchell Embedding};
+		\end{tikzpicture}
+		
+		
+		%------------ Groupoidification  ---------------
+		\begin{tikzpicture}
+			\node [mybox] (box){%
+				\begin{minipage}{0.3\textwidth}
+					
+				\end{minipage}	
+			};
+			%------------ Groupoidification Header ---------------------
+			\node[fancytitle, right=10pt] at (box.north west) {Groupoidification};
+		\end{tikzpicture}
+		
+		%------------ Infinity groupoids  ---------------
+		\begin{tikzpicture}
+			\node [mybox] (box){%
+				\begin{minipage}{0.3\textwidth}
+					
+				\end{minipage}	
+			};
+			%------------ Infinity groupoids Header ---------------------
+			\node[fancytitle, right=10pt] at (box.north west) {$\mathbf{\infty}$ groupoids};
+		\end{tikzpicture}
+		
+		
+		%------------ Higher categories  ---------------
+		\begin{tikzpicture}
+			\node [mybox] (box){%
+				\begin{minipage}{0.3\textwidth}
+					
+				\end{minipage}	
+			};
+			%------------ Higher categories Header ---------------------
+			\node[fancytitle, right=10pt] at (box.north west) {Higher categories};
+		\end{tikzpicture}
+		
+		%------------ Model categories  ---------------
+		\begin{tikzpicture}
+			\node [mybox] (box){%
+				\begin{minipage}{0.3\textwidth}
+					
+				\end{minipage}	
+			};
+			%------------ Model categories Header ---------------------
+			\node[fancytitle, right=10pt] at (box.north west) {Model categories};
+		\end{tikzpicture}
+		
+		% ==============================================================
+	\end{multicols*}
 \end{document}
